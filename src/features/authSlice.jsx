@@ -1,6 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-// Initial state reads token and user info from localStorage if available
 const initialState = {
     currentUser: null,
     currentUserId: null,
