@@ -1,4 +1,3 @@
-/* src/index.css */
 @import "tailwindcss";
 @theme {
   --color-brand-dark: #0f172a;
@@ -15,10 +14,10 @@
   letter-spacing: 0.1em;
   transition: all 0.3s ease;
   cursor: pointer;
-}
-
-@utility btn-premium:hover {
-  background-color: #1e293b;
+  
+  &:hover {
+    background-color: #1e293b;
+  }
 }
 
 @utility input-premium {
@@ -27,8 +26,8 @@
   font-size: 0.875rem;
   outline: none;
   transition: all 0.3s ease;
-}
-
-@utility input-premium:focus {
-  border-color: var(--color-brand-gold);
+  
+  &:focus {
+    border-color: var(--color-brand-gold);
+  }
 }
