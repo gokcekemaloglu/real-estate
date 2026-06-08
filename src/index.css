@@ -1,10 +1,27 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* 1. Global Reset & Universal Font Integration */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Urbanist", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 2. Global Luxury Theme Configurations */
 @theme {
   --color-brand-dark: #0f172a;
   --color-brand-gold: #b45309;
   --font-display: "Urbanist", sans-serif;
 }
 
+/* 3. Global Reusable Style Utilities (Tailwind v4 Standard) */
 @utility btn-premium {
   padding: 0.5rem 1.5rem;
   background-color: var(--color-brand-dark);
@@ -29,5 +46,26 @@
   
   &:focus {
     border-color: var(--color-brand-gold);
+  }
+}
+
+/* Custom Premium Link Hover Animation Effect */
+@utility after-line {
+  position: relative;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 1px;
+    width: 0;
+    background-color: #b45309; /* brand-gold */
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+    left: 0;
   }
 }
