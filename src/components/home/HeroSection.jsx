@@ -18,7 +18,7 @@ const HeroSection = () => {
         </h1>
         
         <p className="text-sm md:text-base text-slate-400 max-w-xl font-light mb-10 leading-relaxed">
-          Cemal Ciğer güvencesiyle lüks, modern ve tamamen size özel tasarlanmış en prestijli gayrimenkul portföyü ile tanışın.
+          Görkem Emlak güvencesiyle lüks, modern ve tamamen size özel tasarlanmış en prestijli gayrimenkul portföyü ile tanışın.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
