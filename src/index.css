@@ -1,2 +1,34 @@
 /* src/index.css */
 @import "tailwindcss";
+@theme {
+  --color-brand-dark: #0f172a;
+  --color-brand-gold: #b45309;
+  --font-display: "Urbanist", sans-serif;
+}
+
+@utility btn-premium {
+  padding: 0.5rem 1.5rem;
+  background-color: var(--color-brand-dark);
+  color: #fbbf24;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+@utility btn-premium:hover {
+  background-color: #1e293b;
+}
+
+@utility input-premium {
+  border: 1px solid #cbd5e1;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+@utility input-premium:focus {
+  border-color: var(--color-brand-gold);
+}
