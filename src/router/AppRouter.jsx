@@ -1,9 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import Navbar from '../components/home/Navbar'
+import Navbar from '../components/Navbar'
 import { Suspense } from 'react'
 import { lazy } from 'react'
+import Footer from '../components/Footer'
 
 // Performance Optimization via Lazy Loading (Code Splitting)
 const Home = lazy(() => import('../pages/Home'))
@@ -28,7 +29,7 @@ const AppRouter = () => {
           <Route path="/login" element={<Login/>}/>
         </Routes>
       </Suspense>
-      
+      <Footer/>
     </Router>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import ThemeToggle from '../ThemeToggle'
+import ThemeToggle from './ThemeToggle'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
