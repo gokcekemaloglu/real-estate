@@ -1,5 +1,9 @@
 @import "tailwindcss";
-/* @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"); */
+/* Official Tailwind v4 directive to enable class-based dark mode (Placed outside @theme) */
+@variant dark (&:where(.dark, .dark *));
+@source "./components/**/*.{js,jsx}";
+@source "./pages/**/*.{js,jsx}";
+
 
 /* 1. Global Reset & Universal Font Integration */
 * {
