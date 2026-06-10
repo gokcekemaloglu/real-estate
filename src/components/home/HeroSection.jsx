@@ -4,7 +4,7 @@ const HeroSection = () => {
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-slate-50 dark:bg-brand-dark overflow-hidden font-display transition-colors duration-300">
       {/* Background Luxury Geometric Line Effect (Color adapts via slate/amber opacity) */}
-      <div className="absolute inset-0 opacity-5 dark:opacity-10 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+      <div className="absolute inset-0 opacity-5 dark:opacity-10 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>
       
       {/* Content Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
