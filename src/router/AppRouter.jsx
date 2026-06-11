@@ -1,15 +1,14 @@
-import React from 'react'
+import React, { Suspense, lazy} from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
-import { Suspense } from 'react'
-import { lazy } from 'react'
 import Footer from '../components/Footer'
-import About from '../pages/About'
-import Contact from '../pages/Contact'
 
 // Performance Optimization via Lazy Loading (Code Splitting)
 const Home = lazy(() => import('../pages/Home'))
+const Properties = lazy(() => import('../pages/Properties'))
+const About = lazy(() => import('../pages/About'))
+const Contact = lazy(() => import('../pages/Contact'))
 const Register = lazy(() => import('../pages/Register'))
 const Login = lazy(() => import('../pages/Login'))
 
@@ -27,6 +26,7 @@ const AppRouter = () => {
       <Suspense fallback={<LoadingFallback/>}>
         <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/properties" element={<Properties/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/register" element={<Register/>}/>
