@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import { Suspense } from 'react'
 import { lazy } from 'react'
 import Footer from '../components/Footer'
+import About from '../pages/About'
 
 // Performance Optimization via Lazy Loading (Code Splitting)
 const Home = lazy(() => import('../pages/Home'))
@@ -25,6 +26,7 @@ const AppRouter = () => {
       <Suspense fallback={<LoadingFallback/>}>
         <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/about" element={<About/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/login" element={<Login/>}/>
         </Routes>
