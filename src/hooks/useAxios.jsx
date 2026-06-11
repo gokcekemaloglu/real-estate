@@ -1,16 +1,31 @@
 import axios from "axios"
+import { useMemo } from "react"
 import { useSelector } from 'react-redux'
 
-export const axiosPublic = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL
-})
+const BASE_URL = import.meta.env.VITE_BASE_URL
+
+export const axiosPublic = axios.create({baseURL: BASE_URL})
+
+export const axiosWithToken =  axios.create({baseURL: BASE_URL})
 
 const useAxios = () => {
-    const token = useSelector(state => state.auth.token)
-    const axiosWithToken =  axios.create({
-        baseURL: import.meta.VITE_BASE_URL,
-        headers: {"Authorization": `Token ${token}`}
-    })
+    const token = useSelector(state => state.auth?.token)
+
+    useMemo(() => {
+    const requestInterceptor = axiosWithToken.interceptors.request.use((config) => {
+        if (token && !config.headers["Authorization"]) {
+          config.headers["Authorization"] = `Token ${token}`
+        }
+        return config
+      },
+      (error) => Promise.reject(error)
+    )
+
+    return () => {
+      axiosWithToken.interceptors.request.eject(requestInterceptor)
+    }
+  }, [token])
+    
   return axiosWithToken
 }
 

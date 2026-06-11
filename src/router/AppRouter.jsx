@@ -12,11 +12,11 @@ const Register = lazy(() => import('../pages/Register'))
 const Login = lazy(() => import('../pages/Login'))
 
 // Loading Fallback Component
-const LoadingFallback = () => {
+const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-screen bg-brand-dark">
     <div className="w-10 h-10 border-2 border-slate-700 border-t-brand-gold rounded-full animate-spin"></div>
   </div>
-}
+)
 
 const AppRouter = () => {
   return (
