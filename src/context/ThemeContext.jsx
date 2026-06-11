@@ -7,7 +7,7 @@ const ThemeContext = createContext()
 
 export const ThemeProvider = ({children}) => {
     const [isDarkMode, setIsDarkMode] = useState(() => {
-        return localStorage.getItem("theme") === "dark" ? true : false
+        return localStorage.getItem("theme") === "dark"
     })
 
     useEffect(() => {
@@ -24,16 +24,16 @@ export const ThemeProvider = ({children}) => {
     const toggleTheme = () => setIsDarkMode(prev => !prev)
 
     return (
-        <ThemeContext.Provider value={{isDarkMode, toggleTheme}}>
+        <ThemeContext value={{isDarkMode, toggleTheme}}>
             {children}
-        </ThemeContext.Provider>
+        </ThemeContext>
     )
 }
 
 export const useTheme = () => {
     const context = useContext(ThemeContext)
     if (!context) {
-        throw new Error("useTheme must be used within a ThemeProvider")
+        throw new Error("useTheme must be used within a ThemeProvider framework")
     }
     return context
 }

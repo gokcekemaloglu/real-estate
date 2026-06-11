@@ -13,7 +13,7 @@ const useAuthCall = () => {
     const register = async (userInfo) => {
         dispatch(fetchStart())
         try {
-            const {data} = await axiosPublic.post("auth/signup", userInfo)
+            const {data} = await axiosPublic.post("/auth/signup", userInfo)
             dispatch(registerSuccess(data))
             SweetNotify("Hesabınız başarıyla oluşturuldu. Giriş yapabilirsiniz.", SweetAlertIcons.SUCCESS)
             navigate("/login")
@@ -28,7 +28,7 @@ const useAuthCall = () => {
     const login = async (userInfo) => {
         dispatch(fetchStart())
         try {
-            const {data} = await axiosPublic.post("auth/login", userInfo)
+            const {data} = await axiosPublic.post("/auth/login", userInfo)
             dispatch(loginSuccess(data))
             SweetNotify(`Hoşgeldiniz, ${data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
             navigate("/")
@@ -45,14 +45,15 @@ const useAuthCall = () => {
         if (!confirmed) return //Exit if user cancels logout
         dispatch(fetchStart())
         try {
-            await axiosWithToken.post("auth/logout")
+            await axiosWithToken.post("/auth/logout")
             dispatch(logoutSuccess())
             SweetNotify("Başarıyla çıkış yapıldı.", SweetAlertIcons.SUCCESS)
             navigate("/")
         } catch (error) {
             console.log("Logout Error", error)
             dispatch(fetchFail())
-            SweetNotify("Çıkış işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.", SweetAlertIcons.ERROR)
+            const errorMsg = error.response?.data?.message || "Çıkış işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin."
+            SweetNotify(errorMsg, SweetAlertIcons.ERROR)
         }
     }
   return {register, login, logout}

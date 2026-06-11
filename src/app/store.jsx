@@ -5,8 +5,8 @@ const store = configureStore({
     reducer: {
         auth: authReducer
     },
+    // Enables Redux DevTools only during development environment for better security
     devTools: import.meta.env.DEV
-    // devTools: process.env.NODE_ENV !== "production"
 })
 
 export default store

@@ -10,7 +10,7 @@ export const axiosWithToken =  axios.create({baseURL: BASE_URL})
 
 const useAxios = () => {
     const token = useSelector(state => state.auth?.token)
-
+    // useMemo ensures interceptors are only attached when the token changes, preventing multiple interceptor stacks
     useMemo(() => {
     const requestInterceptor = axiosWithToken.interceptors.request.use((config) => {
         if (token && !config.headers["Authorization"]) {
@@ -21,6 +21,7 @@ const useAxios = () => {
       (error) => Promise.reject(error)
     )
 
+    // Cleanup function to eject the interceptor when component unmounts or token updates
     return () => {
       axiosWithToken.interceptors.request.eject(requestInterceptor)
     }
