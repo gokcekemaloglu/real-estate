@@ -1,10 +1,14 @@
-import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import useAuthCall from '../hooks/useAuthCall'
 import ThemeToggle from './ThemeToggle'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const {logout} = useAuthCall()
+
+    const {token, currentUser} = useSelector(state => state.auth)
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/85 dark:bg-brand-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 font-display transition-colors duration-300">
       <div className="w-full mx-auto px-12 md:px-24 h-20 flex items-center justify-between">
@@ -14,12 +18,12 @@ const Navbar = () => {
           Görkem <span className="text-brand-gold font-sans font-semibold">Emlak</span>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Navigation Links - Integrated with 'after-line' utility */}
         <div className="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 transition-colors duration-300">
-          <Link to="/" className="hover:text-brand-gold transition-colors duration-300">Ana Sayfa</Link>
-          <Link to="/properties" className="hover:text-brand-gold transition-colors duration-300">İlanlar</Link>
-          <Link to="/about" className="hover:text-brand-gold transition-colors duration-300">Hakkımızda</Link>
-          <Link to="/contact" className="hover:text-brand-gold transition-colors duration-300">İletişim</Link>
+          <Link to="/" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">Ana Sayfa</Link>
+          <Link to="/properties" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">İlanlar</Link>
+          <Link to="/about" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">Hakkımızda</Link>
+          <Link to="/contact" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">İletişim</Link>
         </div>
 
         {/* Right Side Actions Container (Always visible on mobile & desktop) */}
@@ -27,13 +31,24 @@ const Navbar = () => {
           {/* Dark/Light Mode Toggle Switch */}
           <ThemeToggle />
           
-          {/* Desktop Only Login Action */}
-          <div className="hidden md:flex">
-            <Link to="/login" className="btn-premium px-6 py-2.5 font-medium">
-              Giriş Yap
-            </Link>
+          {/* Conditional rendering depending on authentication state  */}
+          {token ? (
+            <div className="flex items-center gap-4">
+              <span className="text-xs font-light tracking-wide text-slate-500 dark:text-slate-400">
+                Salon: <span className="font-medium text-brand-gold">{currentUser}</span>
+              </span>
+              <button onClick={logout} className="btn-premium px-6 py-2.5 font-medium">
+                Çıkış Yap
+              </button>
+            </div>
+          ) : (
+            <div className="hidden md:flex">
+              <Link to="/login" className="btn-premium px-6 py-2.5 font-medium">
+                Giriş Yap
+              </Link>
           </div>
-
+          )}
+          
           {/* Mobile Hamburger Menu Button */}
           <button 
             onClick={() => setIsOpen(!isOpen)}
@@ -57,9 +72,18 @@ const Navbar = () => {
           <Link to="/properties" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İlanlar</Link>
           <Link to="/about" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Hakkımızda</Link>
           <Link to="/contact" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İletişim</Link>
-          <Link to="/login" onClick={() => setIsOpen(false)} className="btn-premium text-center py-3 mt-2">
-            Giriş Yap
-          </Link>
+          {token ? (
+            <button 
+              onClick={() => { setIsOpen(false); logout(); }} 
+              className="btn-premium text-center py-3 mt-2"
+            >
+              Çıkış Yap ({currentUser})
+            </button>
+          ) : (
+            <Link to="/login" onClick={() => setIsOpen(false)} className="btn-premium text-center py-3 mt-2">
+              Giriş Yap
+            </Link>
+          )}
         </div>
       )}
     </nav>
