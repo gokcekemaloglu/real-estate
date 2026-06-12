@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import RegisterForm from '../components/auth/RegisterForm'
+import RegisterForm, { SignupSchema } from '../components/auth/RegisterForm'
 import AuthFooterLink from '../components/auth/AuthFooterLink'
+import { Formik } from 'formik'
+import useAuthCall from '../hooks/useAuthCall'
 
 const Register = () => {
+  const {register} = useAuthCall()
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-brand-dark px-6 py-24 font-display relative overflow-hidden transition-colors duration-300">
       {/* Background Subtle Line Effect */}
@@ -21,7 +24,21 @@ const Register = () => {
         </div>
 
         {/* Form Container */}
-        <RegisterForm/>
+        <Formik
+          initialValues={{
+            userName: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: ""
+          }}
+          validationSchema={SignupSchema}
+          onSubmit={(values, actions) => {
+            register(values)
+          }}
+          component={(props) => <RegisterForm {...props}/>}
+        ></Formik>
+        
         {/* <form className="flex flex-col gap-5">
           <div className="flex flex-col gap-1.5">
             <label className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-medium">Kullanıcı Adı</label>
