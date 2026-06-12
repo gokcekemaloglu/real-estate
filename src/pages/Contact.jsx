@@ -1,4 +1,5 @@
 import React from 'react'
+import ContactHeader from '../components/contact/ContactHeader'
 
 const Contact = () => {
   return (
@@ -9,15 +10,7 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <span className="text-xs uppercase tracking-[0.3em] text-brand-gold font-medium mb-3 block">
-            Seçkin Yatırımlar İçin Bizimle İletişime Geçin
-          </span>
-          <h1 className="text-4xl md:text-6xl font-light tracking-tight text-slate-900 dark:text-white leading-tight">
-            Kusursuz Hizmet <br />
-            <span className="font-serif italic text-brand-gold dark:text-amber-400">İletişim Hattı</span>
-          </h1>
-        </div>
+        <ContactHeader/>
 
         {/* Core Layout: Grid splits into contact info details and raw HTML premium contact form */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
