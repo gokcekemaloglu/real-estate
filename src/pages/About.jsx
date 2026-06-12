@@ -1,4 +1,5 @@
 import React from 'react'
+import AboutHeader from '../components/about/AboutHeader'
 
 const About = () => {
   return (
@@ -9,16 +10,8 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-16 md:mb-24">
-          <span className="text-xs uppercase tracking-[0.3em] text-brand-gold font-medium mb-3 block">
-            Zamansız Değerler, Kusursuz Hizmet
-          </span>
-          <h1 className="text-4xl md:text-6xl font-light tracking-tight text-slate-900 dark:text-white leading-tight">
-            Görkem Emlak <br />
-            <span className="font-serif italic text-brand-gold dark:text-amber-400">Hikayesi</span>
-          </h1>
-        </div>
-
+        <AboutHeader/>
+        
         {/* Core Layout: Grid splits into text and interactive premium image box */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
