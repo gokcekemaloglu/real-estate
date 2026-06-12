@@ -32,15 +32,26 @@ body {
 }
 
 @utility input-premium {
+  width: 100%;
   border: 1px solid #cbd5e1;
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
+  font-weight: 300; /* font-light */
   outline: none;
   transition: all 0.3s ease;
+  background-color: #f1f5f9; /* bg-slate-100 */
+  border-color: #cbd5e1; /* border-slate-300 */
+  color: #1e293b; /* text-slate-800 */
   
   &:focus {
     border-color: var(--color-brand-gold);
   }
+}
+/* Enable seamless adaptation inside class-based dark mode rules */
+.dark .input-premium {
+  background-color: rgba(2, 6, 23, 0.6); /* bg-slate-950/60 */
+  border-color: #1e293b; /* border-slate-800 */
+  color: #ffffff; /* text-white */
 }
 
 /* Custom Premium Link Hover Animation Effect */
