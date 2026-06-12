@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import RegisterForm from '../components/auth/RegisterForm'
+import AuthFooterLink from '../components/auth/AuthFooterLink'
 
 const Register = () => {
   return (
@@ -19,7 +21,8 @@ const Register = () => {
         </div>
 
         {/* Form Container */}
-        <form className="flex flex-col gap-5">
+        <RegisterForm/>
+        {/* <form className="flex flex-col gap-5">
           <div className="flex flex-col gap-1.5">
             <label className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-medium">Kullanıcı Adı</label>
             <input 
@@ -53,17 +56,12 @@ const Register = () => {
           >
             Kayıt Ol
           </button>
-        </form>
+        </form> */}
 
         {/* Bottom Link */}
-        <div className="text-center mt-6">
-          <p className="text-xs text-slate-400 dark:text-slate-500 font-light">
-            Zaten bir hesabınız var mı?{' '}
-            <Link to="/login" className="text-brand-gold hover:text-amber-500 font-medium transition-colors duration-200">
-              Giriş Yapın
-            </Link>
-          </p>
-        </div>
+
+        <AuthFooterLink text={"Zaten bir hesabınız var mı"} linkText={"Giriş Yapın"} to={"/login"}/>
+
       </div>
 
       {/* Decorative Blur Gradients */}
