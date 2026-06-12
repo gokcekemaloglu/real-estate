@@ -35,6 +35,9 @@ const Register = () => {
           validationSchema={SignupSchema}
           onSubmit={(values, actions) => {
             register(values)
+            // actions.resetForm()
+            // Gracefully terminates the Formik submitting lifecycle state
+            actions.setSubmitting(false) 
           }}
           component={(props) => <RegisterForm {...props}/>}
         ></Formik>
@@ -77,7 +80,7 @@ const Register = () => {
 
         {/* Bottom Link */}
 
-        <AuthFooterLink text={"Zaten bir hesabınız var mı"} linkText={"Giriş Yapın"} to={"/login"}/>
+        <AuthFooterLink text={"Zaten bir hesabınız var mı?"} linkText={"Giriş Yapın!"} to={"/login"}/>
 
       </div>
 

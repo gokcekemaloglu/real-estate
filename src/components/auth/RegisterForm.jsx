@@ -3,8 +3,8 @@ import * as Yup from "yup";
 
 export const SignupSchema = Yup.object().shape({
   userName: Yup.string()
-    .required("Bu alan zorunludur!")
-    .min(3, "Username en az 3 karakter olmalıdır!"),
+    .required("Kullanıcı adı zorunludur!")
+    .min(3, "Kullanıcı adı en az 3 karakter olmalıdır!"),
   firstName: Yup.string()
     .min(2, "Adınız çok kısa!")
     .max(50, "Adınız çok uzun!")
@@ -32,27 +32,71 @@ const RegisterForm = ({
     touched,
     handleChange,
     handleBlur,
-    // handleSubmit,
+    handleSubmit,
     isSubmitting,
-    /* and other goodies */
 }) => {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault()
+      handleSubmit()
+    }
+  }
   return (
-    <form className="flex flex-col gap-5">
+    <form className="flex flex-col gap-5" onKeyDown={handleKeyDown} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-1.5">
         <label className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-medium">
           Kullanıcı Adı
         </label>
         <input
-          type="text"
           name="userName"
+          type="text"
           value={values.userName}
           onChange={handleChange}
           onBlur={handleBlur}
-          errors={touched.userName && Boolean(errors.userName)}
+          required
           placeholder="gorkememlak"
           className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white w-full font-light placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:border-brand-gold"
 
         />
+        {touched.userName && errors.userName && (
+          <span className="text-[11px] text-red-500 font-light tracking-wide">{errors.userName}</span>
+        )}
+      </div>
+      {/* Firstname and lastname grid */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-medium">Ad</label>
+          <input
+            name="firstName"
+            type="text"
+            value={values.firstName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            required
+            placeholder="Adınızı buraya yazın."
+            className={`input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white w-full font-light ${touched.firstName && errors.firstName ? 'border-red-500 focus:border-red-500' : 'focus:border-brand-gold'}`}
+          />
+          {touched.firstName && errors.firstName && (
+            <span className="text-[11px] text-red-500 font-light tracking-wide">{errors.firstName}</span>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-medium">Soyad</label>
+          <input
+            name="lastName"
+            type="text"
+            value={values.lastName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            required
+            placeholder="Soyadınızı buraya yazın."
+            className={`input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white w-full font-light ${touched.lastName && errors.lastName ? 'border-red-500 focus:border-red-500' : 'focus:border-brand-gold'}`}
+          />
+          {touched.lastName && errors.lastName && (
+            <span className="text-[11px] text-red-500 font-light tracking-wide">{errors.lastName}</span>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -60,10 +104,18 @@ const RegisterForm = ({
           E-Posta Adresi
         </label>
         <input
+          name="email"
           type="email"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          required
           placeholder="isim@gorkememlak.com"
           className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white w-full font-light placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:border-brand-gold"
         />
+        {touched.email && errors.email && (
+          <span className="text-[11px] text-red-500 font-light tracking-wide">{errors.email}</span>
+        )}
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -71,17 +123,25 @@ const RegisterForm = ({
           Şifre
         </label>
         <input
+          name="password"
           type="password"
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          required
           placeholder="••••••••"
           className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white w-full font-light placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:border-brand-gold"
         />
+        {touched.password && errors.password && (
+          <span className="text-[11px] text-red-500 font-light tracking-wide">{errors.password}</span>
+        )}
       </div>
-
       <button
         type="submit"
+        disabled={isSubmitting}
         className="btn-premium w-full py-3.5 mt-2 font-semibold text-center tracking-widest transition-all duration-300 shadow-md dark:shadow-lg dark:hover:shadow-brand-gold/10"
       >
-        Kayıt Ol
+        {isSubmitting ? "yükleniyor"+"..." : "Kayıt Ol"}
       </button>
     </form>
   );
