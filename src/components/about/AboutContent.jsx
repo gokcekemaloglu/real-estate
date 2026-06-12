@@ -1,41 +1,60 @@
-import React from 'react'
+import React from "react";
 
 const AboutContent = () => {
   return (
     <div className="flex flex-col gap-6 text-slate-600 dark:text-slate-300 font-light leading-relaxed text-sm md:text-base">
-            <h3 className="text-xl md:text-2xl font-serif text-slate-800 dark:text-white font-normal mb-2 tracking-wide">
-              Gayrimenkulde Güvenin ve Prestijin Adresi
-            </h3>
-            
-            <p>
-              Görkem Emlak, kurulduğu günden bu yana lüks konut, elite projeler ve sıra dışı yaşam alanlarını seçkin yatırımcılarla buluşturmayı misyon edinmiştir. Sadece bir gayrimenkul ofisi değil, yaşam tarzı mimarı olarak hizmet veriyoruz.
-            </p>
-            
-            <p className="border-l-2 border-brand-gold pl-4 italic text-slate-500 dark:text-slate-400">
-              "Her portföy bir sanat eseri, her müşteri ise benzersiz bir hikayedir. Biz, o hikayelere en kusursuz mekanları inşa etmek için buradayız." — Cemal Ciğer
-            </p>
+      <h3 className="text-xl md:text-2xl font-serif text-slate-800 dark:text-white font-normal mb-2 tracking-wide">
+        Gayrimenkulde Güvenin ve Prestijin Adresi
+      </h3>
 
-            <p>
-              Küresel standartlarda sunduğumuz analizler, şeffaf süreç yönetimi ve kişiselleştirilmiş danışmanlık hizmetlerimizle, yatırım kararlarınızı sanata ve kalıcı bir mirasa dönüştürüyoruz.
-            </p>
+      <p>
+        Görkem Emlak, kurulduğu günden bu yana lüks konut, elite projeler ve
+        sıra dışı yaşam alanlarını seçkin yatırımcılarla buluşturmayı misyon
+        edinmiştir. Sadece bir gayrimenkul ofisi değil, yaşam tarzı mimarı
+        olarak hizmet veriyoruz.
+      </p>
 
-            {/* Stat Counters for Luxury Look */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 dark:border-slate-800 mt-4">
-              <div>
-                <span className="block text-xl md:text-2xl font-serif font-medium text-brand-gold">10+</span>
-                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Yıllık Tecrübe</span>
-              </div>
-              <div>
-                <span className="block text-xl md:text-2xl font-serif font-medium text-brand-gold">500+</span>
-                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Seçkin Portföy</span>
-              </div>
-              <div>
-                <span className="block text-xl md:text-2xl font-serif font-medium text-brand-gold">%99</span>
-                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Memnuniyet</span>
-              </div>
-            </div>
-          </div>
-  )
-}
+      <p className="border-l-2 border-brand-gold pl-4 italic text-slate-500 dark:text-slate-400">
+        "Her portföy bir sanat eseri, her müşteri ise benzersiz bir hikayedir.
+        Biz, o hikayelere en kusursuz mekanları inşa etmek için buradayız." —
+        Cemal Ciğer
+      </p>
 
-export default AboutContent
+      <p>
+        Küresel standartlarda sunduğumuz analizler, şeffaf süreç yönetimi ve
+        kişiselleştirilmiş danışmanlık hizmetlerimizle, yatırım kararlarınızı
+        sanata ve kalıcı bir mirasa dönüştürüyoruz.
+      </p>
+
+      {/* Stat Counters for Luxury Look */}
+      <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 dark:border-slate-800 mt-4">
+        <div>
+          <span className="block text-xl md:text-2xl font-serif font-medium text-brand-gold">
+            10+
+          </span>
+          <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+            Yıllık Tecrübe
+          </span>
+        </div>
+        <div>
+          <span className="block text-xl md:text-2xl font-serif font-medium text-brand-gold">
+            500+
+          </span>
+          <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+            Seçkin Portföy
+          </span>
+        </div>
+        <div>
+          <span className="block text-xl md:text-2xl font-serif font-medium text-brand-gold">
+            %99
+          </span>
+          <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+            Memnuniyet
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AboutContent;
