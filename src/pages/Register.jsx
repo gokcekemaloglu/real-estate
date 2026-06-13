@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import RegisterForm, { SignupSchema } from '../components/auth/RegisterForm'
+import RegisterForm from '../components/auth/RegisterForm'
 import AuthFooterLink from '../components/auth/AuthFooterLink'
 import { Formik } from 'formik'
 import useAuthCall from '../hooks/useAuthCall'
+import { SignupSchema } from '../helper/ValidationSchemas'
 
 const Register = () => {
   const {register} = useAuthCall()
