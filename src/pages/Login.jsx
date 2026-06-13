@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import LoginForm, { SignInSchema } from '../components/auth/LoginForm'
+import LoginForm from '../components/auth/LoginForm'
 import AuthFooterLink from '../components/auth/AuthFooterLink'
 import useAuthCall from '../hooks/useAuthCall'
 import { Formik } from 'formik'
+import { SignInSchema } from '../helper/ValidationSchemas'
 
 const Login = () => {
   const {login} = useAuthCall()
@@ -26,8 +27,7 @@ const Login = () => {
         {/* Form Container for baseline HTML state */}
         <Formik
           initialValues={{
-            userName: "",
-            email: "",
+            usernameOrEmail: "", //to match SignInSchema and FormInput name property precisely
             password: ""
           }}
           validationSchema={SignInSchema}
