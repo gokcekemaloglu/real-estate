@@ -13,7 +13,7 @@ const LoginForm = (props) => {
     <form className="flex flex-col gap-5" onKeyDown={handleKeyDown} onSubmit={handleSubmit}>
       <FormInput
         label={"Kullanıcı Adı veya E-Posta"}
-        name={"usernameOrEmail"} // Matches the key name in SignInSchema and initialValues
+        name={"userNameOrEmail"} // Matches the key name in SignInSchema and initialValues
         placeholder={"gorkememlak veya isim@gorkememlak.com"}
         formikProps={props}
       />

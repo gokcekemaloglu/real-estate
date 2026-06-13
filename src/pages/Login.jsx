@@ -27,7 +27,7 @@ const Login = () => {
         {/* Form Container for baseline HTML state */}
         <Formik
           initialValues={{
-            usernameOrEmail: "", //to match SignInSchema and FormInput name property precisely
+            userNameOrEmail: "", //to match SignInSchema and FormInput name property precisely
             password: ""
           }}
           validationSchema={SignInSchema}

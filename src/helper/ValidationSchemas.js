@@ -31,7 +31,7 @@ export const SignupSchema = Yup.object().shape({
 // Advanced logic tracking: User can type either a valid email format or a plain string username
 
 export const SignInSchema = Yup.object().shape({
-  usernameOrEmail: Yup.string()
+  userNameOrEmail: Yup.string()
     .required("Kullanıcı adı veya e-posta adresi zorunludur!")
     .min(3, "Giriş bilgisi çok kısa!"),
   password: Yup.string()
