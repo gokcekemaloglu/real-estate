@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import LoginForm from '../components/auth/LoginForm'
+import LoginForm, { SignInSchema } from '../components/auth/LoginForm'
 import AuthFooterLink from '../components/auth/AuthFooterLink'
+import useAuthCall from '../hooks/useAuthCall'
+import { Formik } from 'formik'
 
 const Login = () => {
+  const {login} = useAuthCall()
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-brand-dark px-6 py-24 font-display relative overflow-hidden transition-colors duration-300">
       {/* Background Subtle Line Effect with Tailwind v4 size definition */}
@@ -21,10 +24,24 @@ const Login = () => {
         </div>
 
         {/* Form Container for baseline HTML state */}
-        <LoginForm/>
+        <Formik
+          initialValues={{
+            userName: "",
+            email: "",
+            password: ""
+          }}
+          validationSchema={SignInSchema}
+          onSubmit={(values, actions) => {
+            login(values)
+            // actions.resetForm()
+            // Gracefully terminates the Formik submitting lifecycle state
+            actions.setSubmitting(false) 
+          }}
+          component={(props) => <LoginForm {...props}/>}
+        ></Formik>
 
         {/* Bottom Navigation Link */}
-        <AuthFooterLink text={"Henüz bir Hesabınız yok mu?"} linkText={"Kayıt Olun"} to={"/register"}/>
+        <AuthFooterLink text={"Henüz bir Hesabınız yok mu?"} linkText={"Kayıt Olun!"} to={"/register"}/>
 
       </div>
 
