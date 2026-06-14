@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import useAuthCall from '../hooks/useAuthCall'
 import ThemeToggle from './ThemeToggle'
+import NavLinks from './navbar/NavLinks'
+import MobileMenu from './navbar/MobileMenu'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -22,12 +24,13 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation Links - Integrated with 'after-line' utility */}
-        <div className="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 transition-colors duration-300">
+        <NavLinks/>
+        {/* <div className="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 transition-colors duration-300">
           <Link to="/" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">Ana Sayfa</Link>
           <Link to="/properties" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">İlanlar</Link>
           <Link to="/about" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">Hakkımızda</Link>
           <Link to="/contact" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">İletişim</Link>
-        </div>
+        </div> */}
 
         {/* Right Side Actions Container (Always visible on mobile & desktop) */}
         <div className="flex items-center gap-2 md:gap-4 order-2 md:order-0">
@@ -69,8 +72,11 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {isOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-slate-800 px-6 py-6 flex flex-col gap-6 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 animate-fade-in transition-colors duration-300">
+      {isOpen && 
+        <MobileMenu setIsOpen={setIsOpen} logout={logout} currentUser={currentUser} token={token}/>
+      }
+        
+        {/* <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-slate-800 px-6 py-6 flex flex-col gap-6 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 animate-fade-in transition-colors duration-300">
           <Link to="/" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Ana Sayfa</Link>
           <Link to="/properties" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İlanlar</Link>
           <Link to="/about" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Hakkımızda</Link>
@@ -87,8 +93,8 @@ const Navbar = () => {
               Giriş Yap
             </Link>
           )}
-        </div>
-      )}
+        </div> */}
+      
     </nav>
   )
 }

@@ -31,7 +31,7 @@ const useAuthCall = () => {
         dispatch(fetchStart())
         try {
             const {data} = await axiosPublic.post("/auth/login", userInfo)
-            console.log(data);
+            // console.log(data);
             
             dispatch(loginSuccess(data.data))
             SweetNotify(`Hoşgeldiniz, ${data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
