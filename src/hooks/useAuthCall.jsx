@@ -14,7 +14,9 @@ const useAuthCall = () => {
         dispatch(fetchStart())
         try {
             const {data} = await axiosPublic.post("/auth/signup", userInfo)
-            dispatch(registerSuccess(data))
+            // console.log(data);
+            
+            dispatch(registerSuccess(data.data))
             SweetNotify("Hesabınız başarıyla oluşturuldu. Giriş yapabilirsiniz.", SweetAlertIcons.SUCCESS)
             navigate("/login")
         } catch (error) {
@@ -29,7 +31,9 @@ const useAuthCall = () => {
         dispatch(fetchStart())
         try {
             const {data} = await axiosPublic.post("/auth/login", userInfo)
-            dispatch(loginSuccess(data))
+            console.log(data);
+            
+            dispatch(loginSuccess(data.data))
             SweetNotify(`Hoşgeldiniz, ${data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
             navigate("/")
         } catch (error) {
@@ -45,7 +49,7 @@ const useAuthCall = () => {
         if (!confirmed) return //Exit if user cancels logout
         dispatch(fetchStart())
         try {
-            await axiosWithToken.post("/auth/logout")
+            await axiosWithToken.get("/auth/logout")
             dispatch(logoutSuccess())
             SweetNotify("Başarıyla çıkış yapıldı.", SweetAlertIcons.SUCCESS)
             navigate("/")
