@@ -11,8 +11,8 @@ const Navbar = () => {
     const {logout} = useAuthCall()
 
     const {token, currentUser} = useSelector(state => state.auth)
-    console.log(token);
-    console.log(currentUser);
+    // console.log(token);
+    // console.log(currentUser);
     
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/85 dark:bg-brand-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 font-display transition-colors duration-300">

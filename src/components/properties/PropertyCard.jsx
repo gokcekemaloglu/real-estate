@@ -1,15 +1,50 @@
 import React from "react";
 
 const PropertyCard = ({item}) => {
+  // const { _id,
+  //   title,
+  //   description,
+  //   price,
+  //   listingType,
+  //   propertyCategory,
+  //   city,
+  //   district,
+  //   neighbourhood,
+  //   fullAddress,
+  //   grossArea,
+  //   netArea,
+  //   floor,
+  //   totalFloors,
+  //   roomCount,
+  //   bathroomCount,
+  //   buildingAge,
+  //   heatingType,
+  //   maintenanceFee,
+  //   isFurnished,
+  //   occupancyStatus,
+  //   hasElevator,
+  //   hasParking,
+  //   createdBy, // ??
+  //   isActive,
+  //   isFeatured,
+  //   viewCount,
+  //   favouritesCount,
+  //   isLoanEligible,
+  //   ownerId} = item
+
+  console.log(item);
+  
+  
   return (
+    // <></>
     <div
-      key={item.id}
+      key={item._id}
       className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex flex-col transition-colors duration-300"
     >
       {/* Card Image Block with relative badge element */}
       <div className="relative h-64 w-full bg-slate-200 dark:bg-slate-950 overflow-hidden">
         <img
-          src={item.image}
+          // src={item.image}
           alt={item.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
@@ -17,7 +52,7 @@ const PropertyCard = ({item}) => {
 
         {/* Premium Type Badge */}
         <span className="absolute top-4 left-4 bg-brand-dark/90 dark:bg-slate-900/90 border border-brand-gold/30 text-amber-400 text-[10px] uppercase tracking-widest px-3 py-1.5 font-medium shadow-md">
-          {item.type}
+          {/* {item.listingType} */}
         </span>
       </div>
 
@@ -25,7 +60,7 @@ const PropertyCard = ({item}) => {
       <div className="p-6 flex flex-col flex-1 gap-4">
         <div className="flex flex-col gap-1">
           <span className="text-[10px] uppercase tracking-wider text-brand-gold font-medium">
-            {item.location}
+            {item.district}
           </span>
           <h3 className="text-lg font-serif font-normal text-slate-800 dark:text-white tracking-wide group-hover:text-brand-gold transition-colors duration-300 line-clamp-1">
             {item.title}
@@ -38,19 +73,19 @@ const PropertyCard = ({item}) => {
             <span className="text-[10px] uppercase tracking-tight text-slate-400 font-medium">
               Alan
             </span>
-            <span>{item.specs.space}</span>
+            {/* <span>{item}</span> */}
           </div>
           <div className="border-r border-slate-100 dark:border-slate-800/60 flex flex-col gap-0.5">
             <span className="text-[10px] uppercase tracking-tight text-slate-400 font-medium">
               Oda
             </span>
-            <span>{item.specs.rooms}</span>
+            <span>{item.roomCount}</span>
           </div>
           <div className="flex flex-col gap-0.5">
             <span className="text-[10px] uppercase tracking-tight text-slate-400 font-medium">
               Banyo
             </span>
-            <span>{item.specs.baths}</span>
+            <span>{item.bathroomCount}</span>
           </div>
         </div>
 

@@ -2,6 +2,9 @@ import React from 'react'
 import PropertyHeader from '../components/properties/PropertyHeader'
 import PropertyFilters from '../components/properties/PropertyFilters'
 import PropertyCard from '../components/properties/PropertyCard'
+import { useEffect } from 'react'
+import usePropertyCall from '../hooks/usePropertyCall'
+import { useSelector } from 'react-redux'
 
 const Properties = () => {
     // Static mock array simulating upcoming API structure for UI rendering
@@ -35,6 +38,17 @@ const Properties = () => {
     }
   ]
 
+  const {properties, loading} = useSelector(state => state.property)
+
+  console.log("Properties-->", properties);
+  
+
+  const {getPropertiesData} = usePropertyCall()
+
+  useEffect(() => {
+    getPropertiesData()
+  }, [])
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-brand-dark pt-32 pb-24 font-display transition-colors duration-300 relative overflow-hidden">
       {/* Background Luxury Line Grid using Tailwind v4 syntax */}
@@ -50,11 +64,9 @@ const Properties = () => {
         
         {/* Core Showcase Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {mockProperties.map((item) => (
-            
+          {properties.map((item) => (
             /* Individual Luxury Estate Card component wrapper */
-            <PropertyCard item={item} key={item.id}/>
-           
+            <PropertyCard item={item} key={item._id}/>
           ))}
         </div>
 
@@ -64,3 +76,36 @@ const Properties = () => {
 }
 
 export default Properties
+
+// const { _id,
+  //   title,
+  //   description,
+  //   price,
+  //   listingType,
+  //   propertyCategory,
+  //   city,
+  //   district,
+  //   neighbourhood,
+  //   fullAddress,
+  //   grossArea,
+  //   netArea,
+  //   floor,
+  //   totalFloors,
+  //   roomCount,
+  //   bathroomCount,
+  //   buildingAge,
+  //   heatingType,
+  //   maintenanceFee,
+  //   isFurnished,
+  //   occupancyStatus,
+  //   hasElevator,
+  //   hasParking,
+  //   createdBy, // ??
+  //   isActive,
+  //   isFeatured,
+  //   viewCount,
+  //   favouritesCount,
+  //   isLoanEligible,
+  //   ownerId} = item
+
+  
