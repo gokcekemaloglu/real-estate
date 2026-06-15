@@ -8,6 +8,7 @@ import AuthRoute from './AuthRoute'
 // Performance Optimization via Lazy Loading (Code Splitting)
 const Home = lazy(() => import('../pages/Home'))
 const Properties = lazy(() => import('../pages/Properties'))
+const PropertyDetail = lazy(() => import('../components/properties/PropertyDetail'))
 const About = lazy(() => import('../pages/About'))
 const Contact = lazy(() => import('../pages/Contact'))
 const Register = lazy(() => import('../pages/Register'))
@@ -28,6 +29,7 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/properties" element={<Properties/>}/>
+          <Route path="/properties/:id" element={<PropertyDetail/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route element={<AuthRoute/>}>
