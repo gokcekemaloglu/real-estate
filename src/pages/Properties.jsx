@@ -7,41 +7,10 @@ import usePropertyCall from '../hooks/usePropertyCall'
 import { useSelector } from 'react-redux'
 
 const Properties = () => {
-    // Static mock array simulating upcoming API structure for UI rendering
-  const mockProperties = [
-    {
-      id: 1,
-      title: "Boğaz Manzaralı Zamansız Yalı Dairesi",
-      price: "125,000,000 ₺",
-      location: "Bebek, İstanbul",
-      type: "Satılık",
-      specs: { space: "320 m²", rooms: "4+1", baths: "3" },
-      image: "https://unsplash.com"
-    },
-    {
-      id: 2,
-      title: "Modernist Orman Villası",
-      price: "85,000,000 ₺",
-      location: "Zekeriyaköy, İstanbul",
-      type: "Satılık",
-      specs: { space: "450 m²", rooms: "5+2", baths: "4" },
-      image: "https://unsplash.com"
-    },
-    {
-      id: 3,
-      title: "Kanyon Cepheli Rezidans Penthouse",
-      price: "220,000 ₺ / Ay",
-      location: "Levent, İstanbul",
-      type: "Kiralık",
-      specs: { space: "210 m²", rooms: "3+1", baths: "2" },
-      image: "https://unsplash.com"
-    }
-  ]
 
   const {properties, loading} = useSelector(state => state.property)
 
   console.log("Properties-->", properties);
-  
 
   const {getPropertiesData} = usePropertyCall()
 
@@ -62,13 +31,19 @@ const Properties = () => {
         {/* Premium Horizontal Filter Bar (Baseline HTML inputs for upcoming Formik integration) */}
         <PropertyFilters/>
         
-        {/* Core Showcase Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {properties.map((item) => (
-            /* Individual Luxury Estate Card component wrapper */
-            <PropertyCard item={item} key={item._id}/>
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex items-center justify-center min-h-100">
+            <div className="w-12 h-12 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          /* Core Showcase Grid Layout */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            {properties?.map((item) => (
+              /* Individual Luxury Estate Card component wrapper */
+              <PropertyCard item={item} key={item._id}/>
+            ))}
+          </div>
+        )}
 
       </div>
     </div>
@@ -76,36 +51,3 @@ const Properties = () => {
 }
 
 export default Properties
-
-// const { _id,
-  //   title,
-  //   description,
-  //   price,
-  //   listingType,
-  //   propertyCategory,
-  //   city,
-  //   district,
-  //   neighbourhood,
-  //   fullAddress,
-  //   grossArea,
-  //   netArea,
-  //   floor,
-  //   totalFloors,
-  //   roomCount,
-  //   bathroomCount,
-  //   buildingAge,
-  //   heatingType,
-  //   maintenanceFee,
-  //   isFurnished,
-  //   occupancyStatus,
-  //   hasElevator,
-  //   hasParking,
-  //   createdBy, // ??
-  //   isActive,
-  //   isFeatured,
-  //   viewCount,
-  //   favouritesCount,
-  //   isLoanEligible,
-  //   ownerId} = item
-
-  
