@@ -8,33 +8,33 @@ const initialState = {
     _id: "",
     title: "",
     description: "",
-    price: "",
+    price: 0,
     listingType: "",
     propertyCategory: "",
     city: "",
     district: "",
     neighbourhood: "",
     fullAddress: "",
-    grossArea: null,
-    netArea: null,
-    floor: null,
+    grossArea: 0,
+    netArea: 0,
+    floor: 0,
     totalFloors: null,
-    roomCount: null,
+    roomCount: "",
     bathroomCount: 0,
     buildingAge: 0,
-    heatingType: "",
-    maintenanceFee: null,
-    isFurnished: null,
+    heatingType: "none",
+    maintenanceFee: 0,
+    isFurnished: false,
     occupancyStatus: "",
-    hasElevator: null,
-    hasParking: null,
+    hasElevator: false,
+    hasParking: false,
     createdBy: "", // ??
-    isActive: null,
-    isFeatured: null,
+    isActive: true,
+    isFeatured: false,
     viewCount: 0,
     favouritesCount: 0,
-    isLoanEligible: null,
-    ownerId: ""
+    isLoanEligible: true,
+    ownerId: "",
   },
 };
 
@@ -46,16 +46,16 @@ const propertySlice = createSlice({
       state.loading = true;
       state.error = false;
     },
-    setData: (state, {payload}) => {
+    setData: (state, { payload }) => {
       state.loading = false;
       state.error = null;
       state[payload.key] = payload.data;
     },
-    setSingleData: (state, {payload}) => {
-        state.loading = false
-        state.error = null
-        state[payload.key] = payload.data
-    },
+    // setSingleData: (state, { payload }) => {
+    //   state.loading = false;
+    //   state.error = null;
+    //   state[payload.key] = payload.data;
+    // },
     // getPropertiesDataSuccess: (state) => {
     //   state.loading = false;
     //   state.error = null;
@@ -68,5 +68,7 @@ const propertySlice = createSlice({
   },
 });
 
-export const { fetchStart, fetchFail, setData, setSingleData } = propertySlice.actions;
+export const { fetchStart, fetchFail, setData, 
+    // setSingleData 
+} = propertySlice.actions;
 export default propertySlice.reducer;
