@@ -4,6 +4,7 @@ import usePropertyCall from '../../hooks/usePropertyCall'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import PropertyGallery from './PropertyGallery'
+import PropertyDescription from './PropertyDescription'
 
 const PropertyDetail = () => {
   const {id} = useParams()
@@ -69,13 +70,15 @@ const PropertyDetail = () => {
               </span>
             </div> */}
             
+            
             {/* Description Paragraph Text Block */}
-            <div className="flex flex-col gap-3">
+            <PropertyDescription description={property?.description}/>
+            {/* <div className="flex flex-col gap-3">
               <h3 className="text-lg font-serif text-slate-800 dark:text-white">Mimari Açıklama</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed whitespace-pre-line">
                 {property?.description || "Bu seçkin portföy için henüz detaylı bir mimari açıklama metni girilmemiştir."}
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Column (5-Cols): Luxury Price, Title & Specs Dashboard */}
