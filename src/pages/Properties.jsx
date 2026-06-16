@@ -38,9 +38,9 @@ const Properties = () => {
         ) : (
           /* Core Showcase Grid Layout */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {properties?.map((item) => (
+            {properties?.map((singleProperty) => (
               /* Individual Luxury Estate Card component wrapper */
-              <PropertyCard item={item} key={item._id}/>
+              <PropertyCard property={singleProperty} key={singleProperty._id}/>
             ))}
           </div>
         )}
