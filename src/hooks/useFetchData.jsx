@@ -5,13 +5,13 @@ import { axiosPublic } from "./useAxios";
 
 const useFetchData = () => {
   const dispatch = useDispatch();
-     /**
+    /**
    * Unified Generic Data Fetching Engine supporting real-time pagination and filtering metrics.
    * Isolates concurrent network request tasks inside separate memory thread instances cleanly.
    */
   const fetchData = async ({ endpoint, stateKey, sliceActions, page = 1, limit = 12, query = "" }) => {
     // 1. Fire the specific slice's loading initialization phase triggers
-    dispatch(sliceActions.fetchStart);
+    dispatch(sliceActions.fetchStart());
     try {
       // 2. Formulate clean query parameters appending optional third-party filter components
       const filterQuery = query ? `&${query}` : "";
@@ -22,12 +22,12 @@ const useFetchData = () => {
       );
 
       // Dispatch A: Inject core records data array directly into state mapping location (e.g., state.properties)
-      dispatch(sliceActions.setData({ key: stateKey, data: data?.data }));
+      dispatch(sliceActions.setData({ endpoint: stateKey, data: data?.data }));
 
       // Dispatch B: Map standard pagination meta blocks into dedicated key variables (e.g., state.propertiesDetails)
       dispatch(
         sliceActions.setData({
-          key: `${stateKey}Details`,
+          endpoint: `${stateKey}Details`,
           data: data?.details,
         }),
       );

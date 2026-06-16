@@ -3,20 +3,34 @@ import PropertyHeader from '../components/properties/PropertyHeader'
 import PropertyFilters from '../components/properties/PropertyFilters'
 import PropertyCard from '../components/properties/PropertyCard'
 import { useEffect } from 'react'
-import usePropertyCall from '../hooks/usePropertyCall'
 import { useSelector } from 'react-redux'
+import useFetchData from '../hooks/useFetchData'
+import { useSearchParams } from 'react-router-dom'
+import { fetchFail, fetchStart, setData } from '../features/propertySlice'
+import PaginationComponent from '../components/properties/PaginationComponent'
 
 const Properties = () => {
+  const [searchParams] = useSearchParams()
+  const {fetchData} = useFetchData()
 
-  const {properties, loading} = useSelector(state => state.property)
+  const {properties, loading, propertiesDetails} = useSelector(state => state.property)
 
   console.log("Properties-->", properties);
-
-  const {getPropertiesData} = usePropertyCall()
+  const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1
 
   useEffect(() => {
-    getPropertiesData()
-  }, [])
+    const activeParams = new URLSearchParams(searchParams)
+    activeParams.delete("page")
+    const currentQueryString = activeParams.toString()
+    fetchData({
+      endpoint: "properties",
+      stateKey: "properties",
+      sliceActions: {fetchStart, fetchFail, setData},
+      page: activePage,
+      limit:12, 
+      query: currentQueryString
+    })
+  }, [activePage, searchParams])
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-brand-dark pt-32 pb-24 font-display transition-colors duration-300 relative overflow-hidden">
@@ -36,13 +50,15 @@ const Properties = () => {
             <div className="w-12 h-12 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
           </div>
         ) : (
-          /* Core Showcase Grid Layout */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {properties?.map((singleProperty) => (
-              /* Individual Luxury Estate Card component wrapper */
-              <PropertyCard property={singleProperty} key={singleProperty._id}/>
-            ))}
-          </div>
+          <>
+            {/* Core Showcase Grid Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+              {properties?.map((singleProperty) => (
+                <PropertyCard property={singleProperty} key={singleProperty._id}/>
+              ))}
+            </div>
+            <PaginationComponent details={propertiesDetails}/>
+          </>
         )}
 
       </div>

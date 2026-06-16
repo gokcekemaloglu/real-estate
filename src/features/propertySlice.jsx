@@ -4,6 +4,11 @@ const initialState = {
   loading: false,
   error: false,
   properties: [],
+  propertiesDetails: {
+    totalRecords: 0,
+    limit: 12,
+    pages: {current: 1, total: 1}
+  },
   property: {
     _id: "",
     title: "",
@@ -49,7 +54,7 @@ const propertySlice = createSlice({
     setData: (state, { payload }) => {
       state.loading = false;
       state.error = null;
-      state[payload.key] = payload.data;
+      state[payload.endpoint] = payload.data;
     },
     // setSingleData: (state, { payload }) => {
     //   state.loading = false;
@@ -63,7 +68,7 @@ const propertySlice = createSlice({
     // },
     fetchFail: (state, { payload }) => {
       state.loading = false;
-      state.error = payload || "An error occurred while fetching data.";
+      state.error = payload || "Veriler çekilirken bir hata oluştu.";
     },
   },
 });

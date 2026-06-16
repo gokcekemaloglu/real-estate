@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import useAxios, { axiosPublic } from "./useAxios";
 import { fetchFail, fetchStart, setData } from "../features/propertySlice";
@@ -14,35 +13,23 @@ const usePropertyCall = () => {
     SweetNotify(errorMsg, SweetAlertIcons.ERROR);
   };
 
-  const getPropertiesData = async (key = "properties", options = {}) => {
-    dispatch(fetchStart());
-    try {
-      const {data} = await axiosPublic(`${key}`, options)
-      dispatch(setData({key, data: data?.data}))
-    } catch (error) {
-      handleError(error, `Emlak portföy verileri çekilirken bir hata oluştu!`);
-    }
-  };
-
   const getSinglePropertyData = async (id) => {
     dispatch(fetchStart());
     try {
       const {data} = await axiosPublic(`properties/${id}`)
-      dispatch(setData({key:"property", data: data?.data}))
+      dispatch(setData({endpoint:"property", data: data?.data}))
     } catch (error) {
       handleError(error, `${id} kimlikli gayrimenkul detayları yüklenemedi!`);
     }
   };
 
-  const postPropertyData = async (key = "properties", info) => {
+  const postPropertyData = async (endpoint = "properties", info) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.post(`${key}`, info);
+      await axiosWithToken.post(`${endpoint}`, info);
       SweetNotify("İlan başarıyla yayına alındı.", SweetAlertIcons.SUCCESS)
     } catch (error) {
       handleError(error, "Yeni ilan oluşturulurken hata oluştu!");
-    } finally {
-        getPropertiesData("properties")
     }
   };
 
@@ -65,8 +52,6 @@ const usePropertyCall = () => {
       SweetNotify("İlan başarıyla silindi!", SweetAlertIcons.SUCCESS)
     } catch (error) {
       handleError(error, "İlan silinirken bir hata oluştu!");
-    } finally {
-        getPropertiesData("properties")
     }
   };
   
@@ -94,7 +79,7 @@ const usePropertyCall = () => {
     }
   };
 
-  return { getPropertiesData, getSinglePropertyData, postPropertyData, putPropertyData, deleteProperty, togglePropertyStatus, toggleFeaturedStatus };
+  return { getSinglePropertyData, postPropertyData, putPropertyData, deleteProperty, togglePropertyStatus, toggleFeaturedStatus };
 };
 
 export default usePropertyCall;
