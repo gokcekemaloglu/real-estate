@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import usePropertyCall from '../../hooks/usePropertyCall'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import PropertyGallery from './PropertyGallery'
 
 const PropertyDetail = () => {
   const {id} = useParams()
@@ -56,7 +57,8 @@ const PropertyDetail = () => {
           
           {/* Left Column (7-Cols): Image Box Showcase */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <div className="relative h-100 md:h-125 w-full bg-slate-200 dark:bg-slate-950 overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
+            <PropertyGallery title = {property?.title} listingType = {property?.listingType}/>
+            {/* <div className="relative h-100 md:h-125 w-full bg-slate-200 dark:bg-slate-950 overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
               <img 
                 src="https://unsplash.com" 
                 alt={property?.title}
@@ -65,7 +67,7 @@ const PropertyDetail = () => {
               <span className="absolute top-4 left-4 bg-brand-dark/90 dark:bg-slate-900/90 border border-brand-gold/30 text-amber-400 text-[10px] uppercase tracking-widest px-4 py-2 font-medium">
                 {property?.listingType === "sale" ? "Satılık" : "Kiralık"}
               </span>
-            </div>
+            </div> */}
             
             {/* Description Paragraph Text Block */}
             <div className="flex flex-col gap-3">
