@@ -6,16 +6,16 @@ const PropertyFilters = () => {
 
   const formik = useFormik({
     initialValues: {
-      search: searchParams.get("search[title]") || "",
+      title: searchParams.get("search[title]") || "",
       listingType: searchParams.get("filter[listingType]") || "",
-      city: searchParams.get("filter[district]")
+      district: searchParams.get("filter[district]") || ""
     },
     onSubmit: (values) => {
       const newParams = new URLSearchParams(searchParams)
 
       // Dynamic URL sync: Set query param if filled, delete from URL if cleared
       if (values.title) newParams.set("search[title]", values.title)
-      else newParams.delete("search[title]e")
+      else newParams.delete("search[title]")
 
       if (values.listingType) newParams.set("filter[listingType]", values.listingType)
       else newParams.delete("filter[listingType]")
