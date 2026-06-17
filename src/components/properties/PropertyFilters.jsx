@@ -8,6 +8,17 @@ const PropertyFilters = () => {
   const [titleQuery, setTitleQuery] = useState(searchParams.get("search[title]") || "")
   const [listingType, setListingType] = useState(searchParams.get("filter[listingType]") || "")
   const [district, setDistrict] = useState(searchParams.get("filter[district]") || "")
+  const [propertyCategory, setPropertyCategory] = useState(searchParams.get("filter[propertyCategory]") || "")
+  const [heatingType, setHeatingType] = useState(searchParams.get("filter[heatingType]") || "")
+
+  // Synchronizes fields back to empty immediately upon reset actions
+  useEffect(() => {
+    setTitleQuery(searchParams.get("search[title]") || "")
+    setListingType(searchParams.get("filter[listingType]") || "")
+    setDistrict(searchParams.get("filter[district]") || "")
+    setPropertyCategory(searchParams.get("filter[propertyCategory]") || "")
+    setHeatingType(searchParams.get("filter[heatingType]") || "")
+  }, [searchParams])
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -42,15 +53,27 @@ const PropertyFilters = () => {
       else newParams.delete("filter[district]")
     }
 
+    if (field === "propertyCategory") {
+      setPropertyCategory(value)
+      if (value) newParams.set("filter[propertyCategory]", value)
+      else newParams.delete("filter[propertyCategory]")
+    }
+
+    if (field === "heatingType") {
+      setHeatingType(value)
+      if (value) newParams.set("filter[heatingType]", value)
+      else newParams.delete("filter[heatingType]")
+    }
+
     newParams.set("page", "1")
     setSearchParams(newParams, { replace: true })
   }
 
   return (
     <div
-      className="w-full bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-slate-800 p-6 shadow-xl mb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end transition-colors duration-300"
+      className="w-full bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-slate-800 p-6 shadow-xl mb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end transition-colors duration-300"
     >
-          
+      {/* 1. Keyword Text Search */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Arama / Anahtar Kelime</label>
         <input 
@@ -62,6 +85,7 @@ const PropertyFilters = () => {
         />
       </div>
 
+      {/* 2. Listing Type Enums (sale/rent) */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Durum</label>
         <select 
@@ -77,6 +101,24 @@ const PropertyFilters = () => {
         </select>
       </div>
 
+      {/* 3. Property Category Enums (apartment/house/villa/land/commercial) */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Kategori</label>
+        <select 
+          value={propertyCategory}
+          onChange={(e) => handleSelectChange("propertyCategory", e.target.value)}
+          className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-light focus:border-brand-gold cursor-pointer"
+        >
+          <option value="">Tümü</option>
+          <option value="apartment">Apartman Dairesi</option>
+          <option value="house">Müstakil Ev</option>
+          <option value="villa">Villa</option>
+          <option value="land">Arsa / Arazi</option>
+          <option value="commercial">Ticari Mülk</option>
+        </select>
+      </div>
+
+      {/* 4. Localized Districts */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Şehir / Bölge</label>
         <select 
@@ -92,12 +134,24 @@ const PropertyFilters = () => {
           <option value="Mersin">Mersin (Çevre Bölge)</option>
         </select>
       </div>
-{/* 
-      <div>
-        <button type="submit" className="btn-premium w-full py-3 font-semibold text-center tracking-widest shadow-md">
-          Filtrele
-        </button>
-      </div> */}
+
+      {/* 5. Heating Type Enums (combi/air_conditioner/electric/central_share_meter/central/none) */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Isıtma Tipi</label>
+        <select 
+          value={heatingType}
+          onChange={(e) => handleSelectChange("heatingType", e.target.value)}
+          className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-light focus:border-brand-gold cursor-pointer"
+        >
+          <option value="">Tümü</option>
+          <option value="combi">Kombi</option>
+          <option value="air_conditioner">Klima</option>
+          <option value="central_share_meter">Merkezi Pay Ölçer</option>
+          <option value="central">Merkezi Sistem</option>
+          <option value="electric">Elektrikli Radyatör</option>
+          <option value="none">Isıtma Yok</option>
+        </select>
+      </div>
 
     </div>
   )

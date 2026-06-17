@@ -10,7 +10,7 @@ import { fetchFail, fetchStart, setData } from '../features/propertySlice'
 import PaginationComponent from '../components/properties/PaginationComponent'
 
 const Properties = () => {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const {fetchData} = useFetchData()
 
   const {properties, loading, propertiesDetails} = useSelector(state => state.property)
@@ -34,6 +34,11 @@ const Properties = () => {
     })
   }, [activePage, searchParams])
 
+  const handleClearFilters = () => {
+    setSearchParams({ page: "1" }, { replace: true })
+    window.location.reload() // Hard reload to quickly reset internal dropdown state arrays smoothly
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-brand-dark pt-32 pb-24 font-display transition-colors duration-300 relative overflow-hidden">
       {/* Background Luxury Line Grid using Tailwind v4 syntax */}
@@ -53,13 +58,30 @@ const Properties = () => {
           </div>
         ) : (
           <>
-            {/* Core Showcase Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-              {properties?.map((singleProperty) => (
-                <PropertyCard property={singleProperty} key={singleProperty._id}/>
-              ))}
-            </div>
-            <PaginationComponent details={propertiesDetails}/>
+            {properties?.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-20 border border-dashed border-slate-200 dark:border-slate-800 p-8 text-center bg-white dark:bg-slate-900/10">
+                <p className="text-sm font-light text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
+                  Aradığınız kriterlere uygun lüks mülk portföyü bulunamadı.
+                </p>
+                <button 
+                  onClick={handleClearFilters}
+                  className="btn-premium px-6 py-3 text-xs tracking-widest font-semibold"
+                >
+                  Filtreleri Temizle
+                </button>
+              </div>
+            ) : (
+              <>
+                {/* Core Showcase Grid Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                  {properties?.map((singleProperty) => (
+                    <PropertyCard property={singleProperty} key={singleProperty._id}/>
+                  ))}
+                </div>
+                <PaginationComponent details={propertiesDetails}/>
+              </>
+            )}
+            
           </>
         )}
 
