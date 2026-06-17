@@ -15,20 +15,22 @@ const Properties = () => {
 
   const {properties, loading, propertiesDetails} = useSelector(state => state.property)
 
-  console.log("Properties-->", properties);
+  // console.log("Properties-->", properties);
   const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1
 
   useEffect(() => {
     const activeParams = new URLSearchParams(searchParams)
     activeParams.delete("page")
-    const currentQueryString = activeParams.toString()
+    // const currentQueryString = activeParams.toString()
+    const encryptedQueryString = activeParams.toString()
+    const cleanBracketsQueryString = decodeURIComponent(encryptedQueryString)
     fetchData({
       endpoint: "properties",
       stateKey: "properties",
       sliceActions: {fetchStart, fetchFail, setData},
       page: activePage,
       limit:12, 
-      query: currentQueryString
+      query: cleanBracketsQueryString // Directly passes the pristine query format backend controller expects
     })
   }, [activePage, searchParams])
 

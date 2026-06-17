@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
-  error: false,
+  error: null,
   properties: [],
   propertiesDetails: {
     totalRecords: 0,
@@ -49,7 +49,7 @@ const propertySlice = createSlice({
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
-      state.error = false;
+      state.error = null;
     },
     setData: (state, { payload }) => {
       state.loading = false;

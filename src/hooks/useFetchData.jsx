@@ -17,20 +17,13 @@ const useFetchData = () => {
       const filterQuery = query ? `&${query}` : "";
 
       // 3. Dispatch global request directly through pre-configured axios bundles
-      const { data } = await axiosPublic.get(
-        `/${endpoint}?page=${page}&limit=${limit}${filterQuery}`,
-      );
+      const { data } = await axiosPublic.get(`/${endpoint}?page=${page}&limit=${limit}${filterQuery}`);
 
       // Dispatch A: Inject core records data array directly into state mapping location (e.g., state.properties)
       dispatch(sliceActions.setData({ endpoint: stateKey, data: data?.data }));
 
       // Dispatch B: Map standard pagination meta blocks into dedicated key variables (e.g., state.propertiesDetails)
-      dispatch(
-        sliceActions.setData({
-          endpoint: `${stateKey}Details`,
-          data: data?.details,
-        }),
-      );
+      dispatch(sliceActions.setData({endpoint: `${stateKey}Details`, data: data?.details}));
     } catch (error) {
          // 4. Capture response exceptions gracefully and delegate error strings to targets
       const errorMsg = error?.response?.data?.message || "Veriler yüklenirken beklenmedik bir hata oluştu!";
