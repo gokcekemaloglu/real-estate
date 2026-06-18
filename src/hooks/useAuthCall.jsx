@@ -45,7 +45,7 @@ const useAuthCall = () => {
     }
 
     const logout = async () => {
-         const confirmed = await SweetConfirm("Çıkış Yap", "Çıkış yapmak istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+        const confirmed = await SweetConfirm("Çıkış Yap", "Çıkış yapmak istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
         if (!confirmed) return //Exit if user cancels logout
         dispatch(fetchStart())
         try {

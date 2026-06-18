@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import useAxios, { axiosPublic } from "./useAxios";
 import { fetchFail, fetchStart, setData } from "../features/propertySlice";
-import { SweetAlertIcons, SweetNotify } from "../helper/SweetNotify";
+import { SweetAlertIcons, SweetConfirm, SweetNotify } from "../helper/SweetNotify";
 
 const usePropertyCall = () => {
   const dispatch = useDispatch();
@@ -46,6 +46,8 @@ const usePropertyCall = () => {
   };
 
   const deleteProperty = async (id) => {
+    const confirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    if (!confirmed) return //Exit if user cancels delete
     dispatch(fetchStart());
     try {
       await axiosWithToken.delete(`properties/${id}`)
@@ -58,24 +60,20 @@ const usePropertyCall = () => {
   const togglePropertyStatus = async (id) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.put(`properties/${id}/status`);
-      SweetNotify("İlan durumu değişti!", SweetAlertIcons.SUCCESS)
+      await axiosWithToken.patch(`properties/${id}/status`);
+      SweetNotify("Yayın durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
     } catch (error) {
       handleError(error, "İlan aktiflik durumu değiştirilirken bir hata oluştu!");
-    } finally {
-        getSinglePropertyData(id)
     }
   };
   
   const toggleFeaturedStatus = async (id) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.put(`properties/${id}/featured`);
-      SweetNotify("İlan durumu değişti!", SweetAlertIcons.SUCCESS)
+      await axiosWithToken.patch(`properties/${id}/featured`);
+      SweetNotify("Vitrin durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "İlan durumu değiştirilirken bir hata oluştu!");
-    } finally {
-        getSinglePropertyData(id)
+      handleError(error, "Vitrin İlan durumu değiştirilirken bir hata oluştu!");
     }
   };
 
