@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import ThemeToggle from '../ThemeToggle'
+// import ThemeToggle from '../ThemeToggle'
 
 const AdminLayout = () => {
   const location = useLocation()
@@ -56,7 +56,7 @@ const AdminLayout = () => {
               Görkem Emlak <span className="text-brand-gold font-sans font-semibold">Yönetim Masası</span>
             </h2>
           </div>
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
         </header>
 
         {/* Dynamic Nested Route Target Render Outlet Frame */}

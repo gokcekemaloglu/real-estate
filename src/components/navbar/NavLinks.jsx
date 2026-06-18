@@ -8,6 +8,7 @@ const NavLinks = () => {
         <Link to="/properties" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">İlanlar</Link>
         <Link to="/about" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">Hakkımızda</Link>
         <Link to="/contact" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">İletişim</Link>
+        <Link to="/admin" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">Admin Panel</Link>
     </div>
   )
 }
