@@ -7,6 +7,7 @@ import FormToggleField from '../../components/admin/properties/FormToggleField'
 import FormBlockTitle from '../../components/admin/properties/FormBlockTitle'
 import FormBlockPrice from '../../components/admin/properties/FormBlockPrice'
 import FormBlockLocation from '../../components/admin/properties/FormBlockLocation'
+import FormBlockSpecs from '../../components/admin/properties/FormBlockSpecs'
 
 const AdminPropertyForm = () => {
   const navigate = useNavigate()
@@ -120,8 +121,9 @@ const AdminPropertyForm = () => {
         {/* BLOCK 3: Konum Verileri */}
         <FormBlockLocation formik={formik} districtOptions={districtOptions} />
         
-        {/* BLOCK 4: Yapısal Metrikler */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 grid grid-cols-2 md:grid-cols-4 gap-4 shadow-sm">
+        {/* BLOCK 4: Yapısal Özellikler */}
+        <FormBlockSpecs formik={formik} heatingOptions={heatingOptions} />
+        {/* <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 grid grid-cols-2 md:grid-cols-4 gap-4 shadow-sm">
           <h3 className="col-span-2 md:col-span-4 text-xs uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">4. Yapısal Özellikler</h3>
 
           <div className="flex flex-col gap-1.5">
@@ -141,7 +143,7 @@ const AdminPropertyForm = () => {
           </div>
 
           <FormSelectField label="Isıtma Tipi" name="heatingType" options={heatingOptions} formik={formik} />
-        </div>
+        </div> */}
 
         {/* BLOCK 5: Donanım Toggles */}
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 shadow-sm">
