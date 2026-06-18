@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import useFetchData from '../../hooks/useFetchData'
 import usePropertyCall from '../../hooks/usePropertyCall'
 import { fetchStart, fetchFail, setData } from '../../features/propertySlice'
-import AdminPropertyHeader from './properties/AdminPropertyHeader'
-import AdminPropertyRow from './properties/AdminPropertyRow'
+import AdminPropertyHeader from '../../components/admin/properties/AdminPropertyHeader'
+import AdminPropertyRow from '../../components/admin/properties/AdminPropertyRow'
 
 const AdminProperties = () => {
   const { fetchData } = useFetchData()
