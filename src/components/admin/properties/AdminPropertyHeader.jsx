@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminPropertyHeader = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
@@ -11,7 +13,10 @@ const AdminPropertyHeader = () => {
           Mevcut portföy listesi ve hızlı durum aktivasyon paneli
         </p>
       </div>
-      <button className="btn-premium px-6 py-3 font-semibold text-xs tracking-widest uppercase">
+      <button 
+        onClick={() => navigate("/admin/properties/create")}
+        className="btn-premium px-6 py-3 font-semibold text-xs tracking-widest uppercase"
+      >
         + Yeni İlan Ekle
       </button>
     </div>

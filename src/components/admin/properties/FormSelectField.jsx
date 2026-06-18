@@ -1,7 +1,7 @@
 import React from 'react'
 
 const FormSelectField = ({label, name, options, formik}) => {
-    const hasError = formiik.touched[name] && formik.errors[name]
+    const hasError = formik.touched[name] && formik.errors[name]
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">{label}</label>
