@@ -38,21 +38,25 @@ export const SignInSchema = Yup.object().shape({
     .required("Şifre alanı zorunludur!")
 })
 
-// export const SignInSchema = object({
-//   email: string()
-//     .email("Geçersiz e-posta adresi biçimi!")
-//     .required("E-posta adresi zorunludur!"),
-//   userName: string()
-//     .required("Kullanıcı adı zorunludur!")
-//     .min(3, "Kullanıcı adı en az 3 karakter olmalıdır!"),
-//   password: string()
-//     .required("Şifre alanı zorunludur!")
-//     .min(8, "Şifre en az 8 karakter olmalıdır!")
-//     .matches(/\d+/, "En az bir rakam içermelidir!")
-//     .matches(/[a-z]/, "En az bir küçük harf içermelidir!")
-//     .matches(/[A-Z]/, "En az bir büyük harf içermelidir!")
-//     .matches(
-//       /[@$%&?!*]+/,
-//       "(@$%&?!*) özel karakterlerinden en az bir tanesini içermelidir!",
-//     ),
-// });
+// Comprehensive validation constraints mapped accurately from your Mongoose Property model
+export const PropertySchema = Yup.object().shape({
+  title: Yup.string()
+    .min(5, "İlan başlığı çok kısa!")
+    .required("İlan başlığı girmek zorunludur."),
+  description: Yup.string()
+    .min(10, "Mimari açıklama en az 10 karakter olmalıdır.")
+    .required("Mimari açıklama girmek zorunludur."),
+  price: Yup.number()
+    .positive("Fiyat pozitif bir sayı olmalıdır.")
+    .required("Fiyat alanı zorunludur."),
+  listingType: Yup.string()
+    .required("İlan durumunu (Satılık/Kiralık) seçmek zorunludur."),
+  propertyCategory: Yup.string()
+    .required("Mülk kategorisini (Villa/Daire) seçmek zorunludur."),
+  district: Yup.string()
+    .required("İlçe seçimi zorunludur."),
+  neighbourhood: Yup.string()
+    .required("Mahalle bilgisi zorunludur."),
+  roomCount: Yup.string()
+    .required("Oda sayısı zorunludur (Örn: 3+1)."),
+});
