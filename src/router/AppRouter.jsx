@@ -44,6 +44,7 @@ const AppRouter = () => {
             <Route index element={<DashboardHome/>} />
             <Route path='properties' element={<AdminProperties/>} />
             <Route path='properties/create' element={<AdminPropertyForm/>} />
+            <Route path='properties/create/:id' element={<AdminPropertyForm/>} />
           </Route>
         </Routes>
       </Suspense>
