@@ -60,3 +60,26 @@ export const PropertySchema = Yup.object().shape({
   roomCount: Yup.string()
     .required("Oda sayısı zorunludur (Örn: 3+1)."),
 });
+
+// Comprehensive validation constraints mapped accurately from your Mongoose Customer model
+export const CustomerSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, "Müşteri adı çok kısa!")
+    .max(50, "Müşteri adı çok uzun!")
+    .required("Müşteri adı girmek zorunludur."),
+  lastName: Yup.string()
+    .min(2, "Müşteri soyadı çok kısa!")
+    .max(50, "Müşteri soyadı çok uzun!")
+    .required("Müşteri soyadı girmek zorunludur."),
+  phone: Yup.string()
+    .matches(/^[0-9]+$/, "Telefon numarası sadece rakamlardan oluşmalıdır.")
+    .min(10, "Telefon numarası en az 10 hane olmalıdır.")
+    .required("Telefon numarası girmek zorunludur (Sistemde benzersiz olmalıdır)."),
+  email: Yup.string()
+    .email("Geçersiz e-posta adresi biçimi!"),
+  citizenshipId: Yup.string()
+    .matches(/^[0-9]*$/, "TC Kimlik numarası sadece rakamlardan oluşabilir.")
+    .length(11, "TC Kimlik numarası tam 11 hane olmalıdır."),
+  address: Yup.string()
+    .max(300, "Adres tanımı çok uzun!"),
+});
