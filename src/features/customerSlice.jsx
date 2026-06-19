@@ -43,7 +43,5 @@ const customerSlice = createSlice({
   },
 });
 
-export const { fetchStart, fetchFail, setData, 
-    // setSingleData 
-} = customerSlice.actions;
+export const { fetchStart, fetchFail, setData } = customerSlice.actions;
 export default customerSlice.reducer;

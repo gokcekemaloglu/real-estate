@@ -14,6 +14,16 @@ const useCustomerCall = () => {
     SweetNotify(errorMsg, SweetAlertIcons.ERROR);
   };
 
+  const getAllCustomersData = async () => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken.get("customers");
+      dispatch(setData(data.data));
+    } catch (error) {
+      handleError(error, `Müşteriler yüklenirken bir hata oluştu!`);
+    }
+  };
+
   const getSingleCustomerData = async (id) => {
     dispatch(fetchStart());
     try {
@@ -45,7 +55,20 @@ const useCustomerCall = () => {
       getSingleCustomerData(id)
     }
   };
-  
+
+  // Soft customer delete for admin
+  const toggleCustomerStatus = async (id) => {
+    const confirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    if (!confirmed) return
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.patch(`customers/${id}/status`);
+      SweetNotify("Aktiflik durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+    } catch (error) {
+      handleError(error, "Müşteri aktiflik durumu değiştirilirken bir hata oluştu!");
+    }
+  };
+    
   const deleteCustomer = async (id) => {
     const confirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
     if (!confirmed) return //Exit if user cancels delete
@@ -57,18 +80,8 @@ const useCustomerCall = () => {
       handleError(error, "Müşteri silinirken bir hata oluştu!");
     }
   };
-    
-  const toggleCustomerStatus = async (id) => {
-    dispatch(fetchStart());
-    try {
-      await axiosWithToken.patch(`customers/${id}/status`);
-      SweetNotify("Yayın durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
-    } catch (error) {
-      handleError(error, "Müşteri aktiflik durumu değiştirilirken bir hata oluştu!");
-    }
-  };
 
-  return {getSingleCustomerData, postCustomerData, putCustomerData, deleteCustomer, toggleCustomerStatus}
+  return {getAllCustomersData, getSingleCustomerData, postCustomerData, putCustomerData, toggleCustomerStatus, deleteCustomer}
 }
 
 export default useCustomerCall

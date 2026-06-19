@@ -44,7 +44,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { fetchStart, fetchFail, setData, 
-    // setSingleData 
-} = userSlice.actions;
+export const { fetchStart, fetchFail, setData } = userSlice.actions;
 export default userSlice.reducer;
