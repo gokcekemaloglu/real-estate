@@ -1,7 +1,12 @@
 import React from "react";
 
-const AdminPropertyRow = ({property, onStatusToggle, onDeleteClick, onEditClick}) => {
-    const defaultImage = "https://unsplash.com"
+const AdminPropertyRow = ({
+  property,
+  onStatusToggle,
+  onDeleteClick,
+  onEditClick,
+}) => {
+  const defaultImage = "https://unsplash.com";
   return (
     <div
       key={property?._id}
@@ -66,25 +71,27 @@ const AdminPropertyRow = ({property, onStatusToggle, onDeleteClick, onEditClick}
         </div>
 
         {/* Dynamic Actions Center: Unifying Update and Delete Operations Side-by-Side */}
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col items-center gap-1 ">
           {/* Premium Edit Action Button (Pre-wired for upcoming Formik edit modal context) */}
-          <span className="text-[9px] uppercase tracking-widest text-slate-400">
+          <span className="text-[12px] uppercase tracking-widest text-slate-400">
             Eylemler
           </span>
-          <button
-            onClick={() => onEditClick(property)} // Placeholder until we attach the edit flow
-            className="text-[9px] p-1.5 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-medium uppercase tracking-widest transition-all duration-200 cursor-pointer"
-          >
-            Düzenle
-          </button>
-          {/* Hard Delete Action Trigger Button */}
+          <div className="flex flex-col gap-1 w-full">
+            <button
+              onClick={() => onEditClick(property)} // Placeholder until we attach the edit flow
+              className="text-[10px] px-3 py-1 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-medium uppercase tracking-widest transition-all duration-200 cursor-pointer text-center"
+            >
+              Düzenle
+            </button>
+            {/* Hard Delete Action Trigger Button */}
 
-          <button
-            onClick={() => onDeleteClick(property?._id)}
-            className="text-xs p-1.5 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest text-[9px] font-medium"
-          >
-            Sil
-          </button>
+            <button
+              onClick={() => onDeleteClick(property?._id)}
+              className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-medium text-center"
+            >
+              Sil
+            </button>
+          </div>
         </div>
       </div>
     </div>

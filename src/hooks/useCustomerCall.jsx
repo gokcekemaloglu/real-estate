@@ -58,14 +58,14 @@ const useCustomerCall = () => {
 
   // Soft customer delete for admin
   const toggleCustomerStatus = async (id) => {
-    const confirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    const confirmed = await SweetConfirm("Aktif/Pasif", "Müşterinin aktif/pasif durumunu değiştirmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
     if (!confirmed) return
     dispatch(fetchStart());
     try {
       await axiosWithToken.patch(`customers/${id}/status`);
-      SweetNotify("Aktiflik durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Aktif/Pasif durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Müşteri aktiflik durumu değiştirilirken bir hata oluştu!");
+      handleError(error, "Müşteri Aktif/Pasif durumu değiştirilirken bir hata oluştu!");
     }
   };
     

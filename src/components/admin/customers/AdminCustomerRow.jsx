@@ -1,65 +1,84 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import useCustomerCall from '../../../hooks/useCustomerCall';
-import useFetchData from '../../../hooks/useFetchData';
-import customerReducer from '../../../features/customerSlice'; // Slice dosyanızın varsayılan export adresi
+
 
 const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditClick }) => {
-  
+  const defaultAvatar = "https://unsplash.com"
   return (
-    <tr className="hover:bg-gray-50 transition duration-150 border-b border-gray-200">
-      {/* İsim Soyisim */}
-      <td className="py-4 px-6 font-semibold text-gray-900 text-base">
-        {customer.firstName} {customer.lastName}
-      </td>
-      
-      {/* Telefon */}
-      <td className="py-4 px-6 font-mono text-gray-700 tracking-wider">
-        {customer.phone}
-      </td>
-      
-      {/* E-Posta */}
-      <td className="py-4 px-6 text-gray-500 max-w-50 truncate">
-        {customer.email || <span className="text-gray-300 italic">Belirtilmedi</span>}
-      </td>
-      
-      {/* TC Kimlik No */}
-      <td className="py-4 px-6 font-mono text-sm text-gray-600">
-        {customer.citizenshipId || <span className="text-gray-300 italic">Belirtilmedi</span>}
-      </td>
-      
-      {/* Durum (Aktif/Pasif) Butonu */}
-      <td className="py-4 px-6 text-center">
-        <button
-          onClick={handleStatusToggle}
-          className={`px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wide uppercase shadow-sm transition-all duration-200 ${
-            customer.isActive
-              ? 'bg-green-100 text-green-800 hover:bg-green-200 ring-1 ring-green-300'
-              : 'bg-red-100 text-red-800 hover:bg-red-200 ring-1 ring-red-300'
-          }`}
-        >
-          {customer.isActive ? 'Aktif' : 'Pasif'}
-        </button>
-      </td>
-      
-      {/* İşlemler */}
-      <td className="py-4 px-6 text-center">
-        <div className="flex justify-center items-center gap-3">
+    <div
+      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in"
+    >
+      {/* Sol Blok: Müşteri Avatarı, Kimlik ve İletişim Detayları */}
+      <div className="flex items-center gap-4 flex-1">
+        <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800">
+          <img
+            src={defaultAvatar}
+            alt={`${customer?.firstName} ${customer?.lastName}`}
+            className="w-full h-full object-cover grayscale contrast-125"
+          />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[9px] uppercase tracking-wider text-brand-gold font-semibold">
+            {customer?.citizenshipId ? `TC: ${customer.citizenshipId}` : "TC Kimlik Belirtilmedi"}
+          </span>
+          <h3 className="text-sm font-medium text-slate-800 dark:text-white line-clamp-1">
+            {customer?.firstName} {customer?.lastName}
+          </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs text-slate-500 dark:text-slate-400 font-light mt-0.5">
+            <span className="font-mono">{customer?.phone}</span>
+            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">|</span>
+            <span className="truncate max-w-50">{customer?.email || "E-Posta Yok"}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Sağ Blok: Cemal Bey'in Kolayca Yöneteceği Tam Reaktif Lüks Switch ve Aksiyon Alanı */}
+      <div className="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/60">
+        
+        {/* Toggle Switch: Müşteri/Portföy Aktiflik Durumu */}
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-[12px] uppercase tracking-widest text-slate-400">
+            Pasif/Aktif
+          </span>
           <button
-            onClick={() => onEditClick(customer._id)}
-            className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-1.5 px-4 rounded shadow-sm text-sm transition duration-150"
+            onClick={handleStatusToggle}
+            className={`relative inline-flex h-5 w-10 shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none ${
+              customer?.isActive ? "bg-green-500" : "bg-slate-300 dark:bg-slate-700"
+            }`}
           >
-            Düzenle / Notlar
-          </button>
-          <button
-            onClick={handleDelete}
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-1.5 px-4 rounded shadow-sm text-sm transition duration-150"
-          >
-            Sil
+            <span
+              className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out mt-0.5 ${
+                customer?.isActive ? "translate-x-5" : "translate-x-1"
+              }`}
+            />
           </button>
         </div>
-      </td>
-    </tr>
+
+        {/* Dinamik Eylemler Merkezi: Düzenle (Notlar) ve Silme Operasyonları */}
+        <div className="flex flex-col items-center gap-1 min-w-20">
+          <span className="text-[12px] uppercase tracking-widest text-slate-400 mb-1">
+            Eylemler
+          </span>
+          <div className="flex flex-col gap-1 w-full">
+            {/* Premium Düzenle Butonu */}
+            <button
+              onClick={onEditClick}
+              className="text-[10px] px-3 py-1 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-medium uppercase tracking-widest transition-all duration-200 cursor-pointer text-center"
+            >
+              Düzenle
+            </button>
+            
+            {/* Kalıcı Silme Butonu */}
+            <button
+              onClick={handleDelete}
+              className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-medium text-center"
+            >
+              Sil
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
   );
 };
 

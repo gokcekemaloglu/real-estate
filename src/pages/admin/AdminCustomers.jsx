@@ -9,7 +9,7 @@ import AdminCustomerRow from "../../components/admin/customers/AdminCustomerRow"
 import useFetchData from "../../hooks/useFetchData";
 
 const AdminCustomers = () => {
-   const navigate = useNavigate()
+  const navigate = useNavigate();
   const { fetchData } = useFetchData();
   const { toggleCustomerStatus, deleteCustomer } = useCustomerCall();
   const { loading, customers } = useSelector((state) => state.customers);
@@ -48,65 +48,31 @@ const AdminCustomers = () => {
   }
 
   return (
-    <div className="p-4 md:p-6 bg-gray-50 min-h-screen">
+    <div className="flex flex-col gap-6 animate-fade-in">
       {/* Üst Başlık Bileşeni */}
-      <AdminCustomerHeader 
+      <AdminCustomerHeader
         onCreateClick={() => navigate(`/admin/customers/create`)}
-
       />
 
       {/* Tablo Alanı */}
-      <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-gray-700 uppercase text-xs md:text-sm border-b border-gray-200 tracking-wider">
-                <th className="py-4 px-6 font-bold">Müşteri Adı Soyadı</th>
-                <th className="py-4 px-6 font-bold">Telefon Numarası</th>
-                <th className="py-4 px-6 font-bold">E-Posta Adresi</th>
-                <th className="py-4 px-6 font-bold">TC Kimlik No</th>
-                <th className="py-4 px-6 font-bold text-center">
-                  Yayın Durumu
-                </th>
-                <th className="py-4 px-6 font-bold text-center">Yönetim</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {loading ? (
-                <tr>
-                  <td
-                    colSpan="6"
-                    className="py-12 text-center text-gray-500 font-semibold text-lg"
-                  >
-                    <div className="flex justify-center items-center gap-3">
-                      <div className="w-6 h-6 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                      Müşteri listesi yükleniyor, lütfen bekleyin Cemal Bey...
-                    </div>
-                  </td>
-                </tr>
-              ) : customers?.length > 0 ? (
-                customers.map((customer) => (
-                  <AdminCustomerRow
-                    key={customer._id}
-                    customer={customer}
-                    handleStatusToggle={() => handleStatusToggle(customer?._id)}
-                    handleDelete={() => handleDelete(customer?._id)}
-                    onEditClick={() => navigate(`/admin/customers/edit/${customer?._id}`)}
-                  />
-                ))
-              ) : (
-                <tr>
-                  <td
-                    colSpan="6"
-                    className="py-12 text-center text-gray-500 text-base md:text-lg italic"
-                  >
-                    Sistemde henüz kayıtlı bir mülk sahibi/müşteri bulunamadı.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+      <div className="flex flex-col gap-4 mt-4">
+        {customers?.length > 0 ? (
+          customers.map((customer) => (
+            <AdminCustomerRow
+              key={customer._id}
+              customer={customer}
+              handleStatusToggle={() => handleStatusToggle(customer?._id)}
+              handleDelete={() => handleDelete(customer?._id)}
+              onEditClick={() =>
+                navigate(`/admin/customers/edit/${customer?._id}`)
+              }
+            />
+          ))
+        ) : (
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 text-center text-slate-400 uppercase tracking-widest text-xs font-light shadow-sm">
+            Sistemde kayıtlı herhangi bir mülk sahibi portföyü bulunamadı.
+          </div>
+        )}
       </div>
     </div>
   );
