@@ -14,15 +14,15 @@ const useCustomerCall = () => {
     SweetNotify(errorMsg, SweetAlertIcons.ERROR);
   };
 
-  const getAllCustomersData = async () => {
-    dispatch(fetchStart());
-    try {
-      const { data } = await axiosWithToken.get("customers");
-      dispatch(setData(data.data));
-    } catch (error) {
-      handleError(error, `Müşteriler yüklenirken bir hata oluştu!`);
-    }
-  };
+  // const getAllCustomersData = async ({}) => {
+  //   dispatch(fetchStart());
+  //   try {
+  //     const { data } = await axiosWithToken.get("customers");
+  //     dispatch(setData(data.data));
+  //   } catch (error) {
+  //     handleError(error, `Müşteriler yüklenirken bir hata oluştu!`);
+  //   }
+  // };
 
   const getSingleCustomerData = async (id) => {
     dispatch(fetchStart());
@@ -81,7 +81,7 @@ const useCustomerCall = () => {
     }
   };
 
-  return {getAllCustomersData, getSingleCustomerData, postCustomerData, putCustomerData, toggleCustomerStatus, deleteCustomer}
+  return {getSingleCustomerData, postCustomerData, putCustomerData, toggleCustomerStatus, deleteCustomer}
 }
 
 export default useCustomerCall

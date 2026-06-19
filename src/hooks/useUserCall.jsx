@@ -16,15 +16,15 @@ const useUserCall = () => {
     SweetNotify(errorMsg, SweetAlertIcons.ERROR);
   };  
   
-  const getAllUsers = async () => {
-    dispatch(fetchStart());
-    try {
-      const { data } = await axiosWithToken.get("users");
-      dispatch(setData(data.data));
-    } catch (error) {
-      handleError(error, `Kullanıcılar yüklenirken bir hata oluştu!`);
-    }
-  };
+  // const getAllUsers = async () => {
+  //   dispatch(fetchStart());
+  //   try {
+  //     const { data } = await axiosWithToken.get("users");
+  //     dispatch(setData(data.data));
+  //   } catch (error) {
+  //     handleError(error, `Kullanıcılar yüklenirken bir hata oluştu!`);
+  //   }
+  // };
 
   const getSingleUser = async(id) => {
     dispatch(fetchStart())
@@ -99,7 +99,7 @@ const useUserCall = () => {
   };
   
   return {
-    getAllUsers,
+    // getAllUsers,
     getSingleUser,
     updateMe,
     updateUser,

@@ -4,7 +4,7 @@ const initialState = {
   loading: false,
   error: null,
   customers: [],
-  customerDetails: {
+  customersDetails: {
     totalRecords: 0,
     limit: 12,
     pages: {current: 1, total: 1}
