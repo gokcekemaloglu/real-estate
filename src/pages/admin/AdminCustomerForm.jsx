@@ -22,7 +22,7 @@ const AdminCustomerForm = () => {
   }, [id])
 
   const formik = useFormik({
-    enableReinitialize: true, // Redux verisi geldiği anda input'ları otomatik doldurur
+    enableReinitialize: true,
     initialValues: {
       firstName: isEditMode ? customer?.firstName : '',
       lastName: isEditMode ? customer?.lastName : '',
@@ -79,9 +79,9 @@ const AdminCustomerForm = () => {
         </button>
       </div>
 
-      {/* Main Layout Framework: İlan formundan farklı olarak Notları sağ sütunda topluyoruz */}
+      {/* Main Layout Framework: Isolating historical logs into the right-hand sidebar layout column */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        {/* Sol 2 Sütun: Temel Müşteri Bilgileri Formu */}
+        {/* Left 2 Columns: Core Customer Identification and Registry Form Blocks */}
         <form onSubmit={formik.handleSubmit} className="lg:col-span-2 flex flex-col gap-6">
           <FormBlockCustomerInfo formik={formik} />
           
@@ -92,7 +92,7 @@ const AdminCustomerForm = () => {
           </div>
         </form>
 
-        {/* Sağ 1 Sütun: Cemal Bey'in Görüşme Notları Zaman Çizelgesi */}
+        {/* Right 1 Column: Historical Interaction Logs and Meeting Summaries Timeline Stream */}
         <div className="lg:col-span-1 h-full">
           {isEditMode ? (
             <FormBlockCustomerNotes customerId={id} notes={customer?.note || []} />

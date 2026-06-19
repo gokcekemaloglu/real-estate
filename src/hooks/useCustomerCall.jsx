@@ -56,7 +56,7 @@ const useCustomerCall = () => {
     }
   };
 
-  // Soft customer delete for admin
+  // Customer Soft Delete for admin
   const toggleCustomerStatus = async (id) => {
     const confirmed = await SweetConfirm("Aktif/Pasif", "Müşterinin aktif/pasif durumunu değiştirmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
     if (!confirmed) return

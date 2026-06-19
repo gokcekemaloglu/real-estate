@@ -7,7 +7,7 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
     <div
       className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in"
     >
-      {/* Sol Blok: Müşteri Avatarı, Kimlik ve İletişim Detayları */}
+      {/* Left Block: Customer Avatar, Identity and Contact Details */}
       <div className="flex items-center gap-4 flex-1">
         <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800">
           <img
@@ -31,10 +31,10 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
         </div>
       </div>
 
-      {/* Sağ Blok: Cemal Bey'in Kolayca Yöneteceği Tam Reaktif Lüks Switch ve Aksiyon Alanı */}
+      {/* Right Block: Fully Reactive Luxury Toggle Switches and Actions Area */}
       <div className="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/60">
         
-        {/* Toggle Switch: Customer Active/Passive */}
+        {/* Toggle Switch: Customer Active/Passive Status */}
         <div className="flex flex-col items-center gap-1">
           <span className="text-[12px] uppercase tracking-widest text-slate-400">
             Pasif/Aktif
@@ -53,7 +53,7 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
           </button>
         </div>
 
-        {/* Dinamik Eylemler Merkezi: Düzenle (Notlar) ve Silme Operasyonları */}
+        {/* Dynamic Actions Center: Update (Notes) and Hard Delete Operations */}
         <div className="flex flex-col items-center gap-1 min-w-20">
           <span className="text-[12px] uppercase tracking-widest text-slate-400 mb-1">
             Eylemler
@@ -65,7 +65,7 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
             >
               İncele
             </button>
-            {/* Premium Düzenle Butonu */}
+            {/* Premium Edit Action Button */}
             <button
               onClick={onEditClick}
               className="text-[10px] px-3 py-1 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer text-center"
@@ -73,7 +73,7 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
               Düzenle
             </button>
             
-            {/* Kalıcı Silme Butonu */}
+            {/* Hard Delete Action Trigger Button */}
             <button
               onClick={handleDelete}
               className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-bold text-center"

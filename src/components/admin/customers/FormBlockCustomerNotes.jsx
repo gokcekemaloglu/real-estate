@@ -21,7 +21,7 @@ const FormBlockCustomerNotes = ({customerId, notes}) => {
         2. Müşteri Görüşme Notları
       </h3>
 
-      {/* Hızlı Not Ekleme Formu */}
+      {/* Rapid Log Insertion Submission Form */}
       <form onSubmit={handleAddNote} className="flex flex-col gap-2">
         <textarea
           value={newNote}
@@ -38,20 +38,20 @@ const FormBlockCustomerNotes = ({customerId, notes}) => {
         </button>
       </form>
 
-      {/* Lüks Zaman Çizelgesi (Timeline) Akışı */}
+      {/* Premium Historical Interaction Logs Timeline Stream */}
       <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-4 mt-2 custom-scrollbar">
         {notes && notes.length > 0 ? (
           [...notes].reverse().map((note, index) => (
             <div key={note._id || index} className="relative pl-4 border-l border-brand-gold/40 flex flex-col gap-1">
-              {/* Kare lüks timeline noktası */}
+              {/* Luxury square timeline node anchor */}
               <div className="absolute left-[-3.5px] top-1 w-1.5 h-1.5 bg-brand-gold"></div>
               
-              {/* Not Zaman Damgası */}
+              {/* Interaction log history timestamp indicator */}
               <span className="text-[9px] text-slate-400 dark:text-slate-500 font-mono uppercase tracking-wider">
                 {note.createdAt ? new Date(note.createdAt).toLocaleString("tr-TR") : "Şimdi"}
               </span>
               
-              {/* Not Metni */}
+              {/* Log record textual content block */}
               <p className="text-[11px] font-light text-slate-600 dark:text-slate-300 bg-slate-50/40 dark:bg-slate-950/10 p-2 border border-slate-100 dark:border-slate-800/60 leading-relaxed wrap-break-word">
                 {note.content}
               </p>

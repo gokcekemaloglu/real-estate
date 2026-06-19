@@ -49,12 +49,12 @@ const AdminCustomers = () => {
 
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
-      {/* Üst Başlık Bileşeni */}
+      {/* Top Action Toolbar Header Component */}
       <AdminCustomerHeader
         onCreateClick={() => navigate(`/admin/customers/create`)}
       />
 
-      {/* Tablo Alanı */}
+      {/* Hybrid Row Cards Wrapper Framework Section */}
       <div className="flex flex-col gap-4 mt-4">
         {customers?.length > 0 ? (
           customers.map((customer) => (
@@ -66,7 +66,7 @@ const AdminCustomers = () => {
               onEditClick={() =>
                 navigate(`/admin/customers/edit/${customer?._id}`)
               }
-              onDetailClick={() => navigate(`admin/customers/detail/${customer._id}`)}
+              onDetailClick={() => navigate(`/admin/customers/detail/${customer?._id}`)}
             />
           ))
         ) : (

@@ -9,7 +9,7 @@ const FormBlockCustomerInfo = ({formik}) => {
       </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Ad Alanı */}
+        {/* First Name Input Field */}
         <div className="flex flex-col gap-1.5">
           <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Müşteri Adı *</label>
           <input
@@ -26,7 +26,7 @@ const FormBlockCustomerInfo = ({formik}) => {
           )}
         </div>
 
-        {/* Soyad Alanı */}
+        {/* Last Name Input Field */}
         <div className="flex flex-col gap-1.5">
           <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Müşteri Soyadı *</label>
           <input
@@ -45,7 +45,7 @@ const FormBlockCustomerInfo = ({formik}) => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Telefon Numarası */}
+        {/* Cellular Phone Network Number Input Field */}
         <div className="flex flex-col gap-1.5">
           <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Telefon Numarası *</label>
           <input
@@ -62,7 +62,7 @@ const FormBlockCustomerInfo = ({formik}) => {
           )}
         </div>
 
-        {/* TC Kimlik No */}
+        {/* Citizenship / National Identification Number Input Field */}
         <div className="flex flex-col gap-1.5">
           <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">TC Kimlik / Vatandaşlık No</label>
           <input
@@ -81,7 +81,7 @@ const FormBlockCustomerInfo = ({formik}) => {
         </div>
       </div>
 
-      {/* E-Posta Adresi */}
+      {/* Electronic Mail Address Input Field */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">E-Posta Adresi</label>
         <input
@@ -98,7 +98,7 @@ const FormBlockCustomerInfo = ({formik}) => {
         )}
       </div>
 
-      {/* İkamet / Açık Adres */}
+      {/* Residential / Notification Physical Address Textarea Field */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Müşterinin Açık Adresi</label>
         <textarea
@@ -115,7 +115,7 @@ const FormBlockCustomerInfo = ({formik}) => {
         )}
       </div>
 
-      {/* Yayın Aktiflik Switch Alanı */}
+      {/* Portfolio Record Activation Toggle Layout Section */}
       <div className="mt-2">
         <FormToggleField label="Sistem Portföyünde Aktif Gözüksün" name="isActive" formik={formik} />
       </div>
