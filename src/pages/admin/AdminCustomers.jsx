@@ -66,6 +66,7 @@ const AdminCustomers = () => {
               onEditClick={() =>
                 navigate(`/admin/customers/edit/${customer?._id}`)
               }
+              onDetailClick={() => navigate(`admin/customers/detail/${customer._id}`)}
             />
           ))
         ) : (

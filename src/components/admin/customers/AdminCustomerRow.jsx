@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditClick }) => {
+const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditClick, onDetailClick }) => {
   const defaultAvatar = "https://unsplash.com"
   return (
     <div
@@ -34,7 +34,7 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
       {/* Sağ Blok: Cemal Bey'in Kolayca Yöneteceği Tam Reaktif Lüks Switch ve Aksiyon Alanı */}
       <div className="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/60">
         
-        {/* Toggle Switch: Müşteri/Portföy Aktiflik Durumu */}
+        {/* Toggle Switch: Customer Active/Passive */}
         <div className="flex flex-col items-center gap-1">
           <span className="text-[12px] uppercase tracking-widest text-slate-400">
             Pasif/Aktif
@@ -59,10 +59,16 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
             Eylemler
           </span>
           <div className="flex flex-col gap-1 w-full">
+            <button
+              onClick={onDetailClick}
+              className="text-[10px] px-3 py-1 text-amber-400 hover:bg-slate-800 font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer text-center border border-slate-700"
+            >
+              İncele
+            </button>
             {/* Premium Düzenle Butonu */}
             <button
               onClick={onEditClick}
-              className="text-[10px] px-3 py-1 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-medium uppercase tracking-widest transition-all duration-200 cursor-pointer text-center"
+              className="text-[10px] px-3 py-1 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer text-center"
             >
               Düzenle
             </button>
@@ -70,7 +76,7 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
             {/* Kalıcı Silme Butonu */}
             <button
               onClick={handleDelete}
-              className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-medium text-center"
+              className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-bold text-center"
             >
               Sil
             </button>
