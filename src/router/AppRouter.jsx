@@ -17,6 +17,7 @@ const AdminLayout = lazy(() => import('../components/admin/AdminLayout'))
 const DashboardHome = lazy(() => import('../pages/admin/DashboardHome'))
 const AdminProperties = lazy(() => import('../pages/admin/AdminProperties'))
 const AdminPropertyForm = lazy(() => import('../pages/admin/AdminPropertyForm'))
+const AdminCustomers = lazy(() => import('../pages/admin/AdminCustomers'))
 
 // Loading Fallback Component
 const LoadingFallback = () => (
@@ -45,6 +46,9 @@ const AppRouter = () => {
             <Route path='properties' element={<AdminProperties/>} />
             <Route path='properties/create' element={<AdminPropertyForm/>} />
             <Route path='properties/create/:id' element={<AdminPropertyForm/>} />
+            <Route path='customers' element={<AdminCustomers/>} />
+            {/* <Route path='customers/create' element={<AdminCustomerForm/>} /> */}
+            {/* <Route path='customers/edit/:id' element={<AdminCustomerForm/>} /> */}
           </Route>
         </Routes>
       </Suspense>

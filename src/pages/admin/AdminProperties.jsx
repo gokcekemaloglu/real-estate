@@ -16,7 +16,7 @@ const AdminProperties = () => {
   const { properties, loading } = useSelector((state) => state.property);
 
   // Radar layout re-fetching records data dynamically inside admin dashboard scopes
-  const loadAdminData = () => {
+  const loadAdminPropertyData = () => {
     fetchData({
       endpoint: "properties",
       stateKey: "properties",
@@ -28,18 +28,18 @@ const AdminProperties = () => {
   };
 
   useEffect(() => {
-    loadAdminData();
+    loadAdminPropertyData();
   }, []);
 
   const handleStatusToggle = async (id, type) => {
     if (type === "active") await togglePropertyStatus(id);
     if (type === "featured") await toggleFeaturedStatus(id);
-    loadAdminData(); // Automatically refresh dataset to mirror single source of truth mutations
+    loadAdminPropertyData(); // Automatically refresh dataset to mirror single source of truth mutations
   };
 
   const handleDelete = async (id) => {
     await deleteProperty(id);
-    loadAdminData();
+    loadAdminPropertyData();
   };
 
   if (loading) {
