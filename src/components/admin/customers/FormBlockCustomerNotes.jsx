@@ -2,22 +2,21 @@ import React from 'react'
 import useCustomerCall from '../../../hooks/useCustomerCall'
 import { useState } from 'react'
 
-const FormBlockCustomerNotes = () => {
-  const {} = useCustomerCall()
+const FormBlockCustomerNotes = ({customerId, notes}) => {
+  const {putCustomerData} = useCustomerCall()
   const [newNote, setNewNote] = useState("")
 
   const handleAddNote = async (e) => {
     e.preventDefault()
     if (!newNote.trim()) return
 
-    const updateNotes = [...notes, {content: newNote.trim()}]
+    const updatedNotes = [...notes, {content: newNote.trim()}]
 
     await putCustomerData(customerId, {note: updatedNotes})
-    setNewNote("")
   }
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-sm h-[530px]">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-sm h-132.5">
       <h3 className="text-xs uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
         2. Müşteri Görüşme Notları
       </h3>
@@ -45,7 +44,7 @@ const FormBlockCustomerNotes = () => {
           [...notes].reverse().map((note, index) => (
             <div key={note._id || index} className="relative pl-4 border-l border-brand-gold/40 flex flex-col gap-1">
               {/* Kare lüks timeline noktası */}
-              <div className="absolute -left-[3.5px] top-1 w-1.5 h-1.5 bg-brand-gold"></div>
+              <div className="absolute left-[-3.5px] top-1 w-1.5 h-1.5 bg-brand-gold"></div>
               
               {/* Not Zaman Damgası */}
               <span className="text-[9px] text-slate-400 dark:text-slate-500 font-mono uppercase tracking-wider">
@@ -53,7 +52,7 @@ const FormBlockCustomerNotes = () => {
               </span>
               
               {/* Not Metni */}
-              <p className="text-[11px] font-light text-slate-600 dark:text-slate-300 bg-slate-50/40 dark:bg-slate-950/10 p-2 border border-slate-100 dark:border-slate-800/60 leading-relaxed break-words">
+              <p className="text-[11px] font-light text-slate-600 dark:text-slate-300 bg-slate-50/40 dark:bg-slate-950/10 p-2 border border-slate-100 dark:border-slate-800/60 leading-relaxed wrap-break-word">
                 {note.content}
               </p>
             </div>

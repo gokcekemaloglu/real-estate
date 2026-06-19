@@ -11,7 +11,7 @@ import { CustomerSchema } from '../../helper/ValidationSchemas'
 const AdminCustomerForm = () => {
   const {id} = useParams()
   const navigate =useNavigate()
-  const {getSingleCustomerData, postCustomerData, putCustomerData, toggleCustomerStatus, deleteCustomer} = useCustomerCall()
+  const {getSingleCustomerData, postCustomerData, putCustomerData} = useCustomerCall()
   const {customer, loading} = useSelector(state => state.customers)
   const isEditMode = Boolean(id)
 
@@ -34,7 +34,6 @@ const AdminCustomerForm = () => {
     },
     validationSchema: CustomerSchema,
     onSubmit: async (values) => {
-      // Form verilerini temizleyip backend allowedFields kurallarına göre paslıyoruz
       const cleanValues = {
         ...values,
         firstName: values.firstName.trim(),
@@ -48,7 +47,7 @@ const AdminCustomerForm = () => {
       if (isEditMode) {
         await putCustomerData(id, cleanValues)
       } else {
-        await postCustomerData(cleanValues)
+        await postCustomerData("customers", cleanValues)
       }
       navigate("/admin/customers")
     }

@@ -49,7 +49,7 @@ const AppRouter = () => {
             <Route path='properties/create/:id' element={<AdminPropertyForm/>} />
             <Route path='customers' element={<AdminCustomers/>} />
             <Route path='customers/create' element={<AdminCustomerForm/>} />
-            {/* <Route path='customers/edit/:id' element={<AdminCustomerForm/>} /> */}
+            <Route path='customers/edit/:id' element={<AdminCustomerForm/>} />
           </Route>
         </Routes>
       </Suspense>

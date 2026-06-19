@@ -34,7 +34,7 @@ const useCustomerCall = () => {
     }
   };
   
-  const postCustomerData = async (endpoint = "Customers", info) => {
+  const postCustomerData = async (endpoint = "customers", info) => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.post(`${endpoint}`, info);
@@ -47,7 +47,7 @@ const useCustomerCall = () => {
   const putCustomerData = async (id, info) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.put(`customers/${id}`, info);
+      await axiosWithToken.patch(`customers/${id}`, info);
       SweetNotify("Müşteri başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
     } catch (error) {
       handleError(error, "Müşteri güncellenirken bir hata oluştu!");
