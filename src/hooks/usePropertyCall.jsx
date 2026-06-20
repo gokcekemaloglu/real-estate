@@ -19,7 +19,7 @@ const usePropertyCall = () => {
       const {data} = await axiosPublic(`properties/${id}`)
       dispatch(setData({endpoint:"property", data: data?.data}))
     } catch (error) {
-      handleError(error, `${id} kimlikli gayrimenkul detayları yüklenemedi!`);
+      handleError(error, "Gayrimenkul detayları yüklenirken beklenmedik bir hata oluştu!");
     }
   };
 
@@ -27,9 +27,9 @@ const usePropertyCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.post(`${endpoint}`, info);
-      SweetNotify("İlan başarıyla yayına alındı.", SweetAlertIcons.SUCCESS)
+      SweetNotify("Gayrimenkul ilanı başarıyla portföye eklendi.", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Yeni ilan oluşturulurken hata oluştu!");
+      handleError(error, "Yeni gayrimenkul portföyü oluşturulurken bir hata oluştu!");
     }
   };
 
@@ -37,23 +37,23 @@ const usePropertyCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.put(`properties/${id}`, info);
-      SweetNotify("İlan başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Portföy kartı başarıyla güncellendi.", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "İlan güncellenirken bir hata oluştu!");
+      handleError(error, "Gayrimenkul bilgileri güncellenirken bir hata oluştu!");
     } finally {
         getSinglePropertyData(id)
     }
   };
 
   const deleteProperty = async (id) => {
-    const confirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    const confirmed = await SweetConfirm("Portföyü Kaldır", "Bu gayrimenkul ilanını sistemden kalıcı olarak silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
     if (!confirmed) return //Exit if user cancels delete
     dispatch(fetchStart());
     try {
       await axiosWithToken.delete(`properties/${id}`)
-      SweetNotify("İlan başarıyla silindi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Gayrimenkul portföy kaydı sistemden tamamen kaldırıldı.", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "İlan silinirken bir hata oluştu!");
+      handleError(error, "İlan kaydı silinirken beklenmedik bir hata oluştu!");
     }
   };
   
@@ -61,7 +61,7 @@ const usePropertyCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.patch(`properties/${id}/status`);
-      SweetNotify("Yayın durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("İlan yayın durumu başarıyla güncellendi.", SweetAlertIcons.SUCCESS)
     } catch (error) {
       handleError(error, "İlan aktiflik durumu değiştirilirken bir hata oluştu!");
     }
@@ -71,9 +71,9 @@ const usePropertyCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.patch(`properties/${id}/featured`);
-      SweetNotify("Vitrin durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("İlan vitrin sergileme durumu başarıyla güncellendi.", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Vitrin İlan durumu değiştirilirken bir hata oluştu!");
+      handleError(error, "Vitrin ilan durumu değiştirilirken bir hata oluştu!");
     }
   };
 

@@ -17,7 +17,7 @@ const useAuthCall = () => {
             // console.log(data);
             
             dispatch(registerSuccess(data.data))
-            SweetNotify("Hesabınız başarıyla oluşturuldu. Giriş yapabilirsiniz.", SweetAlertIcons.SUCCESS)
+            SweetNotify("Hesabınız başarıyla oluşturuldu. Güvenle giriş yapabilirsiniz.", SweetAlertIcons.SUCCESS)
             navigate("/login")
         } catch (error) {
             console.log("Register Error", error)
@@ -34,7 +34,7 @@ const useAuthCall = () => {
             // console.log(data);
             
             dispatch(loginSuccess(data.data))
-            SweetNotify(`Hoşgeldiniz, ${data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
+            SweetNotify(`Sisteme başarıyla giriş yapıldı. Hoşgeldiniz, ${data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
             navigate("/")
         } catch (error) {
             console.log("Login Error", error)
@@ -45,13 +45,13 @@ const useAuthCall = () => {
     }
 
     const logout = async () => {
-        const confirmed = await SweetConfirm("Çıkış Yap", "Çıkış yapmak istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+        const confirmed = await SweetConfirm("Oturumu Kapat", "Sistemden çıkış yapmak istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
         if (!confirmed) return //Exit if user cancels logout
         dispatch(fetchStart())
         try {
             await axiosWithToken.get("/auth/logout")
             dispatch(logoutSuccess())
-            SweetNotify("Başarıyla çıkış yapıldı.", SweetAlertIcons.SUCCESS)
+            SweetNotify("Oturum başarıyla sonlandırıldı.", SweetAlertIcons.SUCCESS)
             navigate("/")
         } catch (error) {
             console.log("Logout Error", error)

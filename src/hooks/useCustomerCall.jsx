@@ -14,23 +14,13 @@ const useCustomerCall = () => {
     SweetNotify(errorMsg, SweetAlertIcons.ERROR);
   };
 
-  // const getAllCustomersData = async ({}) => {
-  //   dispatch(fetchStart());
-  //   try {
-  //     const { data } = await axiosWithToken.get("customers");
-  //     dispatch(setData(data.data));
-  //   } catch (error) {
-  //     handleError(error, `Müşteriler yüklenirken bir hata oluştu!`);
-  //   }
-  // };
-
   const getSingleCustomerData = async (id) => {
     dispatch(fetchStart());
     try {
       const {data} = await axiosWithToken.get(`customers/${id}`)
       dispatch(setData({endpoint:"customer", data: data?.data}))
     } catch (error) {
-      handleError(error, `${id} kimlikli müşteri detayları yüklenemedi!`);
+      handleError(error, "Müşteri portföy detayları yüklenirken bir hata oluştu!");
     }
   };
   
@@ -38,9 +28,9 @@ const useCustomerCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.post(`${endpoint}`, info);
-      SweetNotify("Müşteri başarıyla yayına alındı.", SweetAlertIcons.SUCCESS)
+      SweetNotify("Müşteri hesap kaydı başarıyla portföye eklendi.", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Yeni müşteri oluşturulurken hata oluştu!");
+      handleError(error, "Yeni müşteri portföyü oluşturulurken bir hata oluştu!");
     }
   };
   
@@ -48,9 +38,9 @@ const useCustomerCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.patch(`customers/${id}`, info);
-      SweetNotify("Müşteri başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Müşteri hesap kartı başarıyla güncellendi.", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Müşteri güncellenirken bir hata oluştu!");
+      handleError(error, "Müşteri bilgileri güncellenirken bir hata oluştu!");
     } finally {
       getSingleCustomerData(id)
     }
@@ -58,26 +48,26 @@ const useCustomerCall = () => {
 
   // Customer Soft Delete for admin
   const toggleCustomerStatus = async (id) => {
-    const confirmed = await SweetConfirm("Aktif/Pasif", "Müşterinin aktif/pasif durumunu değiştirmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    const confirmed = await SweetConfirm(" Hesap Durumu (Aktif/Pasif)", "Müşterinin portföy aktiflik durumunu değiştirmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
     if (!confirmed) return
     dispatch(fetchStart());
     try {
       await axiosWithToken.patch(`customers/${id}/status`);
-      SweetNotify("Aktif/Pasif durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Müşteri aktiflik durumu başarıyla güncellendi. (Aktif/Pasif)", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Müşteri Aktif/Pasif durumu değiştirilirken bir hata oluştu!");
+      handleError(error, "Müşteri Aktif/Pasif durumu değiştirilirken beklenmedik bir hata oluştu!");
     }
   };
     
   const deleteCustomer = async (id) => {
-    const confirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    const confirmed = await SweetConfirm("Müşteriyi Sil", "Bu mülk sahibini sistemden kalıcı olarak silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
     if (!confirmed) return //Exit if user cancels delete
     dispatch(fetchStart());
     try {
       await axiosWithToken.delete(`customers/${id}`)
-      SweetNotify("Müşteri başarıyla silindi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Müşteri kaydı sistemden tamamen kaldırıldı.", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Müşteri silinirken bir hata oluştu!");
+      handleError(error, "Müşteri kaydı silinirken bir hata oluştu!");
     }
   };
 
