@@ -36,7 +36,7 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
         
         {/* Toggle Switch: Customer Active/Passive Status */}
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[12px] uppercase tracking-widest text-slate-400">
+          <span className="text-[12px] uppercase tracking-widest text-slate-500">
             Pasif/Aktif
           </span>
           <button
@@ -54,8 +54,8 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
         </div>
 
         {/* Dynamic Actions Center: Update (Notes) and Hard Delete Operations */}
-        <div className="flex flex-col items-center gap-1 min-w-20">
-          <span className="text-[12px] uppercase tracking-widest text-slate-400 mb-1">
+        <div className="flex flex-col items-center gap-1 min-w-20 font-bold">
+          <span className="text-[12px] uppercase tracking-widest text-slate-500 mb-1">
             Eylemler
           </span>
           <div className="flex flex-col gap-1 w-full">
@@ -78,7 +78,7 @@ const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditCl
               onClick={handleDelete}
               className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-bold text-center"
             >
-              Sil
+              SİL
             </button>
           </div>
         </div>

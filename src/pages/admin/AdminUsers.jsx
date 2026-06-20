@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchFail, fetchStart, setData } from "../../features/userSlice";
 import AdminUserRow from "../../components/admin/users/AdminUserRow";
+import { useNavigate } from "react-router-dom";
 
 const AdminUsers = () => {
   const { fetchData } = useFetchData();
   const { toggleUserStatus, deleteUser } = useUserCall();
   const { users, loading } = useSelector((state) => state.users);
+  const navigate = useNavigate()
 
   const loadAdminUserData = () => {
     fetchData({
@@ -66,6 +68,7 @@ const AdminUsers = () => {
               user={user}
               handleStatusToggle={() => handleStatusToggle(user._id)}
               handleDelete={() => handleDelete(user._id)}
+              onDetailClick={() => navigate(`/admin/users/detail/${user?._id}`)}
             />
           ))
         ) : (

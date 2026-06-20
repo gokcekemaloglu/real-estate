@@ -42,8 +42,8 @@ const AdminPropertyRow = ({
       {/* Right Block: Fully Reactive Action Toggles tailored beautifully for Cemal's ease of use */}
       <div className="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/60">
         {/* Toggle Switch: Active State Status */}
-        <div className="flex flex-col items-center gap-1">
-          <span className="text-[9px] uppercase tracking-widest text-slate-400">
+        <div className="flex flex-col items-center gap-1 font-bold">
+          <span className="text-[9px] uppercase tracking-widest text-slate-500">
             Yayın Durumu
           </span>
           <button
@@ -57,8 +57,8 @@ const AdminPropertyRow = ({
         </div>
 
         {/* Toggle Switch: Featured Vitrin State Status */}
-        <div className="flex flex-col items-center gap-1">
-          <span className="text-[9px] uppercase tracking-widest text-slate-400">
+        <div className="flex flex-col items-center gap-1 font-bold">
+          <span className="text-[9px] uppercase tracking-widest text-slate-500">
             Vitrinde Göster
           </span>
           <button
@@ -72,9 +72,9 @@ const AdminPropertyRow = ({
         </div>
 
         {/* Dynamic Actions Center: Unifying Update and Delete Operations Side-by-Side */}
-        <div className="flex flex-col items-center gap-1 ">
+        <div className="flex flex-col items-center gap-1 font-bold">
           {/* Premium Edit Action Button (Pre-wired for upcoming Formik edit modal context) */}
-          <span className="text-[12px] uppercase tracking-widest text-slate-400">
+          <span className="text-[12px] uppercase tracking-widest text-slate-500">
             Eylemler
           </span>
           <div className="flex flex-col gap-1 w-full">
@@ -87,16 +87,16 @@ const AdminPropertyRow = ({
             {/* Premium Edit Action Button */}
             <button
               onClick={() => onEditClick(property)} // Placeholder until we attach the edit flow
-              className="text-[10px] px-3 py-1 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-medium uppercase tracking-widest transition-all duration-200 cursor-pointer text-center"
+              className="text-[10px] px-3 py-1 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer text-center"
             >
               Düzenle
             </button>
             {/* Hard Delete Action Trigger Button */}
             <button
               onClick={() => onDeleteClick(property?._id)}
-              className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-medium text-center"
+              className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-bold text-center"
             >
-              Sil
+              SİL
             </button>
           </div>
         </div>
