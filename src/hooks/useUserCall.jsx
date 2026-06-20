@@ -15,22 +15,12 @@ const useUserCall = () => {
     dispatch(fetchFail(errorMsg));
     SweetNotify(errorMsg, SweetAlertIcons.ERROR);
   };  
-  
-  // const getAllUsers = async () => {
-  //   dispatch(fetchStart());
-  //   try {
-  //     const { data } = await axiosWithToken.get("users");
-  //     dispatch(setData(data.data));
-  //   } catch (error) {
-  //     handleError(error, `Kullanıcılar yüklenirken bir hata oluştu!`);
-  //   }
-  // };
 
   const getSingleUser = async(id) => {
     dispatch(fetchStart())
     try {
       const {data} = await axiosWithToken.get(`users/${id}`)
-      dispatch(setData(data.data))
+      dispatch(setData({endpoint: "user", data: data?.data}))
     } catch (error) {
       handleError(error, `${id} kimlikli kullanıcı detayları yüklenemedi!`);
     }
@@ -75,7 +65,7 @@ const useUserCall = () => {
 
   // User soft delete
   const toggleUserStatus = async (id) => {
-    const confirmed = await SweetConfir("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    const confirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
     if (!confirmed) return //Exit if user cancels delete
     dispatch(fetchStart());
     try {
@@ -99,11 +89,11 @@ const useUserCall = () => {
   };
   
   return {
-    // getAllUsers,
     getSingleUser,
     updateMe,
     updateUser,
     changeMyPassword,
+    toggleUserStatus,
     deleteUser
   }
 }

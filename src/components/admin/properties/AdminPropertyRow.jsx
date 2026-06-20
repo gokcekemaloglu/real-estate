@@ -5,6 +5,7 @@ const AdminPropertyRow = ({
   onStatusToggle,
   onDeleteClick,
   onEditClick,
+  onDetailClick
 }) => {
   const defaultImage = "https://unsplash.com";
   return (
@@ -78,13 +79,19 @@ const AdminPropertyRow = ({
           </span>
           <div className="flex flex-col gap-1 w-full">
             <button
+              onClick={onDetailClick}
+              className="text-[10px] px-3 py-1 text-amber-400 hover:bg-slate-800 font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer text-center border border-slate-700"
+            >
+              İncele
+            </button>
+            {/* Premium Edit Action Button */}
+            <button
               onClick={() => onEditClick(property)} // Placeholder until we attach the edit flow
               className="text-[10px] px-3 py-1 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-dark font-medium uppercase tracking-widest transition-all duration-200 cursor-pointer text-center"
             >
               Düzenle
             </button>
             {/* Hard Delete Action Trigger Button */}
-
             <button
               onClick={() => onDeleteClick(property?._id)}
               className="text-[10px] px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-medium text-center"

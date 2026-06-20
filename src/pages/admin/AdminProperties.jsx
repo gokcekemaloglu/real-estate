@@ -59,11 +59,12 @@ const AdminProperties = () => {
       <div className="flex flex-col gap-4 mt-4">
         {properties?.map((property) => (
           <AdminPropertyRow
-            property={property}
             key={property._id}
+            property={property}
             onStatusToggle={handleStatusToggle}
             onDeleteClick={handleDelete}
-            onEditClick={(selected) => navigate(`/admin/properties/create/${selected?._id}`)}
+            onEditClick={() => navigate(`/admin/properties/edit/${property?._id}`)}
+            onDetailClick={() => navigate(`/admin/properties/detail/${property?._id}`)}
           />
         ))}
       </div>
