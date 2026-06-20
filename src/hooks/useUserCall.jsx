@@ -22,7 +22,7 @@ const useUserCall = () => {
       const {data} = await axiosWithToken.get(`users/${id}`)
       dispatch(setData({endpoint: "user", data: data?.data}))
     } catch (error) {
-      handleError(error, `${id} kimlikli kullanıcı detayları yüklenemedi!`);
+      handleError(error, `Kullanıcı profil detayları yüklenirken bir hata oluştu!`);
     }
   }
 
@@ -31,9 +31,9 @@ const useUserCall = () => {
     dispatch(fetchStart())
     try {
       await axiosWithToken.patch(`users/${id}/updateMe`, userUpdateInfo)
-      SweetNotify("Kullanıcı bilgileriniz başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Profil bilgileriniz başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Kulllanıcı hesabınız güncellenirken bir hata oluştu!");
+      handleError(error, "Profil bilgileriniz güncellenirken beklenmedik bir hata oluştu!");
     } finally {
       getSingleUser(id)
     }
@@ -43,9 +43,9 @@ const useUserCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.patch(`users/${id}`, updatedUser);
-      SweetNotify("Kullanıcı bilgileri başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Kullanıcı hesap kartı başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Kulllanıcı hesabı güncellenirken bir hata oluştu!");
+      handleError(error, "Kullanıcı hesap bilgileri güncellenirken bir hata oluştu!");
     } 
   };
 
@@ -54,37 +54,37 @@ const useUserCall = () => {
     dispatch(fetchStart())
     try {
       await axiosWithToken.patch(`users/${id}/changeMyPassword`, values)
-      SweetNotify("Password changed successfully!!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Şifreniz başarıyla değiştirildi. Güvenliğiniz için yeniden giriş yapınız.!", SweetAlertIcons.SUCCESS)
       await axiosWithToken.get("auth/logout")
       dispatch(logoutSuccess())
       navigate("/login")
     } catch (error) {
-      handleError(error, "Şifre değiştirilirken bir hata oluştu!");
+      handleError(error, "Güvenlik şifreniz yenilenirken bir hata oluştu!");
     }
   }
 
   // User soft delete
   const toggleUserStatus = async (id) => {
-    const confirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    const confirmed = await SweetConfirm("Hesap Durumu", "Kullanıcının sisteme erişim yetkisini değiştirmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
     if (!confirmed) return //Exit if user cancels delete
     dispatch(fetchStart());
     try {
       await axiosWithToken.patch(`users/${id}/status`);
-      SweetNotify("Aktiflik durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
+      SweetNotify("Kullanıcı aktiflik durumu başarıyla güncellendi!", SweetAlertIcons.SUCCESS)
     } catch (error) {
-      handleError(error, "Müşteri aktiflik durumu değiştirilirken bir hata oluştu!");
+      handleError(error, "Kullanıcı aktiflik durumu değiştirilirken bir hata oluştu!");
     }
   };
 
   const deleteUser = async (id) => {
-    const isConfirmed = await SweetConfirm("Sil", "Silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION);
+    const isConfirmed = await SweetConfirm("Hesabı Kaldır", "Bu kullanıcı hesabını sistemden kalıcı olarak silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION);
     if (!isConfirmed) return; //if cancelled function stops
     dispatch(fetchStart());
     try {
       await axiosWithToken.delete(`users/${id}`);
-      SweetNotify("Kullanıcı başarıyla silindi", SweetAlertIcons.SUCCESS);
+      SweetNotify("Kullanıcı hesabı sistemden tamamen kaldırıldı.", SweetAlertIcons.SUCCESS);
     } catch (error) {
-      handleError(error, "Kullanıcı silinirken bir hata oluştu!");
+      handleError(error, "Kullanıcı hesabı silinirken bir hata oluştu!");
     }
   };
   
