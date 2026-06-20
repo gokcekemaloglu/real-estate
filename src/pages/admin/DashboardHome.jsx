@@ -31,6 +31,7 @@ const DashboardHome = () => {
 
   // 3. Granular Category Distributions mapped from your exact Mongoose Schema strings tokens
   const apartmentCount = properties?.filter(p => p.propertyCategory === "apartment").length || 0
+  const houseCount = properties?.filter(p => p.propertyCategory === "house").length || 0
   const villaCount = properties?.filter(p => p.propertyCategory === "villa").length || 0
   const landCount = properties?.filter(p => p.propertyCategory === "land").length || 0
   const commercialCount = properties?.filter(p => p.propertyCategory === "commercial").length || 0
@@ -120,10 +121,14 @@ const DashboardHome = () => {
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
         <h3 className="text-xs uppercase tracking-widest text-slate-400 font-medium mb-6">Gayrimenkul Kategori Dağılımı</h3>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
           <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
             <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Daire / Apartman</span>
             <span className="text-xl font-medium text-slate-800 dark:text-white">{apartmentCount}</span>
+          </div>
+          <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
+            <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Müstakil Ev</span>
+            <span className="text-xl font-medium text-slate-800 dark:text-white">{houseCount}</span>
           </div>
           <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
             <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Lüks Villa</span>
