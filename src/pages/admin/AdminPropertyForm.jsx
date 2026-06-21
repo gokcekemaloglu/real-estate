@@ -47,7 +47,7 @@ const AdminPropertyForm = () => {
       bathroomCount: isEditMode ? property?.bathroomCount : 0,
       buildingAge: isEditMode ? property?.buildingAge : '',
       heatingType: isEditMode ? property?.heatingType : 'none',
-      maintenanceFee: isEditMode ? property?.maintenanceFee : 0,
+      maintenanceFee: isEditMode ? property?.maintenanceFee : '',
       isFurnished: isEditMode ? property?.isFurnished : false,
       hasElevator: isEditMode ? property?.hasElevator : false,
       hasParking: isEditMode ? property?.hasParking : false,

@@ -16,7 +16,7 @@ const useUserCall = () => {
     SweetNotify(errorMsg, SweetAlertIcons.ERROR);
   };  
 
-  const getSingleUser = async(id) => {
+  const getSingleUserData = async(id) => {
     dispatch(fetchStart())
     try {
       const {data} = await axiosWithToken.get(`users/${id}`)
@@ -89,7 +89,7 @@ const useUserCall = () => {
   };
   
   return {
-    getSingleUser,
+    getSingleUserData,
     updateMe,
     updateUser,
     changeMyPassword,
