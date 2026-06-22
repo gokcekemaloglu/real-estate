@@ -59,6 +59,18 @@ export const PropertySchema = Yup.object().shape({
     .required("Mahalle bilgisi zorunludur."),
   roomCount: Yup.string()
     .required("Oda sayısı zorunludur (Örn: 3+1)."),
+  bathroomCount: Yup.number()
+    .min(0, "Banyo sayısı negatif olamaz.")
+    .nullable(),
+  totalFloors: Yup.number()
+    .positive("Toplam kat sayısı pozitif bir sayı olmalıdır.")
+    .nullable(),
+  maintenanceFee: Yup.number()
+    .min(0, "Aidat bedeli negatif olamaz.")
+    .nullable(),
+  occupancyStatus: Yup.string()
+    .oneOf(["vacant", "tenant", "owner"], "Geçersiz kullanım durumu seçimi.")
+    .nullable(),
 });
 
 // Comprehensive validation constraints mapped accurately from your Mongoose Customer model

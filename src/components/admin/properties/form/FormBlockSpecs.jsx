@@ -1,13 +1,14 @@
 import React from "react";
 import FormSelectField from "./FormSelectField";
 
-const FormBlockSpecs = ({formik, heatingOptions}) => {
+const FormBlockSpecs = ({formik, heatingOptions, occupancyOptions}) => {
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 grid grid-cols-2 md:grid-cols-4 gap-4 shadow-sm">
       <h3 className="col-span-2 md:col-span-4 text-xs uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
         4. Yapısal Özellikler
       </h3>
 
+      {/* Gross Area Input Field */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
           Brüt Alan (m²)
@@ -20,7 +21,7 @@ const FormBlockSpecs = ({formik, heatingOptions}) => {
           className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
         />
       </div>
-
+      {/* Net Area Input Field */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
           Net Alan (m²)
@@ -33,7 +34,7 @@ const FormBlockSpecs = ({formik, heatingOptions}) => {
           className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
         />
       </div>
-
+      {/* Room Count Composition Input Field */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
           Oda Sayısı
@@ -53,14 +54,52 @@ const FormBlockSpecs = ({formik, heatingOptions}) => {
           </span>
         )}
       </div>
+      {/* Current Floor Level Input Field */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+          Bulunduğu Kat
+        </label>
+        <input
+          type="number"
+          name="floor"
+          placeholder="4"
+          value={formik.values.floor}
+          onChange={formik.handleChange}
+          className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
+        />
+      </div>
 
+      {/* Total Floors Capacity Input Field */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+          Toplam Kat Sayısı
+        </label>
+        <input
+          type="number"
+          name="totalFloors"
+          placeholder="10"
+          value={formik.values.totalFloors}
+          onChange={formik.handleChange}
+          className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
+        />
+      </div>
+
+      {/* Heating Infrastructure Selection Dropdown Field */}
       <FormSelectField
         label="Isıtma Tipi"
         name="heatingType"
         options={heatingOptions}
         formik={formik}
       />
+      {/* Occupancy State Condition Selection Dropdown Field */}
+      <FormSelectField
+        label="Kullanım Durumu"
+        name="occupancyStatus"
+        options={occupancyOptions}
+        formik={formik}
+      />
     </div>
+    
   );
 };
 

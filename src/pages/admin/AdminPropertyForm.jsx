@@ -44,10 +44,11 @@ const AdminPropertyForm = () => {
       floor: isEditMode ? property?.floor : '',
       totalFloors: isEditMode ? property?.totalFloors : '',
       roomCount: isEditMode ? property?.roomCount : '',
-      bathroomCount: isEditMode ? property?.bathroomCount : 0,
+      bathroomCount: isEditMode ? (property?.bathroomCount ?? '') : '',
       buildingAge: isEditMode ? property?.buildingAge : '',
       heatingType: isEditMode ? property?.heatingType : 'none',
       maintenanceFee: isEditMode ? property?.maintenanceFee : '',
+      occupancyStatus: isEditMode ? property?.occupancyStatus : '',
       isFurnished: isEditMode ? property?.isFurnished : false,
       hasElevator: isEditMode ? property?.hasElevator : false,
       hasParking: isEditMode ? property?.hasParking : false,
@@ -60,10 +61,11 @@ const AdminPropertyForm = () => {
         price: Number(values.price),
         grossArea: values.grossArea ? Number(values.grossArea) : null,
         netArea: values.netArea ? Number(values.netArea) : null,
-        floor: values.floor ? Number(values.floor) : null,
+        floor: values.floor !== '' ? Number(values.floor) : null,
         totalFloors: values.totalFloors ? Number(values.totalFloors) : null,
-        buildingAge: values.buildingAge ? Number(values.buildingAge) : 0,
-        maintenanceFee: values.maintenanceFee ? Number(values.maintenanceFee) : 0,
+        buildingAge: values.buildingAge !== '' ? Number(values.buildingAge) : null,
+        maintenanceFee: values.maintenanceFee !== '' ? Number(values.maintenanceFee) : null,
+        occupancyStatus: values.occupancyStatus || null
       }
       
       if (isEditMode) {
@@ -77,9 +79,10 @@ const AdminPropertyForm = () => {
 
   // Dropdown mapping configurations options dictionary lists
   const listingTypeOptions = [{ value: "sale", label: "Satılık" }, { value: "rent", label: "Kiralık" }, { value: "transfer_sale", label: "Devren Satılık" }, { value: "transfer_rent", label: "Devren Kiralık" }]
-  const categoryOptions = [{ value: "apartment", label: "Daire / Apartman" }, { value: "house", label: "Müstakil Ev" }, { value: "villa", label: "Villa" }, { value: "land", label: "Arsa / Arazi" }, { value: "commercial", label: "Ticari Mülk" }]
+  const categoryOptions = [{ value: "apartment", label: "Daire" }, { value: "house", label: "Müstakil Ev" }, { value: "villa", label: "Villa" }, { value: "land", label: "Arsa / Arazi" }, { value: "commercial", label: "Ticari Mülk / İşyeri" }]
   const heatingOptions = [{ value: "none", label: "Isıtma Yok" }, { value: "combi", label: "Kombi" }, { value: "air_conditioner", label: "Klima" }, { value: "central_share_meter", label: "Pay Ölçer" }, { value: "central", label: "Merkezi Sistem" }]
   const districtOptions = [{ value: "Seyhan", label: "Seyhan" }, { value: "Sarıçam", label: "Sarıçam" }, { value: "Çukurova", label: "Çukurova" }, { value: "Yüreğir", label: "Yüreğir" }]
+  const occupancyOptions = [{ value: "vacant", label: "Boş" }, { value: "tenant", label: "Kiracılı" }, { value: "owner", label: "Mülk Sahibi Oturuyor" }]
 
   if (loading && isEditMode) {
     return (
@@ -112,7 +115,7 @@ const AdminPropertyForm = () => {
         <FormBlockTitle formik={formik} hasTitleError={formik.touched.title && formik.errors.title} hasDescError={formik.touched.description && formik.errors.description} />
         <FormBlockPrice formik={formik} listingTypeOptions={listingTypeOptions} categoryOptions={categoryOptions} />
         <FormBlockLocation formik={formik} districtOptions={districtOptions} />
-        <FormBlockSpecs formik={formik} heatingOptions={heatingOptions} />
+        <FormBlockSpecs formik={formik} heatingOptions={heatingOptions} occupancyOptions={occupancyOptions} />
         <FormBlockToggles formik={formik} />
 
         <div className="flex justify-end mt-2">
