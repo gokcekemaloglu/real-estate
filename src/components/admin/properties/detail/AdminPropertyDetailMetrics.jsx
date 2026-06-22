@@ -8,6 +8,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
       </h3>
       {/* Quantitative metrics and architectural dimension parameters grid matrix */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-2 text-slate-600 dark:text-slate-400">
+        {/* Gross Area Field */}
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-widest text-slate-400">
             Brüt Alan
@@ -16,6 +17,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
             {property?.grossArea ? `${property.grossArea} m²` : "-"}
           </span>
         </div>
+        {/* Net Area Field */}
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-widest text-slate-400">
             Net Kullanım
@@ -39,7 +41,11 @@ const AdminPropertyDetailMetrics = ({property}) => {
             Banyo Sayısı
           </span>
           <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
-            {property?.bathroomCount ?? 0} Banyo
+            {property?.bathroomCount === null || property?.bathroomCount === undefined ? (
+              <span className="text-slate-300 dark:text-slate-700 italic">Belirtilmedi</span>
+            ) : (
+              `${property?.bathroomCount} Banyo`
+            )}
           </span>
         </div>
         {/* Building Age Field */}
@@ -48,7 +54,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
             Bina Yaşı
           </span>
           <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
-            {property?.buildingAge ?? 0} Yaş
+            {property?.buildingAge !== undefined && property?.buildingAge !== "" ? `${property?.buildingAge} Yaş` : "-"}
           </span>
         </div>
         {/*  Recent Floor Field */}
@@ -57,7 +63,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
             Bulunduğu Kat
           </span>
           <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
-            {property?.floor ?? 0}. Kat
+            {property?.floor !== undefined && property?.floor !== "" ? `${property.floor}. Kat` : "-"}
           </span>
         </div>
         {/*  Total Floors Capacity Field */}
@@ -75,9 +81,22 @@ const AdminPropertyDetailMetrics = ({property}) => {
             Isıtma Altyapısı
           </span>
           <span className="text-xs font-medium text-slate-800 dark:text-slate-200 uppercase tracking-tight text-[10px]">
-            {property?.heatingType || "Yok"}
+            {property?.heatingType && property?.heatingType !== "none" ? property.heatingType : "Yok"}
           </span>
         </div>
+
+        {/* Property Occupancy Status mapping enum strings safely */}
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[9px] uppercase tracking-widest text-slate-400">
+            Kullanım Durumu
+          </span>
+          <span className="text-xs font-medium text-slate-800 dark:text-slate-200 uppercase tracking-tight text-[10px]">
+            {property?.occupancyStatus === "vacant" ? "Boş" : 
+             property?.occupancyStatus === "tenant" ? "Kiracılı" : 
+             property?.occupancyStatus === "owner" ? "Mülk Sahibi" : "-"}
+          </span>
+        </div>
+        
       </div>
 
       {/* Hardware Flags Toggles Boolean Indicator Row */}
