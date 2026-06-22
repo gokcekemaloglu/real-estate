@@ -1,6 +1,14 @@
 import React from "react";
 
 const AdminPropertyDetailMetrics = ({property}) => {
+  const heatingLabels = {
+    none: "Isıtma Yok",
+    combi: "Kombi",
+    air_conditioner: "Klima",
+    electric: "Elektrikli",
+    central_share_meter: "Pay Ölçer",
+    central: "Merkezi Sistem",
+  };
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-sm">
       <h3 className="text-sm lg:text-base uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
@@ -54,7 +62,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
             Bina Yaşı
           </span>
           <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
-            {property?.buildingAge !== undefined && property?.buildingAge !== "" ? `${property?.buildingAge} Yaş` : "-"}
+            {property?.buildingAge !== undefined && property?.buildingAge !== null && property?.buildingAge !== "" ? `${property?.buildingAge} Yaş` : "-"}
           </span>
         </div>
         {/*  Recent Floor Field */}
@@ -63,7 +71,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
             Bulunduğu Kat
           </span>
           <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
-            {property?.floor !== undefined && property?.floor !== "" ? `${property.floor}. Kat` : "-"}
+            {property?.floor !== undefined && property?.floor !== null && property?.floor !== "" ? `${property.floor}. Kat` : "-"}
           </span>
         </div>
         {/*  Total Floors Capacity Field */}
@@ -81,7 +89,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
             Isıtma Altyapısı
           </span>
           <span className="text-xs font-medium text-slate-800 dark:text-slate-200 uppercase tracking-tight text-[10px]">
-            {property?.heatingType && property?.heatingType !== "none" ? property.heatingType : "Yok"}
+            {property?.heatingType && property?.heatingType !== "none" ? heatingLabels[property?.heatingType] : "Yok"}
           </span>
         </div>
 

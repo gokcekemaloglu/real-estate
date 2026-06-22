@@ -63,12 +63,13 @@ const AdminPropertyForm = () => {
       bathroomCount: isEditMode ? (property?.bathroomCount ?? '') : '',
       buildingAge: isEditMode ? property?.buildingAge : '',
       heatingType: isEditMode ? property?.heatingType : 'none',
-      maintenanceFee: isEditMode ? property?.maintenanceFee : '',
-      occupancyStatus: isEditMode ? property?.occupancyStatus : '',
+      maintenanceFee: isEditMode ? (property?.maintenanceFee ?? '') : '',
+      occupancyStatus: isEditMode ? (property?.occupancyStatus ?? '') : '',
       isFurnished: isEditMode ? property?.isFurnished : false,
       hasElevator: isEditMode ? property?.hasElevator : false,
       hasParking: isEditMode ? property?.hasParking : false,
-      isLoanEligible: isEditMode ? property?.isLoanEligible : true
+      isLoanEligible: isEditMode ? property?.isLoanEligible : true,
+      ownerId: isEditMode ? (property?.ownerId?._id ?? property?.ownerId ?? '') : ''
     },
     validationSchema: PropertySchema,
     onSubmit: async (values) => {

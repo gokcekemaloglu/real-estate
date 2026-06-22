@@ -45,7 +45,7 @@ const AdminPropertyDetail = () => {
         <div className="flex items-center gap-4">
           <button
             type="button"
-            onClick={() => navigate(`/admin/properties/create/${id}`)}
+            onClick={() => navigate(`/admin/properties/edit/${id}`)}
             className="text-xs uppercase tracking-widest text-brand-gold hover:underline cursor-pointer"
           >
             İlanı Düzenle
