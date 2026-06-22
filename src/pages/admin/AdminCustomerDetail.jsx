@@ -94,6 +94,7 @@ const AdminCustomerDetail = () => {
 
           {/* Bottom segment: Detailed Fields Registry mapped out cleanly with luxury styles */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+            {/* Phone */}
             <div className="flex flex-col gap-1">
               <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 Telefon Numarası
@@ -102,6 +103,7 @@ const AdminCustomerDetail = () => {
                 {customer?.phone || "-"}
               </span>
             </div>
+            {/* E-mail */}
             <div className="flex flex-col gap-1">
               <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 E-Posta Adresi
@@ -110,6 +112,7 @@ const AdminCustomerDetail = () => {
                 {customer?.email || "Belirtilmedi"}
               </span>
             </div>
+            {/* Address */}
             <div className="flex flex-col gap-1 sm:col-span-2 pt-2 border-t border-slate-50 dark:border-slate-800/40">
               <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 Kayıtlı İkametgah / Tebligat Adresi

@@ -6,11 +6,11 @@ import { PropertySchema } from '../../helper/ValidationSchemas'
 import usePropertyCall from '../../hooks/usePropertyCall'
 
 // Abstracted sub-block components imports
-import FormBlockTitle from '../../components/admin/properties/FormBlockTitle'
-import FormBlockPrice from '../../components/admin/properties/FormBlockPrice'
-import FormBlockLocation from '../../components/admin/properties/FormBlockLocation'
-import FormBlockSpecs from '../../components/admin/properties/FormBlockSpecs'
-import FormBlockToggles from '../../components/admin/properties/FormBlockToggles'
+import FormBlockTitle from '../../components/admin/properties/form/FormBlockTitle'
+import FormBlockPrice from '../../components/admin/properties/form/FormBlockPrice'
+import FormBlockLocation from '../../components/admin/properties/form/FormBlockLocation'
+import FormBlockSpecs from '../../components/admin/properties/form/FormBlockSpecs'
+import FormBlockToggles from '../../components/admin/properties/form/FormBlockToggles'
 
 const AdminPropertyForm = () => {
   const { id } = useParams() // Captures dynamic ID from URL bar to automatically switch to EDIT mode

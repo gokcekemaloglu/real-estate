@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import useFetchData from "../../hooks/useFetchData";
 import usePropertyCall from "../../hooks/usePropertyCall";
 import { fetchStart, fetchFail, setData } from "../../features/propertySlice";
-import AdminPropertyHeader from "../../components/admin/properties/AdminPropertyHeader";
-import AdminPropertyRow from "../../components/admin/properties/AdminPropertyRow";
+import AdminPropertyHeader from "../../components/admin/properties/list/AdminPropertyHeader";
+import AdminPropertyRow from "../../components/admin/properties/list/AdminPropertyRow";
 import { useNavigate } from "react-router-dom";
 
 const AdminProperties = () => {

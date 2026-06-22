@@ -53,6 +53,7 @@ const AdminUserDetail = () => {
         <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6 shadow-sm">
           {/* Top segment: Identity Profile Avatar and Global Status Indicators */}
           <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800/60">
+            {/* Profile Picture */}
             <div className="w-24 h-24 bg-slate-50 dark:bg-slate-950 overflow-hidden border border-slate-200 dark:border-slate-800 shrink-0">
               <img
                 src={defaultAvatar}
@@ -82,6 +83,7 @@ const AdminUserDetail = () => {
 
           {/* Bottom segment: Detailed Fields Registry mapped out cleanly with luxury styles */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+            {/* Phone */}
             <div className="flex flex-col gap-1">
               <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 Telefon Numarası
@@ -90,6 +92,7 @@ const AdminUserDetail = () => {
                 {user?.phone || "-"}
               </span>
             </div>
+            {/* E-mail */}
             <div className="flex flex-col gap-1">
               <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 E-Posta Adresi
@@ -98,6 +101,7 @@ const AdminUserDetail = () => {
                 {user?.email || "Belirtilmedi"}
               </span>
             </div>
+            {/* Address */}
             <div className="flex flex-col gap-1 sm:col-span-2 pt-2 border-t border-slate-50 dark:border-slate-800/40">
               <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 Adres

@@ -69,11 +69,11 @@ const AdminPropertyDetail = () => {
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 contrast-110"
             />
             <div className="absolute top-4 left-4 flex gap-2">
-              <span className={`text-[9px] uppercase font-bold tracking-widest px-3 py-1 text-white shadow-sm ${property?.listingType === 'sale' ? 'bg-brand-gold' : 'bg-brand-dark border border-slate-700'}`}>
+              <span className={`text-[12px] uppercase font-bold tracking-widest px-3 py-1 text-white shadow-sm ${property?.listingType === 'sale' ? 'bg-brand-gold' : 'bg-brand-dark border border-slate-700'}`}>
                 {property?.listingType === 'sale' ? 'Satılık' : 'Kiralık'}
               </span>
               {property?.isFeatured && (
-                <span className="text-[9px] uppercase font-bold tracking-widest px-3 py-1 bg-amber-500 text-brand-dark shadow-sm">
+                <span className="text-[12px] uppercase font-bold tracking-widest px-3 py-1 bg-amber-500 text-brand-dark shadow-sm">
                   Vitrin İlanı
                 </span>
               )}
@@ -92,7 +92,7 @@ const AdminPropertyDetail = () => {
             </div>
             
             <div className="flex flex-col gap-1.5 pt-2 border-t border-slate-50 dark:border-slate-800/40">
-              <span className="text-[9px] uppercase tracking-widest text-slate-400 font-medium">Mimari Açıklama Metni</span>
+              <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">Mimari Açıklama Metni</span>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light whitespace-pre-line text-justify">
                 {property?.description || "Bu portföy kartı için herhangi bir mimari açıklama metni girilmemiştir."}
               </p>
@@ -106,7 +106,7 @@ const AdminPropertyDetail = () => {
           
           {/* Premium Pricing Counter Matrix */}
           <div className="bg-brand-dark dark:bg-slate-950 border border-slate-800 p-6 flex flex-col gap-1.5 shadow-md">
-            <span className="text-[9px] uppercase tracking-widest text-amber-400/80 font-medium">Hedef Portföy Değeri</span>
+            <span className="text-[12px] uppercase tracking-widest text-amber-400/80 font-medium">Hedef Portföy Değeri</span>
             <span className="text-2xl font-serif text-white tracking-wide">
               {new Intl.NumberFormat("tr-TR", {
                 style: "currency",
@@ -118,7 +118,7 @@ const AdminPropertyDetail = () => {
 
           {/* Quantitative Dimension Specifications Grid Array */}
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-sm">
-            <h3 className="text-xs uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
+            <h3 className="text-sm lg:text-base uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
               Metrik Ölçüler & Donanım
             </h3>
             
