@@ -5,7 +5,7 @@ const AdminPropertyRow = ({
   onStatusToggle,
   onDeleteClick,
   onEditClick,
-  onDetailClick
+  onDetailClick,
 }) => {
   const defaultImage = "https://unsplash.com";
   return (
@@ -29,6 +29,12 @@ const AdminPropertyRow = ({
           <h3 className="text-sm font-medium text-slate-800 dark:text-white line-clamp-1">
             {property?.title}
           </h3>
+          {/* Strategic layout mapping for displaying property customer ownership fields */}
+          {property?.ownerId && (
+            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-light mt-0.5">
+              Ev Sahibi: {property.ownerId.firstName}{" "} {property.ownerId.lastName} ({property.ownerId.phone})
+            </span>
+          )}
           <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
             {new Intl.NumberFormat("tr-TR", {
               style: "currency",

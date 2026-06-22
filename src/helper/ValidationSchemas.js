@@ -71,6 +71,8 @@ export const PropertySchema = Yup.object().shape({
   occupancyStatus: Yup.string()
     .oneOf(["vacant", "tenant", "owner"], "Geçersiz kullanım durumu seçimi.")
     .nullable(),
+  ownerId: Yup.string()
+    .required("Mülk sahibi seçimi zorunludur."),
 });
 
 // Comprehensive validation constraints mapped accurately from your Mongoose Customer model

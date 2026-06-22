@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import { useSelector } from 'react-redux'
 import { PropertySchema } from '../../helper/ValidationSchemas'
 import usePropertyCall from '../../hooks/usePropertyCall'
+import { fetchStart as custStart, fetchFail as custFail, setData as custSet } from '../../features/customerSlice'
 
 // Abstracted sub-block components imports
 import FormBlockTitle from '../../components/admin/properties/form/FormBlockTitle'
@@ -11,12 +12,16 @@ import FormBlockPrice from '../../components/admin/properties/form/FormBlockPric
 import FormBlockLocation from '../../components/admin/properties/form/FormBlockLocation'
 import FormBlockSpecs from '../../components/admin/properties/form/FormBlockSpecs'
 import FormBlockToggles from '../../components/admin/properties/form/FormBlockToggles'
+import FormBlockOwner from '../../components/admin/properties/form/FormBlockOwner'
+import useFetchData from '../../hooks/useFetchData'
 
 const AdminPropertyForm = () => {
   const { id } = useParams() // Captures dynamic ID from URL bar to automatically switch to EDIT mode
   const navigate = useNavigate()
   const { postPropertyData, putPropertyData, getSinglePropertyData } = usePropertyCall()
+  const { fetchData } = useFetchData()
   const { property, loading } = useSelector((state) => state.property)
+  const { customers } = useSelector((state) => state.customers)
 
   const isEditMode = Boolean(id)
 
@@ -26,6 +31,17 @@ const AdminPropertyForm = () => {
       getSinglePropertyData(id)
     }
   }, [id])
+
+  useEffect(() => {
+    fetchData({
+      endpoint: "customers",
+      stateKey: "customers",
+      sliceActions: { fetchStart: custStart, fetchFail: custFail, setData: custSet },
+      page: 1,
+      limit: 100, // Fetch a wide list to populate the dropdown filter completely
+      isWithToken: true,
+    });
+  }, []);
 
   const formik = useFormik({
     enableReinitialize: true, // IMPORTANT: Forces Formik to auto-populate inputs as soon as Redux fills up
@@ -84,6 +100,11 @@ const AdminPropertyForm = () => {
   const districtOptions = [{ value: "Seyhan", label: "Seyhan" }, { value: "Sarıçam", label: "Sarıçam" }, { value: "Çukurova", label: "Çukurova" }, { value: "Yüreğir", label: "Yüreğir" }]
   const occupancyOptions = [{ value: "vacant", label: "Boş" }, { value: "tenant", label: "Kiracılı" }, { value: "owner", label: "Mülk Sahibi Oturuyor" }]
 
+  const customerOptions = customers?.map(cust => ({
+    value: cust._id,
+    label: `${cust.firstName} ${cust.lastName} (${cust.phone})`
+  })) || []
+
   if (loading && isEditMode) {
     return (
       <div className="flex items-center justify-center min-h-100">
@@ -115,6 +136,7 @@ const AdminPropertyForm = () => {
         <FormBlockTitle formik={formik} hasTitleError={formik.touched.title && formik.errors.title} hasDescError={formik.touched.description && formik.errors.description} />
         <FormBlockPrice formik={formik} listingTypeOptions={listingTypeOptions} categoryOptions={categoryOptions} />
         <FormBlockLocation formik={formik} districtOptions={districtOptions} />
+        <FormBlockOwner formik={formik} customerOptions={customerOptions} />
         <FormBlockSpecs formik={formik} heatingOptions={heatingOptions} occupancyOptions={occupancyOptions} />
         <FormBlockToggles formik={formik} />
 
