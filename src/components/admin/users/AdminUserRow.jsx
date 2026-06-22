@@ -20,7 +20,7 @@ const AdminUserRow = ({ user, handleStatusToggle, handleDelete, onDetailClick })
             </span>
             {user?.isAdmin && (
               <span className="text-[8px] bg-brand-dark dark:bg-slate-950 text-amber-400 border border-slate-700 px-1.5 py-0.5 uppercase tracking-widest font-medium">
-                Admin
+                Sistem Yöneticisi
               </span>
             )}
           </div>

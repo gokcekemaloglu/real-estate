@@ -25,7 +25,7 @@ const AdminUserDetail = () => {
     );
   }
   return (
-    <div className="flex flex-col gap-6 animate-fade-in max-w-5xl text-xs font-light text-slate-700 dark:text-slate-300">
+    <div className="flex flex-col gap-6 animate-fade-in max-w-5xl text-sm font-light text-slate-700 dark:text-slate-300">
       {/* Header Action Toolbar Section */}
       <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
         <div>
@@ -61,7 +61,7 @@ const AdminUserDetail = () => {
               />
             </div>
             <div className="flex flex-col gap-1.5 text-center sm:text-left">
-              <span className="text-[9px] uppercase tracking-wider text-brand-gold font-semibold">
+              <span className="text-[12px] uppercase tracking-wider text-brand-gold font-semibold">
                 {user?.userName}
               </span>
               <h2 className="text-xl font-serif text-slate-800 dark:text-white font-light">
@@ -83,26 +83,26 @@ const AdminUserDetail = () => {
           {/* Bottom segment: Detailed Fields Registry mapped out cleanly with luxury styles */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] uppercase tracking-widest text-slate-400 font-medium">
+              <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 Telefon Numarası
               </span>
-              <span className="text-sm font-mono text-slate-800 dark:text-slate-200">
+              <span className="text-sm sm:text-base font-mono font-normal text-slate-800 dark:text-slate-200">
                 {user?.phone || "-"}
               </span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] uppercase tracking-widest text-slate-400 font-medium">
+              <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 E-Posta Adresi
               </span>
-              <span className="text-sm text-slate-800 dark:text-slate-200 truncate">
+              <span className="text-sm sm:text-base text-slate-800 dark:text-slate-200 truncate">
                 {user?.email || "Belirtilmedi"}
               </span>
             </div>
             <div className="flex flex-col gap-1 sm:col-span-2 pt-2 border-t border-slate-50 dark:border-slate-800/40">
-              <span className="text-[9px] uppercase tracking-widest text-slate-400 font-medium">
+              <span className="text-[12px] uppercase tracking-widest text-slate-400 font-medium">
                 Adres
               </span>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light whitespace-pre-line">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-light whitespace-pre-line">
                 {user?.address ||
                   "Bu portföy profiliyle ilişkili henüz bir adres kaydı bulunmuyor."}
               </p>

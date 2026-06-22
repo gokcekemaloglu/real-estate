@@ -16,7 +16,6 @@ const AdminPropertyDetail = () => {
   }, [id])
   console.log("property-->", property);
   
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-100">
