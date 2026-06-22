@@ -6,8 +6,8 @@ const AdminPropertyDetailMetrics = ({property}) => {
       <h3 className="text-sm lg:text-base uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
         Metrik Ölçüler & Donanım
       </h3>
-
-      <div className="grid grid-cols-2 gap-y-4 gap-x-2 text-slate-600 dark:text-slate-400">
+      {/* Quantitative metrics and architectural dimension parameters grid matrix */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-2 text-slate-600 dark:text-slate-400">
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-widest text-slate-400">
             Brüt Alan
@@ -24,6 +24,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
             {property?.netArea ? `${property.netArea} m²` : "-"}
           </span>
         </div>
+        {/* Room Count Configuration */}
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-widest text-slate-400">
             Oda Dağılımı
@@ -32,6 +33,16 @@ const AdminPropertyDetailMetrics = ({property}) => {
             {property?.roomCount || "-"}
           </span>
         </div>
+        {/* Bathroom Count Configuration */}
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[9px] uppercase tracking-widest text-slate-400">
+            Banyo Sayısı
+          </span>
+          <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
+            {property?.bathroomCount ?? 0} Banyo
+          </span>
+        </div>
+        {/* Building Age Field */}
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-widest text-slate-400">
             Bina Yaşı
@@ -40,6 +51,7 @@ const AdminPropertyDetailMetrics = ({property}) => {
             {property?.buildingAge ?? 0} Yaş
           </span>
         </div>
+        {/*  Recent Floor Field */}
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-widest text-slate-400">
             Bulunduğu Kat
@@ -48,6 +60,16 @@ const AdminPropertyDetailMetrics = ({property}) => {
             {property?.floor ?? 0}. Kat
           </span>
         </div>
+        {/*  Total Floors Capacity Field */}
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[9px] uppercase tracking-widest text-slate-400">
+            Toplam Kat
+          </span>
+          <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
+            {property?.totalFloors ? `${property.totalFloors} Kat` : "-"}
+          </span>
+        </div>
+        {/*  Heating Type Field */}
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-widest text-slate-400">
             Isıtma Altyapısı
