@@ -16,7 +16,7 @@ const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
           type="number"
           name="price"
           placeholder="4500000"
-          value={formik.values.price}
+          value={formik.values.price ?? ""}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           className={`input-premium bg-slate-50/50 dark:bg-slate-950/20 ${formik.touched.price && formik.errors.price ? "border-red-500 focus:border-red-500" : ""}`}
@@ -36,7 +36,7 @@ const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
           type="number"
           name="maintenanceFee"
           placeholder="750"
-          value={formik.values.maintenanceFee}
+          value={formik.values.maintenanceFee ?? ""}
           onChange={formik.handleChange}
           className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
         />

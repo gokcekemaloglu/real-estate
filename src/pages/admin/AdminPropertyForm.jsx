@@ -14,6 +14,7 @@ import FormBlockSpecs from '../../components/admin/properties/form/FormBlockSpec
 import FormBlockToggles from '../../components/admin/properties/form/FormBlockToggles'
 import FormBlockOwner from '../../components/admin/properties/form/FormBlockOwner'
 import useFetchData from '../../hooks/useFetchData'
+import FormBlockImage from '../../components/admin/properties/form/FormBlockImage'
 
 const AdminPropertyForm = () => {
   const { id } = useParams() // Captures dynamic ID from URL bar to automatically switch to EDIT mode
@@ -140,6 +141,7 @@ const AdminPropertyForm = () => {
         <FormBlockOwner formik={formik} customerOptions={customerOptions} />
         <FormBlockSpecs formik={formik} heatingOptions={heatingOptions} occupancyOptions={occupancyOptions} />
         <FormBlockToggles formik={formik} />
+        <FormBlockImage propertyId={id} isEditMode={isEditMode}/>
 
         <div className="flex justify-end mt-2">
           <button type="submit" className="btn-premium px-12 py-4 font-semibold tracking-widest text-xs uppercase shadow-lg w-full md:w-auto">

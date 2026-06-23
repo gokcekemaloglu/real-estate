@@ -16,8 +16,9 @@ const FormBlockSpecs = ({formik, heatingOptions, occupancyOptions}) => {
         <input
           type="number"
           name="grossArea"
-          value={formik.values.grossArea}
+          value={formik.values.grossArea ?? ""}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
         />
       </div>
@@ -29,8 +30,9 @@ const FormBlockSpecs = ({formik, heatingOptions, occupancyOptions}) => {
         <input
           type="number"
           name="netArea"
-          value={formik.values.netArea}
+          value={formik.values.netArea ?? ""}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
         />
       </div>
@@ -54,6 +56,36 @@ const FormBlockSpecs = ({formik, heatingOptions, occupancyOptions}) => {
           </span>
         )}
       </div>
+      {/* Bathroom Count Input Field */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+          Banyo Sayısı
+        </label>
+        <input
+          type="number"
+          name="bathroomCount"
+          placeholder="2"
+          value={formik.values.bathroomCount ?? ''}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
+        />
+      </div>
+      {/* Building Age Input Field */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+          Bina Yaşı
+        </label>
+        <input
+          type="number"
+          name="buildingAge"
+          placeholder="5"
+          value={formik.values.buildingAge ?? ""}
+          onChange={formik.handleChange}
+          className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
+          onBlur={formik.handleBlur}
+        />
+      </div>
       {/* Current Floor Level Input Field */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
@@ -63,12 +95,12 @@ const FormBlockSpecs = ({formik, heatingOptions, occupancyOptions}) => {
           type="number"
           name="floor"
           placeholder="4"
-          value={formik.values.floor}
+          value={formik.values.floor ?? ""}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
         />
       </div>
-
       {/* Total Floors Capacity Input Field */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
@@ -78,8 +110,9 @@ const FormBlockSpecs = ({formik, heatingOptions, occupancyOptions}) => {
           type="number"
           name="totalFloors"
           placeholder="10"
-          value={formik.values.totalFloors}
+          value={formik.values.totalFloors ?? ""}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
         />
       </div>
