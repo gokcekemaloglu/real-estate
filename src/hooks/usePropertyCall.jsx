@@ -77,7 +77,45 @@ const usePropertyCall = () => {
     }
   };
 
-  return { getSinglePropertyData, postPropertyData, putPropertyData, deleteProperty, togglePropertyStatus, toggleFeaturedStatus };
+  const postPropertyImageData = async (propertyId, imageFile) => {
+    dispatch(fetchStart())
+    try {
+      // Formulate multipart formData container payload
+      const formData = new FormData();
+      formData.append("propertyId", propertyId);
+      formData.append("image", imageFile); // 'image' key matches backend upload.single("image")
+      await axiosWithToken.post("property-images", formData, {
+        headers: {"Content-Type": multipart/form-data}
+      })
+      SweetNotify("Fotoğraf başarıyla portföye yüklendi.", SweetAlertIcons.SUCCESS)
+    } catch (error) {
+      handleError(error, "Fotoğraf yüklenirken beklenmedik bir hata oluştu!")
+    }
+  }
+
+  const changePropertyCoverStatus = async (ImageBitmapRenderingContext, propertyId) => {
+    dispatch(fetchStart())
+    try {
+      await axiosWithToken.patch(`property-images/${imageId}/set-cover`);
+      SweetNotify("Seçilen görsel ilan kapak resmi olarak atandı.", SweetAlertIcons.SUCCESS)
+    } catch (error) {
+      handleError(error, "Kapak resmi değiştirilirken beklenmedik bir hata oluştu!")
+    }
+  }
+
+  const deletePropertyImage = async (imageId) => {
+    const confirmed = await SweetConfirm("Görseli Kaldır", "Bu fotoğrafı ilandan kalıcı olarak silmek istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    if (!confirmed) return //Exit if user cancels delete
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.delete(`property-images/${imageId}`)
+      SweetNotify("Fotoğraf portföyden tamamen kaldırıldı.", SweetAlertIcons.SUCCESS)
+    } catch (error) {
+      handleError(error, "İlan kaydı silinirken beklenmedik bir hata oluştu!");
+    }
+  };
+
+  return { getSinglePropertyData, postPropertyData, putPropertyData, deleteProperty, togglePropertyStatus, toggleFeaturedStatus, postPropertyImageData, changePropertyCoverStatus, deletePropertyImage };
 };
 
 export default usePropertyCall;
