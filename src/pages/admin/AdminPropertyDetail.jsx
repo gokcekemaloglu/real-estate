@@ -67,7 +67,7 @@ const AdminPropertyDetail = () => {
         <div className="lg:col-span-2 flex flex-col gap-6">
           
           {/* Media Showcase Panel */}
-          <AdminPropertyDetailMedia property={property} defaultImage={defaultImage}/>
+          <AdminPropertyDetailMedia property={property}/>
           
           {/* Core Textual Architectural Information Content Block */}
           <AdminPropertyDetailOverview property={property}/>
