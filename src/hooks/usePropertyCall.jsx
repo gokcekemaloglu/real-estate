@@ -85,7 +85,7 @@ const usePropertyCall = () => {
       formData.append("propertyId", propertyId);
       formData.append("image", imageFile); // 'image' key matches backend upload.single("image")
       await axiosWithToken.post("property-images", formData, {
-        headers: {"Content-Type": multipart/form-data}
+        headers: {"Content-Type": "multipart/form-data"}
       })
       SweetNotify("Fotoğraf başarıyla portföye yüklendi.", SweetAlertIcons.SUCCESS)
     } catch (error) {
@@ -93,7 +93,7 @@ const usePropertyCall = () => {
     }
   }
 
-  const changePropertyCoverStatus = async (ImageBitmapRenderingContext, propertyId) => {
+  const changePropertyCoverStatus = async (ImageId, propertyId) => {
     dispatch(fetchStart())
     try {
       await axiosWithToken.patch(`property-images/${imageId}/set-cover`);
