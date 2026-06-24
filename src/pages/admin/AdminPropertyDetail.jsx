@@ -19,7 +19,7 @@ const AdminPropertyDetail = () => {
   useEffect(() => {
     getSinglePropertyData(id)
   }, [id])
-  console.log("property-->", property);
+  // console.log("property-->", property);
   
   if (loading) {
     return (

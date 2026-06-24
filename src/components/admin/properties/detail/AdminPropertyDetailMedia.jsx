@@ -4,11 +4,14 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import { setData } from "../../../../features/propertySlice";
+import AdminPropertyDetailMediaLightbox from "./AdminPropertyDetailMediaLightbox";
 
 const AdminPropertyDetailMedia = ({ property }) => {
   const { fetchData } = useFetchData();
   const { propertyImages } = useSelector((state) => state.property);
   const [activeImage, setActiveImage] = useState(null);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -44,10 +47,21 @@ const AdminPropertyDetailMedia = ({ property }) => {
       setActiveImage(fallbackPlaceholder);
     }
   }, [propertyImages]);
+
+  // Dynamic selector index helper
+  const triggerLightboxView = (targetUrl) => {
+    if (!propertyImages || propertyImages.length === 0) return;
+    const targetIdx = propertyImages.findIndex((image) => `${IMAGE_BASE_URL}${image.imageUrl}` === targetUrl);
+    setLightboxIndex(targetIdx !== -1 ? targetIdx : 0);
+    setIsLightboxOpen(true);
+  };
   return (
     <div className="flex flex-col gap-3 animate-fade-in w-full text-xs font-light text-slate-700 dark:text-slate-300">
       {activeImage && (
-        <div className="w-full h-80 bg-slate-100 dark:bg-slate-950 overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm relative">
+        <div 
+          onClick={() => triggerLightboxView(activeImage)}
+          className="w-full h-80 bg-slate-100 dark:bg-slate-950 overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm relative cursor-zoom-in group"
+        >
           <img
             src={activeImage}
             alt={property?.title || "Property Asset"}
@@ -76,13 +90,13 @@ const AdminPropertyDetailMedia = ({ property }) => {
           </span>
           <div className="flex items-center gap-3 overflow-x-auto pb-2 custom-scrollbar">
             {propertyImages.map((image) => {
-              const fullUrl = `${IMAGE_BASE_URL}${image.imageUrl}`;
+              const fullUrl = `${IMAGE_BASE_URL}${image?.imageUrl}`;
               const isSelected = activeImage === fullUrl;
 
               return (
                 <div
-                  key={image._id}
-                  onClick={() => setActiveImage(fullUrl)}
+                  key={image?._id}
+                  onClick={() => triggerLightboxView(fullUrl)}
                   className={`w-16 h-16 bg-slate-50 dark:bg-slate-950 border overflow-hidden cursor-pointer transition-all duration-300 shrink-0 ${
                     isSelected
                       ? "border-brand-gold shadow-sm ring-1 ring-brand-gold scale-95"
@@ -100,7 +114,16 @@ const AdminPropertyDetailMedia = ({ property }) => {
           </div>
         </div>
       )}
+      {/* Reusable modal window layer */}
+      <AdminPropertyDetailMediaLightbox
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        images={propertyImages || []}
+        currentIndex={lightboxIndex}
+        setCurrentIndex={setLightboxIndex}
+      />
     </div>
+    
   );
 };
 

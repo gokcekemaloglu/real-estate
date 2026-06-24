@@ -5,12 +5,15 @@ import useFetchData from "../../../../hooks/useFetchData";
 import { useSelector } from "react-redux";
 import {setData} from "../../../../features/propertySlice";
 import { useEffect } from "react";
+import AdminPropertyDetailMediaLightbox from "../detail/AdminPropertyDetailMediaLightbox";
 
 const FormBlockImage = ({ propertyId, isEditMode }) => {
   const {postPropertyImageData, changePropertyCoverStatus, deletePropertyImage} = usePropertyCall();
   const { fetchData } = useFetchData();
   const { propertyImages } = useSelector((state) => state.property);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -48,8 +51,6 @@ const FormBlockImage = ({ propertyId, isEditMode }) => {
     setSelectedFile(null);
     loadImagesDataset();
   };
-
-  // console.log("propertyImages", propertyImages);
   
   const handleSetCover = async (imageId) => {
     await changePropertyCoverStatus(imageId);
@@ -61,6 +62,11 @@ const FormBlockImage = ({ propertyId, isEditMode }) => {
   const handleDeleteImage = async (imageId) => {
     await deletePropertyImage(imageId);
     loadImagesDataset(); // Automatically refresh remaining layout blocks
+  };
+
+  const triggerLightboxView = (index) => {
+    setLightboxIndex(index);
+    setIsLightboxOpen(true);
   };
 
   if (!isEditMode || !propertyId) {
@@ -122,14 +128,13 @@ const FormBlockImage = ({ propertyId, isEditMode }) => {
           Sadece görsel formatları desteklenir.
         </p>
       </div>
-      {/* Luxury Thumbnail Preview Gallery Grid Matrix */}
       {propertyImages?.length > 0 && (
         <div className="flex flex-col gap-3 pt-4 border-t border-slate-100 dark:border-slate-800/60">
           <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
             Yüklenen Fotoğraflar Galerisi
           </span>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
-            {propertyImages.map((image) => (
+            {propertyImages.map((image, idx) => (
               <div
                 key={image._id}
                 className={`relative group bg-slate-50 dark:bg-slate-950 border overflow-hidden transition-all duration-300 aspect-square ${
@@ -147,6 +152,14 @@ const FormBlockImage = ({ propertyId, isEditMode }) => {
 
                 {/* Overlaid luxury reactive utility actions ribbon framework */}
                 <div className="absolute inset-0 bg-brand-dark/80 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center gap-2 p-2 transition-all duration-200">
+                  {/* Premium Inspect / Expand View Action Button */}
+                  <button
+                    type="button"
+                    onClick={() => triggerLightboxView(idx)}
+                    className="text-[8px] tracking-widest font-medium uppercase bg-slate-800 text-amber-400 border border-slate-700 px-2 py-1 w-full text-center hover:bg-slate-700 cursor-pointer"
+                  >
+                    Büyüt
+                  </button>
                   {!image.isCover && (
                     <button
                       type="button"
@@ -176,6 +189,14 @@ const FormBlockImage = ({ propertyId, isEditMode }) => {
           </div>
         </div>
       )}
+      {/* Reusable modal window layer */}
+      <AdminPropertyDetailMediaLightbox
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        images={propertyImages || []}
+        currentIndex={lightboxIndex}
+        setCurrentIndex={setLightboxIndex}
+      />
     </div>
   );
 };
