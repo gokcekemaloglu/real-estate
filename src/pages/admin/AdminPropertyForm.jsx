@@ -102,9 +102,9 @@ const AdminPropertyForm = () => {
   const districtOptions = [{ value: "Seyhan", label: "Seyhan" }, { value: "Sarıçam", label: "Sarıçam" }, { value: "Çukurova", label: "Çukurova" }, { value: "Yüreğir", label: "Yüreğir" }]
   const occupancyOptions = [{ value: "vacant", label: "Boş" }, { value: "tenant", label: "Kiracılı" }, { value: "owner", label: "Mülk Sahibi Oturuyor" }]
 
-  const customerOptions = customers?.map(cust => ({
-    value: cust._id,
-    label: `${cust.firstName} ${cust.lastName} (${cust.phone})`
+  const customerOptions = customers?.map(customer => ({
+    value: customer._id,
+    label: `${customer.firstName} ${customer.lastName} (${customer.phone})`
   })) || []
 
   if (loading && isEditMode) {

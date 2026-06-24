@@ -68,7 +68,7 @@ const AdminPropertyDetailMedia = ({ property }) => {
         </div>
       )}
 
-      {/* [NEW] Bottom Segment: Secondary Thumbnail Navigation Ribbon View */}
+      {/* Bottom Segment: Secondary Thumbnail Navigation Ribbon View */}
       {propertyImages?.length > 1 && (
         <div className="flex flex-col gap-2 pt-2">
           <span className="text-[9px] uppercase tracking-wider text-slate-400 font-medium">

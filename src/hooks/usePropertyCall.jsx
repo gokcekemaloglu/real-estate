@@ -93,7 +93,7 @@ const usePropertyCall = () => {
     }
   }
 
-  const changePropertyCoverStatus = async (ImageId, propertyId) => {
+  const changePropertyCoverStatus = async (imageId) => {
     dispatch(fetchStart())
     try {
       await axiosWithToken.patch(`property-images/${imageId}/set-cover`);

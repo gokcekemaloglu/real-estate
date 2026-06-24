@@ -13,7 +13,7 @@ const AdminProperties = () => {
   const { togglePropertyStatus, toggleFeaturedStatus, deleteProperty } =
     usePropertyCall();
 
-  const { properties, loading } = useSelector((state) => state.property);
+  const { properties, loading, propertyImages } = useSelector((state) => state.property);
 
   // Radar layout re-fetching records data dynamically inside admin dashboard scopes
   const loadAdminPropertyData = () => {
@@ -23,6 +23,18 @@ const AdminProperties = () => {
       sliceActions: { fetchStart, fetchFail, setData },
       page: 1,
       limit: 20,
+      isWithToken: true,
+    });
+    fetchData({
+      endpoint: "property-images",
+      stateKey: "propertyImages",
+      sliceActions: { 
+        fetchStart: () => ({ type: "property/noOpStart" }), // Bypasses page blocking spinners completely
+        fetchFail: () => ({ type: "property/noOpFail" }), 
+        setData 
+      },
+      page: 1,
+      limit: 200, // Fetch a broad buffer list to map list thumbnail images cleanly
       isWithToken: true,
     });
   };
@@ -61,6 +73,7 @@ const AdminProperties = () => {
           <AdminPropertyRow
             key={property._id}
             property={property}
+            propertyImages={propertyImages}
             onStatusToggle={handleStatusToggle}
             onDeleteClick={handleDelete}
             onEditClick={() => navigate(`/admin/properties/edit/${property?._id}`)}

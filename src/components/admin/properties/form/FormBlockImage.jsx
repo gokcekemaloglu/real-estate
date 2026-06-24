@@ -3,18 +3,11 @@ import usePropertyCall from "../../../../hooks/usePropertyCall";
 import { useState } from "react";
 import useFetchData from "../../../../hooks/useFetchData";
 import { useSelector } from "react-redux";
-import {
-  
-  setData,
-} from "../../../../features/propertySlice";
+import {setData} from "../../../../features/propertySlice";
 import { useEffect } from "react";
 
 const FormBlockImage = ({ propertyId, isEditMode }) => {
-  const {
-    postPropertyImageData,
-    changePropertyCoverStatus,
-    deletePropertyImage,
-  } = usePropertyCall();
+  const {postPropertyImageData, changePropertyCoverStatus, deletePropertyImage} = usePropertyCall();
   const { fetchData } = useFetchData();
   const { propertyImages } = useSelector((state) => state.property);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -56,10 +49,14 @@ const FormBlockImage = ({ propertyId, isEditMode }) => {
     loadImagesDataset();
   };
 
+  // console.log("propertyImages", propertyImages);
+  
   const handleSetCover = async (imageId) => {
     await changePropertyCoverStatus(imageId);
     loadImagesDataset(); // Automatically refresh cover status frame highlights
+    // console.log("imageId", imageId);
   };
+  
 
   const handleDeleteImage = async (imageId) => {
     await deletePropertyImage(imageId);
