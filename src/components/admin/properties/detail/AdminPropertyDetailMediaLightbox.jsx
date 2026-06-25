@@ -4,6 +4,16 @@ import { useEffect } from "react";
 const AdminPropertyDetailMediaLightbox = ({isOpen,
   onClose, images, currentIndex, setCurrentIndex}) => {
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+  const handlePrev = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
+    );
+  };
+  
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isOpen) return;
@@ -13,18 +23,10 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, currentIndex, images]);
+  }, [isOpen, images.length]);
 
   if (!isOpen || !images || images.length === 0) return null;
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-  const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
-    );
-  };
-
+  
   return (
     <div className="fixed inset-0 z-50 flex flex-col justify-between bg-brand-dark/95 backdrop-blur-md p-4 animate-fade-in select-none">
       {/* Top Controller Ribbon Block */}

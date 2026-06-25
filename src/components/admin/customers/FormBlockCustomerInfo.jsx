@@ -1,5 +1,5 @@
 import React from 'react'
-import FormToggleField from '../properties/FormToggleField'
+import FormToggleField from '../properties/form/FormToggleField'
 
 const FormBlockCustomerInfo = ({formik}) => {
   return (
