@@ -77,6 +77,16 @@ const usePropertyCall = () => {
     }
   };
 
+  // const getSinglePropertyImagesData = async (propertyId) => {
+  //   dispatch(fetchStart())
+  //   try {
+  //     const {data} = await axiosWithToken.get(`property-images?filter[propertyId]=${propertyId}`)
+  //     dispatch(setData({endpoint:"currentPropertyImages", data: data?.data}))
+  //   } catch (error) {
+  //     handleError(error, "Fotoğraf listelenirken beklenmedik bir hata oluştu!")
+  //   }
+  // }
+
   const postPropertyImageData = async (propertyId, imageFile) => {
     dispatch(fetchStart())
     try {
@@ -94,6 +104,8 @@ const usePropertyCall = () => {
   }
 
   const changePropertyCoverStatus = async (imageId) => {
+    const confirmed = await SweetConfirm("Kapak Fotoğrafını Değiştir", "Bu fotoğrafı kapak fotoğrafı olarak ayarlamak istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    if (!confirmed) return
     dispatch(fetchStart())
     try {
       await axiosWithToken.patch(`property-images/${imageId}/set-cover`);
@@ -115,7 +127,10 @@ const usePropertyCall = () => {
     }
   };
 
-  return { getSinglePropertyData, postPropertyData, putPropertyData, deleteProperty, togglePropertyStatus, toggleFeaturedStatus, postPropertyImageData, changePropertyCoverStatus, deletePropertyImage };
+  return { getSinglePropertyData, postPropertyData, putPropertyData, deleteProperty, togglePropertyStatus, toggleFeaturedStatus, postPropertyImageData, changePropertyCoverStatus, deletePropertyImage, 
+    // getSinglePropertyImagesData 
+
+  };
 };
 
 export default usePropertyCall;

@@ -41,7 +41,8 @@ const initialState = {
     isLoanEligible: true,
     ownerId: "",
   },
-  propertyImages: []
+  propertyImages: [],
+  currentPropertyImages:[]
 };
 
 const propertySlice = createSlice({

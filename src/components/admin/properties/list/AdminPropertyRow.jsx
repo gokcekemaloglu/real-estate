@@ -3,9 +3,12 @@ import React from "react";
 const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteClick, onEditClick, onDetailClick}) => {
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL
   const fallbackPlaceholder = "https://unsplash.com";
-  const targetCoverImage = propertyImages?.find(
+  let targetCoverImage = propertyImages?.find(
     (image) => image.propertyId === property?._id && image.isCover
   );
+  if (!targetCoverImage && propertyImages?.length > 0) {
+    targetCoverImage = propertyImages.find((image) => image.propertyId === property?._id);
+  }
   const resolvedImageSrc = targetCoverImage 
     ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}` 
     : fallbackPlaceholder;

@@ -35,10 +35,10 @@ const AdminPropertyDetail = () => {
       {/* Header Context Action Toolbar Block */}
       <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
         <div>
-          <h1 className="text-lg font-serif text-slate-800 dark:text-white font-light tracking-wide">
+          <h1 className="text-xl font-serif text-slate-800 dark:text-white font-light tracking-wide">
             Gayrimenkul Portföy Detayı
           </h1>
-          <p className="text-[11px] text-slate-400 uppercase tracking-widest mt-0.5">
+          <p className="text-[12px] text-slate-400 uppercase tracking-widest mt-0.5">
             Seçilen lüks mülk kartının sadece okunabilir mimari analizi
           </p>
         </div>
@@ -53,7 +53,7 @@ const AdminPropertyDetail = () => {
           <button 
             type="button" 
             onClick={() => navigate("/admin/properties")} 
-            className="text-xs uppercase tracking-widest text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="text-xs uppercase tracking-widest text-slate-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
           >
             ← Listeye Geri Dön
           </button>

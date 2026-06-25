@@ -121,11 +121,11 @@ const AdminPropertyForm = () => {
       {/* Header Context Toolbar Block */}
       <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
         <div>
-          <h1 className="text-lg font-serif text-slate-800 dark:text-white font-light tracking-wide">
+          <h1 className="text-xl font-serif text-slate-800 dark:text-white font-light tracking-wide">
             {isEditMode ? "Portföy Kartı Güncelleme" : "Yeni Portföy Kaydı"}
           </h1>
-          <p className="text-[11px] text-slate-400 uppercase tracking-widest mt-0.5">
-            {isEditMode ? `${property?.title} ilan kartı detaylarını revize edin` : "Sisteme yeni bir lüks mülk kartı ekleme formu"}
+          <p className="text-[12px] text-slate-400 uppercase tracking-widest mt-0.5">
+            {isEditMode ? `${property?.title} → ilan kartı detaylarını revize edin` : "Sisteme yeni bir lüks mülk kartı ekleme formu"}
           </p>
         </div>
         <button type="button" onClick={() => navigate("/admin/properties")} className="text-xs uppercase tracking-widest text-slate-400 hover:text-brand-gold transition-colors cursor-pointer">
@@ -135,13 +135,13 @@ const AdminPropertyForm = () => {
 
       {/* Main Unified Submission Form Framework */}
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6">
+        <FormBlockImage propertyId={id} isEditMode={isEditMode}/>
         <FormBlockTitle formik={formik} hasTitleError={formik.touched.title && formik.errors.title} hasDescError={formik.touched.description && formik.errors.description} />
         <FormBlockPrice formik={formik} listingTypeOptions={listingTypeOptions} categoryOptions={categoryOptions} />
         <FormBlockLocation formik={formik} districtOptions={districtOptions} />
         <FormBlockOwner formik={formik} customerOptions={customerOptions} />
         <FormBlockSpecs formik={formik} heatingOptions={heatingOptions} occupancyOptions={occupancyOptions} />
         <FormBlockToggles formik={formik} />
-        <FormBlockImage propertyId={id} isEditMode={isEditMode}/>
 
         <div className="flex justify-end mt-2">
           <button type="submit" className="btn-premium px-12 py-4 font-semibold tracking-widest text-xs uppercase shadow-lg w-full md:w-auto">

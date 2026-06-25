@@ -4,7 +4,7 @@ const ImageGalleryGrid = ({propertyImages, triggerLightboxView, handleSetCover, 
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
   return (
     <div className="flex flex-col gap-3 pt-4 border-t border-slate-100 dark:border-slate-800/60">
-          <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+          <span className="text-[12px] uppercase tracking-wider text-slate-400 font-medium">
             Yüklenen Fotoğraflar Galerisi
           </span>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">

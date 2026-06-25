@@ -25,7 +25,7 @@ const useFetchData = () => {
       // Dispatch B: Map standard pagination meta blocks into dedicated key variables (e.g., state.propertiesDetails)
       dispatch(sliceActions.setData({endpoint: `${stateKey}Details`, data: data?.details}));
     } catch (error) {
-         // 4. Capture response exceptions gracefully and delegate error strings to targets
+      // 4. Capture response exceptions gracefully and delegate error strings to targets
       const errorMsg = error?.response?.data?.message || "Veriler yüklenirken beklenmedik bir hata oluştu!";
       dispatch(sliceActions.fetchFail(errorMsg));
       SweetNotify(errorMsg, SweetAlertIcons.ERROR);

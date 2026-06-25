@@ -21,8 +21,8 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
         e.preventDefault();
       }
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") handleNext();
-      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight" && images.length > 1) handleNext();
+      if (e.key === "ArrowLeft" && images.length > 1) handlePrev();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -49,13 +49,18 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
       {/* Main Unified Magnification Interactive Slider Framework */}
       <div className="flex-1 flex items-center justify-between w-full max-w-7xl mx-auto gap-4 my-4 relative">
         {/* Left Arrow Trigger Button Control */}
-        <button
-          type="button"
-          onClick={handlePrev}
-          className="w-10 h-10 border border-slate-800 text-slate-400 hover:text-white hover:border-brand-gold transition-all duration-200 flex items-center justify-center text-lg cursor-pointer shrink-0"
-        >
-          ‹
-        </button>
+        {images.length > 1 ? (
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="w-10 h-10 border border-slate-800 text-slate-400 hover:text-white hover:border-brand-gold transition-all duration-200 flex items-center justify-center text-lg cursor-pointer shrink-0"
+          >
+            ‹
+          </button>
+        ) : (
+          <div className="w-10 shrink-0" />
+        )}
+        
 
         {/* Central Display Canvas Frame Segment */}
         <div className="flex-1 h-full max-h-[70vh] flex items-center justify-center overflow-hidden">
@@ -67,38 +72,46 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
         </div>
 
         {/* Right Arrow Trigger Button Control */}
-        <button
-          type="button"
-          onClick={handleNext}
-          className="w-10 h-10 border border-slate-800 text-slate-400 hover:text-white hover:border-brand-gold transition-all duration-200 flex items-center justify-center text-lg cursor-pointer shrink-0"
-        >
-          ›
-        </button>
+        {images.length > 1 ? (
+          <button
+            type="button"
+            onClick={handleNext}
+            className="w-10 h-10 border border-slate-800 text-slate-400 hover:text-white hover:border-brand-gold transition-all duration-200 flex items-center justify-center text-lg cursor-pointer shrink-0"
+          >
+            ›
+          </button>
+        ) : (
+          <div className="w-10 shrink-0" />
+        )}
+        
       </div>
 
       {/* Bottom Horizontal Carousel Thumbnail Ribbon Grid Matrix */}
-      <div className="w-full max-w-4xl mx-auto flex items-center gap-3 overflow-x-auto pb-4 pt-2 border-t border-slate-800 custom-scrollbar justify-center">
-        {images.map((image, idx) => {
-          const isActive = idx === currentIndex;
-          return (
-            <div
-              key={image._id}
-              onClick={() => setCurrentIndex(idx)}
-              className={`w-14 h-14 border overflow-hidden cursor-pointer transition-all duration-200 shrink-0 ${
-                isActive
-                  ? "border-brand-gold ring-1 ring-brand-gold scale-95"
-                  : "border-slate-800 opacity-40 hover:opacity-100"
-              }`}
-            >
-              <img
-                src={`${IMAGE_BASE_URL}${image.imageUrl}`}
-                alt="Modal Ribbon Thumbnail"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          );
-        })}
-      </div>
+      {images.length > 1 && (
+        <div className="w-full max-w-4xl mx-auto flex items-center gap-3 overflow-x-auto pb-4 pt-2 border-t border-slate-800 custom-scrollbar justify-center">
+          {images.map((image, idx) => {
+            const isActive = idx === currentIndex;
+            return (
+              <div
+                key={image._id}
+                onClick={() => setCurrentIndex(idx)}
+                className={`w-14 h-14 border overflow-hidden cursor-pointer transition-all duration-200 shrink-0 ${
+                  isActive
+                    ? "border-brand-gold ring-1 ring-brand-gold scale-95"
+                    : "border-slate-800 opacity-40 hover:opacity-100"
+                }`}
+              >
+                <img
+                  src={`${IMAGE_BASE_URL}${image.imageUrl}`}
+                  alt="Modal Ribbon Thumbnail"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
+      
     </div>
   );
 };
