@@ -13,7 +13,7 @@ const Properties = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const {fetchData} = useFetchData()
 
-  const {properties, loading, propertiesDetails} = useSelector(state => state.property)
+  const {properties, loading, propertiesDetails, propertyImages} = useSelector(state => state.property)
 
   // console.log("Properties-->", properties);
   const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1
@@ -75,7 +75,7 @@ const Properties = () => {
                 {/* Core Showcase Grid Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                   {properties?.map((singleProperty) => (
-                    <PropertyCard property={singleProperty} key={singleProperty._id}/>
+                    <PropertyCard property={singleProperty} key={singleProperty._id} />
                   ))}
                 </div>
                 <PaginationComponent details={propertiesDetails}/>
