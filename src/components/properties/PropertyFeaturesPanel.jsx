@@ -42,53 +42,76 @@ const PropertyFeaturesPanel = ({ property }) => {
 
       {/* Granular Specification Rows mapped strictly from your Mongoose Schema keys */}
       <div className="flex flex-col border-t border-slate-100 dark:border-slate-800/60 pt-4 text-xs font-light text-slate-600 dark:text-slate-300 gap-3.5">
+        {/* Gross/Net Area */}
         <div className="flex justify-between">
           <span className="text-slate-400">Brüt / Net Alan</span>
           <span className="font-medium">
             {property?.grossArea || "—"} m² / {property?.netArea || "—"} m²
           </span>
         </div>
+        {/* Room Count */}
         <div className="flex justify-between">
           <span className="text-slate-400">Oda Sayısı</span>
           <span className="font-medium text-brand-gold">
             {property?.roomCount || "—"}
           </span>
         </div>
+        {/* Bathroom Count */}
         <div className="flex justify-between">
           <span className="text-slate-400">Banyo Sayısı</span>
-          <span className="font-medium">{property?.bathroomCount ?? 0}</span>
+          <span className="font-medium">
+            {property?.bathroomCount === null || property?.bathroomCount === undefined || property?.bathroomCount === "" ? (
+              <span className="text-slate-400 italic font-normal">Belirtilmedi</span>
+            ) : (
+              `${property.bathroomCount} Banyo`
+            )}
+          </span>
         </div>
+        {/* Recent/Total Floor */}
         <div className="flex justify-between">
-          <span className="text-slate-400">Bulunduğu Kat / Toplam</span>
+          <span className="text-slate-400">Bulunduğu Kat / Toplam Kat</span>
           <span className="font-medium">
             {property?.floor ?? "—"}. Kat /{" "}
             {property?.totalFloors ? `${property.totalFloors} Kat` : "—"}
           </span>
         </div>
+        {/* Building Age */}
         <div className="flex justify-between">
           <span className="text-slate-400">Bina Yaşı</span>
           <span className="font-medium">
-            {property?.buildingAge ?? 0} Yaşında
+            {property?.buildingAge !== undefined && property?.buildingAge !== null && property?.buildingAge !== "" ? (
+              `${property.buildingAge} Yaşında`
+            ) : (
+              "—"
+            )}
           </span>
         </div>
+        {/* Heating Type */}
         <div className="flex justify-between">
           <span className="text-slate-400">Isıtma Tipi</span>
           <span className="font-medium uppercase tracking-wider text-[10px]">
-            {property?.heatingType || "Yok"}
+            {getHeatingDisplay(property?.heatingType)}
           </span>
         </div>
+        {/* Maintenance Fee */}
         <div className="flex justify-between">
           <span className="text-slate-400">Aidat (Mesa)</span>
           <span className="font-medium">
-            {property?.maintenanceFee ? `${property.maintenanceFee} ₺` : "0 ₺"}
+            {property?.maintenanceFee === null || property?.maintenanceFee === undefined || property?.maintenanceFee === "" ? (
+              <span className="text-slate-400 italic font-normal">Belirtilmedi</span>
+            ) : (
+              `${property.maintenanceFee} ₺`
+            )}
           </span>
         </div>
+        {/* Furnished */}
         <div className="flex justify-between">
           <span className="text-slate-400">Eşya Durumu</span>
           <span className="font-medium">
             {property?.isFurnished ? "Eşyalı" : "Boş / Eşyasız"}
           </span>
         </div>
+        {/* Loan Eligible */}
         <div className="flex justify-between">
           <span className="text-slate-400">Kredi Uygunluk</span>
           <span className="font-medium">

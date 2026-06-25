@@ -20,7 +20,7 @@ const PropertyDetail = () => {
     }
   }, [id])
 
-  console.log(property);
+  // console.log("property-->", property);
 
   if (loading) {
     return (
