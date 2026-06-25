@@ -80,9 +80,9 @@ const AdminCustomerForm = () => {
       </div>
 
       {/* Main Layout Framework: Isolating historical logs into the right-hand sidebar layout column */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         {/* Left 2 Columns: Core Customer Identification and Registry Form Blocks */}
-        <form onSubmit={formik.handleSubmit} className="lg:col-span-2 flex flex-col gap-6">
+        <form onSubmit={formik.handleSubmit} className="lg:col-span-1 flex flex-col gap-6">
           <FormBlockCustomerInfo formik={formik} />
           
           <div className="flex justify-end mt-2">

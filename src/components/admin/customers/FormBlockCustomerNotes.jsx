@@ -17,7 +17,7 @@ const FormBlockCustomerNotes = ({customerId, notes}) => {
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-sm h-132.5">
-      <h3 className="text-xs uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
+      <h3 className="text-sm uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
         2. Müşteri Görüşme Notları
       </h3>
 
@@ -28,11 +28,11 @@ const FormBlockCustomerNotes = ({customerId, notes}) => {
           onChange={(e) => setNewNote(e.target.value)}
           placeholder="Cemal Bey, bu portföy sahibiyle ilgili yeni bir not girin... (Örn: Fiyatta indirim yapabileceğini söyledi)"
           rows="3"
-          className="input-premium bg-slate-50/50 dark:bg-slate-950/20 p-3 leading-relaxed resize-none text-[11px]"
+          className="input-premium bg-slate-50/50 dark:bg-slate-950/20 p-3 leading-relaxed resize-none text-[12px]"
         />
         <button
           type="submit"
-          className="bg-brand-gold hover:bg-amber-700 text-white font-medium uppercase tracking-widest text-[9px] py-2 px-4 transition-all duration-200 cursor-pointer text-center"
+          className="bg-brand-gold hover:bg-amber-700 text-white font-medium uppercase tracking-widest text-[12px] py-2 px-4 transition-all duration-200 cursor-pointer text-center"
         >
           Notu Geçmişe Ekle
         </button>
@@ -47,12 +47,12 @@ const FormBlockCustomerNotes = ({customerId, notes}) => {
               <div className="absolute left-[-3.5px] top-1 w-1.5 h-1.5 bg-brand-gold"></div>
               
               {/* Interaction log history timestamp indicator */}
-              <span className="text-[9px] text-slate-400 dark:text-slate-500 font-mono uppercase tracking-wider">
+              <span className="text-[12px] text-slate-400 dark:text-slate-500 font-mono uppercase tracking-wider">
                 {note.createdAt ? new Date(note.createdAt).toLocaleString("tr-TR") : "Şimdi"}
               </span>
               
               {/* Log record textual content block */}
-              <p className="text-[11px] font-light text-slate-600 dark:text-slate-300 bg-slate-50/40 dark:bg-slate-950/10 p-2 border border-slate-100 dark:border-slate-800/60 leading-relaxed wrap-break-word">
+              <p className="text-[16px] font-light text-slate-600 dark:text-slate-300 bg-slate-50/40 dark:bg-slate-950/10 p-2 border border-slate-100 dark:border-slate-800/60 leading-relaxed wrap-break-word">
                 {note.content}
               </p>
             </div>

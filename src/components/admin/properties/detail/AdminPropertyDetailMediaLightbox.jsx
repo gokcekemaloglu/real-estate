@@ -17,13 +17,16 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isOpen) return;
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        e.preventDefault();
+      }
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") handleNext();
       if (e.key === "ArrowLeft") handlePrev();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, images.length]);
+  }, [isOpen, currentIndex, images.length]);
 
   if (!isOpen || !images || images.length === 0) return null;
   
@@ -35,6 +38,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
           Görsel Analizi ({currentIndex + 1} / {images.length})
         </span>
         <button
+          type="button"
           onClick={onClose}
           className="text-xs tracking-widest text-slate-400 hover:text-white uppercase transition-colors duration-200 cursor-pointer"
         >
@@ -46,6 +50,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
       <div className="flex-1 flex items-center justify-between w-full max-w-7xl mx-auto gap-4 my-4 relative">
         {/* Left Arrow Trigger Button Control */}
         <button
+          type="button"
           onClick={handlePrev}
           className="w-10 h-10 border border-slate-800 text-slate-400 hover:text-white hover:border-brand-gold transition-all duration-200 flex items-center justify-center text-lg cursor-pointer shrink-0"
         >
@@ -63,6 +68,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
 
         {/* Right Arrow Trigger Button Control */}
         <button
+          type="button"
           onClick={handleNext}
           className="w-10 h-10 border border-slate-800 text-slate-400 hover:text-white hover:border-brand-gold transition-all duration-200 flex items-center justify-center text-lg cursor-pointer shrink-0"
         >

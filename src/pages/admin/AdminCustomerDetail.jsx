@@ -9,7 +9,6 @@ const AdminCustomerDetail = () => {
   const navigate = useNavigate();
   const { getSingleCustomerData } = useCustomerCall();
   const { customer, loading } = useSelector((state) => state.customers);
-  const defaultAvatar = "https://unsplash.com";
 
   useEffect(() => {
     if (id) {
@@ -26,7 +25,7 @@ const AdminCustomerDetail = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6 animate-fade-in max-w-5xl text-sm font-light text-slate-700 dark:text-slate-300">
+    <div className="flex flex-col gap-6 animate-fade-in max-w-7xl text-sm font-light text-slate-700 dark:text-slate-300">
       {/* Header Action Toolbar Section */}
       <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
         <div>
@@ -62,14 +61,6 @@ const AdminCustomerDetail = () => {
         <div className="lg:col-span-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6 shadow-sm">
           {/* Top segment: Identity Profile Avatar and Global Status Indicators */}
           <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800/60">
-            {/* Profile Picture */}
-            <div className="w-24 h-24 bg-slate-50 dark:bg-slate-950 overflow-hidden border border-slate-200 dark:border-slate-800 shrink-0">
-              <img
-                src={defaultAvatar}
-                alt="Profile Avatar"
-                className="w-full h-full object-cover grayscale contrast-125"
-              />
-            </div>
             <div className="flex flex-col gap-1.5 text-center sm:text-left">
               <span className="text-[12px] uppercase tracking-wider text-brand-gold font-semibold">
                 {customer?.citizenshipId

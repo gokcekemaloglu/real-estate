@@ -2,28 +2,20 @@ import React from 'react';
 
 
 const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditClick, onDetailClick }) => {
-  const defaultAvatar = "https://unsplash.com"
   return (
     <div
       className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in"
     >
       {/* Left Block: Customer Avatar, Identity and Contact Details */}
       <div className="flex items-center gap-4 flex-1">
-        <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800">
-          <img
-            src={defaultAvatar}
-            alt={`${customer?.firstName} ${customer?.lastName}`}
-            className="w-full h-full object-cover grayscale contrast-125"
-          />
-        </div>
         <div className="flex flex-col gap-0.5">
-          <span className="text-[9px] uppercase tracking-wider text-brand-gold font-semibold">
+          <span className="text-[12px] uppercase tracking-wider text-brand-gold font-semibold">
             {customer?.citizenshipId ? `TC: ${customer.citizenshipId}` : "TC Kimlik Belirtilmedi"}
           </span>
           <h3 className="text-sm font-medium text-slate-800 dark:text-white line-clamp-1">
             {customer?.firstName} {customer?.lastName}
           </h3>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs text-slate-500 dark:text-slate-400 font-light mt-0.5">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-sm text-slate-500 dark:text-slate-400 font-light mt-0.5">
             <span className="font-mono">{customer?.phone}</span>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">|</span>
             <span className="truncate max-w-50">{customer?.email || "E-Posta Yok"}</span>
