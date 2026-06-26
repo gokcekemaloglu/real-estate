@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const PropertyCard = ({ property, propertyImages }) => {
   const navigate = useNavigate();
+  const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // Unified luxury currency parser formatting numbers to localized Turkish Lira symbols
   const formatPrice = (amount) => {

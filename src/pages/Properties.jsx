@@ -18,20 +18,40 @@ const Properties = () => {
   // console.log("Properties-->", properties);
   const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1
 
-  useEffect(() => {
-    const activeParams = new URLSearchParams(searchParams)
-    activeParams.delete("page")
-    // const currentQueryString = activeParams.toString()
-    const encryptedQueryString = activeParams.toString()
-    const cleanBracketsQueryString = decodeURIComponent(encryptedQueryString)
+  // Dynamically monitors and dispatches parallel data pipelines upon query mutations
+  const loadPublicPropertiesData = () => {
+    const activeParams = new URLSearchParams(searchParams);
+    activeParams.delete("page");
+    const encryptedQueryString = activeParams.toString();
+    const cleanBracketsQueryString = decodeURIComponent(encryptedQueryString);
+
+    // Pipeline A: Fetch structured primary public properties dataset registry items
     fetchData({
       endpoint: "properties",
       stateKey: "properties",
-      sliceActions: {fetchStart, fetchFail, setData},
+      sliceActions: { fetchStart, fetchFail, setData },
       page: activePage,
-      limit:12, 
-      query: cleanBracketsQueryString // Directly passes the pristine query format backend controller expects
-    })
+      limit: 12, 
+      query: cleanBracketsQueryString
+    });
+
+    // Pipeline B: Fetch broad system images buffer repository concurrently to satisfy frontend card thumbnails
+    fetchData({
+      endpoint: "property-images",
+      stateKey: "propertyImages",
+      sliceActions: { 
+        fetchStart: () => ({ type: "property/noOpStart" }), // Safely protects page loader contexts from clashing
+        fetchFail: () => ({ type: "property/noOpFail" }), 
+        setData 
+      },
+      page: 1,
+      limit: 150, // Buffers a safe spectrum length to filter cards accurately
+      isWithToken: false // Public endpoints logic
+    });
+  };
+
+  useEffect(() => {
+    loadPublicPropertiesData()
   }, [activePage, searchParams])
 
   const handleClearFilters = () => {
@@ -75,7 +95,11 @@ const Properties = () => {
                 {/* Core Showcase Grid Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                   {properties?.map((singleProperty) => (
-                    <PropertyCard property={singleProperty} key={singleProperty._id} />
+                    <PropertyCard
+                      property={singleProperty} 
+                      key={singleProperty._id} 
+                      propertyImages={propertyImages} 
+                    />
                   ))}
                 </div>
                 <PaginationComponent details={propertiesDetails}/>

@@ -1,11 +1,10 @@
-import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import usePropertyCall from '../../hooks/usePropertyCall'
+import usePropertyCall from '../hooks/usePropertyCall'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import PropertyGallery from './PropertyGallery'
-import PropertyDescription from './PropertyDescription'
-import PropertyFeaturesPanel from './PropertyFeaturesPanel'
+import PropertyGallery from '../components/properties/PropertyGallery'
+import PropertyDescription from '../components/properties/PropertyDescription'
+import PropertyFeaturesPanel from '../components/properties/PropertyFeaturesPanel'
 
 const PropertyDetail = () => {
   const {id} = useParams()
@@ -49,7 +48,7 @@ const PropertyDetail = () => {
           
           {/* Left Column (7-Cols): Image Box Showcase */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <PropertyGallery title = {property?.title} listingType = {property?.listingType}/>
+            <PropertyGallery title = {property?.title} listingType = {property?.listingType} propertyId={property?._id}/>
             
             {/* Description Paragraph Text Block */}
             <PropertyDescription description={property?.description}/>
