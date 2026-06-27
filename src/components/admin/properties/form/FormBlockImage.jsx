@@ -5,7 +5,7 @@ import useFetchData from "../../../../hooks/useFetchData";
 import { useSelector } from "react-redux";
 import { setData } from "../../../../features/propertySlice";
 import { useEffect } from "react";
-import AdminPropertyDetailMediaLightbox from "../detail/AdminPropertyDetailMediaLightbox";
+import AdminPropertyDetailMediaLightbox from "../../../AdminPropertyDetailMediaLightbox";
 import ImageUploadInput from "./propertyImage/ImageUploadInput";
 import ImageGalleryGrid from "./propertyImage/ImageGalleryGrid";
 import { useDispatch } from "react-redux";

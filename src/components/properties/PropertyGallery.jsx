@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setData } from "../../features/propertySlice";
 import { useState } from "react";
-import AdminPropertyDetailMediaLightbox from "../admin/properties/detail/AdminPropertyDetailMediaLightbox";
+import AdminPropertyDetailMediaLightbox from "../AdminPropertyDetailMediaLightbox";
 
 const PropertyGallery = ({title, listingType, propertyId}) => {
   const {fetchData} = useFetchData()
-  const {propertyImages} = useSelector(state => state.property)
+  const {currentPropertyImages} = useSelector(state => state.property)
   // Local state layers managing the magnified active viewport and lightbox indices
   const [activeImage, setActiveImage] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -22,7 +22,7 @@ const PropertyGallery = ({title, listingType, propertyId}) => {
     if (propertyId) {
       fetchData({
         endpoint: "property-images",
-        stateKey: "propertyImages",
+        stateKey: "currentPropertyImages",
         sliceActions: {
           fetchStart: () => ({ type: "property/noOpStart" }), // Safely bypass page-unmounting global spinners
           fetchFail: () => ({ type: "property/noOpFail" }),
@@ -35,7 +35,7 @@ const PropertyGallery = ({title, listingType, propertyId}) => {
   }, [propertyId]);
 
   // 2. Isolating and filtering image stream matrix to strictly represent this single view to guarantee zero data leaks
-  const isolatedImages = propertyImages?.filter(image => image.propertyId === propertyId) || [];
+  const isolatedImages = currentPropertyImages?.filter(image => image.propertyId === propertyId) || [];
 
   // 3. Monitor data changes to auto-select cover validation flags seamlessly
   useEffect(() => {
@@ -49,16 +49,16 @@ const PropertyGallery = ({title, listingType, propertyId}) => {
     } else {
       setActiveImage(fallbackPlaceholder);
     }
-  }, [propertyImages, propertyId]);
+  }, [currentPropertyImages, propertyId]);
 
   // 4. Index selector trigger routing viewports cleanly to exact thumbnail items
-  const triggerLightboxView = (targetIndexOrUrl) => {
+  const triggerLightboxView = (targetUrlOrIndex) => {
     if (!isolatedImages || isolatedImages.length === 0) return;
     
     if (typeof targetUrlOrIndex === "number") {
-      setLightboxIndex(targetIndexOrUrl);
+      setLightboxIndex(targetUrlOrIndex);
     } else {
-      const targetIdx = isolatedImages.findIndex((image) => `${IMAGE_BASE_URL}${image.imageUrl}` === targetIndexOrUrl);
+      const targetIdx = isolatedImages.findIndex((image) => `${IMAGE_BASE_URL}${image.imageUrl}` === targetUrlOrIndex);
       setLightboxIndex(targetIdx !== -1 ? targetIdx : 0);
     }
     setIsLightboxOpen(true);
@@ -69,7 +69,7 @@ const PropertyGallery = ({title, listingType, propertyId}) => {
       {/* Upper Main Hero Display Canvas Frame Slot */}
       {activeImage && (
         <div 
-          onClick={() => triggerLightboxView(lightboxIndex)}
+          onClick={() => triggerLightboxView(activeImage)}
           className="relative h-100 md:h-125 w-full bg-slate-200 dark:bg-slate-950 overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 cursor-zoom-in group"
         >
           <img
@@ -96,7 +96,7 @@ const PropertyGallery = ({title, listingType, propertyId}) => {
               return (
                 <div
                   key={image?._id}
-                  onClick={() => triggerLightboxView(idx)} // Clicking thumbnails opens lightbox slider exactly here
+                  onClick={() => triggerLightboxView(fullUrl)} // Clicking thumbnails opens lightbox slider exactly here
                   className={`w-16 h-16 bg-slate-50 dark:bg-slate-950 border overflow-hidden cursor-pointer transition-all duration-300 shrink-0 ${
                     isSelected ? "border-brand-gold shadow-md ring-1 ring-brand-gold scale-95" : "border-slate-200 dark:border-slate-800 opacity-60 hover:opacity-100"
                   }`}
@@ -117,7 +117,7 @@ const PropertyGallery = ({title, listingType, propertyId}) => {
       <AdminPropertyDetailMediaLightbox
         isOpen={isLightboxOpen}
         onClose={() => setIsLightboxOpen(false)}
-        images={isolatedImages}
+        images={isolatedImages || []}
         currentIndex={lightboxIndex}
         setCurrentIndex={setLightboxIndex}
       />

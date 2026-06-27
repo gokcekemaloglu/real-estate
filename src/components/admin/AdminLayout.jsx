@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
-// import ThemeToggle from '../ThemeToggle'
 
 const AdminLayout = () => {
   const location = useLocation()
@@ -15,7 +14,7 @@ const AdminLayout = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-brand-dark font-display flex transition-colors duration-300">
+    <div className="h-screen bg-slate-50 dark:bg-brand-dark font-display flex transition-colors duration-300">
       
       {/* Sidebar Navigation Drawer */}
       <aside className={`${isSidebarOpen ? "w-64" : "w-20"} bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-300 flex flex-col pt-24 z-40`}>
@@ -56,7 +55,6 @@ const AdminLayout = () => {
               Görkem Emlak <span className="text-brand-gold font-sans font-semibold">Yönetim Masası</span>
             </h2>
           </div>
-          {/* <ThemeToggle /> */}
         </header>
 
         {/* Dynamic Nested Route Target Render Outlet Frame */}

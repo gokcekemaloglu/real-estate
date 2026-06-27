@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 const AdminPropertyDetailMediaLightbox = ({isOpen,
   onClose, images, currentIndex, setCurrentIndex}) => {
@@ -27,15 +26,26 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, currentIndex, images.length]);
-
-  if (!isOpen || !images || images.length === 0) return null;
   
+    const handleOverlayClick = (e) => {
+      // Ensures that clicking sub-elements (like central image or buttons) won't accidentally trigger close bounds
+      if (e.target === e.currentTarget) {
+        onClose();
+      }
+    };
+    
+    if (!isOpen || !images || images?.length === 0) return null;
+
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-between bg-brand-dark/95 backdrop-blur-md p-4 animate-fade-in select-none">
+    <div
+      onClick={handleOverlayClick}
+      // style={{zIndex: 99999}}
+      className="fixed inset-0 z-9999 flex flex-col justify-between bg-brand-dark/95 backdrop-blur-md p-4 animate-fade-in select-none"
+    >
       {/* Top Controller Ribbon Block */}
       <div className="flex justify-between items-center w-full max-w-7xl mx-auto pb-2 border-b border-slate-800">
         <span className="text-[11px] font-mono tracking-widest uppercase text-slate-400">
-          Görsel Analizi ({currentIndex + 1} / {images.length})
+          Görsel Analizi ({currentIndex + 1} / {images?.length})
         </span>
         <button
           type="button"
@@ -49,7 +59,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
       {/* Main Unified Magnification Interactive Slider Framework */}
       <div className="flex-1 flex items-center justify-between w-full max-w-7xl mx-auto gap-4 my-4 relative">
         {/* Left Arrow Trigger Button Control */}
-        {images.length > 1 ? (
+        {images?.length > 1 ? (
           <button
             type="button"
             onClick={handlePrev}
@@ -72,7 +82,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
         </div>
 
         {/* Right Arrow Trigger Button Control */}
-        {images.length > 1 ? (
+        {images?.length > 1 ? (
           <button
             type="button"
             onClick={handleNext}
@@ -87,9 +97,9 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
       </div>
 
       {/* Bottom Horizontal Carousel Thumbnail Ribbon Grid Matrix */}
-      {images.length > 1 && (
+      {images?.length > 1 && (
         <div className="w-full max-w-4xl mx-auto flex items-center gap-3 overflow-x-auto pb-4 pt-2 border-t border-slate-800 custom-scrollbar justify-center">
-          {images.map((image, idx) => {
+          {images?.map((image, idx) => {
             const isActive = idx === currentIndex;
             return (
               <div
@@ -102,7 +112,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
                 }`}
               >
                 <img
-                  src={`${IMAGE_BASE_URL}${image.imageUrl}`}
+                  src={`${IMAGE_BASE_URL}${image?.imageUrl}`}
                   alt="Modal Ribbon Thumbnail"
                   className="w-full h-full object-cover"
                 />

@@ -13,6 +13,10 @@ body {
   --color-brand-dark: #0f172a;
   --color-brand-gold: #b45309;
   --font-display: "Urbanist", sans-serif;
+
+  /* Z-Index Definitions */
+  --z-navbar: 50;
+  --z-modal: 9999;
 }
 
 /* Global Reusable Style Utilities (Tailwind v4 Standard) */

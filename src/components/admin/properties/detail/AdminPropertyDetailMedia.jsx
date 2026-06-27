@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useFetchData from "../../../../hooks/useFetchData";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useState } from "react";
 import { setData } from "../../../../features/propertySlice";
-import AdminPropertyDetailMediaLightbox from "./AdminPropertyDetailMediaLightbox";
+import AdminPropertyDetailMediaLightbox from "../../../AdminPropertyDetailMediaLightbox";
 import { useDispatch } from "react-redux";
 
 const AdminPropertyDetailMedia = ({ property }) => {
@@ -35,7 +33,7 @@ const AdminPropertyDetailMedia = ({ property }) => {
     }
   }, [property?._id]);
 
-  const isolatedImages = currentPropertyImages?.filter(img => img.propertyId === property?._id) || [];
+  const isolatedImages = currentPropertyImages?.filter(image => image.propertyId === property?._id) || [];
 
   useEffect(() => {
     if (isolatedImages?.length > 0) {
