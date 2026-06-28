@@ -36,8 +36,8 @@ const HomeServices = () => {
   return (
     <section className="py-24 bg-white dark:bg-brand-dark transition-colors duration-300 relative overflow-hidden">
       {/* Subtle luxury brand identifier watermark background container */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[14vw] font-serif italic font-extrabold text-slate-100/30 dark:text-slate-900/10 pointer-events-none select-none tracking-widest uppercase">
-        Görkem
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[14vw] font-serif italic font-extrabold text-slate-400/5 dark:text-white/3 pointer-events-none select-none tracking-widest uppercase">
+        Görkem Emlak
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
