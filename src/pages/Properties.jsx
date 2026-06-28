@@ -72,12 +72,12 @@ const Properties = () => {
         {/* Premium Horizontal Filter Bar (Baseline HTML inputs for upcoming Formik integration) */}
         <PropertyFilters/>
         
-        {loading ? (
+        {/* {loading ? (
           <div className="flex items-center justify-center min-h-100">
             <div className="w-12 h-12 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
           </div>
-        ) : (
-          <>
+        ) : ( */}
+          <div className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`}>
             {properties?.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 border border-dashed border-slate-200 dark:border-slate-800 p-8 text-center bg-white dark:bg-slate-900/10">
                 <p className="text-sm font-light text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
@@ -106,9 +106,11 @@ const Properties = () => {
               </>
             )}
             
-          </>
+          </div>
+        {/* )} */}
+        {loading && (
+          <div className="fixed top-24 right-6 z-40 w-5 h-5 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
         )}
-
       </div>
     </div>
   )
