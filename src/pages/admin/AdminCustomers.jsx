@@ -12,12 +12,12 @@ import AdminSearchFilters from "../../components/admin/AdminSearchFilters";
 
 const AdminCustomers = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
   const { fetchData } = useFetchData();
   const { toggleCustomerStatus, deleteCustomer } = useCustomerCall();
   const { loading, customers, customersDetails } = useSelector((state) => state.customers);
 
-  const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1
+  const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
   const loadAdminCustomerData = () => {
     const activeParams = new URLSearchParams(searchParams);
@@ -37,7 +37,7 @@ const AdminCustomers = () => {
 
   useEffect(() => {
     loadAdminCustomerData();
-  }, [activePage,searchParams]);
+  }, [activePage, searchParams]);
 
   const handleStatusToggle = async (id, type) => {
     await toggleCustomerStatus(id);
@@ -49,14 +49,6 @@ const AdminCustomers = () => {
     loadAdminCustomerData();
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-75">
-        <div className="w-10 h-10 border-2 border-slate-200 border-t-brand-gold rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
       {/* Top Action Toolbar Header Component */}
@@ -64,30 +56,37 @@ const AdminCustomers = () => {
         onCreateClick={() => navigate(`/admin/customers/create`)}
       />
 
-      <AdminSearchFilters/>
+      <AdminSearchFilters />
 
-      {/* Hybrid Row Cards Wrapper Framework Section */}
-      <div className="flex flex-col gap-4 mt-4">
-        {customers?.length > 0 ? (
-          customers.map((customer) => (
-            <AdminCustomerRow
-              key={customer._id}
-              customer={customer}
-              handleStatusToggle={() => handleStatusToggle(customer?._id)}
-              handleDelete={() => handleDelete(customer?._id)}
-              onEditClick={() =>
-                navigate(`/admin/customers/edit/${customer?._id}`)
-              }
-              onDetailClick={() => navigate(`/admin/customers/detail/${customer?._id}`)}
-            />
-          ))
-        ) : (
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 text-center text-slate-400 uppercase tracking-widest text-xs font-light shadow-sm">
-            Sistemde kayıtlı herhangi bir mülk sahibi portföyü bulunamadı.
-          </div>
-        )}
+      <div className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`} >
+        {/* Hybrid Row Cards Wrapper Framework Section */}
+        <div className="flex flex-col gap-4 mt-4">
+          {customers?.length > 0 ? (
+            customers.map((customer) => (
+              <AdminCustomerRow
+                key={customer._id}
+                customer={customer}
+                handleStatusToggle={() => handleStatusToggle(customer?._id)}
+                handleDelete={() => handleDelete(customer?._id)}
+                onEditClick={() =>
+                  navigate(`/admin/customers/edit/${customer?._id}`)
+                }
+                onDetailClick={() =>
+                  navigate(`/admin/customers/detail/${customer?._id}`)
+                }
+              />
+            ))
+          ) : (
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 text-center text-slate-400 uppercase tracking-widest text-xs font-light shadow-sm">
+              Sistemde kayıtlı herhangi bir mülk sahibi portföyü bulunamadı.
+            </div>
+          )}
+        </div>
+        <PaginationComponent details={customersDetails} label={"Müşteri"} />
       </div>
-      <PaginationComponent details={customersDetails} label={"Müşteri"}/>
+      {loading && (
+        <div className="absolute top-4 right-4 w-5 h-5 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
+      )}
     </div>
   );
 };

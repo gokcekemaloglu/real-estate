@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 // import Footer from '../components/Footer'
 import AuthRoute from './AuthRoute'
 import UserLayout from '../components/UserLayout'
+// import AdminLayout from '../components/admin/AdminLayout'
 
 // Performance Optimization via Lazy Loading (Code Splitting)
 const Home = lazy(() => import('../pages/Home'))
@@ -15,6 +16,7 @@ const Contact = lazy(() => import('../pages/Contact'))
 const Register = lazy(() => import('../pages/Register'))
 const Login = lazy(() => import('../pages/Login'))
 const AdminLayout = lazy(() => import('../components/admin/AdminLayout'))
+// const UserLayout = lazy(() => import('../components/UserLayout'))
 const DashboardHome = lazy(() => import('../pages/admin/DashboardHome'))
 const AdminProperties = lazy(() => import('../pages/admin/AdminProperties'))
 const AdminPropertyForm = lazy(() => import('../pages/admin/AdminPropertyForm'))
