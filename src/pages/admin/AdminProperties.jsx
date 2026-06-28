@@ -63,13 +63,13 @@ const AdminProperties = () => {
     loadAdminPropertyData();
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-75">
-        <div className="w-10 h-10 border-2 border-slate-200 border-t-brand-gold rounded-full animate-spin"></div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-75">
+  //       <div className="w-10 h-10 border-2 border-slate-200 border-t-brand-gold rounded-full animate-spin"></div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
@@ -78,6 +78,7 @@ const AdminProperties = () => {
 
       <PropertyFilters/>
 
+      <div className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`} >
       {/* Hybrid Hybrid Row Cards Wrapper Framework */}
       <div className="flex flex-col gap-4 mt-4">
         {properties?.map((property) => (
@@ -93,6 +94,10 @@ const AdminProperties = () => {
         ))}
       </div>
       <PaginationComponent details={propertiesDetails} label={"İlan"}/>
+      </div>
+        {loading && (
+        <div className="absolute top-4 right-4 w-5 h-5 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
+      )}
     </div>
   );
 };

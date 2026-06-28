@@ -48,14 +48,6 @@ const AdminUsers = () => {
     loadAdminUserData();
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex items-center justify-center min-h-75">
-  //       <div className="w-10 h-10 border-2 border-slate-200 border-t-brand-gold rounded-full animate-spin"></div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
       {/* Top Action Toolbar Header Section */}
