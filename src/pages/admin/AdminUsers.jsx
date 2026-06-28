@@ -48,6 +48,11 @@ const AdminUsers = () => {
     loadAdminUserData();
   };
 
+  const handleClearFilters = () => {
+    setSearchParams({ page: "1" }, { replace: true })
+    window.location.reload() // Hard reload to quickly reset internal dropdown state arrays smoothly
+  }
+
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
       {/* Top Action Toolbar Header Section */}
@@ -64,6 +69,7 @@ const AdminUsers = () => {
       <AdminSearchFilters />
 
       <div className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`} >
+        
         {/* Hybrid Row Cards Wrapper Framework Section */}
         <div className="flex flex-col gap-4 mt-4">
           {users?.length > 0 ? (
@@ -80,7 +86,13 @@ const AdminUsers = () => {
             ))
           ) : (
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 text-center text-slate-400 uppercase tracking-widest text-xs font-light shadow-sm">
-              Sistemde kayıtlı herhangi bir üye veya kullanıcı bulunamadı.
+              <p className="text-sm font-light text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">Sistemde kayıtlı herhangi bir üye veya kullanıcı bulunamadı.</p>
+              <button 
+                  onClick={handleClearFilters}
+                  className="btn-premium px-6 py-3 text-xs tracking-widest font-semibold"
+                >
+                  Filtreleri Temizle
+                </button>
             </div>
           )}
         </div>
