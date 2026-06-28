@@ -9,7 +9,7 @@ const PaginationComponent = ({ details }) => {
   const totalRecords = details?.totalRecords || 0;
   const totalPages = details?.pages?.total !== undefined && details?.pages !== false ? details?.pages?.total : 1;
   const currentPage = searchParams.get("page") ? Number(searchParams.get("page")) : details?.pages?.current || 1;
-  const pageSize = details?.limit || 12;
+  const pageSize = details?.limit || 24;
 
   // Calculates structural records boundaries for UI info strings
   const startRecord = totalRecords === 0 ? 0 : (currentPage - 1) * pageSize + 1;

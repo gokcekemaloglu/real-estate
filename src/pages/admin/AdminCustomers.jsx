@@ -3,31 +3,40 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import useCustomerCall from "../../hooks/useCustomerCall";
 import AdminCustomerHeader from "../../components/admin/customers/AdminCustomerHeader";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { fetchFail, fetchStart, setData } from "../../features/customerSlice";
 import AdminCustomerRow from "../../components/admin/customers/AdminCustomerRow";
 import useFetchData from "../../hooks/useFetchData";
+import PaginationComponent from "../../components/properties/PaginationComponent";
 
 const AdminCustomers = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams()
   const { fetchData } = useFetchData();
   const { toggleCustomerStatus, deleteCustomer } = useCustomerCall();
-  const { loading, customers } = useSelector((state) => state.customers);
+  const { loading, customers, customersDetails } = useSelector((state) => state.customers);
+
+  const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1
 
   const loadAdminCustomerData = () => {
+    const activeParams = new URLSearchParams(searchParams);
+    activeParams.delete("page");
+    const encryptedQueryString = activeParams.toString();
+    const cleanBracketsQueryString = decodeURIComponent(encryptedQueryString);
     fetchData({
       endpoint: "customers",
       stateKey: "customers",
       sliceActions: { fetchStart, fetchFail, setData },
-      page: 1,
+      page: activePage,
       limit: 20,
+      query: cleanBracketsQueryString,
       isWithToken: true,
     });
   };
 
   useEffect(() => {
     loadAdminCustomerData();
-  }, []);
+  }, [activePage,searchParams]);
 
   const handleStatusToggle = async (id, type) => {
     await toggleCustomerStatus(id);
@@ -75,6 +84,7 @@ const AdminCustomers = () => {
           </div>
         )}
       </div>
+      <PaginationComponent details={customersDetails}/>
     </div>
   );
 };

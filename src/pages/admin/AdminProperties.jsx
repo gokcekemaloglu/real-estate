@@ -5,24 +5,32 @@ import usePropertyCall from "../../hooks/usePropertyCall";
 import { fetchStart, fetchFail, setData } from "../../features/propertySlice";
 import AdminPropertyHeader from "../../components/admin/properties/list/AdminPropertyHeader";
 import AdminPropertyRow from "../../components/admin/properties/list/AdminPropertyRow";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import PaginationComponent from "../../components/properties/PaginationComponent";
 
 const AdminProperties = () => {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const { fetchData } = useFetchData();
-  const { togglePropertyStatus, toggleFeaturedStatus, deleteProperty } =
-    usePropertyCall();
+  const { togglePropertyStatus, toggleFeaturedStatus, deleteProperty } = usePropertyCall();
 
-  const { properties, loading, propertyImages } = useSelector((state) => state.property);
+  const { properties, loading, propertyImages, propertiesDetails } = useSelector((state) => state.property);
+
+  const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
   // Radar layout re-fetching records data dynamically inside admin dashboard scopes
   const loadAdminPropertyData = () => {
+    const activeParams = new URLSearchParams(searchParams);
+    activeParams.delete("page");
+    const encryptedQueryString = activeParams.toString();
+    const cleanBracketsQueryString = decodeURIComponent(encryptedQueryString);
     fetchData({
       endpoint: "properties",
       stateKey: "properties",
       sliceActions: { fetchStart, fetchFail, setData },
-      page: 1,
-      limit: 20,
+      page: activePage,
+      limit: 15,
+      query: cleanBracketsQueryString,
       isWithToken: true,
     });
     fetchData({
@@ -41,7 +49,7 @@ const AdminProperties = () => {
 
   useEffect(() => {
     loadAdminPropertyData();
-  }, []);
+  }, [activePage, searchParams]);
 
   const handleStatusToggle = async (id, type) => {
     if (type === "active") await togglePropertyStatus(id);
@@ -81,6 +89,7 @@ const AdminProperties = () => {
           />
         ))}
       </div>
+      <PaginationComponent details={propertiesDetails}/>
     </div>
   );
 };
