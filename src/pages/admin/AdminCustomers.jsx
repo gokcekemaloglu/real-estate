@@ -8,10 +8,11 @@ import { fetchFail, fetchStart, setData } from "../../features/customerSlice";
 import AdminCustomerRow from "../../components/admin/customers/AdminCustomerRow";
 import useFetchData from "../../hooks/useFetchData";
 import PaginationComponent from "../../components/properties/PaginationComponent";
+import AdminSearchFilters from "../../components/admin/AdminSearchFilters";
 
 const AdminCustomers = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const { fetchData } = useFetchData();
   const { toggleCustomerStatus, deleteCustomer } = useCustomerCall();
   const { loading, customers, customersDetails } = useSelector((state) => state.customers);
@@ -63,6 +64,8 @@ const AdminCustomers = () => {
         onCreateClick={() => navigate(`/admin/customers/create`)}
       />
 
+      <AdminSearchFilters/>
+
       {/* Hybrid Row Cards Wrapper Framework Section */}
       <div className="flex flex-col gap-4 mt-4">
         {customers?.length > 0 ? (
@@ -84,7 +87,7 @@ const AdminCustomers = () => {
           </div>
         )}
       </div>
-      <PaginationComponent details={customersDetails}/>
+      <PaginationComponent details={customersDetails} label={"Müşteri"}/>
     </div>
   );
 };

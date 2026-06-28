@@ -5,28 +5,38 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchFail, fetchStart, setData } from "../../features/userSlice";
 import AdminUserRow from "../../components/admin/users/AdminUserRow";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import PaginationComponent from "../../components/properties/PaginationComponent";
+import AdminSearchFilters from "../../components/admin/AdminSearchFilters";
 
 const AdminUsers = () => {
+  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
   const { fetchData } = useFetchData();
   const { toggleUserStatus, deleteUser } = useUserCall();
-  const { users, loading } = useSelector((state) => state.users);
-  const navigate = useNavigate()
+  const { users, loading, usersDetails } = useSelector((state) => state.users);
+
+  const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1
 
   const loadAdminUserData = () => {
+    const activeParams = new URLSearchParams(searchParams);
+    activeParams.delete("page");
+    const encryptedQueryString = activeParams.toString();
+    const cleanBracketsQueryString = decodeURIComponent(encryptedQueryString);
     fetchData({
       endpoint: "users",
       stateKey: "users",
       sliceActions: { fetchStart, fetchFail, setData },
-      page: 1,
+      page: activePage,
       limit: 20,
+      query: cleanBracketsQueryString,
       isWithToken: true,
     });
   };
 
   useEffect(() => {
     loadAdminUserData();
-  }, []);
+  }, [activePage,searchParams]);
 
   const handleStatusToggle = async (id) => {
     await toggleUserStatus(id);
@@ -59,6 +69,7 @@ const AdminUsers = () => {
         </p>
       </div>
 
+      <AdminSearchFilters/>
       {/* Hybrid Row Cards Wrapper Framework Section */}
       <div className="flex flex-col gap-4 mt-4">
         {users?.length > 0 ? (
@@ -77,6 +88,7 @@ const AdminUsers = () => {
           </div>
         )}
       </div>
+      <PaginationComponent details={usersDetails} label={"Kullanıcı"}/>
     </div>
   );
 };

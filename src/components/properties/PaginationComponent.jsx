@@ -1,7 +1,7 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 
-const PaginationComponent = ({ details }) => {
+const PaginationComponent = ({ details, label }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   
   // console.log("Details-->", details);  
@@ -32,7 +32,7 @@ const PaginationComponent = ({ details }) => {
           "Gösterilecek ilan bulunmuyor"
         ) : (
           <p className="font-light">
-            Toplam <span className="font-medium text-slate-800 dark:text-white">{totalRecords}</span> ilandan{" "}
+            Toplam <span className="font-medium text-slate-800 dark:text-white">{totalRecords}</span> {label} {" "} arasından {" "}
             <span className="font-medium text-brand-gold">{startRecord} - {endRecord}</span> arası gösteriliyor
           </p>
         )}

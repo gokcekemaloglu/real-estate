@@ -102,7 +102,7 @@ const Properties = () => {
                     />
                   ))}
                 </div>
-                <PaginationComponent details={propertiesDetails}/>
+                <PaginationComponent details={propertiesDetails} label={"İlan"}/>
               </>
             )}
             

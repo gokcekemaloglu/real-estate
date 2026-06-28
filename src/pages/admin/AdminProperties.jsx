@@ -7,6 +7,7 @@ import AdminPropertyHeader from "../../components/admin/properties/list/AdminPro
 import AdminPropertyRow from "../../components/admin/properties/list/AdminPropertyRow";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PaginationComponent from "../../components/properties/PaginationComponent";
+import PropertyFilters from "../../components/properties/PropertyFilters";
 
 const AdminProperties = () => {
   const navigate = useNavigate()
@@ -75,6 +76,8 @@ const AdminProperties = () => {
       {/* Top action toolbar header block */}
       <AdminPropertyHeader />
 
+      <PropertyFilters/>
+
       {/* Hybrid Hybrid Row Cards Wrapper Framework */}
       <div className="flex flex-col gap-4 mt-4">
         {properties?.map((property) => (
@@ -89,7 +92,7 @@ const AdminProperties = () => {
           />
         ))}
       </div>
-      <PaginationComponent details={propertiesDetails}/>
+      <PaginationComponent details={propertiesDetails} label={"İlan"}/>
     </div>
   );
 };

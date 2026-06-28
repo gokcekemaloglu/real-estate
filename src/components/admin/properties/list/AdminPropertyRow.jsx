@@ -3,6 +3,20 @@ import React from "react";
 const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteClick, onEditClick, onDetailClick}) => {
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL
   const fallbackPlaceholder = "https://unsplash.com";
+  const getListingDisplay = (type) => {
+    const listingMap = {
+      sale: "Satılık",
+      rent: "Kiralık",
+      transfer_sale: "Devren Satılık",
+      transfer_rent: "Devren Kiralık",
+    };
+    return listingMap[type] || "Portföy";
+  };
+  const getListingBadgeStyle = (type) => {
+    if (type === "sale") return "bg-brand-gold text-white border-brand-gold/20";
+    if (type === "rent") return "bg-slate-800 dark:bg-slate-950 border-slate-700 text-amber-400";
+    return "bg-amber-600 text-white border-amber-500/20"; // Style fallback for transfer models
+  };
   let targetCoverImage = propertyImages?.find(
     (image) => image.propertyId === property?._id && image.isCover
   );
@@ -22,13 +36,16 @@ const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteCli
         <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800">
           <img
             src={resolvedImageSrc}
-            alt={property?.title}
+            alt={property?.title || "Real Estate Specimen"}
             className="w-full h-full object-cover"
           />
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-wider text-brand-gold font-semibold">
-            {property?.district} / Adana
+            {property?.district || "—"} / Adana
+          </span>
+          <span className={`text-[8px] uppercase font-bold tracking-widest px-2 py-0.5 border shadow-2xs font-sans ${getListingBadgeStyle(property?.listingType)} w-24`}>
+            {getListingDisplay(property?.listingType)}
           </span>
           <h3 className="text-sm font-medium text-slate-800 dark:text-white line-clamp-1">
             {property?.title}
@@ -36,7 +53,7 @@ const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteCli
           {/* Strategic layout mapping for displaying property customer ownership fields */}
           {property?.ownerId && (
             <span className="text-[10px] text-slate-400 dark:text-slate-500 font-light mt-0.5">
-              Ev Sahibi: {property.ownerId.firstName}{" "} {property.ownerId.lastName} ({property.ownerId.phone})
+              Ev Sahibi: {property?.ownerId?.firstName}{" "} {property?.ownerId?.lastName} ({property?.ownerId?.phone})
             </span>
           )}
           <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
@@ -50,7 +67,7 @@ const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteCli
       </div>
 
       {/* Right Block: Fully Reactive Action Toggles tailored beautifully for Cemal's ease of use */}
-      <div className="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/60">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between md:justify-end gap-5 sm:gap-6 border-t md:border-t-0 pt-4 sm:pt-0 border-slate-100 dark:border-slate-800/60 w-full sm:w-auto">
         {/* Toggle Switch: Active State Status */}
         <div className="flex flex-col items-center gap-1 font-bold">
           <span className="text-[9px] uppercase tracking-widest text-slate-500">
