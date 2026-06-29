@@ -6,25 +6,20 @@ import { fetchFail, fetchStart, setData } from '../../features/propertySlice';
 import PropertyCard from '../properties/PropertyCard';
 
 const HomeRecent = () => {
-    const { fetchData } = useFetchData();
+  const { fetchData } = useFetchData();
+  const { recentProperties, propertyImages, loading } = useSelector((state) => state.property);
+
+  // console.log("recentProperties-->", recentProperties);
   
-  // Destructure target state blocks from unified property slice registry
-  const { properties, propertyImages, loading } = useSelector((state) => state.property);
-
-  // Take exactly the first 3 items from the properties array which comes sorted by newest from backend
-  const recentListings = properties?.slice(0, 3) || [];
-
   useEffect(() => {
-    // Fetch base properties entries with a tight limit stream to capture core items efficiently
     fetchData({
       endpoint: "properties",
-      stateKey: "properties",
+      stateKey: "recentProperties",
       sliceActions: { fetchStart, fetchFail, setData },
       page: 1,
       limit: 3, // Directly requests only the newest 3 properties from server
     });
 
-    // Fetch associated public gallery lookups concurrently
     fetchData({
       endpoint: "property-images",
       stateKey: "propertyImages",
@@ -34,12 +29,12 @@ const HomeRecent = () => {
         setData 
       },
       page: 1,
-      limit: 50,
+      limit: 100,
       isWithToken: false
     });
   }, []);
 
-  if (!loading && recentListings?.length === 0) return null;
+  if (!loading && recentProperties?.length === 0) return null;
   return (
     <section className="py-24 bg-slate-50 dark:bg-slate-950/20 border-t border-slate-100 dark:border-slate-900/60 transition-colors duration-300 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -57,7 +52,7 @@ const HomeRecent = () => {
 
         {/* Dynamic Responsive Layout Cards Grid Frame */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {recentListings?.map((property) => (
+          {recentProperties?.map((property) => (
             <PropertyCard 
               property={property} 
               propertyImages={propertyImages} 

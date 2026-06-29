@@ -43,7 +43,8 @@ const initialState = {
   },
   propertyImages: [],
   currentPropertyImages:[],
-  featuredProperties: []
+  featuredProperties: [],
+  recentProperties: []
 };
 
 const propertySlice = createSlice({

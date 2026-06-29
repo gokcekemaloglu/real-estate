@@ -10,11 +10,8 @@ const HomeFeatured = () => {
   
   // Destructure real-time store payloads from property registers
   const { featuredProperties, propertyImages, loading } = useSelector((state) => state.property);
-// console.log("properties", properties);
 
-// // Filter local memory buffer instantly to capture ONLY verified elite featured objects
-// const featuredProperties = properties?.filter((p) => p.isFeatured) || [];
-console.log("featuredProperties", featuredProperties);
+// console.log("featuredProperties", featuredProperties);
 
   useEffect(() => {
     // Fetch base properties entries with a tight limit stream to capture core items efficiently
