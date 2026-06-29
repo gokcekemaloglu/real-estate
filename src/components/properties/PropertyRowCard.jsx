@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const PropertyRowCard = () => {
+const PropertyRowCard = ({ property, propertyImages }) => {
   const navigate = useNavigate();
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
   const fallbackPlaceholder = "https://unsplash.com";
@@ -44,7 +44,7 @@ const PropertyRowCard = () => {
         <img
           src={resolvedImageSrc}
           alt={property?.title || "Real Estate Portfolio"}
-          className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700 contrast-110"
+          className="w-full h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700 contrast-110"
           loading="lazy"
         />
         <span className="absolute top-3 left-3 bg-brand-dark/90 dark:bg-slate-900/90 border border-brand-gold/30 text-amber-400 text-[9px] uppercase tracking-widest px-2.5 py-1 font-medium shadow-sm">
