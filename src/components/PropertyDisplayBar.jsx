@@ -15,6 +15,8 @@ const PropertyDisplayBar = ({ viewMode, setViewMode, totalRecords = 0 }) => {
 
   const handleSortChange = (e) => {
     const selectedValue = e.target.value;
+    // console.log(selectedValue);
+    
     const [field, direction] = selectedValue.split(":");
     const newParams = new URLSearchParams(searchParams);
 

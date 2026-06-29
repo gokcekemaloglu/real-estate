@@ -94,10 +94,10 @@ const DashboardHome = () => {
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
           <div className="flex justify-between items-start">
             <div className="flex flex-col gap-1">
-              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Satılık / Kiralık</span>
+              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Pazarlama Dağılımı</span>
               <div className="flex items-baseline gap-3">
-                <span className="text-2xl font-light text-slate-800 dark:text-white">{saleCount}<span className="text-xs text-slate-400 font-normal ml-0.5"> S</span></span>
-                <span className="text-2xl font-light text-slate-800 dark:text-white">{rentCount}<span className="text-xs text-slate-400 font-normal ml-0.5"> K</span></span>
+                <span className="text-2xl font-light text-amber-600 dark:text-amber-400">{saleCount}<span className="text-xs text-slate-400 font-normal ml-0.5"> Satılık</span></span>
+                <span className="text-2xl font-light text-slate-700 dark:text-slate-300">{rentCount}<span className="text-xs text-slate-400 font-normal ml-0.5"> Kiralık</span></span>
               </div>
             </div>
             <span className="text-xl p-2 bg-slate-50 dark:bg-slate-800/50 text-amber-500">🔑</span>
@@ -119,11 +119,11 @@ const DashboardHome = () => {
 
       {/* Grid Row 2: Advanced Detailed Category Distribution Section */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
-        <h3 className="text-xs uppercase tracking-widest text-slate-400 font-medium mb-6">Gayrimenkul Kategori Dağılımı</h3>
+        <h3 className="text-xs uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-3 mb-4">Gayrimenkul Kategori Dağılımı</h3>
         
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
           <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Daire / Apartman</span>
+            <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Apartman Dairesi</span>
             <span className="text-xl font-medium text-slate-800 dark:text-white">{apartmentCount}</span>
           </div>
           <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">

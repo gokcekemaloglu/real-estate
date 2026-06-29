@@ -42,7 +42,8 @@ const initialState = {
     ownerId: "",
   },
   propertyImages: [],
-  currentPropertyImages:[]
+  currentPropertyImages:[],
+  featuredProperties: []
 };
 
 const propertySlice = createSlice({

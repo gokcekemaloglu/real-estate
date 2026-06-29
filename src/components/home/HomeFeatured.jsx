@@ -9,16 +9,18 @@ const HomeFeatured = () => {
     const { fetchData } = useFetchData();
   
   // Destructure real-time store payloads from property registers
-  const { properties, propertyImages, loading } = useSelector((state) => state.property);
+  const { featuredProperties, propertyImages, loading } = useSelector((state) => state.property);
+// console.log("properties", properties);
 
-  // Filter local memory buffer instantly to capture ONLY verified elite featured objects
-  const featuredListings = properties?.filter((p) => p.isFeatured) || [];
+// // Filter local memory buffer instantly to capture ONLY verified elite featured objects
+// const featuredProperties = properties?.filter((p) => p.isFeatured) || [];
+console.log("featuredProperties", featuredProperties);
 
   useEffect(() => {
     // Fetch base properties entries with a tight limit stream to capture core items efficiently
     fetchData({
       endpoint: "properties",
-      stateKey: "properties",
+      stateKey: "featuredProperties",
       sliceActions: { fetchStart, fetchFail, setData },
       page: 1,
       limit: 20,
@@ -40,7 +42,7 @@ const HomeFeatured = () => {
     });
   }, []);
 
-  if (!loading && featuredListings?.length === 0) return null;
+  if (!loading && featuredProperties?.length === 0) return null;
   return (
     <section className="py-20 bg-white dark:bg-brand-dark transition-colors duration-300 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -58,7 +60,7 @@ const HomeFeatured = () => {
 
         {/* Dynamic Cards Layout Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {featuredListings?.map((property) => (
+          {featuredProperties?.map((property) => (
             <PropertyCard 
               property={property} 
               propertyImages={propertyImages} 
