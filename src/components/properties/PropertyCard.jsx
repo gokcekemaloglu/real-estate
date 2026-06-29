@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const PropertyCard = ({ property, propertyImages }) => {
+const PropertyCard = ({ property, propertyImages, viewMode }) => {
   const navigate = useNavigate();
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -43,10 +43,10 @@ const PropertyCard = ({ property, propertyImages }) => {
     : fallbackPlaceholder;
 
   return (
-    <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex flex-col transition-colors duration-300">
+    <div className={`group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex transition-all duration-300 animate-fade-in ${ viewMode === "row" ? "flex-col md:flex-row h-auto md:h-64 w-full" : "flex-col h-full w-full" }`}>
       
       {/* Card Image Block Component Layout Frame */}
-      <div className="relative h-64 w-full bg-slate-200 dark:bg-slate-950 overflow-hidden">
+      <div className={`relative bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 ${ viewMode === "row" ? "h-64 md:h-full w-full md:w-80" : "h-64 w-full" }`}>
         <img
           src={resolvedImageSrc}
           alt={property?.title || "Real Estate Portfolio"}

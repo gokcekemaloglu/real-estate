@@ -8,6 +8,8 @@ import useFetchData from '../hooks/useFetchData'
 import { useSearchParams } from 'react-router-dom'
 import { fetchFail, fetchStart, setData } from '../features/propertySlice'
 import PaginationComponent from '../components/properties/PaginationComponent'
+import { useState } from 'react'
+import PropertyDisplayBar from '../components/PropertyDisplayBar'
 
 const Properties = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -17,6 +19,12 @@ const Properties = () => {
 
   // console.log("Properties-->", properties);
   const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1
+
+  const [viewMode, setViewMode] = useState(() => localStorage.getItem("gorkem_view_mode") || "grid");
+
+  useEffect(() => {
+    localStorage.setItem("gorkem_view_mode", viewMode);
+  }, [viewMode]);
 
   // Dynamically monitors and dispatches parallel data pipelines upon query mutations
   const loadPublicPropertiesData = () => {
@@ -71,6 +79,12 @@ const Properties = () => {
 
         {/* Premium Horizontal Filter Bar (Baseline HTML inputs for upcoming Formik integration) */}
         <PropertyFilters/>
+
+        <PropertyDisplayBar
+          viewMode={viewMode} 
+          setViewMode={setViewMode} 
+          totalRecords={propertiesDetails?.totalRecords || 0} 
+        />
         
         {/* {loading ? (
           <div className="flex items-center justify-center min-h-100">
