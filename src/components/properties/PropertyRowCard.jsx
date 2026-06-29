@@ -40,11 +40,11 @@ const PropertyRowCard = ({ property, propertyImages }) => {
   return (
     <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden flex flex-col md:flex-row items-stretch gap-4 transition-all duration-300 hover:shadow-xl animate-fade-in w-full">
       {/* Left Segment: Premium Image Framework Panel */}
-      <div className="relative h-48 md:h-auto w-full md:w-64 bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0">
+      <div className="relative h-48 w-full md:w-64 bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0">
         <img
           src={resolvedImageSrc}
           alt={property?.title || "Real Estate Portfolio"}
-          className="w-full h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700 contrast-110"
+          className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700 contrast-110"
           loading="lazy"
         />
         <span className="absolute top-3 left-3 bg-brand-dark/90 dark:bg-slate-900/90 border border-brand-gold/30 text-amber-400 text-[9px] uppercase tracking-widest px-2.5 py-1 font-medium shadow-sm">
@@ -80,7 +80,7 @@ const PropertyRowCard = ({ property, propertyImages }) => {
         </div>
 
         {/* Pricing Actions Context Footer */}
-        <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto gap-2 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/40 shrink-0">
+        <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto gap-2 md:gap-16 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/40 shrink-0">
           <span className="text-lg font-medium text-brand-gold dark:text-amber-400 whitespace-nowrap">
             {formatPrice(property?.price)}
             {property?.listingType?.includes("rent") ? " / Ay" : ""}
