@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const HeroSection = () => {
+  const navigate = useNavigate()
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-slate-50 dark:bg-brand-dark overflow-hidden font-display transition-colors duration-300">
       {/* Background Luxury Geometric Line Effect (Color adapts via slate/amber opacity) */}
@@ -22,10 +24,13 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <button className="btn-premium px-8 py-3.5 text-xs font-semibold cursor-pointer">
+          <button 
+            onClick={() => navigate("/properties")}
+            className="btn-premium px-8 py-3.5 text-xs font-semibold cursor-pointer"
+          >
             Portföyü İncele
           </button>
-          <button className="px-8 py-3.5 text-xs uppercase tracking-widest text-slate-800 dark:text-white border border-slate-300 dark:border-slate-700 hover:border-brand-gold dark:hover:border-brand-gold transition-all duration-300 cursor-pointer">
+          <button onClick={() => navigate("/contact")} className="px-8 py-3.5 text-xs uppercase tracking-widest text-slate-800 dark:text-white border border-slate-300 dark:border-slate-700 hover:border-brand-gold dark:hover:border-brand-gold transition-all duration-300 cursor-pointer">
             İletişime Geç
           </button>
         </div>
