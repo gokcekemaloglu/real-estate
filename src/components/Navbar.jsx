@@ -26,13 +26,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation Links - Integrated with 'after-line' utility */}
-        <NavLinks/>
-        {/* <div className="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 transition-colors duration-300">
-          <Link to="/" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">Ana Sayfa</Link>
-          <Link to="/properties" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">İlanlar</Link>
-          <Link to="/about" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">Hakkımızda</Link>
-          <Link to="/contact" className="after-line py-1 hover:text-brand-gold transition-colors duration-300">İletişim</Link>
-        </div> */}
+        <NavLinks isAdmin={isAdmin} />
 
         {/* Right Side Actions Container (Always visible on mobile & desktop) */}
         <div className="flex items-center gap-2 md:gap-4 order-2 md:order-0">
@@ -43,7 +37,7 @@ const Navbar = () => {
           {token ? (
             <div className="flex items-center gap-4">
               <span className="text-xs font-light tracking-wide text-slate-500 dark:text-slate-400">
-                Salon: <span className="font-medium text-brand-gold">{currentUser}</span>
+                Giriş: <span className="font-medium text-brand-gold">{currentUser}</span>
               </span>
               <button onClick={logout} className="btn-premium px-6 py-2.5 font-medium">
                 Çıkış Yap
@@ -75,27 +69,8 @@ const Navbar = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && 
-        <MobileMenu setIsOpen={setIsOpen} logout={logout} currentUser={currentUser} token={token}/>
+        <MobileMenu setIsOpen={setIsOpen} logout={logout} currentUser={currentUser} token={token} isAdmin={isAdmin} />
       }
-        
-        {/* <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-slate-800 px-6 py-6 flex flex-col gap-6 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 animate-fade-in transition-colors duration-300">
-          <Link to="/" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Ana Sayfa</Link>
-          <Link to="/properties" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İlanlar</Link>
-          <Link to="/about" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Hakkımızda</Link>
-          <Link to="/contact" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İletişim</Link>
-          {token ? (
-            <button 
-              onClick={() => { setIsOpen(false); logout(); }} 
-              className="btn-premium text-center py-3 mt-2"
-            >
-              Çıkış Yap ({currentUser})
-            </button>
-          ) : (
-            <Link to="/login" onClick={() => setIsOpen(false)} className="btn-premium text-center py-3 mt-2">
-              Giriş Yap
-            </Link>
-          )}
-        </div> */}
       
     </nav>
   )
