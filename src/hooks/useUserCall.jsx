@@ -35,7 +35,7 @@ const useUserCall = () => {
     } catch (error) {
       handleError(error, "Profil bilgileriniz güncellenirken beklenmedik bir hata oluştu!");
     } finally {
-      getSingleUser(id)
+      getSingleUserData(id)
     }
   }
 

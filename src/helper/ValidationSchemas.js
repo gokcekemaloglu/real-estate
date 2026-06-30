@@ -97,3 +97,42 @@ export const CustomerSchema = Yup.object().shape({
   address: Yup.string()
     .max(300, "Adres tanımı çok uzun!"),
 });
+
+export const ProfileUpdateSchema = Yup.object().shape({
+  userName: Yup.string()
+    .required("Kullanıcı adı zorunludur!")
+    .min(3, "Kullanıcı adı en az 3 karakter olmalıdır!"),
+  firstName: Yup.string()
+    .min(2, "Adınız çok kısa!")
+    .max(50, "Adınız çok uzun!")
+    .required("Ad alanı zorunludur!"),
+  lastName: Yup.string()
+    .min(2, "Soyadınız çok kısa!")
+    .max(50, "Soyadınız çok uzun!")
+    .required("Soyad alanı zorunludur!"),
+  email: Yup.string()
+    .email("Geçersiz e-posta adresi biçimi!")
+    .required("E-posta adresi zorunludur!"),
+});
+
+// Comprehensive security schema mapped precisely for your changeMyPassword controller boundaries
+export const PasswordChangeSchema = Yup.object().shape({
+  currentPassword: Yup.string()
+    .required("Mevcut şifrenizi girmeniz zorunludur!"),
+  newPassword: Yup.string()
+    .required("Yeni şifre alanı zorunludur!")
+    .min(8, "Şifre en az 8 karakter olmalıdır!")
+    .matches(/\d+/, "En az bir rakam içermelidir!")
+    .matches(/[a-z]/, "En az bir küçük harf içermelidir!")
+    .matches(/[A-Z]/, "En az bir büyük harf içermelidir!")
+    .matches(
+      /[@$%&?!*]+/,
+      "(@$%&?!*) özel karakterlerinden en az bir tanesini içermelidir!",
+    )
+    // Avoid user mapping their old credentials directly as the new password layer
+    .notOneOf([Yup.ref("currentPassword")], "Yeni şifreniz mevcut şifrenizle aynı olamaz!"),
+  retypePassword: Yup.string()
+    .required("Şifre tekrarı alanı zorunludur!")
+    // FIXED BEST PRACTICE: Explicitly forces strict string comparisons to guarantee retype matching bounds
+    .oneOf([Yup.ref("newPassword"), null], "Yeni şifreleriniz birbiriyle eşleşmiyor!"),
+});
