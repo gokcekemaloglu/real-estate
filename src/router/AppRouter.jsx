@@ -15,6 +15,7 @@ const About = lazy(() => import("../pages/About"));
 const Contact = lazy(() => import("../pages/Contact"));
 const Register = lazy(() => import("../pages/Register"));
 const Login = lazy(() => import("../pages/Login"));
+const Profile = lazy(() => import("../pages/Profile"));
 // const UserLayout = lazy(() => import('../components/UserLayout'))
 const AdminRoute = lazy(() => import("./AdminRoute"));
 const AdminLayout = lazy(() => import("../components/admin/AdminLayout"));
@@ -47,6 +48,7 @@ const AppRouter = () => {
             <Route path="/properties/:id" element={<PropertyDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/profile" element={<Profile />} />
 
             <Route element={<AuthRoute />}>
               <Route path="/register" element={<Register />} />
@@ -56,7 +58,7 @@ const AppRouter = () => {
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<DashboardHome />} />
-                
+
                 <Route path="properties" element={<AdminProperties />} />
                 <Route path="properties/create" element={<AdminPropertyForm />} />
                 <Route path="properties/edit/:id" element={<AdminPropertyForm />} />
