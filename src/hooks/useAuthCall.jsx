@@ -31,10 +31,10 @@ const useAuthCall = () => {
         dispatch(fetchStart())
         try {
             const {data} = await axiosPublic.post("/auth/login", userInfo)
-            // console.log(data);
+            console.log(data);
             
             dispatch(loginSuccess(data.data))
-            SweetNotify(`Sisteme başarıyla giriş yapıldı. Hoşgeldiniz, ${data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
+            SweetNotify(`Sisteme başarıyla giriş yapıldı. Hoşgeldiniz, ${data?.data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
             navigate("/")
         } catch (error) {
             console.log("Login Error", error)
