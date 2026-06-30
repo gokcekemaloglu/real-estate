@@ -15,7 +15,7 @@ const ProfileUpdateForm = ({formik}) => {
           <input
             type="text"
             name="userName"
-            value={formik.values.userName}
+            value={formik?.values?.userName}
             disabled
             className="input-premium bg-slate-100 dark:bg-slate-950/40 border-slate-200 dark:border-slate-800 text-slate-500 font-light select-none cursor-not-allowed w-full"
           />
@@ -27,14 +27,14 @@ const ProfileUpdateForm = ({formik}) => {
           <input
             type="text"
             name="firstName"
-            value={formik.values.firstName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            value={formik?.values?.firstName}
+            onChange={formik?.handleChange}
+            onBlur={formik?.handleBlur}
             placeholder="Cemal"
             className="input-premium bg-slate-50 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white font-light placeholder:text-slate-400 focus:border-brand-gold w-full"
           />
-          {formik.touched.firstName && formik.errors.firstName && (
-            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik.errors.firstName}</div>
+          {formik?.touched?.firstName && formik?.errors?.firstName && (
+            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik?.errors?.firstName}</div>
           )}
         </div>
 
@@ -44,14 +44,14 @@ const ProfileUpdateForm = ({formik}) => {
           <input
             type="text"
             name="lastName"
-            value={formik.values.lastName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            value={formik?.values?.lastName}
+            onChange={formik?.handleChange}
+            onBlur={formik?.handleBlur}
             placeholder="Ciğer"
             className="input-premium bg-slate-50 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white font-light placeholder:text-slate-400 focus:border-brand-gold w-full"
           />
-          {formik.touched.lastName && formik.errors.lastName && (
-            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik.errors.lastName}</div>
+          {formik?.touched.lastName && formik?.errors.lastName && (
+            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik?.errors?.lastName}</div>
           )}
         </div>
 
@@ -61,14 +61,14 @@ const ProfileUpdateForm = ({formik}) => {
           <input
             type="email"
             name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            value={formik?.values?.email}
+            onChange={formik?.handleChange}
+            onBlur={formik?.handleBlur}
             placeholder="cemal@example.com"
             className="input-premium bg-slate-50 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white font-light placeholder:text-slate-400 focus:border-brand-gold w-full"
           />
-          {formik.touched.email && formik.errors.email && (
-            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik.errors.email}</div>
+          {formik?.touched?.email && formik?.errors?.email && (
+            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik?.errors?.email}</div>
           )}
         </div>
 
@@ -78,14 +78,14 @@ const ProfileUpdateForm = ({formik}) => {
           <input
             type="tel"
             name="phone"
-            value={formik.values.phone}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            value={formik?.values?.phone}
+            onChange={formik?.handleChange}
+            onBlur={formik?.handleBlur}
             placeholder="555 000 0000"
             className="input-premium bg-slate-50 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white font-light placeholder:text-slate-400 focus:border-brand-gold w-full"
           />
-          {formik.touched.phone && formik.errors.phone && (
-            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik.errors.phone}</div>
+          {formik?.touched?.phone && formik?.errors?.phone && (
+            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik?.errors?.phone}</div>
           )}
         </div>
 
@@ -95,14 +95,14 @@ const ProfileUpdateForm = ({formik}) => {
           <textarea
             name="address"
             rows="3"
-            value={formik.values.address}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            value={formik?.values?.address}
+            onChange={formik?.handleChange}
+            onBlur={formik?.handleBlur}
             placeholder="Seyhan / Adana"
             className="input-premium bg-slate-50 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-800 dark:text-white font-light placeholder:text-slate-400 focus:border-brand-gold resize-none w-full"
           />
-          {formik.touched.address && formik.errors.address && (
-            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik.errors.address}</div>
+          {formik?.touched?.address && formik?.errors?.address && (
+            <div className="text-[11px] text-red-500 font-medium mt-0.5">{formik?.errors?.address}</div>
           )}
         </div>
 
