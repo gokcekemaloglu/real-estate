@@ -6,6 +6,7 @@ import { ProfileUpdateSchema } from "../helper/ValidationSchemas";
 import ProfileChangePasswordForm from "../components/profile/ProfileChangePasswordForm";
 import ProfileUpdateForm from "../components/profile/ProfileUpdateForm";
 import ProfileAvatar from "../components/profile/ProfileAvatar";
+import ProfileDeleteForm from "../components/profile/ProfileDeleteForm";
 
 const Profile = () => {
   const { getSingleUserData, updateMe } = useUserCall()
@@ -72,8 +73,7 @@ const Profile = () => {
           {/* Block B: Identity Personal Information Fields Grid */}
           <ProfileUpdateForm formik={formik} />
 
-          {/* Block C: Isolated Change Password Formik Sub-matrix Module */}
-          <ProfileChangePasswordForm currentUserId={currentUserId} />
+          
 
           {/* Core Submit Operations Action Row */}
           <div className="flex justify-end pt-2 border-t border-slate-100 dark:border-slate-800">
@@ -85,7 +85,12 @@ const Profile = () => {
             </button>
           </div>
 
+          {/* Block C: Isolated Change Password Formik Sub-matrix Module */}
+          <ProfileChangePasswordForm currentUserId={currentUserId} />
+
         </form>
+
+        <ProfileDeleteForm currentUserId={currentUserId}/>
 
       </div>
     </div>
