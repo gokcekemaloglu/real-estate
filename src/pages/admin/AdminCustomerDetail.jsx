@@ -1,20 +1,60 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useCustomerCall from "../../hooks/useCustomerCall";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import useFetchData from "../../hooks/useFetchData";
+import { fetchFail, fetchStart, setData } from "../../features/propertySlice";
+import AdminCustomerPropertiesList from "../../components/admin/customers/AdminCustomerPropertiesList";
 
 const AdminCustomerDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleCustomerData } = useCustomerCall();
+  const { fetchData } = useFetchData();
   const { customer, loading } = useSelector((state) => state.customers);
+  const { singleCustomerProperties, propertyImages } = useSelector((state) => state.property);
+
+  console.log(customer);
+  console.log(singleCustomerProperties);
+  
 
   useEffect(() => {
     if (id) {
       getSingleCustomerData(id);
+      
+      // Fetch base properties entries with a tight limit stream to capture core items efficiently
+      fetchData({
+        endpoint: "properties",
+        stateKey: "singleCustomerProperties",
+        sliceActions: { fetchStart, fetchFail, setData },
+        page: 1,
+        limit: 20,
+        query: `filter[ownerId]=${id}`
+      });
+  
+      // Fetch relational images lookup buffers seamlessly
+      fetchData({
+        endpoint: "property-images",
+        stateKey: "propertyImages",
+        sliceActions: { 
+          fetchStart: () => ({ type: "property/noOpStart" }), 
+          fetchFail: () => ({ type: "property/noOpFail" }), 
+          setData 
+        },
+        page: 1,
+        limit: 100,
+        isWithToken: false
+      });
     }
   }, [id]);
+  
+  // if (!loading && singleCustomerProperties?.length === 0) return null;
+
+  // // useEffect(() => {
+  // //   if (id) {
+  // //     getSingleCustomerData(id);
+  // //   }
+  // // }, [id]);
 
   if (loading) {
     return (
@@ -148,6 +188,7 @@ const AdminCustomerDetail = () => {
           </div>
         </div>
       </div>
+      <AdminCustomerPropertiesList properties={singleCustomerProperties} propertyImages={propertyImages} navigate={navigate} id={id} />
     </div>
   );
 };
