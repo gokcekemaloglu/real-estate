@@ -8,6 +8,7 @@ import AdminPropertyRow from "../../components/admin/properties/list/AdminProper
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PaginationComponent from "../../components/properties/PaginationComponent";
 import PropertyFilters from "../../components/properties/PropertyFilters";
+import AdminOwnerFilter from "../../components/admin/properties/form/AdminOwnerFilter";
 
 const AdminProperties = () => {
   const navigate = useNavigate()
@@ -63,20 +64,14 @@ const AdminProperties = () => {
     loadAdminPropertyData();
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex items-center justify-center min-h-75">
-  //       <div className="w-10 h-10 border-2 border-slate-200 border-t-brand-gold rounded-full animate-spin"></div>
-  //     </div>
-  //   );
-  // }
-
   return (
-    <div className="flex flex-col gap-6 animate-fade-in">
+    <div className="flex flex-col gap-4 animate-fade-in">
       {/* Top action toolbar header block */}
       <AdminPropertyHeader />
 
       <PropertyFilters/>
+
+      <AdminOwnerFilter/>
 
       <div className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`} >
       {/* Hybrid Hybrid Row Cards Wrapper Framework */}
