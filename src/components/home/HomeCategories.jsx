@@ -8,14 +8,14 @@ const HomeCategories = () => {
   const categories = [
     {
       id: "sale",
-      title: "Satılık Koleksiyon",
+      title: "Satılık İlanlar",
       subtitle: "Seçkin Mülkler & Villa Portföyü",
       bgImage: "https://unsplash.com",
       queryParam: "filter[listingType]=sale"
     },
     {
       id: "rent",
-      title: "Kiralık Rezidanslar",
+      title: "Kiralık İlanlar",
       subtitle: "Seçkin Konumlar & Lüks Yaşam",
       bgImage: "https://unsplash.com",
       queryParam: "filter[listingType]=rent"
@@ -25,7 +25,7 @@ const HomeCategories = () => {
       title: "Devren Yatırımlar",
       subtitle: "Hazır Ticari Portföy Fırsatları",
       bgImage: "https://unsplash.com",
-      queryParam: "filter[listingType]=transfer_sale" // Seamless route handler targeting your existing backend transfer enums
+      queryParam: "filter[listingType]=transfer_sale&" // Seamless route handler targeting your existing backend transfer enums
     }
   ];
 

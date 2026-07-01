@@ -8,8 +8,8 @@ const ContactInfo = () => {
           Merkez Ofis
         </h3>
         <p className="text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed">
-          Lüks Konut Grubu Bölümü <br />
-          MaviBulvar <br />
+          YeşilYurt Mh. MaviBulvar Girişi <br />
+          Sezer 4 Apartmanı Altı No: 13 <br />
           Seyhan, Adana / Türkiye
         </p>
       </div>
@@ -19,12 +19,12 @@ const ContactInfo = () => {
           Doğrudan İletişim
         </h3>
         <p className="text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed">
-          Müşteri İlişkileri:{" "}
+          İletişim Numarası:{" "}
           <span className="font-normal text-brand-gold">
-            +90 (322) 555 0100
+            +90 (506) 793 1320
           </span>{" "}
           <br />
-          Genel Sekreterlik:{" "}
+          Merkez Ofis:{" "}
           <span className="font-normal text-brand-gold">
             +90 (322) 555 0101
           </span>
@@ -33,7 +33,7 @@ const ContactInfo = () => {
 
       <div className="flex flex-col gap-2">
         <h3 className="text-xl font-serif text-slate-800 dark:text-white tracking-wide">
-          E-Posta Adresleri
+          E-Posta Adresi
         </h3>
         <p className="text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed">
           Genel Bilgi:{" "}
@@ -41,10 +41,6 @@ const ContactInfo = () => {
             info@gorkememlak.com
           </span>{" "}
           <br />
-          Yatırım Ortaklığı:{" "}
-          <span className="text-slate-700 dark:text-slate-300 font-normal">
-            investment@gorkememlak.com
-          </span>
         </p>
       </div>
 
