@@ -147,7 +147,7 @@ const PropertyFeaturesPanel = ({ property }) => {
         onClick={() => navigate("/contact")}
         className="btn-premium w-full py-4 text-center font-semibold tracking-widest shadow-md mt-2"
       >
-        Yatırım Talebi Oluştur
+        İletişime Geç
       </button>
     </div>
   );

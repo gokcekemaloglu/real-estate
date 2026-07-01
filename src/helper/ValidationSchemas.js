@@ -60,12 +60,19 @@ export const PropertySchema = Yup.object().shape({
   roomCount: Yup.string()
     .required("Oda sayısı zorunludur (Örn: 3+1)."),
   bathroomCount: Yup.number()
+    .transform((value, originalValue) => originalValue === "" ? null : value)
     .min(0, "Banyo sayısı negatif olamaz.")
     .nullable(),
   totalFloors: Yup.number()
+    .transform((value, originalValue) => originalValue === "" ? null : value)
     .positive("Toplam kat sayısı pozitif bir sayı olmalıdır.")
     .nullable(),
+  buildingAge: Yup.number()
+    .transform((value, originalValue) => originalValue === "" ? null : value)
+    .min(0, "Bina yaşı negatif olamaz.")
+    .nullable(),
   maintenanceFee: Yup.number()
+    .transform((value, originalValue) => originalValue === "" ? null : value)
     .min(0, "Aidat bedeli negatif olamaz.")
     .nullable(),
   occupancyStatus: Yup.string()
@@ -90,12 +97,22 @@ export const CustomerSchema = Yup.object().shape({
     .min(10, "Telefon numarası en az 10 hane olmalıdır.")
     .required("Telefon numarası girmek zorunludur (Sistemde benzersiz olmalıdır)."),
   email: Yup.string()
-    .email("Geçersiz e-posta adresi biçimi!"),
+    .email("Geçersiz e-posta adresi biçimi!")
+    .notRequired()
+    .nullable(),
   citizenshipId: Yup.string()
+    .transform((value, originalValue) => originalValue === "" ? null : value)
     .matches(/^[0-9]*$/, "TC Kimlik numarası sadece rakamlardan oluşabilir.")
-    .length(11, "TC Kimlik numarası tam 11 hane olmalıdır."),
+    .length(11, "TC Kimlik numarası tam 11 hane olmalıdır.")
+    .nullable()
+    .notRequired(),
   address: Yup.string()
-    .max(300, "Adres tanımı çok uzun!"),
+    .max(300, "Adres tanımı çok uzun!")
+    .notRequired()
+    .nullable(),
+  isActive: Yup.boolean()
+    .default(true)
+    .required("Müşteri aktiflik durumu zorunludur."),
 });
 
 export const ProfileUpdateSchema = Yup.object().shape({
@@ -113,6 +130,16 @@ export const ProfileUpdateSchema = Yup.object().shape({
   email: Yup.string()
     .email("Geçersiz e-posta adresi biçimi!")
     .required("E-posta adresi zorunludur!"),
+  phone: Yup.string()
+    .transform((value, originalValue) => originalValue === "" ? null : value)
+    .matches(/^[0-9]*$/, "Telefon numarası sadece rakamlardan oluşmalıdır.")
+    .min(10, "Telefon numarası en az 10 hane olmalıdır.")
+    .notRequired()
+    .nullable(),
+  address: Yup.string()
+    .max(300, "Adres tanımı çok uzun!")
+    .notRequired()
+    .nullable(),
 });
 
 // Comprehensive security schema mapped precisely for your changeMyPassword controller boundaries
@@ -125,14 +152,11 @@ export const PasswordChangeSchema = Yup.object().shape({
     .matches(/\d+/, "En az bir rakam içermelidir!")
     .matches(/[a-z]/, "En az bir küçük harf içermelidir!")
     .matches(/[A-Z]/, "En az bir büyük harf içermelidir!")
-    .matches(
-      /[@$%&?!*]+/,
-      "(@$%&?!*) özel karakterlerinden en az bir tanesini içermelidir!",
-    )
+    .matches(/[@$%&?!*]+/, "(@$%&?!*) özel karakterlerinden en az bir tanesini içermelidir!")
     // Avoid user mapping their old credentials directly as the new password layer
     .notOneOf([Yup.ref("currentPassword")], "Yeni şifreniz mevcut şifrenizle aynı olamaz!"),
   retypePassword: Yup.string()
     .required("Şifre tekrarı alanı zorunludur!")
-    // FIXED BEST PRACTICE: Explicitly forces strict string comparisons to guarantee retype matching bounds
+    //Explicitly forces strict string comparisons to guarantee retype matching bounds
     .oneOf([Yup.ref("newPassword"), null], "Yeni şifreleriniz birbiriyle eşleşmiyor!"),
 });

@@ -67,7 +67,7 @@ const AppRouter = () => {
                 <Route path="customers" element={<AdminCustomers />} />
                 <Route path="customers/create" element={<AdminCustomerForm />} />
                 <Route path="customers/edit/:id" element={<AdminCustomerForm />} />
-                <Route element={<AdminCustomerDetail />} />
+                <Route path="customers/detail/:id" element={<AdminCustomerDetail />} />
 
                 <Route path="users" element={<AdminUsers />} />
                 <Route path="users/detail/:id" element={<AdminUserDetail />} />
