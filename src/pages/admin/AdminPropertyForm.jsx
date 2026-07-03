@@ -135,7 +135,7 @@ const AdminPropertyForm = () => {
       {/* Main Unified Submission Form Framework */}
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6">
         <FormBlockImage propertyId={id} isEditMode={isEditMode}/>
-        <FormBlockTitle formik={formik} hasTitleError={formik.touched.title && formik.errors.title} hasDescError={formik.touched.description && formik.errors.description} />
+        <FormBlockTitle formik={formik}/>
         <FormBlockPrice formik={formik} listingTypeOptions={listingTypeOptions} categoryOptions={categoryOptions} />
         <FormBlockLocation formik={formik} districtOptions={districtOptions} />
         <FormBlockOwner formik={formik} customerOptions={customerOptions} />
