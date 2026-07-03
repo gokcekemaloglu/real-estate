@@ -26,7 +26,7 @@ const FormBlockLocation = ({formik, districtOptions}) => {
       <FormInput
         label="Mahalle"
         name="neighbourhood"
-        placeholder="Mahalle..."
+        placeholder="Mahalle"
         formikProps={formik}
         required= {true}
         disabled={formik.isSubmitting}

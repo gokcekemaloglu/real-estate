@@ -85,10 +85,10 @@ const Profile = () => {
             </button>
           </div>
 
-          {/* Block C: Isolated Change Password Formik Sub-matrix Module */}
-          <ProfileChangePasswordForm currentUserId={currentUserId} />
 
         </form>
+        {/* Block C: Isolated Change Password Formik Sub-matrix Module */}
+        <ProfileChangePasswordForm currentUserId={currentUserId} />
 
         <ProfileDeleteForm currentUserId={currentUserId}/>
 

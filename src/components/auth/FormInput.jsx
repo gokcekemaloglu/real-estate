@@ -9,6 +9,7 @@ const FormInput = ({
   formikProps,
   required = false,
   disabled = false,
+  maxLength={undefined}
 }) => {
   const { values, errors, touched, handleChange, handleBlur } = formikProps;
   const hasError = touched[name] && errors[name];

@@ -11,11 +11,7 @@ const FormBlockToggles = ({formik}) => {
       <FormToggleField label="Eşyalı Mülk" name="isFurnished" formik={formik} />
       <FormToggleField label="Asansör" name="hasElevator" formik={formik} />
       <FormToggleField label="Otopark" name="hasParking" formik={formik} />
-      <FormToggleField
-        label="Krediye Uygun"
-        name="isLoanEligible"
-        formik={formik}
-      />
+      <FormToggleField label="Krediye Uygun" name="isLoanEligible" formik={formik}/>
     </div>
   );
 };
