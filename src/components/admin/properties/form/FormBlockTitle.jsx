@@ -10,9 +10,9 @@ const FormBlockTitle = ({ formik }) => {
       </h3>
 
       <FormInput
-        label={"İlan Başlığı"}
-        name={"title"}
-        placeholder={"Seyhan'da Havuzlu Lüks Müstakil Villa..."}
+        label="İlan Başlığı"
+        name="title"
+        placeholder="Seyhan'da Havuzlu Lüks Müstakil Villa..."
         formikProps={formik}
         required= {true}
         disabled={formik.isSubmitting}

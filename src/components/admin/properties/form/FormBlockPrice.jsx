@@ -1,5 +1,6 @@
 import React from "react";
 import FormSelectField from "./FormSelectField";
+import FormInput from "../../../auth/FormInput";
 
 const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
   return (
@@ -8,7 +9,16 @@ const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
         2. Durum & Fiyatlandırma
       </h3>
       {/* Selling Price Input Field */}
-      <div className="flex flex-col gap-1.5">
+      <FormInput
+        label="Fiyat (₺)"
+        name="price"
+        type="number"
+        placeholder="Fiyat (₺)"
+        formikProps={formik}
+        required= {true}
+        disabled={formik.isSubmitting}
+      />
+      {/* <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
           Fiyat (₺)
         </label>
@@ -26,9 +36,18 @@ const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
             {formik.errors.price}
           </span>
         )}
-      </div>
+      </div> */}
       {/* Monthly Operational Maintenance Fee Input Field */}
-      <div className="flex flex-col gap-1.5">
+      <FormInput
+        label="Aylık Aidat (₺)"
+        name="maintenanceFee"
+        type="number"
+        placeholder="Aylık Aidat (₺)"
+        formikProps={formik}
+        required= {true}
+        disabled={formik.isSubmitting}
+      />
+      {/* <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
           Aylık Aidat (₺)
         </label>
@@ -40,7 +59,7 @@ const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
           onChange={formik.handleChange}
           className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
         />
-      </div>
+      </div> */}
 
       <FormSelectField
         label="İlan Durumu"
