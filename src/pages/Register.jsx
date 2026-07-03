@@ -44,9 +44,7 @@ const Register = () => {
         ></Formik>
         
         {/* Bottom Link */}
-
         <AuthFooterLink text={"Zaten bir hesabınız var mı?"} linkText={"Giriş Yapın!"} to={"/login"}/>
-
       </div>
 
       {/* Decorative Blur Gradients */}

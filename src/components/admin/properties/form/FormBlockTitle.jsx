@@ -1,4 +1,5 @@
 import React from "react";
+import FormInput from "../../../auth/FormInput";
 
 const FormBlockTitle = ({ formik, hasTitleError, hasDescError }) => {
   return (
@@ -7,25 +8,14 @@ const FormBlockTitle = ({ formik, hasTitleError, hasDescError }) => {
         1. Başlık & Mimari Tanım
       </h3>
 
-      <div className="flex flex-col gap-1.5">
-        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
-          İlan Başlığı
-        </label>
-        <input
-          type="text"
-          name="title"
-          placeholder="Seyhan'da Havuzlu Lüks Müstakil Villa..."
-          value={formik.values.title}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={`input-premium bg-slate-50/50 dark:bg-slate-950/20 ${hasTitleError ? "border-red-500 focus:border-red-500" : ""}`}
-        />
-        {hasTitleError && (
-          <span className="text-[11px] text-red-500 font-light mt-1">
-            {formik.errors.title}
-          </span>
-        )}
-      </div>
+      <FormInput
+        label={"İlan Başlığı"}
+        name={"title"}
+        placeholder={"Seyhan'da Havuzlu Lüks Müstakil Villa..."}
+        formikProps={formik}
+        required= {true}
+        disabled={isSubmitting}
+      />
 
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">

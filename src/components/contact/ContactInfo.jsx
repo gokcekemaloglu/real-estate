@@ -26,7 +26,7 @@ const ContactInfo = () => {
           <br />
           Merkez Ofis:{" "}
           <span className="font-normal text-brand-gold">
-            +90 (322) 555 0101
+            +90 (322) 226 4704
           </span>
         </p>
       </div>

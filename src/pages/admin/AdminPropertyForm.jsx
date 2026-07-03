@@ -6,7 +6,6 @@ import { PropertySchema } from '../../helper/ValidationSchemas'
 import usePropertyCall from '../../hooks/usePropertyCall'
 import { fetchStart as custStart, fetchFail as custFail, setData as custSet } from '../../features/customerSlice'
 
-// Abstracted sub-block components imports
 import FormBlockTitle from '../../components/admin/properties/form/FormBlockTitle'
 import FormBlockPrice from '../../components/admin/properties/form/FormBlockPrice'
 import FormBlockLocation from '../../components/admin/properties/form/FormBlockLocation'

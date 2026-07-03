@@ -16,17 +16,11 @@ const Properties = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { fetchData } = useFetchData();
 
-  const { properties, loading, propertiesDetails, propertyImages } =
-    useSelector((state) => state.property);
-
+  const { properties, loading, propertiesDetails, propertyImages } = useSelector((state) => state.property);
   // console.log("Properties-->", properties);
-  const activePage = searchParams.get("page")
-    ? Number(searchParams.get("page"))
-    : 1;
+  const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
-  const [viewMode, setViewMode] = useState(
-    () => localStorage.getItem("gorkem_view_mode") || "grid",
-  );
+  const [viewMode, setViewMode] = useState(() => localStorage.getItem("gorkem_view_mode") || "grid");
 
   useEffect(() => {
     localStorage.setItem("gorkem_view_mode", viewMode);
@@ -91,11 +85,6 @@ const Properties = () => {
           totalRecords={propertiesDetails?.totalRecords || 0}
         />
 
-        {/* {loading ? (
-          <div className="flex items-center justify-center min-h-100">
-            <div className="w-12 h-12 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
-          </div>
-        ) : ( */}
         <div
           className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`}
         >
@@ -103,7 +92,7 @@ const Properties = () => {
             <div className="border-dashed py-20 text-center">...</div>
           ) : (
             <>
-              {/* FIXED SYSTEM LAYOUT MATRIX: Alternates components flawlessly using your local viewMode state controls */}
+              {/* Alternates components flawlessly using local viewMode state controls */}
               {viewMode === "grid" ? (
                 // Grid View: Uses standard 3-column matrix card templates safely
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
@@ -116,13 +105,13 @@ const Properties = () => {
                   ))}
                 </div>
               ) : (
-                // Row View: Transforms dynamically into a beautifully spaced single-column full width stream
+                // Row View: Transforms dynamically into a single-column full width stream
                 <div className="flex flex-col gap-5">
                   {properties?.map((singleProperty) => (
                     <PropertyRowCard
                       property={singleProperty}
                       key={singleProperty._id}
-                      propertyImages={propertyImages} // Feeds relational buffer pools securely into the row layout
+                      propertyImages={propertyImages}
                     />
                   ))}
                 </div>
@@ -132,7 +121,6 @@ const Properties = () => {
             </>
           )}
         </div>
-        {/* )} */}
         {loading && (
           <div className="fixed top-24 right-6 z-40 w-5 h-5 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
         )}

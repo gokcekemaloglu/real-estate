@@ -10,7 +10,6 @@ const PropertyDetail = () => {
   const {id} = useParams()
   const navigate = useNavigate()
   const {getSinglePropertyData} = usePropertyCall()
-
   const {property, loading} = useSelector(state => state.property)
 
   useEffect(() => {
@@ -34,7 +33,6 @@ const PropertyDetail = () => {
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        
         {/* Back Navigation Action Link */}
         <button 
           onClick={() => navigate("/properties")}
@@ -42,23 +40,16 @@ const PropertyDetail = () => {
         >
           ← Tüm İlanlara Dön
         </button>
-
         {/* Core Detail Grid Layout split into image presentation and structural specification metrics */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
           {/* Left Column (7-Cols): Image Box Showcase */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             <PropertyGallery title = {property?.title} listingType = {property?.listingType} propertyId={property?._id}/>
-            
             {/* Description Paragraph Text Block */}
             <PropertyDescription description={property?.description}/>
-            
           </div>
-
           {/* Right Column (5-Cols): Luxury Price, Title & Specs Dashboard */}
           <PropertyFeaturesPanel property={property}/>
-          
-
         </div>
       </div>
     </div>

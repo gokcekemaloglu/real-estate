@@ -16,6 +16,8 @@ const LoginForm = (props) => {
         name={"userNameOrEmail"} // Matches the key name in SignInSchema and initialValues
         placeholder={"gorkememlak veya isim@gorkememlak.com"}
         formikProps={props}
+        required= {true}
+        disabled={isSubmitting}
       />
 
       <FormInput
@@ -24,6 +26,8 @@ const LoginForm = (props) => {
         type="password"
         placeholder={"••••••••"}
         formikProps={props}
+        required= {true}
+        disabled={isSubmitting}
       />
 
       <button

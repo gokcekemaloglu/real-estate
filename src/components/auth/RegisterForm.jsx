@@ -20,6 +20,8 @@ const RegisterForm = (props) => {
         name={"userName"}
         placeholder={"gorkememlak"}
         formikProps={props}
+        required= {true}
+        disabled={isSubmitting}
       />
       {/* Firstname and lastname grid */}
       <div className="grid grid-cols-2 gap-4">
@@ -28,12 +30,16 @@ const RegisterForm = (props) => {
           name={"firstName"}
           placeholder={"Adınız"}
           formikProps={props}
+          required= {true}
+          disabled={isSubmitting}
         />
         <FormInput
           label={"Soy Ad"}
           name={"lastName"}
           placeholder={"Soyadınız"}
           formikProps={props}
+          required= {true}
+          disabled={isSubmitting}
         />
       </div>
       <FormInput
@@ -41,6 +47,8 @@ const RegisterForm = (props) => {
         name={"email"}
         placeholder={"isim@gorkememlak.com"}
         formikProps={props}
+        required= {true}
+        disabled={isSubmitting}
       />
       <FormInput
         label={"Şifre"}
@@ -48,6 +56,8 @@ const RegisterForm = (props) => {
         type="password"
         placeholder={"••••••••"}
         formikProps={props}
+        required= {true}
+        disabled={isSubmitting}
       />
       <button
         type="submit"

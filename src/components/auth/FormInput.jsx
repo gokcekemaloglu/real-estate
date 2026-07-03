@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
 
-// Reusable atomic field component to abstract standard input template logic and errors smoothly
 const FormInput = ({
   label,
   name,
   type = "text",
   placeholder,
   formikProps,
+  required = false,
+  disabled = false,
 }) => {
   const { values, errors, touched, handleChange, handleBlur } = formikProps;
-  // Computes validation failure boundary condition to inject luxury red border accent
   const hasError = touched[name] && errors[name];
   const [showPassword, setShowPassword] = useState(false)
   const isPasswordType = type === "password"
@@ -24,10 +24,11 @@ const FormInput = ({
         <input
           name={name}
           type={computedType}
-          value={values[name]}
+          value={values[name] ?? ""}
           onChange={handleChange}
           onBlur={handleBlur}
-          required
+          required={required}
+          disabled={disabled}
           placeholder={placeholder}
           className={`input-premium ${hasError ? "border-red-500 focus:border-red-500" : ""}`}
         />
