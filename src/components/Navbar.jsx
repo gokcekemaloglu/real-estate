@@ -15,7 +15,7 @@ const Navbar = () => {
   const dropdownRef = useRef(null);
   const { logout } = useAuthCall();
 
-  const { token, currentUser, isAdmin, currentUserInfo } = useSelector((state) => state.auth);
+  const { token, currentUser, isAdmin, currentUserInfo, currentUserId } = useSelector((state) => state.auth);
   // console.log(token);
   // console.log(currentUser);
   // console.log(currentUserInfo);
@@ -66,7 +66,7 @@ const Navbar = () => {
               {isDropdownOpen && (
                 <UserDropdown
                   currentUser={currentUser} 
-                  // currentUserInfo={currentUserInfo} 
+                  currentUserId={currentUserId} 
                   isAdmin={isAdmin} 
                   logout={logout} 
                   setIsDropdownOpen={setIsDropdownOpen} 

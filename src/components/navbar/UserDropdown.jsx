@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const UserDropdown = ({ currentUser, isAdmin, logout, setIsDropdownOpen }) => {
+const UserDropdown = ({ currentUser, isAdmin, logout, setIsDropdownOpen, currentUserId }) => {
   return (
     <div className="absolute right-0 top-12 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl animate-fade-in font-display z-50 text-xs text-slate-600 dark:text-slate-300">
       
@@ -16,7 +16,7 @@ const UserDropdown = ({ currentUser, isAdmin, logout, setIsDropdownOpen }) => {
         
         {/* Account Profile Management Portal Gateway */}
         <Link 
-          to="/profile" 
+          to={`/profile/${currentUserId}`} 
           onClick={() => setIsDropdownOpen(false)}
           className="px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-950/40 hover:text-brand-gold flex items-center justify-between group transition-colors duration-200"
         >

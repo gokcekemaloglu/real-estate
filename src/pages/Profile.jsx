@@ -53,7 +53,6 @@ const Profile = () => {
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col gap-6">
-        
         {/* Header Toolbar Title Section */}
         <div className="flex flex-col gap-1 border-b border-slate-100 dark:border-slate-800 pb-4">
           <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-medium block">
@@ -63,35 +62,25 @@ const Profile = () => {
             Hesap Bilgilerim / <span className="italic text-brand-gold dark:text-amber-400">Profil Ayarları</span>
           </h1>
         </div>
-
         {/* Main Formik Submission Pipeline Wrapper */}
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6">
-          
           {/* Block A: Dynamic Avatar Profile Picture Element Showcase */}
           <ProfileAvatar currentUser={currentUser} user={user} />
-
           {/* Block B: Identity Personal Information Fields Grid */}
           <ProfileUpdateForm formik={formik} />
-
-          
-
           {/* Core Submit Operations Action Row */}
           <div className="flex justify-end pt-2 border-t border-slate-100 dark:border-slate-800">
             <button 
               type="submit" 
+              disabled={formik?.isSubmitting}
               className="btn-premium px-10 py-3.5 text-xs font-semibold uppercase tracking-widest cursor-pointer shadow-md"
             >
-              Değişiklikleri Kaydet
+              {formik?.isSubmitting ? "Güncelleniyor..." : "Değişiklikleri Kaydet"}
             </button>
           </div>
-
-
         </form>
-        {/* Block C: Isolated Change Password Formik Sub-matrix Module */}
         <ProfileChangePasswordForm currentUserId={currentUserId} />
-
         <ProfileDeleteForm currentUserId={currentUserId}/>
-
       </div>
     </div>
   );
