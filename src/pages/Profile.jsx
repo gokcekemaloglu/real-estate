@@ -10,7 +10,7 @@ import ProfileDeleteForm from "../components/profile/ProfileDeleteForm";
 
 const Profile = () => {
   const { getSingleUserData, updateMe } = useUserCall()
-  const { currentUserId, currentUser } = useSelector((state) => state.auth)
+  const { currentUserId, currentUser, isAdmin } = useSelector((state) => state.auth)
   const { user, loading } = useSelector((state) => state.users)
 
   // 1. Fetch user records from database as soon as viewport mounts safely
@@ -80,7 +80,7 @@ const Profile = () => {
           </div>
         </form>
         <ProfileChangePasswordForm currentUserId={currentUserId} />
-        <ProfileDeleteForm currentUserId={currentUserId}/>
+        {!isAdmin && <ProfileDeleteForm currentUserId={currentUserId}/>}
       </div>
     </div>
   );

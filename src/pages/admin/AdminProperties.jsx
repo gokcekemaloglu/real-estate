@@ -33,7 +33,6 @@ const AdminProperties = () => {
       page: activePage,
       limit: 15,
       query: cleanBracketsQueryString,
-      isWithToken: true,
     });
     fetchData({
       endpoint: "property-images",
@@ -45,7 +44,6 @@ const AdminProperties = () => {
       },
       page: 1,
       limit: 200, // Fetch a broad buffer list to map list thumbnail images cleanly
-      isWithToken: true,
     });
   };
 
