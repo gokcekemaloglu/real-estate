@@ -1,6 +1,6 @@
 export const getNavigationRoutes = (isAdmin, token, currentUserId) => {
   const routes = [
-    { path: "/", label: "Ana Sayfa" },
+    { path: "/", label: "Anasayfa" },
     { path: "/properties", label: "İlanlar" },
     { path: "/about", label: "Hakkımızda" },
     { path: "/contact", label: "İletİşİm" },

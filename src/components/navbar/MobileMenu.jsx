@@ -50,13 +50,3 @@ const MobileMenu = ({ setIsOpen, logout, currentUser, token, isAdmin, currentUse
 };
 
 export default MobileMenu;
-
-{
-  /* 
-
-  <Link to="/" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Ana Sayfa</Link>
-  <Link to="/properties" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İlanlar</Link>
-  <Link to="/about" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Hakkımızda</Link>
-  <Link to="/contact" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İletişim</Link>
-  {isAdmin && <Link to="/admin" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Admin Panel</Link>} */
-}
