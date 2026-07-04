@@ -21,7 +21,6 @@ const AdminProperties = () => {
 
   const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
-  // Radar layout re-fetching records data dynamically inside admin dashboard scopes
   const loadAdminPropertyData = () => {
     const activeParams = new URLSearchParams(searchParams);
     activeParams.delete("page");
@@ -44,7 +43,7 @@ const AdminProperties = () => {
         setData 
       },
       page: 1,
-      limit: 200, // Fetch a broad buffer list to map list thumbnail images cleanly
+      limit: 200,
     });
   };
 

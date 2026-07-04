@@ -50,7 +50,6 @@ const AdminUsers = () => {
 
   const handleClearFilters = () => {
     setSearchParams({ page: "1" }, { replace: true })
-    window.location.reload()
   }
 
   return (
