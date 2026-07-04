@@ -1,29 +1,52 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import { getNavigationRoutes } from "../../helper/navigationRoutes";
 
-const MobileMenu = ({setIsOpen, logout, currentUser, token, isAdmin}) => {
+const MobileMenu = ({ setIsOpen, logout, currentUser, token, isAdmin, currentUserId }) => {
+  const activeRoutes = getNavigationRoutes(isAdmin, token, currentUserId);
   return (
-     <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-slate-800 px-6 py-6 flex flex-col gap-6 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 animate-fade-in transition-colors duration-300">
-          <Link to="/" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Ana Sayfa</Link>
-          <Link to="/properties" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İlanlar</Link>
-          <Link to="/about" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Hakkımızda</Link>
-          <Link to="/contact" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">İletişim</Link>
-          {isAdmin && <Link to="/admin" onClick={() => setIsOpen(false)} className="hover:text-brand-gold">Admin Panel</Link>}
-          
-          {token ? (
-            <button 
-              onClick={() => { setIsOpen(false); logout(); }} 
-              className="btn-premium text-center py-3 mt-2"
-            >
-              Çıkış Yap ({currentUser})
-            </button>
-          ) : (
-            <Link to="/login" onClick={() => setIsOpen(false)} className="btn-premium text-center py-3 mt-2">
-              Giriş Yap
-            </Link>
+    <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-slate-800 px-6 py-6 flex flex-col gap-6 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 animate-fade-in transition-colors duration-300">
+      {activeRoutes?.map((route) => (
+        <NavLink
+          key={route.path}
+          to={route.path}
+          onClick={() => setIsOpen(false)}
+          className={({ isActive }) =>
+            `hover:text-brand-gold transition-colors flex items-center justify-between ${
+              isActive ? "text-brand-gold font-semibold" : ""
+            }`
+          }
+        >
+          <span>{route.label}</span>
+          {/* Subtle luxury dot parlatıcı tracking indicator active routes paths */}
+          {window.location.pathname === route.path && (
+            <span className="text-brand-gold font-sans">●</span>
           )}
-        </div>
-  )
-}
+        </NavLink>
+      ))}
 
-export default MobileMenu
+      {token ? (
+        <button
+          type="button"
+          onClick={() => {
+            setIsOpen(false);
+            logout();
+          }}
+          className="btn-premium text-center py-3 mt-2"
+        >
+          Çıkış Yap ({currentUser})
+        </button>
+      ) : (
+        <Link
+          to="/login"
+          onClick={() => setIsOpen(false)}
+          className="btn-premium text-center py-3 mt-2"
+        >
+          Giriş Yap
+        </Link>
+      )}
+    </div>
+  );
+};
+
+export default MobileMenu;

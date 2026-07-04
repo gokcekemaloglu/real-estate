@@ -18,25 +18,7 @@ const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
         required= {true}
         disabled={formik.isSubmitting}
       />
-      {/* <div className="flex flex-col gap-1.5">
-        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
-          Fiyat (₺)
-        </label>
-        <input
-          type="number"
-          name="price"
-          placeholder="4500000"
-          value={formik.values.price ?? ""}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={`input-premium bg-slate-50/50 dark:bg-slate-950/20 ${formik.touched.price && formik.errors.price ? "border-red-500 focus:border-red-500" : ""}`}
-        />
-        {formik.touched.price && formik.errors.price && (
-          <span className="text-[11px] text-red-500 font-light mt-1">
-            {formik.errors.price}
-          </span>
-        )}
-      </div> */}
+      
       {/* Monthly Operational Maintenance Fee Input Field */}
       <FormInput
         label="Aylık Aidat (₺)"
@@ -46,20 +28,7 @@ const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
         formikProps={formik}
         disabled={formik.isSubmitting}
       />
-      {/* <div className="flex flex-col gap-1.5">
-        <label className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
-          Aylık Aidat (₺)
-        </label>
-        <input
-          type="number"
-          name="maintenanceFee"
-          placeholder="750"
-          value={formik.values.maintenanceFee ?? ""}
-          onChange={formik.handleChange}
-          className="input-premium bg-slate-50/50 dark:bg-slate-950/20"
-        />
-      </div> */}
-
+      {/* Listing Type Select Field */}
       <FormSelectField
         label="İlan Durumu"
         name="listingType"

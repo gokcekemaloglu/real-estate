@@ -131,11 +131,10 @@ export const ProfileUpdateSchema = Yup.object().shape({
     .email("Geçersiz e-posta adresi biçimi!")
     .required("E-posta adresi zorunludur!"),
   phone: Yup.string()
-    .transform((value, originalValue) => originalValue === "" ? null : value)
+    .transform((value, originalValue) => originalValue === "" ? undefined : value)
     .matches(/^[0-9]*$/, "Telefon numarası sadece rakamlardan oluşmalıdır.")
     .min(10, "Telefon numarası en az 10 hane olmalıdır.")
-    .notRequired()
-    .nullable(),
+    .notRequired(),
   address: Yup.string()
     .max(300, "Adres tanımı çok uzun!")
     .notRequired()
