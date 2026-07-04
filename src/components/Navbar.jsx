@@ -16,10 +16,6 @@ const Navbar = () => {
   const { logout } = useAuthCall();
 
   const { token, currentUser, isAdmin, currentUserInfo, currentUserId } = useSelector((state) => state.auth);
-  // console.log(token);
-  // console.log(currentUser);
-  // console.log(currentUserInfo);
-  // console.log(isAdmin);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -120,6 +116,7 @@ const Navbar = () => {
           currentUser={currentUser}
           token={token}
           isAdmin={isAdmin}
+          currentUserId={currentUserId}
         />
       )}
     </nav>

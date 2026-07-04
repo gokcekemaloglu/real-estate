@@ -18,7 +18,6 @@ const useFetchData = () => {
       // Automated Authorization Routing Shield: Detects if the admin manager is accessing a path starting with the explicit administrative layout bounds.
       const isNavigatingAdminScope = window.location.pathname.startsWith("/admin");
 
-
       const axiosEngine = (token && isAdmin && isNavigatingAdminScope) ? axiosWithToken : axiosPublic
 
       // 3. Dispatch global request directly through pre-configured axios bundles
@@ -36,7 +35,6 @@ const useFetchData = () => {
       SweetNotify(errorMsg, SweetAlertIcons.ERROR);
     }
   };
-
   return { fetchData };
 };
 
