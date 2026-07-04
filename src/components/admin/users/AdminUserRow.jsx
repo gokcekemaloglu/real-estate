@@ -1,6 +1,7 @@
 import React from "react";
 
 const AdminUserRow = ({ user, handleStatusToggle, handleDelete, onDetailClick }) => {
+  console.log(user)
   const defaultAvatar = "https://unsplash.com";
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in">
@@ -71,12 +72,12 @@ const AdminUserRow = ({ user, handleStatusToggle, handleDelete, onDetailClick })
           >
             İncele
           </button>
-          <button
+          {!user?.isAdmin && <button
             onClick={handleDelete}
             className="text-[9px] w-full px-3 py-1 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 cursor-pointer uppercase tracking-widest font-medium text-center"
           >
             Sil
-          </button>
+          </button>}
         </div>
       </div>
     </div>
