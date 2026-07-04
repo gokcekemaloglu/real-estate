@@ -39,7 +39,7 @@ const AdminPropertyForm = () => {
       sliceActions: { fetchStart: custStart, fetchFail: custFail, setData: custSet },
       page: 1,
       limit: 100, // Fetch a wide list to populate the dropdown filter completely
-      isWithToken: true,
+      // isWithToken: true,
     });
   }, []);
 

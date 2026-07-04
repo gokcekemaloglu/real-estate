@@ -30,7 +30,7 @@ const AdminUsers = () => {
       page: activePage,
       limit: 20,
       query: cleanBracketsQueryString,
-      isWithToken: true,
+      // isWithToken: true,
     });
   };
 

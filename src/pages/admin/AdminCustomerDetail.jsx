@@ -43,7 +43,6 @@ const AdminCustomerDetail = () => {
         },
         page: 1,
         limit: 100,
-        isWithToken: false
       });
     }
   }, [id]);

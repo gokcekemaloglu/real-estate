@@ -15,7 +15,7 @@ const DashboardHome = () => {
       sliceActions: { fetchStart, fetchFail, setData },
       page: 1,
       limit: 1000, // Broad limit to calculate statistical charts accurately
-      isWithToken: true
+      // isWithToken: true
     })
   }, [])
 
