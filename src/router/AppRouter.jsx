@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Footer from '../components/Footer'
 import AuthRoute from "./AuthRoute";
 import UserLayout from "../components/UserLayout";
+import ScrollToTop from "../components/ScrollToTop";
 // import AdminLayout from '../components/admin/AdminLayout'
 
 // Performance Optimization via Lazy Loading (Code Splitting)
@@ -40,6 +41,7 @@ const AppRouter = () => {
   return (
     <Router>
       {/* <Navbar/> */}
+      <ScrollToTop/>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<UserLayout />}>
