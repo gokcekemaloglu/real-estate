@@ -8,6 +8,7 @@ import AdminUserRow from "../../components/admin/users/AdminUserRow";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PaginationComponent from "../../components/properties/PaginationComponent";
 import AdminSearchFilters from "../../components/admin/AdminSearchFilters";
+import AdminActiveFilter from "../../components/admin/AdminActiveFilter";
 
 const AdminUsers = () => {
   const navigate = useNavigate();
@@ -30,7 +31,6 @@ const AdminUsers = () => {
       page: activePage,
       limit: 20,
       query: cleanBracketsQueryString,
-      // isWithToken: true,
     });
   };
 
@@ -50,7 +50,7 @@ const AdminUsers = () => {
 
   const handleClearFilters = () => {
     setSearchParams({ page: "1" }, { replace: true })
-    window.location.reload() // Hard reload to quickly reset internal dropdown state arrays smoothly
+    window.location.reload()
   }
 
   return (
@@ -61,12 +61,12 @@ const AdminUsers = () => {
           Sistem Üye & Kullanıcı Yönetimi
         </h1>
         <p className="text-[11px] text-slate-400 uppercase tracking-widest mt-0.5">
-          Kayıtlı sistem kullanıcıları, danışmanlar listesi ve hızlı erişim
-          yetki paneli
+          Kayıtlı sistem kullanıcıları, danışmanlar listesi ve hızlı erişim yetki paneli
         </p>
       </div>
 
       <AdminSearchFilters />
+      <AdminActiveFilter label="Kullanıcı Hesap Durumu" />
 
       <div className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`} >
         
@@ -88,11 +88,11 @@ const AdminUsers = () => {
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 text-center text-slate-400 uppercase tracking-widest text-xs font-light shadow-sm">
               <p className="text-sm font-light text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">Sistemde kayıtlı herhangi bir üye veya kullanıcı bulunamadı.</p>
               <button 
-                  onClick={handleClearFilters}
-                  className="btn-premium px-6 py-3 text-xs tracking-widest font-semibold"
-                >
-                  Filtreleri Temizle
-                </button>
+                onClick={handleClearFilters}
+                className="btn-premium px-6 py-3 text-xs tracking-widest font-semibold"
+              >
+                Filtreleri Temizle
+              </button>
             </div>
           )}
         </div>

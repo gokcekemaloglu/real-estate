@@ -1,9 +1,9 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import useFetchData from "../../../../hooks/useFetchData";
+import useFetchData from "../../hooks/useFetchData";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import {fetchFail, fetchStart, setData} from "../../../../features/customerSlice";
+import {fetchFail, fetchStart, setData} from "../../features/customerSlice";
 
 const AdminOwnerFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams();

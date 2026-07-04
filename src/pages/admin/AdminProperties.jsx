@@ -8,11 +8,12 @@ import AdminPropertyRow from "../../components/admin/properties/list/AdminProper
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PaginationComponent from "../../components/properties/PaginationComponent";
 import PropertyFilters from "../../components/properties/PropertyFilters";
-import AdminOwnerFilter from "../../components/admin/properties/form/AdminOwnerFilter";
+import AdminOwnerFilter from "../../components/admin/AdminOwnerFilter";
+import AdminActiveFilter from "../../components/admin/AdminActiveFilter";
 
 const AdminProperties = () => {
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const { fetchData } = useFetchData();
   const { togglePropertyStatus, toggleFeaturedStatus, deleteProperty } = usePropertyCall();
 
@@ -62,19 +63,25 @@ const AdminProperties = () => {
     loadAdminPropertyData();
   };
 
+  const handleClearFilters = () => {
+    setSearchParams({ page: "1" }, { replace: true })
+    // window.location.reload()
+  }
+
   return (
     <div className="flex flex-col gap-4 animate-fade-in">
       {/* Top action toolbar header block */}
       <AdminPropertyHeader />
-
       <PropertyFilters/>
-
-      <AdminOwnerFilter/>
-
+      <div className="flex flex-col md:flex-row gap-2 items-start md:items-center justify-between">
+        <AdminOwnerFilter/>
+        <AdminActiveFilter label="İlan Yayın Durumu"/>
+      </div>
       <div className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`} >
       {/* Hybrid Hybrid Row Cards Wrapper Framework */}
       <div className="flex flex-col gap-4 mt-4">
-        {properties?.map((property) => (
+        {properties?.length > 0 ? (
+          properties?.map((property) => (
           <AdminPropertyRow
             key={property._id}
             property={property}
@@ -84,7 +91,18 @@ const AdminProperties = () => {
             onEditClick={() => navigate(`/admin/properties/edit/${property?._id}`)}
             onDetailClick={() => navigate(`/admin/properties/detail/${property?._id}`)}
           />
-        ))}
+        ))
+        ) : (
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 text-center text-slate-400 uppercase tracking-widest text-xs font-light shadow-sm">
+            <p className="text-sm font-light text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">Kriterlere uygun veya sistemde kayıtlı herhangi bir mülk portföyü bulunamadı.</p>
+            <button 
+              onClick={handleClearFilters}
+              className="btn-premium px-6 py-3 text-xs tracking-widest font-semibold"
+            >
+              Filtreleri Temizle
+            </button>
+          </div>
+        )}
       </div>
       <PaginationComponent details={propertiesDetails} label={"İlan"}/>
       </div>

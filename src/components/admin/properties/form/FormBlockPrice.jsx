@@ -44,7 +44,6 @@ const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions}) => {
         type="number"
         placeholder="Aylık Aidat (₺)"
         formikProps={formik}
-        required= {true}
         disabled={formik.isSubmitting}
       />
       {/* <div className="flex flex-col gap-1.5">

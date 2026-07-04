@@ -75,7 +75,7 @@ const PropertyRowCard = ({ property, propertyImages }) => {
             <span className="text-slate-200 dark:text-slate-800">|</span>
             <span>🛏️ {property?.roomCount || "—"}</span>
             <span className="text-slate-200 dark:text-slate-800">|</span>
-            <span>🚿 {property?.bathroomCount ?? 0} Banyo</span>
+            <span>🚿 {property?.bathroomCount ?? "—"} Banyo</span>
           </div>
         </div>
 

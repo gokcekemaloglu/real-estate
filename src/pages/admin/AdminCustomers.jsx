@@ -9,6 +9,7 @@ import AdminCustomerRow from "../../components/admin/customers/AdminCustomerRow"
 import useFetchData from "../../hooks/useFetchData";
 import PaginationComponent from "../../components/properties/PaginationComponent";
 import AdminSearchFilters from "../../components/admin/AdminSearchFilters";
+import AdminActiveFilter from "../../components/admin/AdminActiveFilter";
 
 const AdminCustomers = () => {
   const navigate = useNavigate();
@@ -49,6 +50,11 @@ const AdminCustomers = () => {
     loadAdminCustomerData();
   };
 
+  const handleClearFilters = () => {
+    setSearchParams({ page: "1" }, { replace: true })
+    window.location.reload()
+  }
+
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
       {/* Top Action Toolbar Header Component */}
@@ -57,6 +63,7 @@ const AdminCustomers = () => {
       />
 
       <AdminSearchFilters />
+      <AdminActiveFilter label="Müşteri Hesap Durumu" />
 
       <div className={`transition-all duration-300 relative ${loading ? "opacity-40 pointer-events-none" : "opacity-100"}`} >
         {/* Hybrid Row Cards Wrapper Framework Section */}
@@ -78,7 +85,13 @@ const AdminCustomers = () => {
             ))
           ) : (
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 text-center text-slate-400 uppercase tracking-widest text-xs font-light shadow-sm">
-              Sistemde kayıtlı herhangi bir mülk sahibi portföyü bulunamadı.
+              <p className="text-sm font-light text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">Sistemde kayıtlı herhangi bir mülk sahibi portföyü bulunamadı.</p>
+              <button 
+                onClick={handleClearFilters}
+                className="btn-premium px-6 py-3 text-xs tracking-widest font-semibold"
+              >
+                Filtreleri Temizle
+              </button>
             </div>
           )}
         </div>

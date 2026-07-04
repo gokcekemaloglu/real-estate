@@ -1,7 +1,7 @@
 import React from "react";
 
 const AdminUserRow = ({ user, handleStatusToggle, handleDelete, onDetailClick }) => {
-  console.log(user)
+  // console.log(user)
   const defaultAvatar = "https://unsplash.com";
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in">
