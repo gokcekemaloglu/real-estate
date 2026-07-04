@@ -31,7 +31,7 @@ const FormBlockImage = ({ propertyId, isEditMode }) => {
           setData,
         },
         query: `filter[propertyId]=${propertyId}`,
-        isWithToken: true,
+        // isWithToken: true,
       });
     }
   };

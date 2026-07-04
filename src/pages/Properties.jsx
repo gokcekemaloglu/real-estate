@@ -54,7 +54,6 @@ const Properties = () => {
       },
       page: 1,
       limit: 150, // Buffers a safe spectrum length to filter cards accurately
-      isWithToken: false, // Public endpoints logic
     });
   };
 

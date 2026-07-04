@@ -14,14 +14,12 @@ const AdminCustomerDetail = () => {
   const { customer, loading } = useSelector((state) => state.customers);
   const { singleCustomerProperties, propertyImages } = useSelector((state) => state.property);
 
-  console.log(customer);
-  console.log(singleCustomerProperties);
-  
+  // console.log(customer);
+  // console.log(singleCustomerProperties);
 
   useEffect(() => {
     if (id) {
       getSingleCustomerData(id);
-      
       // Fetch base properties entries with a tight limit stream to capture core items efficiently
       fetchData({
         endpoint: "properties",

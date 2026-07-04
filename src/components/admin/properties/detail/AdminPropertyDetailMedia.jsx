@@ -28,7 +28,7 @@ const AdminPropertyDetailMedia = ({ property }) => {
           setData,
         },
         query: `filter[propertyId]=${property._id}`,
-        isWithToken: true,
+        // isWithToken: true,
       });
     }
   }, [property?._id]);

@@ -29,7 +29,6 @@ const PropertyGallery = ({title, listingType, propertyId}) => {
           setData,
         },
         query: `filter[propertyId]=${propertyId}`,
-        isWithToken: false, // Public endpoint data fetch
       });
     }
   }, [propertyId]);
