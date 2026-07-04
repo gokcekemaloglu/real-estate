@@ -32,7 +32,6 @@ const AdminCustomers = () => {
       page: activePage,
       limit: 20,
       query: cleanBracketsQueryString,
-      // isWithToken: true,
     });
   };
 
@@ -52,7 +51,6 @@ const AdminCustomers = () => {
 
   const handleClearFilters = () => {
     setSearchParams({ page: "1" }, { replace: true })
-    window.location.reload()
   }
 
   return (
