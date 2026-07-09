@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const PropertyCard = ({ property, propertyImages, viewMode }) => {
+const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }) => {
   const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // Unified luxury currency parser formatting numbers to localized Turkish Lira symbols
@@ -32,7 +34,7 @@ const PropertyCard = ({ property, propertyImages, viewMode }) => {
     (image) => image.propertyId === property?._id && image.isCover
   );
 
-  // 2. FIXED BEST PRACTICE: Fallback to the very first index asset node slot if no active cover tag is enforced
+  // 2. Fallback to the very first index asset node slot if no active cover tag is enforced
   if (!targetCoverImage && propertyImages?.length > 0) {
     targetCoverImage = propertyImages.find((image) => image.propertyId === property?._id);
   }
@@ -41,6 +43,16 @@ const PropertyCard = ({ property, propertyImages, viewMode }) => {
   const resolvedImageSrc = targetCoverImage 
     ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}` 
     : fallbackPlaceholder;
+
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
+    if (!token) {
+      return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
+    }
+    if (onFavoriteToggle) {
+      onFavoriteToggle(property?._id);
+    }
+  };
 
   return (
     <div className={`group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex transition-all duration-300 animate-fade-in ${ viewMode === "row" ? "flex-col md:flex-row h-auto md:h-64 w-full" : "flex-col h-full w-full" }`}>
@@ -59,6 +71,22 @@ const PropertyCard = ({ property, propertyImages, viewMode }) => {
         <span className="absolute top-4 left-4 bg-brand-dark/90 dark:bg-slate-900/90 border border-brand-gold/30 text-amber-400 text-[10px] uppercase tracking-widest px-3 py-1.5 font-medium shadow-md">
           {getListingBadge(property?.listingType)}
         </span>
+        <button
+          type="button"
+          onClick={handleFavoriteClick}
+          className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-brand-dark/60 dark:bg-slate-900/60 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-lg text-white hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer group/heart"
+          title={isFavorite ? "Favorilerimden Kaldır" : "Favorilerime Ekle"}
+        >
+          <svg 
+            className={`w-4 h-4 transition-colors duration-300 ${isFavorite ? "fill-brand-gold text-brand-gold animate-heart-beat" : "fill-transparent text-white group-hover/heart:text-brand-gold"}`} 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.318 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </button>
       </div>
 
       {/* Card Information Body Content */}

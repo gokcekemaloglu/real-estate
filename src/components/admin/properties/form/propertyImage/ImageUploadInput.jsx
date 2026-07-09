@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// FIXED BEST PRACTICE: Removed 'handleUploadClick' from props since automation triggers natively on input changes.
+// Removed 'handleUploadClick' from props since automation triggers natively on input changes.
 // Injected a clear 'loading' boolean indicator from parent hook context to block interface leaks.
 const ImageUploadInput = ({ handleFileChange, loading = false }) => {
   const [selectedFileName, setSelectedFileName] = useState("");
@@ -17,8 +17,7 @@ const ImageUploadInput = ({ handleFileChange, loading = false }) => {
 
     setSelectedFileName(file.name);
 
-    // FIXED SENIOR AUTOMATION: Immediately invokes parent's binary upload slice hook pipeline 
-    // the exact millisecond the event listener captures a fresh valid image asset file pointer!
+    //Immediately invokes parent's binary upload slice hook pipeline the exact millisecond the event listener captures a fresh valid image asset file pointer!
     await handleFileChange(e); 
     
     // Optional: Wipes out local text state once backend resolved successfully
@@ -28,7 +27,7 @@ const ImageUploadInput = ({ handleFileChange, loading = false }) => {
   return (
     <div className="flex flex-col gap-3 animate-fade-in w-full">
       <h3 className="text-xs uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-2">
-        敷 Portföy Fotoğraf Yönetimi
+        🖼️ Portföy Fotoğraf Yönetimi
       </h3>
 
       {/* Reconfigured container stretched fully into a sleek single wide input grid layout row */}
@@ -63,14 +62,13 @@ const ImageUploadInput = ({ handleFileChange, loading = false }) => {
       </div>
       
       <p className="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-0.5">
-        * Multer Güvenlik Filtresi: Azami dosya boyutu 5MB sınırındadır. Görsel seçildiği an otomatik yüklenir.
+        🕒 * Multer Güvenlik Filtresi: Azami dosya boyutu 5MB sınırındadır. Görsel seçildiği an otomatik yüklenir.
       </p>
     </div>
   );
 };
 
 export default ImageUploadInput;
-
 
 // import React from "react";
 
