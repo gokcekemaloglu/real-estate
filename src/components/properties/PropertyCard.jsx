@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { SweetAlertIcons, SweetNotify } from "../../helper/SweetNotify";
 
 const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }) => {
   const navigate = useNavigate();
