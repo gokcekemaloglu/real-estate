@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SweetAlertIcons, SweetNotify } from "../../helper/SweetNotify";
 
-const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }) => {
+const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth)
+  // const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // Unified luxury currency parser formatting numbers to localized Turkish Lira symbols
@@ -45,15 +45,15 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }
     ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}` 
     : fallbackPlaceholder;
 
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
-    if (!token) {
-      return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
-    }
-    if (onFavoriteToggle) {
-      onFavoriteToggle(property?._id);
-    }
-  };
+  // const handleFavoriteClick = (e) => {
+  //   e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
+  //   if (!token) {
+  //     return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
+  //   }
+  //   if (onFavoriteToggle) {
+  //     onFavoriteToggle(property?._id);
+  //   }
+  // };
 
   return (
     <div className={`group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex transition-all duration-300 animate-fade-in ${ viewMode === "row" ? "flex-col md:flex-row h-auto md:h-64 w-full" : "flex-col h-full w-full" }`}>
@@ -74,7 +74,10 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }
         </span>
         <button
           type="button"
-          onClick={handleFavoriteClick}
+          onClick={(e) => {
+            e.stopPropagation(); // Stops deep routing detail page jumps safely
+            if (onFavoriteToggle) onFavoriteToggle(property?._id);
+          }}
           className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-brand-dark/60 dark:bg-slate-900/60 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-lg text-white hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer group/heart"
           title={isFavorite ? "Favorilerimden Kaldır" : "Favorilerime Ekle"}
         >

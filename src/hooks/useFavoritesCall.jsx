@@ -28,15 +28,15 @@ const useFavoritesCall = () => {
 
   // 2. Toggle Favorite (Like / Unlike) engine mapping backend constraints
   const toggleFavorite = async (propertyId) => {
-    if (!token) return;
+    if (!token) {
+      return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
+    }
 
-    // Optimistic UI Update: Flip heart icon color immediately on frontend for seamless premium luxury speed!
+    // Flip heart icon color immediately on frontend for seamless premium luxury speed!
     dispatch(updateFavoriteIds(propertyId));
 
     try {
-      const { data } = await axiosWithToken.post("/favorites/toggle", {
-        propertyId,
-      });
+      const { data } = await axiosWithToken.post("/favorites/toggle", {propertyId});
 
       // If backend confirms mutation, refresh the source of truth arrays smoothly
       const { data: updatedList } = await axiosWithToken.get("/favorites");

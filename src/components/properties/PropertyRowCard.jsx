@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const PropertyRowCard = ({ property, propertyImages, isFavorite = false }) => {
+const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -40,15 +40,15 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false }) => {
     ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}`
     : fallbackPlaceholder;
 
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
-    if (!token) {
-      return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
-    }
-    if (onFavoriteToggle) {
-      onFavoriteToggle(property?._id);
-    }
-  };
+  // const handleFavoriteClick = (e) => {
+  //   e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
+  //   if (!token) {
+  //     return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
+  //   }
+  //   if (onFavoriteToggle) {
+  //     onFavoriteToggle(property?._id);
+  //   }
+  // };
   return (
     <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden flex flex-col md:flex-row items-stretch gap-4 transition-all duration-300 hover:shadow-xl animate-fade-in w-full">
       {/* Left Segment: Premium Image Framework Panel */}
@@ -64,7 +64,10 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false }) => {
         </span>
         <button
           type="button"
-          onClick={handleFavoriteClick}
+          onClick={(e) => {
+            e.stopPropagation(); // Stops deep routing detail page jumps safely
+            if (onFavoriteToggle) onFavoriteToggle(property?._id);
+          }}
           className="absolute top-3 right-3 z-20 w-7 h-7 rounded-full bg-brand-dark/60 dark:bg-slate-900/60 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-md text-white hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer group/rowheart"
         >
           <svg 
@@ -90,8 +93,7 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false }) => {
             {property?.title}
           </h3>
           <p className="text-xs text-slate-400 dark:text-slate-500 font-light line-clamp-1 mt-1">
-            {property?.description ||
-              "Bu seçkin portföy için henüz açıklama metni eklenmemiştir."}
+            {property?.description || "Bu seçkin portföy için henüz açıklama metni eklenmemiştir."}
           </p>
 
           {/* Internal Minimal Architecture Specifications Ribbon Line */}
@@ -103,6 +105,8 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false }) => {
             <span>🛏️ {property?.roomCount || "—"}</span>
             <span className="text-slate-200 dark:text-slate-800">|</span>
             <span>🚿 {property?.bathroomCount ?? "—"} Banyo</span>
+            <span className="text-slate-200 dark:text-slate-800">|</span>
+            <span>👥 {property?.viewsCount ?? "—"} Ziyaretçi</span>
           </div>
         </div>
 
