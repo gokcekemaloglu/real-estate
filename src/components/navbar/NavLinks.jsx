@@ -7,7 +7,7 @@ const NavLinks = ({ isAdmin, token }) => {
   const activeRoutes = getNavigationRoutes(isAdmin, token);
 
   return (
-    <div className="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 transition-colors duration-300">
+    <div className="hidden md:flex items-center gap-8 text-xs md:text-sm lg:text-md font-bold tracking-widest text-slate-600 dark:text-slate-300 transition-colors duration-300">
       {activeRoutes?.map((route) => (
         <NavLink
           key={route.path}

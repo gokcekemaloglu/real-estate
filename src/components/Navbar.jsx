@@ -33,7 +33,7 @@ const Navbar = () => {
         {/* Brand Luxury Logo */}
         <Link
           to="/"
-          className="text-lg uppercase tracking-[0.25em] text-slate-900 dark:text-white font-serif font-light transition-colors duration-300"
+          className="text-lg md:text-xl lg:text-3xl uppercase tracking-[0.25em] text-slate-900 dark:text-white font-serif font-light transition-colors duration-300"
         >
           Görkem{" "}
           <span className="text-brand-gold font-sans font-semibold">Emlak</span>
