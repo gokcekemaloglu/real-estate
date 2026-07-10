@@ -1,10 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth)
+  // const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
   const fallbackPlaceholder = "https://unsplash.com";
 
