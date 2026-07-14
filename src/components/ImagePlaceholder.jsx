@@ -38,7 +38,7 @@ const ImagePlaceholder = ({ type = "property", showText = false }) => {
           strokeWidth="1.25" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          className="text-brand-gold/60 dark:text-amber-500/40 animate-pulse duration-[4000ms]"
+          className="text-brand-gold/60 dark:text-amber-500/40 animate-pulse duration-4000"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M5 12l-2 0l9 -9l9 9l-2 0" />

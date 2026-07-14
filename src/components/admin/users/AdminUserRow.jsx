@@ -1,18 +1,15 @@
 import React from "react";
+import ImagePlaceholder from "../../ImagePlaceholder";
 
 const AdminUserRow = ({ user, handleStatusToggle, handleDelete, onDetailClick }) => {
   // console.log(user)
-  const defaultAvatar = "https://unsplash.com";
+  // const defaultAvatar = "https://unsplash.com";
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in">
       {/* Left Block: User Identity Profiles & Administrative Authorizations */}
       <div className="flex items-center gap-4 flex-1">
         <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800">
-          <img
-            src={defaultAvatar}
-            alt={`${user?.firstName} ${user?.lastName}`}
-            className="w-full h-full object-cover grayscale contrast-125"
-          />
+          <ImagePlaceholder type="user"/>
         </div>
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-2">
