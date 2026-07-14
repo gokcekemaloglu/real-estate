@@ -141,6 +141,12 @@ const PropertyFeaturesPanel = ({ property }) => {
           Otopark {property?.hasParking ? "Var" : "Yok"}
         </div>
       </div>
+      <div className="grid grid-cols-1 gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/60 text-[9px] uppercase font-medium text-slate-400 text-center">
+
+        <div className={`py-1.5 border border-slate-100 dark:border-slate-800/60`}>
+           {property?.viewsCount} Görüntüleme
+        </div>
+      </div>
 
       {/* Primary Interactive CTA Call-to-action operations button wrapper */}
       <button

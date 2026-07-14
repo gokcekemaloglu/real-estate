@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import PropertyRowCard from '../components/properties/PropertyRowCard';
 import PropertyCard from '../components/properties/PropertyCard';
 import PropertyDisplayBar from '../components/PropertyDisplayBar';
-import PaginationComponent from '../components/properties/PaginationComponent';
+// import PaginationComponent from '../components/properties/PaginationComponent';
 
 const MyFavorites = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { getMyFavorites, toggleFavorite } = useFavoritesCall();
   
   const { myFavorites, favoriteIds, loading } = useSelector((state) => state.favorites);
@@ -35,7 +35,7 @@ const MyFavorites = () => {
       </div>
     );
   }
-  console.log(favoriteProperties);
+//   console.log(favoriteProperties);
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-brand-dark pt-32 pb-24 font-display transition-colors duration-300 relative overflow-hidden text-xs font-light text-slate-700 dark:text-slate-300">
@@ -104,7 +104,7 @@ const MyFavorites = () => {
                   ))}
                 </div>
               )}
-              <PaginationComponent />
+              {/* <PaginationComponent /> */}
             </>
           )}
         </div>

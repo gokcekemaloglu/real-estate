@@ -2,25 +2,38 @@ import { useNavigate, useParams } from 'react-router-dom'
 import usePropertyCall from '../hooks/usePropertyCall'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import useFetchData from "../hooks/useFetchData";
 import PropertyGallery from '../components/properties/PropertyGallery'
 import PropertyDescription from '../components/properties/PropertyDescription'
 import PropertyFeaturesPanel from '../components/properties/PropertyFeaturesPanel'
+import { setData } from '../features/propertySlice';
 
 const PropertyDetail = () => {
   const {id} = useParams()
   const navigate = useNavigate()
   const {getSinglePropertyData} = usePropertyCall()
-  const {property, loading} = useSelector(state => state.property)
+  const {fetchData} = useFetchData()
+  const {property, currentPropertyImages, loading} = useSelector(state => state.property)
 
   useEffect(() => {
     if (id) {
       getSinglePropertyData(id)
+      fetchData({
+        endpoint: "property-images",
+        stateKey: "currentPropertyImages",
+        sliceActions: {
+          fetchStart: () => ({ type: "property/noOpStart" }),
+          fetchFail: () => ({ type: "property/noOpFail" }),
+          setData,
+        },
+        query: `filter[propertyId]=${id}`,
+      });
     }
   }, [id])
 
   // console.log("property-->", property);
 
-  if (loading) {
+  if (loading && !property?.title) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-brand-dark flex items-center justify-center">
         <div className="w-12 h-12 border-2 border-slate-300 border-t-brand-gold rounded-full animate-spin"></div>
@@ -44,7 +57,7 @@ const PropertyDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column (7-Cols): Image Box Showcase */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <PropertyGallery title = {property?.title} listingType = {property?.listingType} propertyId={property?._id}/>
+            <PropertyGallery title = {property?.title} listingType = {property?.listingType} propertyId={property?._id} currentPropertyImages={currentPropertyImages}/>
             {/* Description Paragraph Text Block */}
             <PropertyDescription description={property?.description}/>
           </div>
