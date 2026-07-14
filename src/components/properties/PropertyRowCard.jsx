@@ -1,12 +1,13 @@
 import React from "react";
 // import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ImagePlaceholder from "../ImagePlaceholder";
 
 const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
   // const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
-  const fallbackPlaceholder = "https://unsplash.com";
+  // const fallbackPlaceholder = "https://unsplash.com";
 
   const formatPrice = (amount) => {
     return new Intl.NumberFormat("tr-TR", {
@@ -36,9 +37,10 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavor
     );
   }
 
-  const resolvedImageSrc = targetCoverImage
+  const hasValidImage = !!targetCoverImage
+  const resolvedImageSrc = hasValidImage
     ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}`
-    : fallbackPlaceholder;
+    : null;
 
   // const handleFavoriteClick = (e) => {
   //   e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
@@ -53,12 +55,17 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavor
     <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden flex flex-col md:flex-row items-stretch gap-4 transition-all duration-300 hover:shadow-xl animate-fade-in w-full">
       {/* Left Segment: Premium Image Framework Panel */}
       <div className="relative h-48 w-full md:w-64 bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0">
-        <img
-          src={resolvedImageSrc}
-          alt={property?.title || "Real Estate Portfolio"}
-          className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700 contrast-110"
-          loading="lazy"
-        />
+        {hasValidImage ? (
+          <img
+            src={resolvedImageSrc}
+            alt={property?.title || "Real Estate Portfolio"}
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0   group-hover:scale-103 transition-all duration-700 contrast-110"
+            loading="lazy"
+          />
+        ) : (
+          <ImagePlaceholder/>
+        )}
+        
         <span className="absolute top-3 left-3 bg-brand-dark/90 dark:bg-slate-900/90 border border-brand-gold/30 text-amber-400 text-[9px] uppercase tracking-widest px-2.5 py-1 font-medium shadow-sm">
           {getListingBadge(property?.listingType)}
         </span>

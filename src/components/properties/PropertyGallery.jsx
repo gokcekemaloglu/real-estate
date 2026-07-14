@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { setData } from "../../features/propertySlice";
 import AdminPropertyDetailMediaLightbox from "../AdminPropertyDetailMediaLightbox";
+import ImagePlaceholder from "../ImagePlaceholder";
 
 const PropertyGallery = ({title, listingType, propertyId, currentPropertyImages}) => {
   // Local state layers managing the magnified active viewport and lightbox indices
@@ -42,35 +43,7 @@ const PropertyGallery = ({title, listingType, propertyId, currentPropertyImages}
     setIsLightboxOpen(true);
   };
   const PremiumBlueprintFallback = () => (
-    <div className="w-full h-full bg-slate-100 dark:bg-slate-950 flex flex-col items-center justify-center gap-4 transition-colors duration-300">
-      {/* Subtle structural framing vector background layer */}
-      <div className="absolute inset-0 opacity-[0.02] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[2rem_2rem]"></div>
-      
-      {/* Tabler-style elegant wireframe house and camera vector hybrid grid */}
-      <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        width="64" 
-        height="64" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor" 
-        strokeWidth="1.25" 
-        strokeLinecap="round" 
-        strokeLinejoin="round" 
-        className="text-brand-gold/60 dark:text-amber-500/40 animate-pulse duration-4000"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-        <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-        {/* Subtle camera lens overlay element added natively inside the layout structure */}
-        <circle cx="12" cy="13" r="2" strokeWidth="1" opacity="0.5" />
-      </svg>
-      
-      <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 font-medium">
-        Henüz bir fotoğraf eklenmedi
-      </span>
-    </div>
+    <ImagePlaceholder type="property" showText={true}/>
   );
   return (
     <div className="flex flex-col gap-3 animate-fade-in w-full text-xs font-light text-slate-700 dark:text-slate-300 select-none">

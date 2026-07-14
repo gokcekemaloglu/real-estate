@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SweetAlertIcons, SweetNotify } from "../../helper/SweetNotify";
+import ImagePlaceholder from "../ImagePlaceholder";
 
 const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
     return badges[type] || "Portföy";
   };
 
-  // Hardcoded premium architecture backdrop array acting as fallback until images schema goes live
-  const fallbackPlaceholder = "https://unsplash.com";
+  // // Hardcoded premium architecture backdrop array acting as fallback until images schema goes live
+  // const fallbackPlaceholder = "https://unsplash.com";
   // 1. Search for the designated cover image belonging to this card first
   let targetCoverImage = propertyImages?.find(
     (image) => image.propertyId === property?._id && image.isCover
@@ -39,11 +40,11 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
   if (!targetCoverImage && propertyImages?.length > 0) {
     targetCoverImage = propertyImages.find((image) => image.propertyId === property?._id);
   }
-
+  const hasValidImage = !!targetCoverImage
   // 3. Resolve clean binary address path string
-  const resolvedImageSrc = targetCoverImage 
+  const resolvedImageSrc = hasValidImage 
     ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}` 
-    : fallbackPlaceholder;
+    : null;
 
   // const handleFavoriteClick = (e) => {
   //   e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
@@ -60,12 +61,17 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
       
       {/* Card Image Block Component Layout Frame */}
       <div className={`relative bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 ${ viewMode === "row" ? "h-64 md:h-full w-full md:w-80" : "h-64 w-full" }`}>
-        <img
-          src={resolvedImageSrc}
-          alt={property?.title || "Real Estate Portfolio"}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-          loading="lazy"
-        />
+        {hasValidImage ? (
+          <img
+            src={resolvedImageSrc}
+            alt={property?.title || "Real Estate Portfolio"}
+            className="w-full h-full object-cover   group-hover:scale-105 transition-transform  duration-700"
+            loading="lazy"
+          />
+        ) : (
+          <ImagePlaceholder/>
+        )}
+        
         <div className="absolute inset-0 bg-linear-to-t from-brand-dark/20 to-transparent"></div>
 
         {/* Premium Conditional Listing Type Badge */}
