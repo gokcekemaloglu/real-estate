@@ -2,20 +2,20 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import useFetchData from '../../hooks/useFetchData'
 import { fetchStart, fetchFail, setData } from '../../features/propertySlice'
+import DashboardWidgets from '../../components/admin/dashboard/DashboardWidgets'
+import DashboardCategoryDistribution from '../../components/admin/dashboard/DashboardCategoryDistribution'
 
 const DashboardHome = () => {
   const { fetchData } = useFetchData()
   const { properties, propertiesDetails, loading } = useSelector((state) => state.property)
 
   useEffect(() => {
-    // Fetches the property dataset natively to parse overall performance metrics
     fetchData({
       endpoint: "properties",
       stateKey: "properties",
       sliceActions: { fetchStart, fetchFail, setData },
       page: 1,
-      limit: 1000, // Broad limit to calculate statistical charts accurately
-      // isWithToken: true
+      limit: 1000,
     })
   }, [])
 
@@ -23,6 +23,28 @@ const DashboardHome = () => {
   const totalProperties = propertiesDetails?.totalRecords || properties?.length || 0
   const activeCount = properties?.filter(p => p.isActive === true).length || 0
   const passiveCount = totalProperties - activeCount // Dynamically extracted passive layer
+
+  // 2. Fetch network traffic logs counter summaries cleanly
+  const totalViewsSum = properties?.reduce((sum, p) => sum + (p.viewsCount || 0), 0) || 0
+  const totalFavoritesSum = properties?.reduce((sum, p) => sum + (p.favoriteCount || 0), 0) || 0
+
+  const widgetMetrics = {
+    total: totalProperties,
+    active: activeCount,
+    passive: passiveCount,
+    sale: properties?.filter(p => p.listingType?.includes("sale")).length || 0,
+    rent: properties?.filter(p => p.listingType?.includes("rent")).length || 0,
+    totalViews: totalViewsSum,
+    totalFavorites: totalFavoritesSum
+  };
+
+  const categoryArray = [
+    { label: "Apartman Dairesi", count: properties?.filter(p => p.propertyCategory === "apartment").length || 0 },
+    { label: "Müstakil Ev", count: properties?.filter(p => p.propertyCategory === "house").length || 0 },
+    { label: "Lüks Villa", count: properties?.filter(p => p.propertyCategory === "villa").length || 0, isHighlight: true },
+    { label: "Arsa / Arazi", count: properties?.filter(p => p.propertyCategory === "land").length || 0 },
+    { label: "Ticari Mülk", count: properties?.filter(p => p.propertyCategory === "commercial").length || 0 },
+  ];
 
   // 2. Listing Type Segregations
   const saleCount = properties?.filter(p => p.listingType?.includes("sale")).length || 0
@@ -62,88 +84,9 @@ const DashboardHome = () => {
         </div>
       </div>
 
-      {/* Grid Row 1: Core Performance Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        {/* Widget 1: Total Portfolio */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
-          <div className="flex justify-between items-start">
-            <div className="flex flex-col gap-1">
-              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Toplam Portföy</span>
-              <span className="text-3xl font-sans font-light text-slate-800 dark:text-white">{totalProperties}</span>
-            </div>
-            <span className="text-xl p-2 bg-slate-50 dark:bg-slate-800/50 text-brand-gold">🏢</span>
-          </div>
-        </div>
+      <DashboardWidgets metrics={widgetMetrics}/>
+      <DashboardCategoryDistribution categories={categoryArray}/>
 
-        {/* Widget 2: Active vs Passive Stack */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
-          <div className="flex justify-between items-start">
-            <div className="flex flex-col gap-1">
-              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Yayın Durumu</span>
-              <div className="flex items-baseline gap-3">
-                <span className="text-2xl font-light text-green-600 dark:text-green-500">{activeCount}<span className="text-xs text-slate-400 font-normal ml-0.5"> Aktif</span></span>
-                <span className="text-lg font-light text-red-500">{passiveCount}<span className="text-xs text-slate-400 font-normal ml-0.5"> Pasif</span></span>
-              </div>
-            </div>
-            <span className="text-xl p-2 bg-slate-50 dark:bg-slate-800/50 text-green-500">✨</span>
-          </div>
-        </div>
-
-        {/* Widget 3: Listing Splits Grid */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
-          <div className="flex justify-between items-start">
-            <div className="flex flex-col gap-1">
-              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Pazarlama Dağılımı</span>
-              <div className="flex items-baseline gap-3">
-                <span className="text-2xl font-light text-amber-600 dark:text-amber-400">{saleCount}<span className="text-xs text-slate-400 font-normal ml-0.5"> Satılık</span></span>
-                <span className="text-2xl font-light text-slate-700 dark:text-slate-300">{rentCount}<span className="text-xs text-slate-400 font-normal ml-0.5"> Kiralık</span></span>
-              </div>
-            </div>
-            <span className="text-xl p-2 bg-slate-50 dark:bg-slate-800/50 text-amber-500">🔑</span>
-          </div>
-        </div>
-
-        {/* Widget 4: Featured Vitrin Items */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
-          <div className="flex justify-between items-start">
-            <div className="flex flex-col gap-1">
-              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Vitrin İlanları</span>
-              <span className="text-3xl font-sans font-light text-amber-500 dark:text-amber-400">{featuredCount}</span>
-            </div>
-            <span className="text-xl p-2 bg-slate-50 dark:bg-slate-800/50 text-amber-400">⭐</span>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Grid Row 2: Advanced Detailed Category Distribution Section */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
-        <h3 className="text-xs uppercase tracking-widest text-brand-gold font-medium border-b border-slate-100 dark:border-slate-800/60 pb-3 mb-4">Gayrimenkul Kategori Dağılımı</h3>
-        
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-          <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Apartman Dairesi</span>
-            <span className="text-xl font-medium text-slate-800 dark:text-white">{apartmentCount}</span>
-          </div>
-          <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Müstakil Ev</span>
-            <span className="text-xl font-medium text-slate-800 dark:text-white">{houseCount}</span>
-          </div>
-          <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Lüks Villa</span>
-            <span className="text-xl font-medium text-brand-gold">{villaCount}</span>
-          </div>
-          <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Arsa / Arazi</span>
-            <span className="text-xl font-medium text-slate-800 dark:text-white">{landCount}</span>
-          </div>
-          <div className="p-4 border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Ticari Mülk</span>
-            <span className="text-xl font-medium text-slate-800 dark:text-white">{commercialCount}</span>
-          </div>
-        </div>
-      </div>
 
     </div>
   )
