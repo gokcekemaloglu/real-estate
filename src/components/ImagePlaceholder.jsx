@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ImagePlaceholder = ({ type = "property", showText = false }) => {
+const ImagePlaceholder = ({ type = "property", showText = false, isAdmin = false }) => {
   const isUser = type === "user"
   const isSale = type === "category_sale";
   const isRent = type === "category_rent";
@@ -10,14 +10,14 @@ const ImagePlaceholder = ({ type = "property", showText = false }) => {
       {/* Subtle luxury structural background blueprint grid lines layer */}
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[2rem_2rem]"></div>
       {isUser && (
-        <svg className="absolute w-[110%] h-[110%] -bottom-4 text-brand-gold dark:text-brand-gold fill-cyan-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.15">
+        <svg className={`absolute w-[110%] h-[110%] -bottom-4 text-brand-gold dark:text-brand-gold ${isAdmin ? "fill-brand-gold" : "fill-emerald-800"}  `} viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.15">
           <circle cx="50" cy="35" r="16" />
           <path d="M15,85 C15,62 30,58 50,58 C70,58 85,62 85,85" />
           <line x1="5" y1="85" x2="95" y2="85" strokeWidth="0.3" />
         </svg>
       )}
       {isSale && (
-        <svg className="absolute w-[120%] h-[120%] -bottom-10 -left-10 text-amber-400/75 dark:text-amber-300 transition-all fill-emerald-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.15">
+        <svg className="absolute w-[120%] h-[120%] -bottom-10 -left-10 text-amber-400/75 dark:text-amber-300 transition-all  fill-emerald-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.15">
           <polygon points="10,90 90,90 90,50 50,20 10,50" />
           <polygon points="25,50 50,30 75,50" />
           <rect x="42" y="65" width="16" height="25" />

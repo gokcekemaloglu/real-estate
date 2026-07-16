@@ -3,18 +3,17 @@ import ImagePlaceholder from "../../ImagePlaceholder";
 
 const AdminUserRow = ({ user, handleStatusToggle, handleDelete, onDetailClick }) => {
   // console.log(user)
-  // const defaultAvatar = "https://unsplash.com";
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in">
       {/* Left Block: User Identity Profiles & Administrative Authorizations */}
       <div className="flex items-center gap-4 flex-1">
         <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800">
-          <ImagePlaceholder type="user"/>
+          <ImagePlaceholder type="user" isAdmin={user?.isAdmin}/>
         </div>
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-2">
-            <span className="text-[9px] uppercase tracking-wider text-brand-gold font-semibold">
-              @{user?.userName}
+            <span className="text-[11px]  tracking-wider text-brand-gold font-semibold">
+              Kullanıcı Adı: {user?.userName}
             </span>
             {user?.isAdmin && (
               <span className="text-[8px] bg-brand-dark dark:bg-slate-950 text-amber-400 border border-slate-700 px-1.5 py-0.5 uppercase tracking-widest font-medium">
@@ -22,7 +21,7 @@ const AdminUserRow = ({ user, handleStatusToggle, handleDelete, onDetailClick })
               </span>
             )}
           </div>
-          <h3 className="text-sm font-medium text-slate-800 dark:text-white line-clamp-1">
+          <h3 className="text-md font-medium text-slate-800 dark:text-white line-clamp-1">
             {user?.firstName} {user?.lastName}
           </h3>
           <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs text-slate-500 dark:text-slate-400 font-light mt-0.5">
