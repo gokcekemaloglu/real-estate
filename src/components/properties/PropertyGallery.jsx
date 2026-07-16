@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { setData } from "../../features/propertySlice";
-import AdminPropertyDetailMediaLightbox from "../AdminPropertyDetailMediaLightbox";
-import ImagePlaceholder from "../ImagePlaceholder";
+import React from "react";
 import PropertyMediaGallery from "./PropertyMediaGallery";
 
 const PropertyGallery = ({title, listingType, propertyId, currentPropertyImages}) => {
