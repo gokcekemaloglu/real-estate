@@ -9,7 +9,7 @@ const Contact = () => {
       {/* Background Luxury Line Grid using Tailwind v4 syntax */}
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>
  
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative">
  
         {/* Section Header */}
         <ContactHeader/>
