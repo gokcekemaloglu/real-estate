@@ -60,7 +60,7 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
     <div className={`group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex transition-all duration-300 animate-fade-in ${ viewMode === "row" ? "flex-col md:flex-row h-auto md:h-64 w-full" : "flex-col h-full w-full" }`}>
       
       {/* Card Image Block Component Layout Frame */}
-      <div className={`relative bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 ${ viewMode === "row" ? "h-64 md:h-full w-full md:w-80" : "h-64 w-full" }`}>
+      <div className={`relative cursor-pointer bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 ${ viewMode === "row" ? "h-64 md:h-full w-full md:w-80" : "h-64 w-full" }`} onClick={() => navigate(`/properties/${property?._id}`)}>
         {hasValidImage ? (
           <img
             src={resolvedImageSrc}

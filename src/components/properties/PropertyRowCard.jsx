@@ -54,7 +54,7 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavor
   return (
     <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden flex flex-col md:flex-row items-stretch gap-4 transition-all duration-300 hover:shadow-xl animate-fade-in w-full">
       {/* Left Segment: Premium Image Framework Panel */}
-      <div className="relative h-48 w-full md:w-64 bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0">
+      <div className="relative h-48 w-full md:w-64 bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 cursor-pointer" onClick={() => navigate(`/properties/${property?._id}`)}>
         {hasValidImage ? (
           <img
             src={resolvedImageSrc}
