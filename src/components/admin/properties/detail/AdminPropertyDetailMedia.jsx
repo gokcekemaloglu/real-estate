@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import { setData } from "../../../../features/propertySlice";
 import AdminPropertyDetailMediaLightbox from "../../../AdminPropertyDetailMediaLightbox";
 import { useDispatch } from "react-redux";
+import ImagePlaceholder from "../../../ImagePlaceholder";
 
 const AdminPropertyDetailMedia = ({ property }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { fetchData } = useFetchData();
   const { currentPropertyImages } = useSelector((state) => state.property);
   const [activeImage, setActiveImage] = useState(null);
@@ -14,8 +15,7 @@ const AdminPropertyDetailMedia = ({ property }) => {
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
-
-  const fallbackPlaceholder = "https://unsplash.com";
+  const FALLBACK_KEY = "RENDER_PREMIUM_BLUEPRINT_PLACEHOLDER";
 
   useEffect(() => {
     if (property?._id) {
@@ -28,12 +28,14 @@ const AdminPropertyDetailMedia = ({ property }) => {
           setData,
         },
         query: `filter[propertyId]=${property._id}`,
-        // isWithToken: true,
       });
     }
   }, [property?._id]);
 
-  const isolatedImages = currentPropertyImages?.filter(image => image.propertyId === property?._id) || [];
+  const isolatedImages =
+    currentPropertyImages?.filter(
+      (image) => image.propertyId === property?._id,
+    ) || [];
 
   useEffect(() => {
     if (isolatedImages?.length > 0) {
@@ -46,7 +48,7 @@ const AdminPropertyDetailMedia = ({ property }) => {
         setActiveImage(`${IMAGE_BASE_URL}${isolatedImages[0].imageUrl}`);
       }
     } else {
-      setActiveImage(fallbackPlaceholder);
+      setActiveImage(FALLBACK_KEY);
     }
   }, [currentPropertyImages, property?._id]);
 
@@ -56,24 +58,34 @@ const AdminPropertyDetailMedia = ({ property }) => {
     if (typeof targetUrlOrIndex === "number") {
       setLightboxIndex(targetUrlOrIndex);
     } else {
-      const targetIdx = isolatedImages.findIndex((image) => `${IMAGE_BASE_URL}${image.imageUrl}` === targetUrlOrIndex);
+      const targetIdx = isolatedImages.findIndex(
+        (image) => `${IMAGE_BASE_URL}${image.imageUrl}` === targetUrlOrIndex,
+      );
       setLightboxIndex(targetIdx !== -1 ? targetIdx : 0);
     }
     setIsLightboxOpen(true);
   };
-  
+
+  const PremiumBlueprintFallback = () => (
+    <ImagePlaceholder type="property" showText={true} />
+  );
+
   return (
     <div className="flex flex-col gap-3 animate-fade-in w-full text-xs font-light text-slate-700 dark:text-slate-300">
       {activeImage && (
-        <div 
+        <div
           onClick={() => triggerLightboxView(activeImage)}
           className="w-full h-80 bg-slate-100 dark:bg-slate-950 overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm relative cursor-zoom-in group"
         >
-          <img
-            src={activeImage}
-            alt={property?.title || "Property Asset"}
-            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 contrast-110"
-          />
+          {activeImage === FALLBACK_KEY ? (
+            <PremiumBlueprintFallback />
+          ) : (
+            <img
+              src={activeImage}
+              alt={property?.title || "Property Asset"}
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 contrast-110"
+            />
+          )}
           <div className="absolute top-4 left-4 flex gap-2">
             <span
               className={`text-[12px] uppercase font-bold tracking-widest px-3 py-1 text-white shadow-sm ${property?.listingType === "sale" ? "bg-brand-gold" : "bg-brand-dark border border-slate-700"}`}
@@ -130,7 +142,6 @@ const AdminPropertyDetailMedia = ({ property }) => {
         setCurrentIndex={setLightboxIndex}
       />
     </div>
-    
   );
 };
 

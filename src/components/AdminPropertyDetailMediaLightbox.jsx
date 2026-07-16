@@ -1,24 +1,20 @@
 import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 
-const AdminPropertyDetailMediaLightbox = ({isOpen,
-  onClose, images, currentIndex, setCurrentIndex}) => {
+const AdminPropertyDetailMediaLightbox = ({isOpen, onClose, images, currentIndex, setCurrentIndex}) => {
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
-
+ 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
   const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
-    );
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
   
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isOpen) return;
-      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-        e.preventDefault();
-      }
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") e.preventDefault();
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight" && images.length > 1) handleNext();
       if (e.key === "ArrowLeft" && images.length > 1) handlePrev();
@@ -27,19 +23,18 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, currentIndex, images.length]);
   
-    const handleOverlayClick = (e) => {
-      // Ensures that clicking sub-elements (like central image or buttons) won't accidentally trigger close bounds
-      if (e.target === e.currentTarget) {
-        onClose();
-      }
-    };
+  const handleOverlayClick = (e) => {
+    // Ensures that clicking sub-elements (like central image or buttons) won't accidentally trigger close bounds
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
     
-    if (!isOpen || !images || images?.length === 0) return null;
+  if (!isOpen || !images || images?.length === 0) return null;
 
-  return (
+  const lightboxContent = (
     <div
       onClick={handleOverlayClick}
-      // style={{zIndex: 99999}}
       className="fixed inset-0 z-9999 flex flex-col justify-between bg-brand-dark/95 backdrop-blur-md p-4 animate-fade-in select-none"
     >
       {/* Top Controller Ribbon Block */}
@@ -55,7 +50,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
           Kapat ✕
         </button>
       </div>
-
+ 
       {/* Main Unified Magnification Interactive Slider Framework */}
       <div className="flex-1 flex items-center justify-between w-full max-w-7xl mx-auto gap-4 my-4 relative">
         {/* Left Arrow Trigger Button Control */}
@@ -70,8 +65,6 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
         ) : (
           <div className="w-10 shrink-0" />
         )}
-        
-
         {/* Central Display Canvas Frame Segment */}
         <div className="flex-1 h-full max-h-[70vh] flex items-center justify-center overflow-hidden">
           <img
@@ -80,7 +73,6 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
             className="max-w-full max-h-full object-contain shadow-2xl transition-all duration-300"
           />
         </div>
-
         {/* Right Arrow Trigger Button Control */}
         {images?.length > 1 ? (
           <button
@@ -93,9 +85,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
         ) : (
           <div className="w-10 shrink-0" />
         )}
-        
       </div>
-
       {/* Bottom Horizontal Carousel Thumbnail Ribbon Grid Matrix */}
       {images?.length > 1 && (
         <div className="w-full max-w-4xl mx-auto flex items-center gap-3 overflow-x-auto pb-4 pt-2 border-t border-slate-800 custom-scrollbar justify-center">
@@ -120,10 +110,11 @@ const AdminPropertyDetailMediaLightbox = ({isOpen,
             );
           })}
         </div>
-      )}
-      
+      )}      
     </div>
   );
+ 
+  return createPortal(lightboxContent, document.body);
 };
-
+ 
 export default AdminPropertyDetailMediaLightbox;

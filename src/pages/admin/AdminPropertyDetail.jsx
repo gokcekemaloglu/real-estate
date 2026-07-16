@@ -14,7 +14,6 @@ const AdminPropertyDetail = () => {
   const navigate = useNavigate()
   const {getSinglePropertyData} = usePropertyCall()
   const {property, loading} = useSelector(state => state.property)
-  const defaultImage = "https://unsplash.com";
 
   useEffect(() => {
     getSinglePropertyData(id)
