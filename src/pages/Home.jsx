@@ -8,11 +8,11 @@ import HomeRecent from '../components/home/HomeRecent'
 const Home = () => {
   return (
     <div className="bg-slate-50 dark:bg-brand-dark transition-colors duration-300">
-        <HeroSection/>
-        <HomeFeatured/>
-        <HomeCategories/>
-        <HomeServices/>
-        <HomeRecent/>
+      <HeroSection/>
+      <HomeFeatured/>
+      <HomeCategories/>
+      <HomeServices/>
+      <HomeRecent/>
     </div>
   )
 }
