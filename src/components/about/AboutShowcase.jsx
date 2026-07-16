@@ -1,4 +1,5 @@
 import React from "react";
+import gorkemOfisImg from "../../assets/gorkem-emlak-ofis.png"
 
 const AboutShowcase = () => {
   return (
@@ -9,7 +10,7 @@ const AboutShowcase = () => {
       {/* Main Premium Architecture Image Placeholder */}
       <div className="relative h-100 md:h-125 w-full bg-slate-200 dark:bg-slate-900 overflow-hidden shadow-2xl">
         <img
-          src="https://unsplash.com"
+          src={gorkemOfisImg}
           alt="Luxury Real Estate Estate Architecture Office"
           className="w-full h-full object-cover grayscale-30 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
         />
@@ -22,7 +23,7 @@ const AboutShowcase = () => {
           Merkez Ofis
         </span>
         <span className="text-xs font-light text-slate-600 dark:text-slate-400">
-          Lüks Konut Grubu Bölümü
+          Seyhan, Adana (2002'den Beri)
         </span>
       </div>
     </div>
