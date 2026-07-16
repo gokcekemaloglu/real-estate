@@ -3,13 +3,15 @@ import authReducer from "../features/authSlice"
 import propertyReducer from "../features/propertySlice"
 import customerReducer from "../features/customerSlice"
 import userReducer from "../features/userSlice"
+import favoritesReducer from "../features/favoritesSlice"
 
 const store = configureStore({
     reducer: {
         auth: authReducer,
         property: propertyReducer,
         customers: customerReducer,
-        users: userReducer
+        users: userReducer,
+        favorites: favoritesReducer
     },
     // Enables Redux DevTools only during development environment for better security
     devTools: import.meta.env.DEV

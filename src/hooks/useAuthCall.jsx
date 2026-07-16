@@ -3,12 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import useAxios, {axiosPublic} from './useAxios'
 import { fetchFail, fetchStart, loginSuccess, logoutSuccess, registerSuccess,  } from '../features/authSlice'
 import { SweetNotify, SweetAlertIcons, SweetConfirm } from '../helper/SweetNotify'
+import useFavoritesCall from './useFavoritesCall'
 
 const useAuthCall = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const axiosWithToken = useAxios()
+    const {getMyFavorites} = useFavoritesCall()
+
+    const handleError = (error, fallbackMsg) => {
+        const errorMsg = error?.response?.data?.message || fallbackMsg
+        dispatch(fetchFail(errorMsg))
+        SweetNotify(errorMsg, SweetAlertIcons.ERROR)
+    }
 
     const register = async (userInfo) => {
         dispatch(fetchStart())
@@ -21,9 +29,7 @@ const useAuthCall = () => {
             navigate("/login")
         } catch (error) {
             console.log("Register Error", error)
-            dispatch(fetchFail())
-            const errorMsg = error.response?.data?.message || "Kayıt işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin."
-            SweetNotify(errorMsg, SweetAlertIcons.ERROR)
+            handleError(error, "Kayıt işlemi sırasında bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.")
         }
     }
 
@@ -34,13 +40,12 @@ const useAuthCall = () => {
             console.log(data);
             
             dispatch(loginSuccess(data.data))
+            await getMyFavorites() // Fetch user's favorites immediately after login to sync state
             SweetNotify(`Sisteme başarıyla giriş yapıldı. Hoşgeldiniz, ${data?.data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
             navigate("/")
         } catch (error) {
             console.log("Login Error", error)
-            dispatch(fetchFail())
-            const errorMsg = error.response?.data?.message || "Giriş işlemi sırasında bir hata oluştu. Giriş bilgileri hatalı veya eksik. Lütfen tekrar deneyin."
-            SweetNotify(errorMsg, SweetAlertIcons.ERROR)
+            handleError(error, "Giriş işlemi sırasında bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.")
         }
     }
 
@@ -55,9 +60,7 @@ const useAuthCall = () => {
             navigate("/")
         } catch (error) {
             console.log("Logout Error", error)
-            dispatch(fetchFail())
-            const errorMsg = error.response?.data?.message || "Çıkış işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin."
-            SweetNotify(errorMsg, SweetAlertIcons.ERROR)
+            handleError(error, "Oturum kapatma işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.")
         }
     }
   return {register, login, logout}

@@ -11,12 +11,15 @@ import PaginationComponent from "../components/properties/PaginationComponent";
 import { useState } from "react";
 import PropertyDisplayBar from "../components/PropertyDisplayBar";
 import PropertyRowCard from "../components/properties/PropertyRowCard";
+import useFavoritesCall from "../hooks/useFavoritesCall";
 
 const Properties = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { fetchData } = useFetchData();
+  const { toggleFavorite } = useFavoritesCall();
 
   const { properties, loading, propertiesDetails, propertyImages } = useSelector((state) => state.property);
+  const { favoriteIds } = useSelector((state) => state.favorites);
   // console.log("Properties-->", properties);
   const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
@@ -98,12 +101,14 @@ const Properties = () => {
               {/* Alternates components flawlessly using local viewMode state controls */}
               {viewMode === "grid" ? (
                 // Grid View: Uses standard 3-column matrix card templates safely
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
                   {properties?.map((singleProperty) => (
                     <PropertyCard
-                      property={singleProperty}
                       key={singleProperty._id}
+                      property={singleProperty}
                       propertyImages={propertyImages}
+                      isFavorite={favoriteIds?.includes(singleProperty?._id)}
+                      onFavoriteToggle={toggleFavorite}
                     />
                   ))}
                 </div>
@@ -115,6 +120,8 @@ const Properties = () => {
                       property={singleProperty}
                       key={singleProperty._id}
                       propertyImages={propertyImages}
+                      isFavorite={favoriteIds?.includes(singleProperty?._id)}
+                      onFavoriteToggle={toggleFavorite}
                     />
                   ))}
                 </div>

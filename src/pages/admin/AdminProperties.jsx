@@ -10,12 +10,15 @@ import PaginationComponent from "../../components/properties/PaginationComponent
 import PropertyFilters from "../../components/properties/PropertyFilters";
 import AdminOwnerFilter from "../../components/admin/AdminOwnerFilter";
 import AdminActiveFilter from "../../components/admin/AdminActiveFilter";
+// import useFavoritesCall from "../../hooks/useFavoritesCall";
 
 const AdminProperties = () => {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const { fetchData } = useFetchData();
   const { togglePropertyStatus, toggleFeaturedStatus, deleteProperty } = usePropertyCall();
+  // const { toggleFavorite } = useFavoritesCall();
+  // const { favoriteIds } = useSelector((state) => state.favorites);
 
   const { properties, loading, propertyImages, propertiesDetails } = useSelector((state) => state.property);
 
@@ -89,6 +92,8 @@ const AdminProperties = () => {
             onDeleteClick={handleDelete}
             onEditClick={() => navigate(`/admin/properties/edit/${property?._id}`)}
             onDetailClick={() => navigate(`/admin/properties/detail/${property?._id}`)}
+            // isFavorite={favoriteIds?.includes(property?._id)}
+            // onFavoriteToggle={toggleFavorite}
           />
         ))
         ) : (

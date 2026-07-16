@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const PropertyFeaturesPanel = ({ property }) => {
   const navigate = useNavigate();
+  console.log("propeerty-->", property);
   
   const formatPrice = (amount) => {
     if (!amount) return "—";
@@ -45,10 +46,9 @@ const PropertyFeaturesPanel = ({ property }) => {
         </h1>
         <span className="text-xl md:text-2xl font-sans font-medium text-brand-gold block mt-4">
           {formatPrice(property?.price)}
-          {property?.listingType.includes("rent") ? " / Ay" : ""}
+          {property?.listingType?.includes("rent") ? " / Ay" : ""}
         </span>
       </div>
-
       {/* Granular Specification Rows mapped strictly from your Mongoose Schema keys */}
       <div className="flex flex-col border-t border-slate-100 dark:border-slate-800/60 pt-4 text-xs font-light text-slate-600 dark:text-slate-300 gap-3.5">
         {/* Gross/Net Area */}
@@ -72,7 +72,7 @@ const PropertyFeaturesPanel = ({ property }) => {
             {property?.bathroomCount === null || property?.bathroomCount === undefined || property?.bathroomCount === "" ? (
               <span className="text-slate-400 italic font-normal">Belirtilmedi</span>
             ) : (
-              `${property.bathroomCount} Banyo`
+              `${property?.bathroomCount} Banyo`
             )}
           </span>
         </div>
@@ -80,8 +80,8 @@ const PropertyFeaturesPanel = ({ property }) => {
         <div className="flex justify-between">
           <span className="text-slate-400">Bulunduğu Kat / Toplam Kat</span>
           <span className="font-medium">
-            {property?.floor !== undefined && property?.floor !== null && property?.floor !== "" ? `${property.floor}. Kat` : "—"} /{" "}
-            {property?.totalFloors ? `${property.totalFloors} Kat` : "—"}
+            {property?.floor !== undefined && property?.floor !== null && property?.floor !== "" ? `${property?.floor}. Kat` : "—"} /{" "}
+            {property?.totalFloors ? `${property?.totalFloors} Kat` : "—"}
           </span>
         </div>
         {/* Building Age */}
@@ -116,7 +116,7 @@ const PropertyFeaturesPanel = ({ property }) => {
             {property?.maintenanceFee === null || property?.maintenanceFee === undefined || property?.maintenanceFee === "" ? (
               <span className="text-slate-400 italic font-normal">Belirtilmedi</span>
             ) : (
-              `${property.maintenanceFee} ₺`
+              `${property?.maintenanceFee} ₺`
             )}
           </span>
         </div>
@@ -128,7 +128,6 @@ const PropertyFeaturesPanel = ({ property }) => {
           </span>
         </div>
       </div>
-
       {/* Premium Hardware Flags Indicators Row Grid */}
       <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/60 text-[9px] uppercase font-medium text-slate-400 text-center">
         <div className={`py-1.5 border ${property?.isFurnished ? "border-brand-gold/30 text-brand-gold bg-brand-gold/5" : "border-slate-100 dark:border-slate-800/60"}`}>
@@ -141,7 +140,20 @@ const PropertyFeaturesPanel = ({ property }) => {
           Otopark {property?.hasParking ? "Var" : "Yok"}
         </div>
       </div>
-
+      {/* Count of views */}
+      <div className="grid grid-cols-1 gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/60 text-[9px] uppercase font-medium text-slate-400 text-center">
+        <div className={`py-1.5 border border-slate-100 dark:border-slate-800/60`}>
+          {property?.viewsCount} Görüntüleme
+        </div>
+      </div>
+      {/* Count of Likes */}
+      {property?.favoriteCount > 0 ? (       
+        <div className="grid grid-cols-1 gap-2  dark:border-slate-800/60 text-[9px] uppercase font-medium text-slate-400 text-center">
+          <div className={`py-1.5 border border-slate-100 dark:border-slate-800/60`}>
+            {property?.favoriteCount} Favori
+          </div>
+        </div>
+      ) : null}
       {/* Primary Interactive CTA Call-to-action operations button wrapper */}
       <button
         onClick={() => navigate("/contact")}

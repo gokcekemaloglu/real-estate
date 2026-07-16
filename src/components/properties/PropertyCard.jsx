@@ -1,13 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { SweetAlertIcons, SweetNotify } from "../../helper/SweetNotify";
+import ImagePlaceholder from "../ImagePlaceholder";
 
-const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }) => {
+const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth)
+  // const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  // Unified luxury currency parser formatting numbers to localized Turkish Lira symbols
+  // Unified currency parser formatting numbers to localized Turkish Lira symbols
   const formatPrice = (amount) => {
     return new Intl.NumberFormat("tr-TR", {
       style: "currency",
@@ -27,8 +29,8 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }
     return badges[type] || "Portföy";
   };
 
-  // Hardcoded premium architecture backdrop array acting as fallback until images schema goes live
-  const fallbackPlaceholder = "https://unsplash.com";
+  // // Hardcoded premium architecture backdrop array acting as fallback until images schema goes live
+  // const fallbackPlaceholder = "https://unsplash.com";
   // 1. Search for the designated cover image belonging to this card first
   let targetCoverImage = propertyImages?.find(
     (image) => image.propertyId === property?._id && image.isCover
@@ -38,33 +40,38 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }
   if (!targetCoverImage && propertyImages?.length > 0) {
     targetCoverImage = propertyImages.find((image) => image.propertyId === property?._id);
   }
-
+  const hasValidImage = !!targetCoverImage
   // 3. Resolve clean binary address path string
-  const resolvedImageSrc = targetCoverImage 
+  const resolvedImageSrc = hasValidImage 
     ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}` 
-    : fallbackPlaceholder;
+    : null;
 
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
-    if (!token) {
-      return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
-    }
-    if (onFavoriteToggle) {
-      onFavoriteToggle(property?._id);
-    }
-  };
+  // const handleFavoriteClick = (e) => {
+  //   e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
+  //   if (!token) {
+  //     return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
+  //   }
+  //   if (onFavoriteToggle) {
+  //     onFavoriteToggle(property?._id);
+  //   }
+  // };
 
   return (
     <div className={`group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex transition-all duration-300 animate-fade-in ${ viewMode === "row" ? "flex-col md:flex-row h-auto md:h-64 w-full" : "flex-col h-full w-full" }`}>
       
       {/* Card Image Block Component Layout Frame */}
-      <div className={`relative bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 ${ viewMode === "row" ? "h-64 md:h-full w-full md:w-80" : "h-64 w-full" }`}>
-        <img
-          src={resolvedImageSrc}
-          alt={property?.title || "Real Estate Portfolio"}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-          loading="lazy"
-        />
+      <div className={`relative cursor-pointer bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 ${ viewMode === "row" ? "h-64 md:h-full w-full md:w-80" : "h-64 w-full" }`} onClick={() => navigate(`/properties/${property?._id}`)}>
+        {hasValidImage ? (
+          <img
+            src={resolvedImageSrc}
+            alt={property?.title || "Real Estate Portfolio"}
+            className="w-full h-full object-cover   group-hover:scale-105 transition-transform  duration-700"
+            loading="lazy"
+          />
+        ) : (
+          <ImagePlaceholder/>
+        )}
+        
         <div className="absolute inset-0 bg-linear-to-t from-brand-dark/20 to-transparent"></div>
 
         {/* Premium Conditional Listing Type Badge */}
@@ -73,7 +80,10 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }
         </span>
         <button
           type="button"
-          onClick={handleFavoriteClick}
+          onClick={(e) => {
+            e.stopPropagation(); // Stops deep routing detail page jumps safely
+            if (onFavoriteToggle) onFavoriteToggle(property?._id);
+          }}
           className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-brand-dark/60 dark:bg-slate-900/60 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-lg text-white hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer group/heart"
           title={isFavorite ? "Favorilerimden Kaldır" : "Favorilerime Ekle"}
         >
@@ -120,9 +130,14 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false }
 
         {/* Footer actions displaying real-time monetary figures and detail pointers */}
         <div className="flex items-center justify-between pt-1 mt-auto">
-          <span className="text-base font-medium text-brand-gold dark:text-amber-400">
-            {formatPrice(property?.price)}{property?.listingType?.includes("rent") ? " / Ay" : ""}
-          </span>
+          <div className="flex flex-col gap-2">
+            <span className="text-base font-medium text-brand-gold dark:text-amber-400">
+              {formatPrice(property?.price)}{property?.listingType?.includes("rent") ? " / Ay" : ""}
+            </span>
+            <span className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-light font-sans mt-0.5">
+              👥 {property?.viewsCount ?? 0} Ziyaretçi
+            </span>
+          </div>
           <button 
             onClick={() => navigate(`/properties/${property?._id}`)}
             className="text-[11px] uppercase tracking-wider text-slate-700 dark:text-slate-300 font-medium border-b border-slate-300 dark:border-slate-700 hover:border-brand-gold dark:hover:border-brand-gold pb-0.5 transition-colors duration-300 cursor-pointer"

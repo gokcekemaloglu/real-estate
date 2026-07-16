@@ -24,7 +24,7 @@ const UserDropdown = ({ currentUser, isAdmin, logout, setIsDropdownOpen, current
           <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300 text-brand-gold font-sans font-medium text-sm">›</span>
         </Link>
 
-        {/* [ADDED PLACEHOLDER]: Connected dynamic link structure ready for your upcoming backend bookmarks system */}
+        {/* Connected dynamic link structure ready for your upcoming backend bookmarks system */}
         <Link 
           to="/favorites" 
           onClick={() => setIsDropdownOpen(false)}
