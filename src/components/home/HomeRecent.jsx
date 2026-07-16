@@ -35,7 +35,6 @@ const HomeRecent = () => {
   return (
     <section className="py-16 bg-slate-50 dark:bg-slate-950/20 border-t border-slate-100 dark:border-slate-900/60 transition-colors duration-300 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        
         {/* Section Title Ribbon */}
         <div className="text-center mb-10 md:mb-14">
           <span className="text-[10px] uppercase tracking-[0.25em] text-brand-gold font-medium mb-2 block">
@@ -46,7 +45,6 @@ const HomeRecent = () => {
           </h2>
           <div className="w-12 h-px bg-brand-gold/40 mx-auto mt-4"></div>
         </div>
-
         {/* Dynamic Responsive Layout Cards Grid Frame */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {recentProperties?.map((property) => (
@@ -57,7 +55,6 @@ const HomeRecent = () => {
             />
           ))}
         </div>
-
       </div>
     </section>
   )

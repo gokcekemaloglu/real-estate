@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom'
 const HeroSection = () => {
   const navigate = useNavigate()
   return (
-    <div className="relative h-120 md:h-135 flex items-center justify-center bg-slate-50 dark:bg-brand-dark overflow-hidden font-display transition-colors duration-300 pt-16">
+    <div className="relative min-h-115 sm:min-h-0 sm:h-110 md:h-120 flex items-center justify-center bg-slate-50 dark:bg-brand-dark overflow-hidden font-display transition-colors duration-300 pt-28 sm:pt-24 md:pt-16">
       {/* Background Geometric Line Effect - Fully uniform across layout boundaries */}
-      <div className="absolute inset-0 opacity-[0.03] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>
-      
+      <div className="absolute inset-0 opacity-[0.03] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>      
       {/* Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
         <span className="text-[10px] uppercase tracking-[0.25em] text-brand-gold font-medium mb-3 block animate-fade-in">
@@ -19,8 +18,7 @@ const HeroSection = () => {
         </h1>
         <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 max-w-lg font-light mb-8 leading-relaxed transition-colors duration-300">
           Görkem Emlak güvencesiyle bütçenizi zorlamayan, aileniz için en huzurlu daireleri, yatırımlık arsaları ve devren iş yeri fırsatlarını tek bir çatıda topladık.
-        </p>
-        
+        </p>        
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <button 
             type="button"
@@ -38,7 +36,6 @@ const HeroSection = () => {
           </button>
         </div>
       </div>
-
       {/* Decorative Elegant Blur Gradients kept subtle */}
       <div className="absolute -bottom-48 -right-48 w-80 h-80 bg-brand-gold/5 blur-[100px] rounded-full"></div>
       <div className="absolute -top-48 -left-48 w-80 h-80 bg-amber-500/5 blur-[100px] rounded-full"></div>
