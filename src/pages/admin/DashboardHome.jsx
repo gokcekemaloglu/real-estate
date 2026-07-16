@@ -23,6 +23,9 @@ const DashboardHome = () => {
   const totalProperties = propertiesDetails?.totalRecords || properties?.length || 0
   const activeCount = properties?.filter(p => p.isActive === true).length || 0
   const passiveCount = totalProperties - activeCount // Dynamically extracted passive layer
+  const saleCount = properties?.filter(p => p.listingType?.includes("sale")).length || 0
+  const rentCount = properties?.filter(p => p.listingType?.includes("rent")).length || 0
+  const featuredCount = properties?.filter(p => p.isFeatured === true).length || 0
 
   // 2. Fetch network traffic logs counter summaries cleanly
   const totalViewsSum = properties?.reduce((sum, p) => sum + (p.viewsCount || 0), 0) || 0
@@ -32,31 +35,28 @@ const DashboardHome = () => {
     total: totalProperties,
     active: activeCount,
     passive: passiveCount,
-    sale: properties?.filter(p => p.listingType?.includes("sale")).length || 0,
-    rent: properties?.filter(p => p.listingType?.includes("rent")).length || 0,
+    sale: saleCount,
+    rent: rentCount,
+    featured: featuredCount,
     totalViews: totalViewsSum,
     totalFavorites: totalFavoritesSum
   };
 
-  const categoryArray = [
-    { label: "Apartman Dairesi", count: properties?.filter(p => p.propertyCategory === "apartment").length || 0 },
-    { label: "Müstakil Ev", count: properties?.filter(p => p.propertyCategory === "house").length || 0 },
-    { label: "Lüks Villa", count: properties?.filter(p => p.propertyCategory === "villa").length || 0, isHighlight: true },
-    { label: "Arsa / Arazi", count: properties?.filter(p => p.propertyCategory === "land").length || 0 },
-    { label: "Ticari Mülk", count: properties?.filter(p => p.propertyCategory === "commercial").length || 0 },
-  ];
-
-  // 2. Listing Type Segregations
-  const saleCount = properties?.filter(p => p.listingType?.includes("sale")).length || 0
-  const rentCount = properties?.filter(p => p.listingType?.includes("rent")).length || 0
-  const featuredCount = properties?.filter(p => p.isFeatured === true).length || 0
-
+  
   // 3. Granular Category Distributions mapped from your exact Mongoose Schema strings tokens
   const apartmentCount = properties?.filter(p => p.propertyCategory === "apartment").length || 0
   const houseCount = properties?.filter(p => p.propertyCategory === "house").length || 0
   const villaCount = properties?.filter(p => p.propertyCategory === "villa").length || 0
   const landCount = properties?.filter(p => p.propertyCategory === "land").length || 0
   const commercialCount = properties?.filter(p => p.propertyCategory === "commercial").length || 0
+
+  const categoryArray = [
+    { label: "Apartman Dairesi", count: apartmentCount },
+    { label: "Müstakil Ev", count: houseCount },
+    { label: "Lüks Villa", count: villaCount, isHighlight: true },
+    { label: "Arsa / Arazi", count: landCount },
+    { label: "Ticari Mülk", count: commercialCount },
+  ];
 
   if (loading) {
     return (
@@ -68,7 +68,6 @@ const DashboardHome = () => {
 
   return (
     <div className="flex flex-col gap-8 animate-fade-in">
-      
       {/* Welcome Message Panel Dashboard */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -86,8 +85,6 @@ const DashboardHome = () => {
 
       <DashboardWidgets metrics={widgetMetrics}/>
       <DashboardCategoryDistribution categories={categoryArray}/>
-
-
     </div>
   )
 }
