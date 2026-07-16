@@ -9,7 +9,7 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
   // const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  // Unified luxury currency parser formatting numbers to localized Turkish Lira symbols
+  // Unified currency parser formatting numbers to localized Turkish Lira symbols
   const formatPrice = (amount) => {
     return new Intl.NumberFormat("tr-TR", {
       style: "currency",

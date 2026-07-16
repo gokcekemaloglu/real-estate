@@ -27,9 +27,7 @@ const HomeCategories = () => {
       queryParam: "filter[listingType]=transfer_sale&"
     }
   ];
-
   const handleCategoryClick = (query) => {
-    // Navigates securely straight into your pristine reactive properties viewports with active filters
     navigate(`/properties?${query}&page=1`);
   };
   return (
@@ -38,7 +36,7 @@ const HomeCategories = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">        
         {/* Section Title Ribbon */}
         <div className="text-center mb-12 md:mb-16">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-medium mb-2 block">
+          <span className="text-[12px] uppercase tracking-[0.3em] text-brand-gold font-bold mb-2 block">
             Hızlı Kategoriler
           </span>
           <h2 className="text-3xl md:text-4xl font-light tracking-tight text-slate-900 dark:text-white font-serif">
@@ -50,6 +48,9 @@ const HomeCategories = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category) => {
             const isImageBroken = category.bgImage.includes("unsplash.com") && !category.bgImage.includes("images.unsplash.com")
+            const placeholderType = 
+              category.id === "sale" ? "category_sale" : 
+              category.id === "rent" ? "category_rent" : "category_transfer";
             return (
             <div
               key={category.id}
@@ -57,7 +58,7 @@ const HomeCategories = () => {
               className="relative h-96 group overflow-hidden border border-slate-200 dark:border-slate-800/80 shadow-lg cursor-pointer bg-brand-dark animate-fade-in"
             >
               {isImageBroken ? (
-                <ImagePlaceholder type='category'/>
+                <ImagePlaceholder type={placeholderType}/>
               ) : (
                 <img
                   src={category.bgImage}
@@ -68,22 +69,21 @@ const HomeCategories = () => {
               )}
                            
               {/* Dark Overlaid Vignette Gradient */}
-              <div className="absolute inset-0 bg-linear-to-t from-brand-dark via-brand-dark/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-brand-dark via-brand-dark/30 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-300"></div>
 
               {/* Central Absolute Title Card Metadata segment */}
               <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-1 z-20">
-                <span className="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-semibold">
+                <span className="text-[12px] uppercase tracking-[0.2em] text-amber-400 font-semibold">
                   {category.subtitle}
                 </span>
                 <h3 className="text-xl font-serif font-normal text-white tracking-wide group-hover:translate-x-1 transition-transform duration-300">
                   {category.title}
                 </h3>
-                <div className="w-8 h-px bg-brand-gold/60 mt-2 group-hover:w-16 transition-all duration-300"></div>
+                <div className="w-8 h-px bg-amber-400/60 mt-2 group-hover:w-16 transition-all duration-300"></div>
               </div>
             </div>
           )})}
         </div>
-
       </div>
     </section>
   )

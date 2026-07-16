@@ -44,7 +44,7 @@ const HomeServices = () => {
         
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-medium mb-2 block">
+          <span className="text-[12px] uppercase tracking-[0.3em] text-brand-gold font-bold mb-2 block">
             Çalışma İlkelerimiz
           </span>
           <h2 className="text-3xl md:text-4xl font-light tracking-tight text-slate-900 dark:text-white font-serif">

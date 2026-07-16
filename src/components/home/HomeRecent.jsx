@@ -37,7 +37,7 @@ const HomeRecent = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Section Title Ribbon */}
         <div className="text-center mb-10 md:mb-14">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-brand-gold font-medium mb-2 block">
+          <span className="text-[12px] uppercase tracking-[0.25em] text-brand-gold font-bold mb-2 block">
             Yeni Eklenen Fırsatlar
           </span>
           <h2 className="text-2xl md:text-3xl font-light tracking-tight text-slate-900 dark:text-white font-serif">
