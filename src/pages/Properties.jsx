@@ -101,7 +101,7 @@ const Properties = () => {
               {/* Alternates components flawlessly using local viewMode state controls */}
               {viewMode === "grid" ? (
                 // Grid View: Uses standard 3-column matrix card templates safely
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
                   {properties?.map((singleProperty) => (
                     <PropertyCard
                       key={singleProperty._id}

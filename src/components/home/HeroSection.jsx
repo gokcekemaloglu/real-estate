@@ -8,7 +8,7 @@ const HeroSection = () => {
       {/* Background Geometric Line Effect - Fully uniform across layout boundaries */}
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>      
       {/* Content Container */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center flex flex-col items-center">
         <span className="text-[10px] md:text-[16px] uppercase tracking-[0.25em] text-brand-gold font-bold mb-3 block animate-fade-in">
           Adana'da Güvenilir Emlak Rehberiniz
         </span>

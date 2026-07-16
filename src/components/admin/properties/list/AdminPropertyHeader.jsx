@@ -6,10 +6,10 @@ const AdminPropertyHeader = () => {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
-        <h1 className="text-lg font-serif text-slate-800 dark:text-white font-light tracking-wide">
+        <h1 className="text-3xl font-bold font-serif text-slate-800 dark:text-white tracking-wide">
           İlan Portföy Yönetimi
         </h1>
-        <p className="text-[11px] text-slate-400 uppercase tracking-widest mt-0.5">
+        <p className="text-[11px] text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-0.5">
           Mevcut portföy listesi ve hızlı durum aktivasyon paneli
         </p>
       </div>

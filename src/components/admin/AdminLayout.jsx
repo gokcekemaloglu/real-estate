@@ -10,7 +10,7 @@ const AdminLayout = () => {
     { path: "/admin", label: "Özet Panel", icon: "📊" },
     { path: "/admin/properties", label: "İlan Yönetimi", icon: "🏢" },
     { path: "/admin/customers", label: "Müşteriler", icon: "👥" },
-    { path: "/admin/users", label: "Acenteler / Üyeler", icon: "👤" },
+    { path: "/admin/users", label: "Üyeler", icon: "👤" },
   ]
 
   return (
@@ -28,7 +28,7 @@ const AdminLayout = () => {
                 className={`flex items-center gap-4 px-4 py-3 text-xs uppercase tracking-widest transition-all duration-200 ${
                   isActive 
                     ? "bg-brand-gold/10 text-brand-gold border-l-2 border-brand-gold font-medium" 
-                    : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900"
+                    : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-amber-400"
                 }`}
               >
                 <span>{link.icon}</span>

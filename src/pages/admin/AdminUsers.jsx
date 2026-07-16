@@ -56,10 +56,10 @@ const AdminUsers = () => {
     <div className="flex flex-col gap-6 animate-fade-in">
       {/* Top Action Toolbar Header Section */}
       <div>
-        <h1 className="text-xl font-serif text-slate-800 dark:text-white font-light tracking-wide">
+        <h1 className="text-3xl font-serif text-slate-800 dark:text-white font-bold tracking-wide">
           Sistem Üye & Kullanıcı Yönetimi
         </h1>
-        <p className="text-[11px] text-slate-400 uppercase tracking-widest mt-0.5">
+        <p className="text-[11px] text-slate-400 uppercase dark:text-slate-450 tracking-widest mt-0.5">
           Kayıtlı sistem kullanıcıları, danışmanlar listesi ve hızlı erişim yetki paneli
         </p>
       </div>

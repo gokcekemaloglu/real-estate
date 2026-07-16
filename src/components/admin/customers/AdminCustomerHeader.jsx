@@ -5,8 +5,8 @@ const AdminCustomerHeader = ({onCreateClick}) => {
   return (
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
       <div>
-        <h1 className="text-3xl font-extrabold ont-serif text-slate-800 dark:text-white  tracking-wide">Müşteri (Portföy) Yönetimi</h1>
-        <p className="text-[11px] text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-0.5">
+        <h1 className="text-3xl font-bold font-serif text-slate-800 dark:text-white  tracking-wide">Müşteri (Portföy) Yönetimi</h1>
+        <p className="text-[11px] text-slate-400 dark:text-slate-450 uppercase tracking-widest mt-0.5">
           Cemal Bey, sistemdeki tüm mülk sahiplerinin listesi ve bilgileri aşağıdadır.
         </p>
       </div>
