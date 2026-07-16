@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import ImagePlaceholder from '../ImagePlaceholder';
 
 const HomeCategories = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const HomeCategories = () => {
     {
       id: "rent",
       title: "Kiralık İlanlar",
-      subtitle: "Aileler ve Esnaflar İçin En Uygun Kiralık Evler",
+      subtitle: "Aileler ve Esnaflar İçin Bütçe Dostu Güvenilir Kiralıklar",
       bgImage: "https://unsplash.com",
       queryParam: "filter[listingType]=rent"
     },
@@ -32,7 +33,8 @@ const HomeCategories = () => {
     navigate(`/properties?${query}&page=1`);
   };
   return (
-    <section className="py-20 bg-slate-50 dark:bg-slate-950/20 border-y border-slate-100 dark:border-slate-900/60 transition-colors duration-300 relative overflow-hidden">
+    <section className="py-16 bg-slate-50 dark:bg-slate-950/20 border-y border-slate-100 dark:border-slate-900/60 transition-colors duration-300 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">        
         {/* Section Title Ribbon */}
         <div className="text-center mb-12 md:mb-16">
@@ -46,20 +48,25 @@ const HomeCategories = () => {
         </div>
         {/* Dynamic Responsive Layout Category Grid Framework */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((category) => (
+          {categories.map((category) => {
+            const isImageBroken = category.bgImage.includes("unsplash.com") && !category.bgImage.includes("images.unsplash.com")
+            return (
             <div
               key={category.id}
               onClick={() => handleCategoryClick(category.queryParam)}
               className="relative h-96 group overflow-hidden border border-slate-200 dark:border-slate-800/80 shadow-lg cursor-pointer bg-brand-dark animate-fade-in"
             >
-              {/* Background Architectural Canvas Specimen View */}
-              <img
-                src={category.bgImage}
-                alt={category.title}
-                className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-80 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 contrast-105"
-                loading="lazy"
-              />
-              
+              {isImageBroken ? (
+                <ImagePlaceholder type='category'/>
+              ) : (
+                <img
+                  src={category.bgImage}
+                  alt={category.title}
+                  className="w-full h-full object-cover grayscale opacity-60  group-hover:opacity-80 group-hover:scale-105 group-hover:grayscale-0   transition-all duration-700 contrast-105"
+                  loading="lazy"
+                />
+              )}
+                           
               {/* Dark Overlaid Vignette Gradient */}
               <div className="absolute inset-0 bg-linear-to-t from-brand-dark via-brand-dark/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
 
@@ -74,7 +81,7 @@ const HomeCategories = () => {
                 <div className="w-8 h-px bg-brand-gold/60 mt-2 group-hover:w-16 transition-all duration-300"></div>
               </div>
             </div>
-          ))}
+          )})}
         </div>
 
       </div>

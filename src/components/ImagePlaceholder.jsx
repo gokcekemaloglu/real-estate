@@ -2,6 +2,7 @@ import React from 'react'
 
 const ImagePlaceholder = ({ type = "property", showText = false }) => {
   const isUser = type === "user"
+  const isCategory = type === "category"
   return (
     <div className="w-full h-full bg-slate-100 dark:bg-slate-950 flex flex-col items-center justify-center gap-2.5 transition-colors duration-300 relative select-none">
       {/* Subtle luxury structural background blueprint grid lines layer */}
@@ -26,7 +27,18 @@ const ImagePlaceholder = ({ type = "property", showText = false }) => {
           <path d="M12 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
           <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
         </svg>
-      ) : (
+      ) : isCategory ? (
+        // FIXED BEST PRACTICE: Integrated your favorite HomeServices building outline vector nicely as a core placeholder asset!
+        <svg 
+          className="w-12 h-12 text-brand-gold/40 dark:text-amber-500/20 animate-pulse duration-4000" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="1" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+        ) : (
         // Tabler-style elegant wireframe house and camera vector hybrid overlay icon layout
         <svg 
           xmlns="http://w3.org" 
