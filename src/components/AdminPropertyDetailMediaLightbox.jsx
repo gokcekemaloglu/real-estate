@@ -65,7 +65,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen, onClose, images, currentIndex
         ) : (
           <div className="w-10 shrink-0" />
         )}
-        {/* Central Display Canvas Frame Segment */}
+        {/* Central Display Segment */}
         <div className="flex-1 h-full max-h-[70vh] flex items-center justify-center overflow-hidden">
           <img
             src={`${IMAGE_BASE_URL}${images[currentIndex]?.imageUrl}`}
