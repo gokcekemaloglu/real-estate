@@ -30,9 +30,7 @@ const PropertyDetail = () => {
       });
     }
   }, [id])
-
   // console.log("property-->", property);
-
   if (loading && !property?.title) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-brand-dark flex items-center justify-center">
