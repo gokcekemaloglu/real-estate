@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const PropertyFeaturesPanel = ({ property }) => {
   const navigate = useNavigate();
-  console.log("propeerty-->", property);
+  // console.log("propeerty-->", property);
   
   const formatPrice = (amount) => {
     if (!amount) return "—";

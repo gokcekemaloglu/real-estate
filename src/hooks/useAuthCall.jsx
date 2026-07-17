@@ -54,10 +54,10 @@ const useAuthCall = () => {
         if (!confirmed) return //Exit if user cancels logout
         dispatch(fetchStart())
         try {
+            navigate("/")
             await axiosWithToken.get("/auth/logout")
             dispatch(logoutSuccess())
             SweetNotify("Oturum başarıyla sonlandırıldı.", SweetAlertIcons.SUCCESS)
-            navigate("/")
         } catch (error) {
             console.log("Logout Error", error)
             handleError(error, "Oturum kapatma işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.")
