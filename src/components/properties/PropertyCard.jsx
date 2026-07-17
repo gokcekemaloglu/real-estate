@@ -3,34 +3,13 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SweetAlertIcons, SweetNotify } from "../../helper/SweetNotify";
 import ImagePlaceholder from "../ImagePlaceholder";
+import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/listingTypeLabels";
 
 const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
   // const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  // Unified currency parser formatting numbers to localized Turkish Lira symbols
-  const formatPrice = (amount) => {
-    return new Intl.NumberFormat("tr-TR", {
-      style: "currency",
-      currency: "TRY",
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
-
-  // Maps backend enum listing variants to elite display representations smoothly
-  const getListingBadge = (type) => {
-    const badges = {
-      sale: "Satılık",
-      rent: "Kiralık",
-      transfer_sale: "Devren Satılık",
-      transfer_rent: "Devren Kiralık"
-    };
-    return badges[type] || "Portföy";
-  };
-
-  // // Hardcoded premium architecture backdrop array acting as fallback until images schema goes live
-  // const fallbackPlaceholder = "https://unsplash.com";
   // 1. Search for the designated cover image belonging to this card first
   let targetCoverImage = propertyImages?.find(
     (image) => image.propertyId === property?._id && image.isCover
@@ -132,7 +111,7 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
         <div className="flex items-center justify-between pt-1 mt-auto">
           <div className="flex flex-col gap-2">
             <span className="text-base font-medium text-brand-gold dark:text-amber-400">
-              {formatPrice(property?.price)}{property?.listingType?.includes("rent") ? " / Ay" : ""}
+              {formatPrice(property?.price)}{getPriceSuffix(property?.listingType, property?.rentPeriod)}
             </span>
             <span className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-light font-sans mt-0.5">
               👥 {property?.viewsCount ?? 0} Ziyaretçi

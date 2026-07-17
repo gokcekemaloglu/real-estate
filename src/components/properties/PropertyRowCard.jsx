@@ -1,33 +1,13 @@
 import React from "react";
-// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ImagePlaceholder from "../ImagePlaceholder";
+import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/listingTypeLabels";
 
 const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
-  // const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
-  // const fallbackPlaceholder = "https://unsplash.com";
 
-  const formatPrice = (amount) => {
-    return new Intl.NumberFormat("tr-TR", {
-      style: "currency",
-      currency: "TRY",
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  const getListingBadge = (type) => {
-    const badges = {
-      sale: "Satılık",
-      rent: "Kiralık",
-      transfer_sale: "Devren Satılık",
-      transfer_rent: "Devren Kiralık",
-    };
-    return badges[type] || "Portföy";
-  };
-
-  // 1. Resolve core cover asset identifiers dynamically
+   // 1. Resolve core cover asset identifiers dynamically
   let targetCoverImage = propertyImages?.find(
     (img) => img.propertyId === property?._id && img.isCover,
   );
@@ -121,7 +101,7 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavor
         <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto gap-2 md:gap-16 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/40 shrink-0">
           <span className="text-lg font-medium text-brand-gold dark:text-amber-400 whitespace-nowrap">
             {formatPrice(property?.price)}
-            {property?.listingType?.includes("rent") ? " / Ay" : ""}
+            {getPriceSuffix(property?.listingType, property?.rentPeriod)}
           </span>
           <button
             onClick={() => navigate(`/properties/${property?._id}`)}
