@@ -35,3 +35,9 @@ export const formatPrice = (amount) => {
     maximumFractionDigits: 0,
   }).format(amount);
 };
+
+export const getListingBadgeStyle = (type) => {
+  if (type === "sale") return "bg-brand-gold text-white border-brand-gold/20 ";
+  if (type === "rent") return "bg-slate-800 dark:bg-slate-950 border-slate-700 text-amber-400";
+  return "bg-amber-600 text-white border-amber-500/20"; // Style fallback for transfer models
+};

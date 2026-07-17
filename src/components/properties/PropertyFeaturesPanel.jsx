@@ -1,18 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { formatPrice, getPriceSuffix } from "../../helper/listingTypeLabels";
 
 const PropertyFeaturesPanel = ({ property }) => {
   const navigate = useNavigate();
   // console.log("propeerty-->", property);
-  
-  const formatPrice = (amount) => {
-    if (!amount) return "—";
-    return new Intl.NumberFormat("tr-TR", {
-      style: "currency",
-      currency: "TRY",
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
 
   const getHeatingDisplay = (type) => {
     const heatingMap = {
@@ -46,10 +38,10 @@ const PropertyFeaturesPanel = ({ property }) => {
         </h1>
         <span className="text-xl md:text-2xl font-sans font-medium text-brand-gold block mt-4">
           {formatPrice(property?.price)}
-          {property?.listingType?.includes("rent") ? " / Ay" : ""}
+          {getPriceSuffix(property?.listingType, property?.rentPeriod)}
         </span>
       </div>
-      {/* Granular Specification Rows mapped strictly from your Mongoose Schema keys */}
+      {/* Granular Specification Rows mapped strictly from your Mongoose Schema keys / Metrics*/}
       <div className="flex flex-col border-t border-slate-100 dark:border-slate-800/60 pt-4 text-xs font-light text-slate-600 dark:text-slate-300 gap-3.5">
         {/* Gross/Net Area */}
         <div className="flex justify-between">

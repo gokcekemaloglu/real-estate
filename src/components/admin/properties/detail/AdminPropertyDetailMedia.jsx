@@ -3,6 +3,7 @@ import useFetchData from "../../../../hooks/useFetchData";
 import { useSelector } from "react-redux";
 import { setData } from "../../../../features/propertySlice";
 import PropertyMediaGallery from "../../../properties/PropertyMediaGallery";
+import { getListingBadge, getListingBadgeStyle } from "../../../../helper/listingTypeLabels";
 
 const AdminPropertyDetailMedia = ({ property }) => {
   const { fetchData } = useFetchData();
@@ -30,14 +31,8 @@ const AdminPropertyDetailMedia = ({ property }) => {
 
   const badges = (
     <>
-      <span
-        className={`text-[12px] uppercase font-bold tracking-widest px-3 py-1 text-white shadow-sm ${
-          property?.listingType === "sale"
-            ? "bg-brand-gold"
-            : "bg-brand-dark border border-slate-700"
-        }`}
-      >
-        {property?.listingType === "sale" ? "Satılık" : "Kiralık"}
+      <span className={`text-[10px] uppercase font-bold tracking-widest px-2 py-1 border shadow-2xs font-sans ${getListingBadgeStyle(property?.listingType)} w-24 text-center`}>
+        {getListingBadge(property?.listingType)}
       </span>
       {property?.isFeatured && (
         <span className="text-[12px] uppercase font-bold tracking-widest px-3 py-1 bg-amber-500 text-brand-dark shadow-sm">

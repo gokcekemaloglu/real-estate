@@ -31,7 +31,7 @@ const AdminUserRow = ({ user, handleStatusToggle, handleDelete, onDetailClick })
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">
               |
             </span>
-            <span className="font-mono">{user?.phone || "No Phone"}</span>
+            <span className="font-mono">{user?.phone || "Telefon Numarası Kayıtlı Değil"}</span>
           </div>
         </div>
       </div>

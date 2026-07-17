@@ -11,7 +11,7 @@ const PropertyMediaGallery = ({
   containerBgClass = "bg-slate-100 dark:bg-slate-950",
   thumbLabel = "Fotoğraflar",
 }) => {
-    const {
+  const {
     IMAGE_BASE_URL,
     activeImage,
     isLightboxOpen,
