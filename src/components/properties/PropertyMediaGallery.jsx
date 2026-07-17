@@ -7,6 +7,7 @@ const PropertyMediaGallery = ({
   images,
   altText,
   badges,
+  topRightContent,
   heroHeightClass = "h-80",
   containerBgClass = "bg-slate-100 dark:bg-slate-950",
   thumbLabel = "Fotoğraflar",
@@ -48,10 +49,14 @@ const PropertyMediaGallery = ({
               {badges}
             </div>
           )}
+          {topRightContent && (
+            <div className="absolute top-4 right-4">
+              {topRightContent}
+            </div>
+          )}
         </div>
       )}
  
-      {/* Thumbnail Şeridi */}
       {images?.length > 1 && (
         <div className="flex flex-col gap-2 pt-1">
           <span className="text-[9px] uppercase tracking-wider text-slate-400 font-medium">

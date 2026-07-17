@@ -1,6 +1,7 @@
 import React from "react";
 import PropertyMediaGallery from "./PropertyMediaGallery";
 import { getListingBadge } from "../../helper/listingTypeLabels";
+import FavoriteButton from "./FavoriteButton";
 
 const PropertyGallery = ({title, listingType, propertyId, currentPropertyImages}) => {
   const badges = (
@@ -14,6 +15,7 @@ const PropertyGallery = ({title, listingType, propertyId, currentPropertyImages}
       images={currentPropertyImages}
       altText={title}
       badges={badges}
+      topRightContent={<FavoriteButton propertyId={propertyId} size="lg" />}
       heroHeightClass="h-100 md:h-125"
       containerBgClass="bg-slate-200 dark:bg-slate-950"
       thumbLabel="Portföy Fotoğrafları"
