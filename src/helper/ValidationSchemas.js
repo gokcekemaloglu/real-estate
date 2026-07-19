@@ -1,4 +1,5 @@
 import * as Yup from "yup"
+import { isRentType } from "./listingTypeLabels";
 
 // Reusable validation schema for registering new user accounts
 export const SignupSchema = Yup.object().shape({
@@ -51,6 +52,16 @@ export const PropertySchema = Yup.object().shape({
     .required("Fiyat alanı zorunludur."),
   listingType: Yup.string()
     .required("İlan durumunu (Satılık/Kiralık) seçmek zorunludur."),
+  rentPeriod: Yup.string()
+    .nullable()
+    .when("listingType", {
+      is: (value) => isRentType(value),
+      then: (schema) =>
+        schema
+          .required("Kiralık ilanlarda kira periyodu (Aylık/Yıllık) seçmek zorunludur.")
+          .oneOf(["monthly", "yearly"], "Geçersiz kira periyodu seçimi."),
+      otherwise: (schema) => schema.notRequired(),
+    }),
   propertyCategory: Yup.string()
     .required("Mülk kategorisini (Villa/Daire) seçmek zorunludur."),
   district: Yup.string()

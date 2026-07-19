@@ -11,12 +11,10 @@ import PaginationComponent from "../components/properties/PaginationComponent";
 import { useState } from "react";
 import PropertyDisplayBar from "../components/PropertyDisplayBar";
 import PropertyRowCard from "../components/properties/PropertyRowCard";
-import useFavoritesCall from "../hooks/useFavoritesCall";
 
 const Properties = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { fetchData } = useFetchData();
-  const { toggleFavorite } = useFavoritesCall();
 
   const { properties, loading, propertiesDetails, propertyImages } = useSelector((state) => state.property);
   const { favoriteIds } = useSelector((state) => state.favorites);
@@ -107,8 +105,6 @@ const Properties = () => {
                       key={singleProperty._id}
                       property={singleProperty}
                       propertyImages={propertyImages}
-                      isFavorite={favoriteIds?.includes(singleProperty?._id)}
-                      onFavoriteToggle={toggleFavorite}
                     />
                   ))}
                 </div>
@@ -120,8 +116,6 @@ const Properties = () => {
                       property={singleProperty}
                       key={singleProperty._id}
                       propertyImages={propertyImages}
-                      isFavorite={favoriteIds?.includes(singleProperty?._id)}
-                      onFavoriteToggle={toggleFavorite}
                     />
                   ))}
                 </div>

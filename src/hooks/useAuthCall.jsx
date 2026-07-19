@@ -37,8 +37,7 @@ const useAuthCall = () => {
         dispatch(fetchStart())
         try {
             const {data} = await axiosPublic.post("/auth/login", userInfo)
-            console.log(data);
-            
+            // console.log(data);            
             dispatch(loginSuccess(data.data))
             await getMyFavorites() // Fetch user's favorites immediately after login to sync state
             SweetNotify(`Sisteme başarıyla giriş yapıldı. Hoşgeldiniz, ${data?.data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)

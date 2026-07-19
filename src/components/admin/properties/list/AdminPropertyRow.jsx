@@ -5,11 +5,6 @@ import { formatPrice, getListingBadge, getPriceSuffix, getListingBadgeStyle } fr
 const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteClick, onEditClick, onDetailClick}) => {
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL
 
-  // const getListingBadgeStyle = (type) => {
-  //   if (type === "sale") return "bg-brand-gold text-white border-brand-gold/20";
-  //   if (type === "rent") return "bg-slate-800 dark:bg-slate-950 border-slate-700 text-amber-400";
-  //   return "bg-amber-600 text-white border-amber-500/20"; // Style fallback for transfer models
-  // };
   let targetCoverImage = propertyImages?.find(
     (image) => image.propertyId === property?._id && image.isCover
   );
@@ -29,16 +24,15 @@ const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteCli
       {/* Left Block: Image & Structural Context Titles */}
       <div className="flex items-center gap-4 flex-1">
         <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800">
-        {hasValidImage ? (
-          <img
-            src={resolvedImageSrc}
-            alt={property?.title || "Real Estate Specimen"}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <ImagePlaceholder/>
-        )}
-          
+          {hasValidImage ? (
+            <img
+              src={resolvedImageSrc}
+              alt={property?.title || "Real Estate Specimen"}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <ImagePlaceholder/>
+          )}          
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-wider text-brand-gold font-semibold">
