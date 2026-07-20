@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 const PropertyDisplayBar = ({ viewMode, setViewMode, totalRecords = 0 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log("[PropertyDisplayBar] render edildi. viewMode:", viewMode, "| setViewMode tipi:", typeof setViewMode);
   // Unified sorting states extracted cleanly from dynamic URL search query parameters
   const currentSortKey = searchParams.get("sort[price]")
     ? `price:${searchParams.get("sort[price]")}`

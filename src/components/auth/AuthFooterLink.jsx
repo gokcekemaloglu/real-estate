@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const AuthFooterLink = ({ text, linkText, to }) => {
   return (
     <div className="text-center mt-6">
-      <p className="text-xs text-slate-400 dark:text-slate-500 font-light">
+      <p className="text-xs text-slate-400 dark:text-slate-500 font-light py-6">
         {text}{' '}
         <Link to={to} className="text-brand-gold hover:text-amber-500 font-medium transition-colors duration-200">
           {linkText}

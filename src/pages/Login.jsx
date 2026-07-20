@@ -5,6 +5,7 @@ import AuthFooterLink from '../components/auth/AuthFooterLink'
 import useAuthCall from '../hooks/useAuthCall'
 import { Formik } from 'formik'
 import { SignInSchema } from '../helper/ValidationSchemas'
+import GoogleLoginButton from '../components/auth/GoogleLoginButton'
 
 const Login = () => {
   const {login} = useAuthCall()
@@ -42,12 +43,13 @@ const Login = () => {
 
         {/* Bottom Navigation Link */}
         <AuthFooterLink text={"Henüz bir Hesabınız yok mu?"} linkText={"Kayıt Olun!"} to={"/register"}/>
-
+        <GoogleLoginButton/>
       </div>
 
       {/* Decorative Blur Gradients matching the design standards */}
       <div className="absolute top-1/4 -right-32 w-80 h-80 bg-brand-gold/5 blur-[100px] rounded-full"></div>
       <div className="absolute bottom-1/4 -left-32 w-80 h-80 bg-slate-800/10 dark:bg-slate-800/20 blur-[100px] rounded-full"></div>
+      
     </div>
   )
 }

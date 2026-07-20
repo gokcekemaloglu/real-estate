@@ -22,8 +22,7 @@ const useAuthCall = () => {
         dispatch(fetchStart())
         try {
             const {data} = await axiosPublic.post("/auth/signup", userInfo)
-            // console.log(data);
-            
+            // console.log(data);            
             dispatch(registerSuccess(data.data))
             SweetNotify("Hesabınız başarıyla oluşturuldu. Güvenle giriş yapabilirsiniz.", SweetAlertIcons.SUCCESS)
             navigate("/login")
@@ -38,13 +37,28 @@ const useAuthCall = () => {
         try {
             const {data} = await axiosPublic.post("/auth/login", userInfo)
             // console.log(data);            
-            dispatch(loginSuccess(data.data))
+            dispatch(loginSuccess(data?.data))
             await getMyFavorites() // Fetch user's favorites immediately after login to sync state
             SweetNotify(`Sisteme başarıyla giriş yapıldı. Hoşgeldiniz, ${data?.data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
             navigate("/")
         } catch (error) {
             console.log("Login Error", error)
             handleError(error, "Giriş işlemi sırasında bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.")
+        }
+    }
+
+    // Google Sign-In: exchanges the ID token (credential) the Google button gave us on the frontend for our own Token/JWT pair from the backend. Reuses loginSuccess on purpose — the backend's /auth/google response has the exact same shape (token, jwt, user) as /auth/login, so no new slice action is needed and the rest of the app (favorites sync, redirect, toast) behaves identically to a classic login.
+    const googleAuth = async (credential) => {
+        dispatch(fetchStart())
+        try {
+            const {data} = await axiosPublic.post("/auth/google", { credential })
+            dispatch(loginSuccess(data?.data))
+            await getMyFavorites()
+            SweetNotify(`Sisteme başarıyla giriş yapıldı. Hoşgeldiniz, ${data?.data?.user?.userName || 'Kullanıcı'}!`, SweetAlertIcons.SUCCESS)
+            navigate("/")
+        } catch (error) {
+            console.log("Google Auth Error", error)
+            handleError(error, "Google ile giriş sırasında bir hata oluştu. Lütfen tekrar deneyin.")
         }
     }
 
@@ -62,7 +76,7 @@ const useAuthCall = () => {
             handleError(error, "Oturum kapatma işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.")
         }
     }
-  return {register, login, logout}
+  return {register, login, googleAuth, logout}
 }
 
 export default useAuthCall
