@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { PropertySchema } from '../../helper/ValidationSchemas'
 import usePropertyCall from '../../hooks/usePropertyCall'
 import { fetchStart as custStart, fetchFail as custFail, setData as custSet } from '../../features/customerSlice'
-import { isRentType } from '../../helper/listingTypeLabels'
+import { isRentType, listingTypeOptions, rentPeriodOptions, categoryOptions, heatingOptions, districtOptions, occupancyOptions } from '../../helper/propertyOptions'
 import FormBlockTitle from '../../components/admin/properties/form/FormBlockTitle'
 import FormBlockPrice from '../../components/admin/properties/form/FormBlockPrice'
 import FormBlockLocation from '../../components/admin/properties/form/FormBlockLocation'
@@ -100,14 +100,6 @@ const AdminPropertyForm = () => {
       formik.setFieldValue('rentPeriod', '')
     }
   }, [formik.values.listingType])
-
-  // Dropdown mapping configurations options dictionary lists
-  const listingTypeOptions = [{ value: "sale", label: "Satılık" }, { value: "rent", label: "Kiralık" }, { value: "transfer_sale", label: "Devren Satılık" }, { value: "transfer_rent", label: "Devren Kiralık" }]
-  const rentPeriodOptions = [{ value: "monthly", label: "Aylık" }, { value: "yearly", label: "Yıllık" }]
-  const categoryOptions = [{ value: "apartment", label: "Daire" }, { value: "house", label: "Müstakil Ev" }, { value: "villa", label: "Villa" }, { value: "land", label: "Arsa / Arazi" }, { value: "commercial", label: "Ticari Mülk / İşyeri" }]
-  const heatingOptions = [{ value: "none", label: "Isıtma Yok" }, { value: "combi", label: "Kombi" }, { value: "air_conditioner", label: "Klima" }, { value: "central_share_meter", label: "Pay Ölçer" }, { value: "central", label: "Merkezi Sistem" }]
-  const districtOptions = [{ value: "Seyhan", label: "Seyhan" }, { value: "Sarıçam", label: "Sarıçam" }, { value: "Çukurova", label: "Çukurova" }, { value: "Yüreğir", label: "Yüreğir" }]
-  const occupancyOptions = [{ value: "vacant", label: "Boş" }, { value: "tenant", label: "Kiracılı" }, { value: "owner", label: "Mülk Sahibi Oturuyor" }]
 
   const customerOptions = customers?.map(customer => ({
     value: customer._id,
