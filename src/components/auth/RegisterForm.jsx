@@ -2,9 +2,9 @@ import React from "react";
 import FormInput from "./FormInput";
 
 const RegisterForm = (props) => {
-  const { handleSubmit, isSubmitting } = props;
+  const { handleSubmit, isSubmitting, isKvkkAccepted } = props;
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && isKvkkAccepted && !isSubmitting) {
       e.preventDefault();
       handleSubmit();
     }
@@ -61,10 +61,14 @@ const RegisterForm = (props) => {
       />
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="btn-premium w-full py-3.5 mt-2 font-semibold text-center tracking-widest transition-all duration-300 shadow-md dark:shadow-lg dark:hover:shadow-brand-gold/10"
+        disabled={!isKvkkAccepted || isSubmitting}
+        className={`w-full py-3.5 mt-2 font-semibold text-center tracking-widest transition-all duration-300 rounded-sm shadow-md ${
+          isKvkkAccepted
+            ? "btn-premium cursor-pointer opacity-100 dark:shadow-lg dark:hover:shadow-brand-gold/10"
+            : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed opacity-50 shadow-none pointer-events-none"
+        }`}
       >
-        {isSubmitting ? "yükleniyor" + "..." : "Kayıt Ol"}
+        {isSubmitting ? "Yükleniyor" + "..." : "Kayıt Ol"}
       </button>
     </form>
   );

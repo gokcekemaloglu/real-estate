@@ -6,9 +6,12 @@ import { Formik } from 'formik'
 import useAuthCall from '../hooks/useAuthCall'
 import { SignupSchema } from '../helper/ValidationSchemas'
 import GoogleLoginButton from '../components/auth/GoogleLoginButton'
+import { useState } from 'react'
+import KvkkCheckbox from '../components/auth/KvkkCheckbox'
 
 const Register = () => {
   const {register} = useAuthCall()
+  const [kvkkConsent, setKvkkConsent] = useState(false)
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-brand-dark px-6 py-24 font-display relative overflow-hidden transition-colors duration-300">
       {/* Background Subtle Line Effect */}
@@ -41,12 +44,16 @@ const Register = () => {
             // Gracefully terminates the Formik submitting lifecycle state
             actions.setSubmitting(false) 
           }}
-          component={(props) => <RegisterForm {...props}/>}
+          component={(props) => <RegisterForm {...props} isKvkkAccepted={kvkkConsent}  />}
         ></Formik>
+        {/* KVKK */}
+        <KvkkCheckbox checked={kvkkConsent} onChange={setKvkkConsent}/>
         
         {/* Bottom Link */}
         <AuthFooterLink text={"Zaten bir hesabınız var mı?"} linkText={"Giriş Yapın!"} to={"/login"}/>
-        <GoogleLoginButton/>
+        <div className={`transition-all duration-300 mt-2 ${kvkkConsent ? "opacity-100 pointer-events-auto" : "opacity-40 pointer-events-none select-none"}`}>
+          <GoogleLoginButton/>
+        </div>
       </div>
 
       {/* Decorative Blur Gradients */}

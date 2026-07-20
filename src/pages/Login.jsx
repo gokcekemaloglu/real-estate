@@ -6,9 +6,12 @@ import useAuthCall from '../hooks/useAuthCall'
 import { Formik } from 'formik'
 import { SignInSchema } from '../helper/ValidationSchemas'
 import GoogleLoginButton from '../components/auth/GoogleLoginButton'
+import { useState } from 'react'
+import KvkkCheckbox from '../components/auth/KvkkCheckbox'
 
 const Login = () => {
   const {login} = useAuthCall()
+  const [kvkkConsent, setKvkkConsent] = useState(false)
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-brand-dark px-6 py-24 font-display relative overflow-hidden transition-colors duration-300">
       {/* Background Subtle Line Effect with Tailwind v4 size definition */}
@@ -40,10 +43,32 @@ const Login = () => {
           }}
           component={(props) => <LoginForm {...props}/>}
         ></Formik>
+        {/* KVKK */}
+        {/* <div className="flex items-start gap-2.5 my-5 select-none animate-fade-in text-[11px] font-light leading-relaxed text-slate-500 dark:text-slate-400">
+          <input
+            id="login-kvkk-consent"
+            type="checkbox"
+            checked={kvkkConsent}
+            onChange={(e) => setKvkkConsent(e.target.checked)}
+            className="w-3.5 h-3.5 mt-0.5 accent-brand-gold border-slate-300 rounded-xs cursor-pointer shrink-0"
+          />
+          <label htmlFor="login-kvkk-consent" className="cursor-pointer">
+            Görkem Emlak{" "}
+            <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="text-brand-gold font-medium hover:underline">
+              KVKK Aydınlatma Metni
+            </a>
+            'ni okudum. Google veya yerel hesabımla giriş yaparak verilerimin işlenmesini kabul ediyorum.
+          </label>
+        </div> */}
 
         {/* Bottom Navigation Link */}
         <AuthFooterLink text={"Henüz bir Hesabınız yok mu?"} linkText={"Kayıt Olun!"} to={"/register"}/>
-        <GoogleLoginButton/>
+        <div className="mt-4">
+          <GoogleLoginButton />
+        </div>        
+        <p className="text-[10px] text-center text-slate-400 dark:text-slate-500 font-light mt-5 leading-relaxed max-w-xs mx-auto select-none">
+          Oturum açarak Görkem Emlak <a href="/kvkk" className="text-brand-gold hover:underline font-medium">KVKK Politikası</a> şartlarını ve veri işleme koşullarını otomatik olarak kabul etmiş sayılırsınız.
+        </p>
       </div>
 
       {/* Decorative Blur Gradients matching the design standards */}

@@ -5,6 +5,7 @@ import AuthRoute from "./AuthRoute";
 import PrivateRouter from "./PrivateRouter";
 import AdminRoute from "./AdminRoute";
 import ScrollToTop from "../components/ScrollToTop";
+import KvkkText from "../pages/KvkkText";
 
 // Performance Optimization via Lazy Loading (Code Splitting)
 const Home = lazy(() => import("../pages/Home"));
@@ -47,6 +48,7 @@ const AppRouter = () => {
             <Route path="/properties/:id" element={<PropertyDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/kvkk" element={<KvkkText />} />
             <Route element={<PrivateRouter />}>
               <Route path="/profile/:id" element={<Profile />} />
               <Route path="/favorites" element={<MyFavorites />} />
