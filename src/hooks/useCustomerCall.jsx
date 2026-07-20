@@ -71,7 +71,24 @@ const useCustomerCall = () => {
     }
   };
 
-  return {getSingleCustomerData, postCustomerData, putCustomerData, toggleCustomerStatus, deleteCustomer}
+  const deleteCustomerNote = async (customerId, noteId, onSuccessCallback) => {
+    const confirmed = await SweetConfirm("Notu Sil", "Bu notu kalıcı olarak geçmişten kaldırmak istediğinize emin misiniz?", SweetAlertIcons.QUESTION)
+    if (!confirmed) return
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken.delete(`/customers/${customerId}/note/${noteId}`);
+      
+      // Instantly inject modified record payload back into core states mapping structures
+      dispatch(setData({ endpoint: "customer", data: data?.data }));
+      
+      SweetNotify(data?.message, SweetAlertIcons.SUCCESS);
+      if (onSuccessCallback) onSuccessCallback();
+    } catch (error) {
+      handleError(error, "Not silinirken bir hata oluştu!")
+    }
+  };
+
+  return {getSingleCustomerData, postCustomerData, putCustomerData, toggleCustomerStatus, deleteCustomer, deleteCustomerNote}
 }
 
 export default useCustomerCall

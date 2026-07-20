@@ -142,6 +142,14 @@ const AdminPropertyDetailMetrics = ({property}) => {
           {property?.viewsCount} Görüntüleme
         </div>
       </div>
+      {/* Count of Likes */}
+      {property?.favoriteCount > 0 ? (       
+        <div className="grid grid-cols-1 gap-2  dark:border-slate-800/60 text-[9px] uppercase font-medium text-slate-400 text-center">
+          <div className={`py-1.5 border border-slate-100 dark:border-slate-800/60`}>
+            {property?.favoriteCount} Favori
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

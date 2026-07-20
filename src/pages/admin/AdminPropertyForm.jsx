@@ -49,6 +49,7 @@ const AdminPropertyForm = () => {
       description: isEditMode ? property?.description : '',
       price: isEditMode ? property?.price : '',
       listingType: isEditMode ? property?.listingType : '',
+      rentPeriod: isEditMode ? (property?.rentPeriod ?? '') : '',
       propertyCategory: isEditMode ? property?.propertyCategory : '',
       city: 'Adana',
       district: isEditMode ? property?.district : '',
@@ -95,7 +96,7 @@ const AdminPropertyForm = () => {
   })
 
   useEffect(() => {
-    if (!isRentType(formik.values.listingType) && formik.values.rentPeriod) {
+    if (formik.touched.listingType && !isRentType(formik.values.listingType) && formik.values.rentPeriod) {
       formik.setFieldValue('rentPeriod', '')
     }
   }, [formik.values.listingType])
@@ -143,7 +144,7 @@ const AdminPropertyForm = () => {
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6">
         <FormBlockImage propertyId={id} isEditMode={isEditMode}/>
         <FormBlockTitle formik={formik}/>
-        <FormBlockPrice formik={formik} listingTypeOptions={listingTypeOptions} categoryOptions={categoryOptions} />
+        <FormBlockPrice formik={formik} listingTypeOptions={listingTypeOptions} categoryOptions={categoryOptions} rentPeriodOptions={rentPeriodOptions} />
         <FormBlockLocation formik={formik} districtOptions={districtOptions} />
         <FormBlockOwner formik={formik} customerOptions={customerOptions} />
         <FormBlockSpecs formik={formik} heatingOptions={heatingOptions} occupancyOptions={occupancyOptions} />
