@@ -1,9 +1,9 @@
 import React from "react";
 import FormSelectField from "./FormSelectField";
 import FormInput from "../../../auth/FormInput";
-import { isRentType } from "../../../../helper/listingTypeLabels";
+import { isRentType } from "../../../../helper/propertyOptions";
 
-const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions, rentPeriodOptions}) => {
+const FormBlockPrice = ({formik, listingTypeOptions, categoryOptions, rentPeriodOptions,}) => {
   const showRentPeriod = isRentType(formik.values.listingType);
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 grid grid-cols-1 md:grid-cols-2 gap-6 shadow-sm">
