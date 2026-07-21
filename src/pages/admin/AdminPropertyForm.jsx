@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { PropertySchema } from '../../helper/ValidationSchemas'
 import usePropertyCall from '../../hooks/usePropertyCall'
 import { fetchStart as custStart, fetchFail as custFail, setData as custSet } from '../../features/customerSlice'
-
+import { isRentType, listingTypeOptions, rentPeriodOptions, categoryOptions, heatingOptions, districtOptions, occupancyOptions } from '../../helper/propertyOptions'
 import FormBlockTitle from '../../components/admin/properties/form/FormBlockTitle'
 import FormBlockPrice from '../../components/admin/properties/form/FormBlockPrice'
 import FormBlockLocation from '../../components/admin/properties/form/FormBlockLocation'
@@ -39,7 +39,6 @@ const AdminPropertyForm = () => {
       sliceActions: { fetchStart: custStart, fetchFail: custFail, setData: custSet },
       page: 1,
       limit: 100, // Fetch a wide list to populate the dropdown filter completely
-      // isWithToken: true,
     });
   }, []);
 
@@ -50,6 +49,7 @@ const AdminPropertyForm = () => {
       description: isEditMode ? property?.description : '',
       price: isEditMode ? property?.price : '',
       listingType: isEditMode ? property?.listingType : '',
+      rentPeriod: isEditMode ? (property?.rentPeriod ?? '') : '',
       propertyCategory: isEditMode ? property?.propertyCategory : '',
       city: 'Adana',
       district: isEditMode ? property?.district : '',
@@ -82,7 +82,8 @@ const AdminPropertyForm = () => {
         totalFloors: values.totalFloors ? Number(values.totalFloors) : null,
         buildingAge: values.buildingAge !== '' ? Number(values.buildingAge) : null,
         maintenanceFee: values.maintenanceFee !== '' ? Number(values.maintenanceFee) : null,
-        occupancyStatus: values.occupancyStatus || null
+        occupancyStatus: values.occupancyStatus || null,
+        rentPeriod: isRentType(values.listingType) ? (values.rentPeriod || null) : null,
       }
       
       if (isEditMode) {
@@ -94,12 +95,11 @@ const AdminPropertyForm = () => {
     }
   })
 
-  // Dropdown mapping configurations options dictionary lists
-  const listingTypeOptions = [{ value: "sale", label: "Satılık" }, { value: "rent", label: "Kiralık" }, { value: "transfer_sale", label: "Devren Satılık" }, { value: "transfer_rent", label: "Devren Kiralık" }]
-  const categoryOptions = [{ value: "apartment", label: "Daire" }, { value: "house", label: "Müstakil Ev" }, { value: "villa", label: "Villa" }, { value: "land", label: "Arsa / Arazi" }, { value: "commercial", label: "Ticari Mülk / İşyeri" }]
-  const heatingOptions = [{ value: "none", label: "Isıtma Yok" }, { value: "combi", label: "Kombi" }, { value: "air_conditioner", label: "Klima" }, { value: "central_share_meter", label: "Pay Ölçer" }, { value: "central", label: "Merkezi Sistem" }]
-  const districtOptions = [{ value: "Seyhan", label: "Seyhan" }, { value: "Sarıçam", label: "Sarıçam" }, { value: "Çukurova", label: "Çukurova" }, { value: "Yüreğir", label: "Yüreğir" }]
-  const occupancyOptions = [{ value: "vacant", label: "Boş" }, { value: "tenant", label: "Kiracılı" }, { value: "owner", label: "Mülk Sahibi Oturuyor" }]
+  useEffect(() => {
+    if (formik.touched.listingType && !isRentType(formik.values.listingType) && formik.values.rentPeriod) {
+      formik.setFieldValue('rentPeriod', '')
+    }
+  }, [formik.values.listingType])
 
   const customerOptions = customers?.map(customer => ({
     value: customer._id,
@@ -136,7 +136,7 @@ const AdminPropertyForm = () => {
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6">
         <FormBlockImage propertyId={id} isEditMode={isEditMode}/>
         <FormBlockTitle formik={formik}/>
-        <FormBlockPrice formik={formik} listingTypeOptions={listingTypeOptions} categoryOptions={categoryOptions} />
+        <FormBlockPrice formik={formik} listingTypeOptions={listingTypeOptions} categoryOptions={categoryOptions} rentPeriodOptions={rentPeriodOptions} />
         <FormBlockLocation formik={formik} districtOptions={districtOptions} />
         <FormBlockOwner formik={formik} customerOptions={customerOptions} />
         <FormBlockSpecs formik={formik} heatingOptions={heatingOptions} occupancyOptions={occupancyOptions} />

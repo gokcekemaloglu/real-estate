@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const AdminCustomerRow = ({ customer, handleStatusToggle, handleDelete, onEditClick, onDetailClick }) => {
   return (
     <div

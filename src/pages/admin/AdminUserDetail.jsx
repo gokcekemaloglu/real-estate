@@ -3,19 +3,18 @@ import { useNavigate, useParams } from 'react-router-dom'
 import useUserCall from '../../hooks/useUserCall'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import ImagePlaceholder from '../../components/ImagePlaceholder'
 
 const AdminUserDetail = () => {
   const {id} =useParams()
   const navigate = useNavigate()
   const {getSingleUserData} = useUserCall()
   const {user, loading} = useSelector(state => state.users)
-  const defaultAvatar = "https://unsplash.com";
 
   useEffect(() => {
     getSingleUserData(id)
   }, [id])
   // console.log("user-->", user);
-  
 
   if (loading) {
     return (
@@ -53,18 +52,19 @@ const AdminUserDetail = () => {
         <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6 shadow-sm">
           {/* Top segment: Identity Profile Avatar and Global Status Indicators */}
           <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800/60">
-            {/* Profile Picture */}
+            {/* Profile Picture / Card Header*/}
             <div className="w-24 h-24 bg-slate-50 dark:bg-slate-950 overflow-hidden border border-slate-200 dark:border-slate-800 shrink-0">
-              <img
-                src={defaultAvatar}
-                alt="Profile Avatar"
-                className="w-full h-full object-cover grayscale contrast-125"
-              />
+              <ImagePlaceholder type="user" isAdmin={user?.isAdmin}/>
             </div>
             <div className="flex flex-col gap-1.5 text-center sm:text-left">
-              <span className="text-[12px] uppercase tracking-wider text-brand-gold font-semibold">
-                {user?.userName}
+              <span className="text-[12px] tracking-wider text-brand-gold font-semibold">
+                Kullanıcı Adı: {user?.userName}
               </span>
+              {user?.isAdmin && (
+              <span className="text-[12px] bg-brand-dark dark:bg-slate-950 text-amber-400 border border-slate-700 px-1.5 py-0.5 uppercase tracking-widest font-medium">
+                Sistem Yöneticisi
+              </span>
+            )}
               <h2 className="text-xl font-serif text-slate-800 dark:text-white font-light">
                 {user?.firstName} {user?.lastName}
               </h2>

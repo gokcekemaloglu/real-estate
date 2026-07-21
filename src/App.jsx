@@ -1,10 +1,13 @@
-import { Provider } from "react-redux"
-import store from './app/store'
+import CookieBanner from "./components/CookieBanner"
 import AppRouter from "./router/AppRouter"
 
 function App() {
   return (
-    <AppRouter/>
+    <>
+      <AppRouter/>
+      <CookieBanner/>
+    </>
+    
   )
 }
 

@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { isRentType, listingTypeOptions, categoryOptions, heatingOptions, districtOptions } from '../../helper/propertyOptions'
 
 const PropertyFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,35 +37,24 @@ const PropertyFilters = () => {
     return () => clearTimeout(delayDebounceFn)
   }, [titleQuery])
 
-  // Instant trigger handling selector adjustments right on user input changes
   const handleSelectChange = (field, value) => {
     const newParams = new URLSearchParams(searchParams)
+    // Dynamic local state setters routing mappings
+    if (field === "listingType") setListingType(value);
+    if (field === "district") setDistrict(value);
+    if (field === "propertyCategory") setPropertyCategory(value);
+    if (field === "heatingType") setHeatingType(value);
 
-    if (field === "listingType") {
-      setListingType(value)
-      if (value) newParams.set("filter[listingType]", value)
-      else newParams.delete("filter[listingType]")
+    // Formulate backend routing param target structures keys dynamically (e.g., 'filter[district]')
+    const paramKey = `filter[${field}]`;
+
+    if (value) {
+      newParams.set(paramKey, value)
+    } else {
+      newParams.delete(paramKey)
     }
 
-    if (field === "district") {
-      setDistrict(value)
-      if (value) newParams.set("filter[district]", value)
-      else newParams.delete("filter[district]")
-    }
-
-    if (field === "propertyCategory") {
-      setPropertyCategory(value)
-      if (value) newParams.set("filter[propertyCategory]", value)
-      else newParams.delete("filter[propertyCategory]")
-    }
-
-    if (field === "heatingType") {
-      setHeatingType(value)
-      if (value) newParams.set("filter[heatingType]", value)
-      else newParams.delete("filter[heatingType]")
-    }
-
-    newParams.set("page", "1")
+    newParams.set("page", "1") // Reset page pointer gracefully to prevent range calculation errors
     setSearchParams(newParams, { replace: true })
   }
 
@@ -94,10 +83,7 @@ const PropertyFilters = () => {
           className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-light focus:border-brand-gold cursor-pointer"
         >
           <option value="">Tümü</option>
-          <option value="sale">Satılık</option>
-          <option value="rent">Kiralık</option>
-          <option value="transfer_sale">Devren Satılık</option>
-          <option value="transfer_rent">Devren Kiralık</option>
+          {listingTypeOptions?.map(option => <option key={option.value} value={option.value}>{option.label}</option> )}
         </select>
       </div>
 
@@ -110,11 +96,7 @@ const PropertyFilters = () => {
           className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-light focus:border-brand-gold cursor-pointer"
         >
           <option value="">Tümü</option>
-          <option value="apartment">Apartman Dairesi</option>
-          <option value="house">Müstakil Ev</option>
-          <option value="villa">Villa</option>
-          <option value="land">Arsa / Arazi</option>
-          <option value="commercial">Ticari Mülk</option>
+          {categoryOptions?.map(option => <option key={option.value} value={option.value}>{option.label}</option> )}
         </select>
       </div>
 
@@ -126,12 +108,8 @@ const PropertyFilters = () => {
           onChange={(e) => handleSelectChange("district", e.target.value)}
           className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-light focus:border-brand-gold cursor-pointer"
         >
-          <option value="">Adana (Tümü)</option>
-          <option value="Seyhan">Seyhan</option>
-          <option value="Sarıçam">Sarıçam</option>
-          <option value="Çukurova">Çukurova</option>
-          <option value="Yüreğir">Yüreğir</option>
-          <option value="Mersin">Mersin (Çevre Bölge)</option>
+          <option value="">Tümü</option>
+          {districtOptions?.map(option => <option key={option.value} value={option.value}>{option.label}</option> )}
         </select>
       </div>
 
@@ -144,12 +122,7 @@ const PropertyFilters = () => {
           className="input-premium bg-slate-100 dark:bg-slate-950/60 border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-light focus:border-brand-gold cursor-pointer"
         >
           <option value="">Tümü</option>
-          <option value="combi">Kombi</option>
-          <option value="air_conditioner">Klima</option>
-          <option value="central_share_meter">Merkezi Pay Ölçer</option>
-          <option value="central">Merkezi Sistem</option>
-          <option value="electric">Elektrikli Radyatör</option>
-          <option value="none">Isıtma Yok</option>
+          {heatingOptions?.map(option => <option key={option.value} value={option.value}>{option.label}</option> )}
         </select>
       </div>
 

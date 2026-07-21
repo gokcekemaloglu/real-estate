@@ -58,7 +58,6 @@ const FormBlockCustomerInfo = ({formik}) => {
         type="email"
         placeholder="E-Posta Adresi Giriniz"
         formikProps={formik}
-        required= {true}
         disabled={formik.isSubmitting}
       />
       {/* Residential / Notification Physical Address Textarea Field */}

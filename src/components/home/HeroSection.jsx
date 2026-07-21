@@ -9,14 +9,14 @@ const HeroSection = () => {
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>      
       {/* Content Container */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center flex flex-col items-center">
-        <span className="text-[10px] md:text-[16px] uppercase tracking-[0.25em] text-brand-gold font-bold mb-3 block animate-fade-in">
+        <span className="text-[10px] md:text-[12px] uppercase tracking-[0.25em] text-brand-gold font-bold mb-3 block animate-fade-in">
           Adana'da Güvenilir Emlak Rehberiniz
         </span>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-slate-900 dark:text-white mb-4 leading-tight max-w-3xl transition-colors duration-300">
           Geleceğiniz İçin En Doğru, <br />
           <span className="font-serif italic text-brand-gold dark:text-amber-400 font-normal">Uygun Fiyatlı Gayrimenkuller</span>
         </h1>
-        <p className="text-sm md:text-lg text-slate-900 dark:text-slate-400 max-w-lg font-light mb-8 leading-relaxed transition-colors duration-300">
+        <p className="text-sm md:text-md text-slate-900 dark:text-slate-400 max-w-lg font-light mb-8 leading-relaxed transition-colors duration-300">
           Görkem Emlak güvencesiyle bütçenizi zorlamayan, aileniz için en huzurlu daireleri, yatırımlık arsaları ve devren iş yeri fırsatlarını tek bir çatıda topladık.
         </p>        
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">

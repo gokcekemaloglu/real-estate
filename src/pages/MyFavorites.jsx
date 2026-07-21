@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useFavoritesCall from '../hooks/useFavoritesCall';
 import { useSelector } from 'react-redux';
 import PropertyRowCard from '../components/properties/PropertyRowCard';
 import PropertyCard from '../components/properties/PropertyCard';
 import PropertyDisplayBar from '../components/PropertyDisplayBar';
-// import PaginationComponent from '../components/properties/PaginationComponent';
 
 const MyFavorites = () => {
   const navigate = useNavigate();
-  const { getMyFavorites, toggleFavorite } = useFavoritesCall();
+  const { getMyFavorites } = useFavoritesCall();
+  const [searchParams] = useSearchParams()
   
-  const { myFavorites, favoriteIds, loading } = useSelector((state) => state.favorites);
+  const { myFavorites, loading } = useSelector((state) => state.favorites);
   const { propertyImages } = useSelector((state) => state.property);
 
   const [viewMode, setViewMode] = useState(() => localStorage.getItem("gorkem_view_mode") || "grid");
@@ -26,7 +26,51 @@ const MyFavorites = () => {
 
   // Structural extraction to safely isolate pure properties entries from populated favorites models
   // Backend returns: [ { _id: "favId", userId: "...", propertyId: { _id: "propId", title: "..." } } ]
-  const favoriteProperties = myFavorites?.map((fav) => fav.propertyId)?.filter((prop) => prop !== null && prop !== undefined) || [];
+  // const favoriteProperties = myFavorites?.map((fav) => fav.propertyId)?.filter((prop) => prop !== null && prop !== undefined) || [];
+  const uniqueFavoritesMap = new Map();
+  myFavorites?.forEach((fav) => {
+    const prop = fav.propertyId;
+    if (prop && prop._id && !uniqueFavoritesMap.has(prop._id)) {
+      uniqueFavoritesMap.set(prop._id, { ...prop, favoritedAt: fav.createdAt });
+    }
+  });
+  const favoriteProperties = Array.from(uniqueFavoritesMap.values());
+ 
+  /// SORTING
+// We don't sort on the backend because the Favorite model doesn't contain fields like "price" or "title"; those belong to the populated property. Sending sort[price] to MongoDB has no effect. Since favorite lists are small and we intentionally don't use pagination, sorting on the frontend is the simplest and most efficient solution.
+  const sortField = searchParams.get("sort[price]")
+    ? "price"
+    : searchParams.get("sort[title]")
+      ? "title"
+      : searchParams.get("sort[createdAt]")
+        ? "favoritedAt"
+        : null; // If no sort option is selected, keep the original order from the backend.
+ 
+  const sortDirection = sortField
+    ? Number(searchParams.get(`sort[${sortField === "favoritedAt" ? "createdAt" : sortField}]`)) || -1
+    : null;
+ 
+  const sortedFavoriteProperties = sortField
+    ? [...favoriteProperties].sort((a, b) => {
+        const aVal = a?.[sortField];
+        const bVal = b?.[sortField];
+        if (aVal === null || aVal === undefined) return 1;
+        if (bVal === null || bVal === undefined) return -1;
+ 
+        if (sortField === "title") {
+          return sortDirection === 1
+            ? aVal.localeCompare(bVal, "tr")
+            : bVal.localeCompare(aVal, "tr");
+        }
+        if (sortField === "favoritedAt") {
+          const aTime = new Date(aVal).getTime();
+          const bTime = new Date(bVal).getTime();
+          return sortDirection === 1 ? aTime - bTime : bTime - aTime;
+        }
+        // price
+        return sortDirection === 1 ? aVal - bVal : bVal - aVal;
+      })
+    : favoriteProperties;
 
   if (loading && favoriteProperties.length === 0) {
     return (
@@ -35,7 +79,7 @@ const MyFavorites = () => {
       </div>
     );
   }
-//   console.log(favoriteProperties);
+  // console.log(favoriteProperties);
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-brand-dark pt-32 pb-24 font-display transition-colors duration-300 relative overflow-hidden text-xs font-light text-slate-700 dark:text-slate-300">
@@ -81,30 +125,25 @@ const MyFavorites = () => {
             <>
               {viewMode === "grid" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                  {favoriteProperties.map((property) => (
+                  {sortedFavoriteProperties.map((property) => (
                     <PropertyCard
                       key={property._id}
                       property={property}
                       propertyImages={propertyImages}
-                      isFavorite={favoriteIds.includes(property._id)}
-                      onFavoriteToggle={toggleFavorite}
                     />
                   ))}
                 </div>
               ) : (
                 <div className="flex flex-col gap-5">
-                  {favoriteProperties.map((property) => (
+                  {sortedFavoriteProperties.map((property) => (
                     <PropertyRowCard
                       key={property._id}
                       property={property}
                       propertyImages={propertyImages}
-                      isFavorite={favoriteIds.includes(property._id)}
-                      onFavoriteToggle={toggleFavorite}
                     />
                   ))}
                 </div>
               )}
-              {/* <PaginationComponent /> */}
             </>
           )}
         </div>

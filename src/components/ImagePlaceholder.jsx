@@ -6,58 +6,92 @@ const ImagePlaceholder = ({ type = "property", showText = false, isAdmin = false
   const isRent = type === "category_rent";
   const isTransfer = type === "category_transfer";
   return (
-    <div className="w-full h-full bg-slate-100 dark:bg-slate-950 flex flex-col items-center justify-center gap-2.5 transition-colors duration-300 relative select-none">
-      {/* Subtle luxury structural background blueprint grid lines layer */}
+    <div className="w-full h-full bg-slate-100 dark:bg-slate-950 flex flex-col items-center justify-center gap-3 transition-colors duration-300 relative select-none overflow-hidden">
+ 
+      {/* Blueprint grid dokusu (orijinal) */}
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-5 bg-[linear-gradient(to_right,#b45309_1px,transparent_1px),linear-gradient(to_bottom,#b45309_1px,transparent_1px)] bg-size-[2rem_2rem]"></div>
-      {isUser && (
-        <svg className={`absolute w-[110%] h-[110%] -bottom-4 text-brand-gold dark:text-brand-gold ${isAdmin ? "fill-brand-gold" : "fill-emerald-800"}  `} viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.15">
-          <circle cx="50" cy="35" r="16" />
-          <path d="M15,85 C15,62 30,58 50,58 C70,58 85,62 85,85" />
-          <line x1="5" y1="85" x2="95" y2="85" strokeWidth="0.3" />
+ 
+      {/* Yumuşak radial glow — badge'in arkasında derinlik hissi yaratır */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,rgba(180,83,9,0.10)_0%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(251,191,36,0.08)_0%,transparent_70%)]"></div>
+      </div>
+ 
+      {/* Fotoğraf vizörü köşe işaretleri — imza detay */}
+      {[
+        "top-3 left-3 border-t border-l",
+        "top-3 right-3 border-t border-r",
+        "bottom-3 left-3 border-b border-l",
+        "bottom-3 right-3 border-b border-r",
+      ].map((pos) => (
+        <span
+          key={pos}
+          className={`absolute w-3 h-3 ${pos} border-brand-gold/30 dark:border-amber-400/25 pointer-events-none`}
+        />
+      ))}
+ 
+      {/* Dairesel çerçeve (badge) */}
+      <div className="relative z-10 w-[42%] aspect-square rounded-full border border-brand-gold/25 dark:border-amber-400/20 bg-white/40 dark:bg-slate-900/40 backdrop-blur-[1px] flex items-center justify-center shadow-sm">
+        <svg
+          className="w-[58%] h-[58%] text-brand-gold/70 dark:text-amber-400/70"
+          viewBox="0 0 48 48"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.1"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {isUser && (
+            <>
+              <circle cx="24" cy="17" r="8" />
+              <path d="M9 39c0-8.837 6.716-14 15-14s15 5.163 15 14" />
+            </>
+          )}
+ 
+          {isSale && (
+            <>
+              {/* Ev + anahtar: satılık temsili */}
+              <path d="M8 24 24 11l16 13" />
+              <path d="M12 22v15h9V27h6v10h9V22" />
+              <circle cx="33" cy="14" r="3.4" />
+              <path d="M35.4 16.4 41 22M38 19l-2 2" />
+            </>
+          )}
+ 
+          {isRent && (
+            <>
+              {/* Apartman bloğu: kiralık temsili */}
+              <rect x="10" y="14" width="12" height="24" />
+              <rect x="26" y="8" width="12" height="30" />
+              <path d="M13 19h6M13 24h6M13 29h6" />
+              <path d="M29 13h6M29 18h6M29 23h6M29 28h6" />
+            </>
+          )}
+ 
+          {isTransfer && (
+            <>
+              {/* Dükkan + devir oku: devren temsili */}
+              <path d="M8 20 10 9h28l2 11" />
+              <path d="M8 20v18h32V20" />
+              <path d="M20 38V27h8v11" />
+              <path d="M16 20v6M24 20v3M32 20v6" />
+              <path d="M17 6l3 3-3 3" />
+            </>
+          )}
+ 
+          {!isUser && !isSale && !isRent && !isTransfer && (
+            <>
+              {/* Fotoğraf makinesi: genel "görsel yok" temsili */}
+              <path d="M6 16h6l3-4h10l3 4h6a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V18a2 2 0 0 1 2-2Z" />
+              <circle cx="24" cy="26" r="7" />
+              <circle cx="24" cy="26" r="2.6" />
+              <path d="M33 20h2" />
+            </>
+          )}
         </svg>
-      )}
-      {isSale && (
-        <svg className="absolute w-[120%] h-[120%] -bottom-10 -left-10 text-amber-400/75 dark:text-amber-300 transition-all  fill-emerald-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.15">
-          <polygon points="10,90 90,90 90,50 50,20 10,50" />
-          <polygon points="25,50 50,30 75,50" />
-          <rect x="42" y="65" width="16" height="25" />
-          <rect x="25" y="58" width="12" height="15" />
-          <rect x="63" y="58" width="12" height="15" />
-          <line x1="0" y1="90" x2="100" y2="90" strokeWidth="0.5" />
-        </svg>
-        )}
-        {isRent && (
-          <svg className="absolute w-[130%] h-[130%] -bottom-12 -right-12 text-amber-400/75 dark:text-amber-300 fill-emerald-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.15">
-            <rect x="10" y="30" width="18" height="60" />
-            <rect x="34" y="15" width="22" height="75" />
-            <rect x="62" y="45" width="16" height="45" />
-            <rect x="84" y="25" width="14" height="65" />
-            <line x1="40" y1="25" x2="50" y2="25" /><line x1="40" y1="35" x2="50" y2="35" /><line x1="40" y1="45" x2="50" y2="45" />
-            <line x1="14" y1="40" x2="24" y2="40" /><line x1="14" y1="50" x2="24" y2="50" />
-            <line x1="66" y1="55" x2="74" y2="55" /><line x1="66" y1="65" x2="74" y2="65" />
-          </svg>
-        )}
-        {isTransfer && (
-        <svg className="absolute w-[120%] h-[120%] -bottom-6 text-amber-300/75 dark:text-amber-400/70 fill-emerald-600" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.15">
-          <rect x="15" y="40" width="70" height="50" />
-          <rect x="25" y="55" width="20" height="35" /> 
-          <rect x="53" y="55" width="22" height="25" />
-          <polygon points="10,40 90,40 85,25 15,25" fill="brand-gold" />
-          <line x1="25" y1="25" x2="21" y2="40" /><line x1="40" y1="25" x2="38" y2="40" /><line x1="55" y1="25" x2="55" y2="40" /><line x1="70" y1="25" x2="72" y2="40" />
-        </svg>
-      )}
-        {!isUser && !isSale && !isRent && !isTransfer && (
-        <svg className="absolute w-[110%] h-[110%] -bottom-8 -left-6 text-amber-300/75 dark:text-amber-400/70 animate-pulse duration-4000 fill-emerald-800" viewBox="0 0 100 100"  stroke="currentColor" strokeWidth="0.15">
-          <polygon points="15,45 50,15 85,45" />
-          <rect x="22" y="45" width="56" height="40" />
-          <rect x="42" y="60" width="16" height="25" />
-          {/* Subtle micro camera overlay lines mapping straight into center baseline */}
-          <circle cx="50" cy="35" r="4" strokeWidth="0.2" />
-          <line x1="0" y1="85" x2="100" y2="85" strokeWidth="0.4" />
-        </svg>
-      )}
+      </div>
+ 
       {showText && (
-        <span className="text-[9px] uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 font-medium">
+        <span className="relative z-10 text-[9px] uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 font-medium">
           Henüz bir görsel eklenmedi
         </span>
       )}

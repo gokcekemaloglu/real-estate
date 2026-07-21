@@ -1,33 +1,14 @@
 import React from "react";
-// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ImagePlaceholder from "../ImagePlaceholder";
+import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/propertyOptions";
+import FavoriteButton from "./FavoriteButton";
 
 const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
-  // const { token } = useSelector((state) => state.auth)
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
-  // const fallbackPlaceholder = "https://unsplash.com";
 
-  const formatPrice = (amount) => {
-    return new Intl.NumberFormat("tr-TR", {
-      style: "currency",
-      currency: "TRY",
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  const getListingBadge = (type) => {
-    const badges = {
-      sale: "Satılık",
-      rent: "Kiralık",
-      transfer_sale: "Devren Satılık",
-      transfer_rent: "Devren Kiralık",
-    };
-    return badges[type] || "Portföy";
-  };
-
-  // 1. Resolve core cover asset identifiers dynamically
+   // 1. Resolve core cover asset identifiers dynamically
   let targetCoverImage = propertyImages?.find(
     (img) => img.propertyId === property?._id && img.isCover,
   );
@@ -42,15 +23,6 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavor
     ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}`
     : null;
 
-  // const handleFavoriteClick = (e) => {
-  //   e.stopPropagation(); // Stop click propagation from accidentally navigating deep into detail pages
-  //   if (!token) {
-  //     return SweetNotify("Bu ilanı favorilerinize eklemek için lütfen önce giriş yapınız.", SweetAlertIcons.WARNING);
-  //   }
-  //   if (onFavoriteToggle) {
-  //     onFavoriteToggle(property?._id);
-  //   }
-  // };
   return (
     <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden flex flex-col md:flex-row items-stretch gap-4 transition-all duration-300 hover:shadow-xl animate-fade-in w-full">
       {/* Left Segment: Premium Image Framework Panel */}
@@ -69,24 +41,7 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavor
         <span className="absolute top-3 left-3 bg-brand-dark/90 dark:bg-slate-900/90 border border-brand-gold/30 text-amber-400 text-[9px] uppercase tracking-widest px-2.5 py-1 font-medium shadow-sm">
           {getListingBadge(property?.listingType)}
         </span>
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation(); // Stops deep routing detail page jumps safely
-            if (onFavoriteToggle) onFavoriteToggle(property?._id);
-          }}
-          className="absolute top-3 right-3 z-20 w-7 h-7 rounded-full bg-brand-dark/60 dark:bg-slate-900/60 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-md text-white hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer group/rowheart"
-        >
-          <svg 
-            className={`w-3.5 h-3.5 transition-colors duration-300 ${isFavorite ? "fill-brand-gold text-brand-gold" : "fill-transparent text-white group-hover/rowheart:text-brand-gold"}`} 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.318 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-          </svg>
-        </button>
+        <FavoriteButton propertyId={property?._id} size="sm" className="absolute top-3 right-3" />
       </div>
 
       {/* Right Segment: Unified Information Node Sheet */}
@@ -121,7 +76,7 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavor
         <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto gap-2 md:gap-16 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 dark:border-slate-800/40 shrink-0">
           <span className="text-lg font-medium text-brand-gold dark:text-amber-400 whitespace-nowrap">
             {formatPrice(property?.price)}
-            {property?.listingType?.includes("rent") ? " / Ay" : ""}
+            {getPriceSuffix(property?.listingType, property?.rentPeriod)}
           </span>
           <button
             onClick={() => navigate(`/properties/${property?._id}`)}

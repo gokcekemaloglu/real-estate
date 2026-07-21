@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-slate-50 dark:bg-brand-dark border-t border-slate-200 dark:border-slate-800 py-4 font-display transition-colors duration-300">
+    <footer className="w-full bg-slate-50 dark:bg-brand-dark border-t border-slate-200 dark:border-slate-800 py-2 font-display transition-colors duration-300">
       <div className=" mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-6 border-b border-slate-200 dark:border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-4 border-b border-slate-200 dark:border-slate-800">
           {/* Left Column: Brand Statement */}
           <div className="flex flex-col gap-3">
             <span className="text-sm uppercase tracking-[0.25em] text-slate-900 dark:text-white font-serif font-light">
@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
         </div>
         {/* Bottom Copyright Area */}
-        <div className="pt-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-400 font-light">
+        <div className="pt-2 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-400 font-light">
           <p>© {new Date().getFullYear()} Görkem Emlak. Tüm Hakları Saklıdır.</p>
           <p className="tracking-wide text-slate-400/60">Premium Showcase Architecture</p>
         </div>

@@ -1,9 +1,10 @@
 import React from 'react'
 import useCustomerCall from '../../../hooks/useCustomerCall'
 import { useState } from 'react'
+import { SweetConfirm } from '../../../helper/SweetNotify'
 
 const FormBlockCustomerNotes = ({customerId, notes}) => {
-  const {putCustomerData} = useCustomerCall()
+  const {putCustomerData, deleteCustomerNote} = useCustomerCall()
   const [newNote, setNewNote] = useState("")
 
   const handleAddNote = async (e) => {
@@ -13,7 +14,12 @@ const FormBlockCustomerNotes = ({customerId, notes}) => {
     const updatedNotes = [...notes, {content: newNote.trim()}]
 
     await putCustomerData(customerId, {note: updatedNotes})
+    setNewNote("")
   }
+
+  const handleNoteDeleteClick = async (customerId, noteId) => {
+    await deleteCustomerNote(customerId, noteId);
+  };
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-sm h-132.5">
@@ -47,9 +53,21 @@ const FormBlockCustomerNotes = ({customerId, notes}) => {
               <div className="absolute left-[-3.5px] top-1 w-1.5 h-1.5 bg-brand-gold"></div>
               
               {/* Interaction log history timestamp indicator */}
-              <span className="text-[12px] text-slate-400 dark:text-slate-500 font-mono uppercase tracking-wider">
-                {note.createdAt ? new Date(note.createdAt).toLocaleString("tr-TR") : "Şimdi"}
-              </span>
+              <div className="flex items-center justify-between gap-4 h-4">
+                <span className="text-[12px] text-slate-400 dark:text-slate-500 font-mono uppercase tracking-wider">
+                  {note.createdAt ? new Date(note.createdAt). toLocaleString("tr-TR") : "Şimdi"}
+                </span>
+                {note._id && (
+                  <button
+                    type="button"
+                    onClick={() => handleNoteDeleteClick(customerId, note._id)}
+                    className="text-[10px] uppercase tracking-widest text-red-500/60 hover:text-red-500 font-medium opacity-80 group-hover/formNote:opacity-100 transition-opacity duration-300 cursor-pointer px-1 bg-red-500/5 hover:bg-red-500/10 rounded-sm"
+                  >
+                    [ Notu Sil ]
+                  </button>
+                )}
+              </div>
+              
               
               {/* Log record textual content block */}
               <p className="text-[16px] font-light text-slate-600 dark:text-slate-300 bg-slate-50/40 dark:bg-slate-950/10 p-2 border border-slate-100 dark:border-slate-800/60 leading-relaxed wrap-break-word">

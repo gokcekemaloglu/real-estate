@@ -20,7 +20,6 @@ const AdminCustomerDetail = () => {
   useEffect(() => {
     if (id) {
       getSingleCustomerData(id);
-      // Fetch base properties entries with a tight limit stream to capture core items efficiently
       fetchData({
         endpoint: "properties",
         stateKey: "singleCustomerProperties",
@@ -29,8 +28,6 @@ const AdminCustomerDetail = () => {
         limit: 20,
         query: `filter[ownerId]=${id}`
       });
-  
-      // Fetch relational images lookup buffers seamlessly
       fetchData({
         endpoint: "property-images",
         stateKey: "propertyImages",
@@ -44,14 +41,7 @@ const AdminCustomerDetail = () => {
       });
     }
   }, [id]);
-  
-  // if (!loading && singleCustomerProperties?.length === 0) return null;
 
-  // // useEffect(() => {
-  // //   if (id) {
-  // //     getSingleCustomerData(id);
-  // //   }
-  // // }, [id]);
 
   if (loading) {
     return (
@@ -85,7 +75,7 @@ const AdminCustomerDetail = () => {
           <button
             type="button"
             onClick={() => navigate("/admin/customers")}
-            className="text-xs uppercase tracking-widest text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="text-xs uppercase tracking-widest text-slate-400 hover:text-slate-600 hover:underline transition-colors cursor-pointer"
           >
             ← Listeye Geri Dön
           </button>

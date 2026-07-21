@@ -1,23 +1,10 @@
 import React from "react";
 import ImagePlaceholder from "../../../ImagePlaceholder";
+import { formatPrice, getListingBadge, getPriceSuffix, getListingBadgeStyle } from "../../../../helper/propertyOptions";
 
 const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteClick, onEditClick, onDetailClick}) => {
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL
-  // const fallbackPlaceholder = "https://unsplash.com";
-  const getListingDisplay = (type) => {
-    const listingMap = {
-      sale: "Satılık",
-      rent: "Kiralık",
-      transfer_sale: "Devren Satılık",
-      transfer_rent: "Devren Kiralık",
-    };
-    return listingMap[type] || "Portföy";
-  };
-  const getListingBadgeStyle = (type) => {
-    if (type === "sale") return "bg-brand-gold text-white border-brand-gold/20";
-    if (type === "rent") return "bg-slate-800 dark:bg-slate-950 border-slate-700 text-amber-400";
-    return "bg-amber-600 text-white border-amber-500/20"; // Style fallback for transfer models
-  };
+
   let targetCoverImage = propertyImages?.find(
     (image) => image.propertyId === property?._id && image.isCover
   );
@@ -37,23 +24,22 @@ const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteCli
       {/* Left Block: Image & Structural Context Titles */}
       <div className="flex items-center gap-4 flex-1">
         <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800">
-        {hasValidImage ? (
-          <img
-            src={resolvedImageSrc}
-            alt={property?.title || "Real Estate Specimen"}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <ImagePlaceholder/>
-        )}
-          
+          {hasValidImage ? (
+            <img
+              src={resolvedImageSrc}
+              alt={property?.title || "Real Estate Specimen"}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <ImagePlaceholder/>
+          )}          
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-[9px] uppercase tracking-wider text-brand-gold font-semibold">
             {property?.district || "—"} / Adana
           </span>
           <span className={`text-[8px] uppercase font-bold tracking-widest px-2 py-0.5 border shadow-2xs font-sans ${getListingBadgeStyle(property?.listingType)} w-24`}>
-            {getListingDisplay(property?.listingType)}
+            {getListingBadge(property?.listingType)}
           </span>
           <h3 className="text-sm font-medium text-slate-800 dark:text-white line-clamp-1">
             {property?.title}
@@ -65,11 +51,8 @@ const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteCli
             </span>
           )}
           <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-            {new Intl.NumberFormat("tr-TR", {
-              style: "currency",
-              currency: "TRY",
-              maximumFractionDigits: 0,
-            }).format(property?.price)}
+            {formatPrice(property?.price)}
+            {getPriceSuffix(property?.listingType, property?.rentPeriod)}
           </span>
         </div>
       </div>
