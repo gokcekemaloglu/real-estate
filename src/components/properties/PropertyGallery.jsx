@@ -1,6 +1,6 @@
 import React from "react";
 import PropertyMediaGallery from "./PropertyMediaGallery";
-import { getListingBadge } from "../../helper/listingTypeLabels";
+import { getListingBadge } from "../../helper/propertyOptions";
 import FavoriteButton from "./FavoriteButton";
 
 const PropertyGallery = ({title, listingType, propertyId, currentPropertyImages}) => {

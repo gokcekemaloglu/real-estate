@@ -11,45 +11,6 @@ const PropertyFilters = () => {
   const [propertyCategory, setPropertyCategory] = useState(searchParams.get("filter[propertyCategory]") || "")
   const [heatingType, setHeatingType] = useState(searchParams.get("filter[heatingType]") || "")
 
-  // const listingTypeOptions = [
-  //   { value: "", label: "Tümü" },
-  //   { value: "sale", label: "Satılık" },
-  //   { value: "rent", label: "Kiralık" },
-  //   { value: "transfer_sale", label: "Devren Satılık" },
-  //   { value: "transfer_rent", label: "Devren Kiralık" }
-  // ];
-
-  // const categoryOptions = [
-  //   { value: "", label: "Tümü" },
-  //   { value: "apartment", label: "Apartman Dairesi" },
-  //   { value: "house", label: "Müstakil Ev" },
-  //   { value: "villa", label: "Villa" },
-  //   { value: "land", label: "Arsa / Arazi" },
-  //   { value: "commercial", label: "Ticari Mülk" }
-  // ];
-
-  // const districtOptions = [
-  //   { value: "", label: "Tümü" },
-  //   { value: "Seyhan", label: "Seyhan" },
-  //   { value: "Çukurova", label: "Çukurova" },
-  //   { value: "Sarıçam", label: "Sarıçam" },
-  //   { value: "Yüreğir", label: "Yüreğir" },
-  //   { value: "Karataş", label: "Karataş" },
-  //   { value: "Yumurtalık", label: "Yumurtalık" },
-  //   { value: "Pozantı", label: "Pozantı" },
-  //   { value: "Mersin", label: "Mersin (Çevre Bölge)" }
-  // ];
-
-  // const heatingOptions = [
-  //   { value: "", label: "Tümü" },
-  //   { value: "combi", label: "Kombi" },
-  //   { value: "air_conditioner", label: "Klima" },
-  //   { value: "central_share_meter", label: "Merkezi Pay Ölçer" },
-  //   { value: "central", label: "Merkezi Sistem" },
-  //   { value: "electric", label: "Elektrikli Radyatör" },
-  //   { value: "none", label: "Hiçbiri" }
-  // ];
-
   // Synchronizes fields back to empty immediately upon reset actions
   useEffect(() => {
     setTitleQuery(searchParams.get("search[title]") || "")

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SweetAlertIcons, SweetNotify } from "../../helper/SweetNotify";
 import ImagePlaceholder from "../ImagePlaceholder";
-import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/listingTypeLabels";
+import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/propertyOptions";
 import FavoriteButton from "./FavoriteButton";
 
 const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, onFavoriteToggle }) => {

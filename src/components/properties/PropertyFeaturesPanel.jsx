@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { formatPrice, getPriceSuffix } from "../../helper/listingTypeLabels";
+import { formatPrice, getPriceSuffix } from "../../helper/propertyOptions";
 
 const PropertyFeaturesPanel = ({ property }) => {
   const navigate = useNavigate();

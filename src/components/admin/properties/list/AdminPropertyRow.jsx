@@ -1,6 +1,6 @@
 import React from "react";
 import ImagePlaceholder from "../../../ImagePlaceholder";
-import { formatPrice, getListingBadge, getPriceSuffix, getListingBadgeStyle } from "../../../../helper/listingTypeLabels";
+import { formatPrice, getListingBadge, getPriceSuffix, getListingBadgeStyle } from "../../../../helper/propertyOptions";
 
 const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteClick, onEditClick, onDetailClick}) => {
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL

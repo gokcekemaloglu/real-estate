@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ImagePlaceholder from "../ImagePlaceholder";
-import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/listingTypeLabels";
+import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/propertyOptions";
 import FavoriteButton from "./FavoriteButton";
 
 const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavoriteToggle }) => {

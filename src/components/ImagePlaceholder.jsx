@@ -29,7 +29,7 @@ const ImagePlaceholder = ({ type = "property", showText = false, isAdmin = false
         />
       ))}
  
-      {/* Dairesel çerçeve (badge) — ikon artık burada tam ortalanıyor */}
+      {/* Dairesel çerçeve (badge) */}
       <div className="relative z-10 w-[42%] aspect-square rounded-full border border-brand-gold/25 dark:border-amber-400/20 bg-white/40 dark:bg-slate-900/40 backdrop-blur-[1px] flex items-center justify-center shadow-sm">
         <svg
           className="w-[58%] h-[58%] text-brand-gold/70 dark:text-amber-400/70"

@@ -1,5 +1,5 @@
 import React from "react";
-import { formatPrice, getPriceSuffix } from "../../../../helper/listingTypeLabels";
+import { formatPrice, getPriceSuffix } from "../../../../helper/propertyOptions";
 
 const AdminPropertyDetailPrice = ({ property }) => {
   return (

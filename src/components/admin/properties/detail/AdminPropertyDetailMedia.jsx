@@ -3,7 +3,7 @@ import useFetchData from "../../../../hooks/useFetchData";
 import { useSelector } from "react-redux";
 import { setData } from "../../../../features/propertySlice";
 import PropertyMediaGallery from "../../../properties/PropertyMediaGallery";
-import { getListingBadge, getListingBadgeStyle } from "../../../../helper/listingTypeLabels";
+import { getListingBadge, getListingBadgeStyle } from "../../../../helper/propertyOptions";
 
 const AdminPropertyDetailMedia = ({ property }) => {
   const { fetchData } = useFetchData();
