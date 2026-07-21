@@ -73,6 +73,7 @@ src/
 │   └── gorkem-emlak-ofis.png
 ├── components/
 │   ├── AdminPropertyDetailMediaLightbox.jsx
+│   ├── CookieBanner.jsx
 │   ├── ErrorBoundary.jsx
 │   ├── Footer.jsx
 │   ├── ImagePlaceholder.jsx
@@ -108,25 +109,28 @@ src/
 │   │   │   │   ├── AdminPropertyDetailPrice.jsx
 │   │   │   │   └── AdminPropertyDetailMedia.jsx
 │   │   │   └── form/
-│   │   │       ├── FormBlockImage.jsx
-│   │   │       ├── FormBlockLocation.jsx
-│   │   │       ├── FormBlockOwner.jsx
-│   │   │       ├── FormBlockPrice.jsx
-│   │   │       ├── FormBlockSpecs.jsx
-│   │   │       ├── FormBlockTitle.jsx
-│   │   │       ├── FormBlockToggles.jsx
-│   │   │       ├── FormSelectField.jsx
-│   │   │       ├── FormToggleField.jsx
-│   │   │       └── propertyImage/
-│   │   │           ├── ImageGalleryGrid.jsx
-│   │   │           └── ImageUploadInput.jsx
-│   │   └── properties/
-│   │       └── list/
-│   │           ├── AdminPropertyHeader.jsx
-│   │           └── AdminPropertyRow.jsx
+│   │   │   │   ├── FormBlockImage.jsx
+│   │   │   │   ├── FormBlockLocation.jsx
+│   │   │   │   ├── FormBlockPrice.jsx
+│   │   │   │   ├── FormBlockSpecs.jsx
+│   │   │   │   ├── FormBlockOwner.jsx
+│   │   │   │   ├── FormBlockTitle.jsx
+│   │   │   │   ├── FormBlockToggles.jsx
+│   │   │   │   ├── FormSelectField.jsx
+│   │   │   │   ├── FormToggleField.jsx
+│   │   │   │   └── propertyImage/
+│   │   │   │       ├── ImageGalleryGrid.jsx
+│   │   │   │       └── ImageUploadInput.jsx
+│   │   │   └── list/
+│   │   │       ├── AdminPropertyHeader.jsx
+│   │   │       └── AdminPropertyRow.jsx
+│   │   └── users/
+│   │       └── AdminUserRow.jsx
 │   ├── auth/
 │   │   ├── AuthFooterLink.jsx
 │   │   ├── FormInput.jsx
+│   │   ├── GoogleLoginButton.jsx
+│   │   ├── KvkkCheckbox.jsx
 │   │   ├── LoginForm.jsx
 │   │   └── RegisterForm.jsx
 │   ├── contact/
@@ -150,6 +154,7 @@ src/
 │   │   ├── ProfileDeleteForm.jsx
 │   │   ├── ProfileUpdateForm.jsx
 │   └── properties/
+│       ├── FavoriteButton.jsx
 │       ├── PaginationComponent.jsx
 │       ├── PropertyCard.jsx
 │       ├── PropertyDescription.jsx
@@ -170,7 +175,7 @@ src/
 ├── helper/
 │   ├── SweetNotify.jsx
 │   ├── ValidationSchemas.js
-│   ├── listingTypeLabels.js
+│   ├── propertyOptions.js
 │   └── navigationRoutes.js
 ├── hooks/
 │   ├── useAxios.jsx
@@ -179,11 +184,13 @@ src/
 │   ├── useFavoritesCall.jsx
 │   ├── useFetchData.jsx
 │   ├── useMediaGallery.jsx
-│   └── usePropertyCall.jsx
+│   ├── usePropertyCall.jsx
+│   └── useUserCall.jsx
 ├── pages/
 │   ├── About.jsx
 │   ├── Contact.jsx
 │   ├── Home.jsx
+│   ├── KvkkText.jsx
 │   ├── Login.jsx
 │   ├── MyFavorites.jsx
 │   ├── Profile.jsx
