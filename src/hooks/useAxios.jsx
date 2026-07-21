@@ -2,11 +2,11 @@ import axios from "axios"
 import { useMemo } from "react"
 import { useSelector } from 'react-redux'
 
-const BASE_URL = import.meta.env.VITE_BASE_URL
+const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8000/api"
 
-export const axiosPublic = axios.create({baseURL: BASE_URL})
+export const axiosPublic = axios.create({baseURL: BASE_URL, timeout:10000})
 
-export const axiosWithToken =  axios.create({baseURL: BASE_URL})
+export const axiosWithToken =  axios.create({baseURL: BASE_URL, timeout:10000})
 
 const useAxios = () => {
     const token = useSelector(state => state.auth?.token)
