@@ -2,6 +2,7 @@ import React from 'react'
 import useMediaGallery, {FALLBACK_KEY} from '../../hooks/useMediaGallery';
 import ImagePlaceholder from '../ImagePlaceholder';
 import AdminPropertyDetailMediaLightbox from '../AdminPropertyDetailMediaLightbox';
+import { resolveMediaUrl } from '../../helper/propertyOptions';
 
 const PropertyMediaGallery = ({
   images,
@@ -13,7 +14,6 @@ const PropertyMediaGallery = ({
   thumbLabel = "Fotoğraflar",
 }) => {
   const {
-    IMAGE_BASE_URL,
     activeImage,
     isLightboxOpen,
     setIsLightboxOpen,
@@ -64,7 +64,7 @@ const PropertyMediaGallery = ({
           </span>
           <div className="flex items-center gap-3 overflow-x-auto pb-2 custom-scrollbar">
             {images.map((image, idx) => {
-              const fullUrl = `${IMAGE_BASE_URL}${image?.imageUrl}`;
+              const fullUrl = resolveMediaUrl(image?.imageUrl);
               const isSelected = activeImage === fullUrl;
  
               return (

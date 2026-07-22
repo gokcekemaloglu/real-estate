@@ -50,13 +50,13 @@ const FormBlockImage = ({ propertyId, isEditMode }) => {
       setIsUploading(true); // Lock the input bar instantly, triggers 'Lüks Görsel Sunucuya Aktarılıyor...'
       
       // Dispatch raw binary files data straight over usePropertyCall multipart handler bundles
-      await postPropertyImageData(propertyId, filePointer);
+      await postPropertyImageData(propertyId, filePointer, () => loadImagesDataset());
       
     } catch (error) {
       console.error("Auto image deployment execution failure error:", error);
     } finally {
       setIsUploading(false); // Release the input focus locks
-      loadImagesDataset();   // Refresh the grid gallery dynamically from the database
+      // loadImagesDataset();   // Refresh the grid gallery dynamically from the database
     }
   };
 

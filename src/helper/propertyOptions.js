@@ -88,3 +88,17 @@ export const occupancyOptions = [
   { value: "tenant", label: "Kiracılı" }, 
   { value: "owner", label: "Mülk Sahibi Oturuyor" }
 ];
+
+/**
+ * Automatically formats and cleans image source URLs across the entire application hierarchy.
+ * If the image is stored in Cloudinary (starts with http), it serves the cloud link cleanly.
+ * If it's a legacy local asset string, it automatically appends the active Vite environment base server URL.
+ */
+export const resolveMediaUrl = (imageUrl) => {
+  if (!imageUrl) return null;
+  if (imageUrl.startsWith("http")) return imageUrl;
+  
+  // Dynamic fallback mapping for local host development environments
+  const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:8000";
+  return `${baseUrl}${imageUrl}`;
+};

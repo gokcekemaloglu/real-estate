@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { resolveMediaUrl } from "../helper/propertyOptions";
 
 const AdminPropertyDetailMediaLightbox = ({isOpen, onClose, images, currentIndex, setCurrentIndex}) => {
   const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -68,7 +69,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen, onClose, images, currentIndex
         {/* Central Display Segment */}
         <div className="flex-1 h-full max-h-[70vh] flex items-center justify-center overflow-hidden">
           <img
-            src={`${IMAGE_BASE_URL}${images[currentIndex]?.imageUrl}`}
+            src={resolveMediaUrl(images[currentIndex]?.imageUrl)}
             alt="Magnified Specimen View"
             className="max-w-full max-h-full object-contain shadow-2xl transition-all duration-300"
           />
@@ -102,7 +103,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen, onClose, images, currentIndex
                 }`}
               >
                 <img
-                  src={`${IMAGE_BASE_URL}${image?.imageUrl}`}
+                  src={resolveMediaUrl(image?.imageUrl)}
                   alt="Modal Ribbon Thumbnail"
                   className="w-full h-full object-cover"
                 />

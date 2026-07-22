@@ -1,9 +1,8 @@
 import React from "react";
 import ImagePlaceholder from "../../../ImagePlaceholder";
-import { formatPrice, getListingBadge, getPriceSuffix, getListingBadgeStyle } from "../../../../helper/propertyOptions";
+import { formatPrice, getListingBadge, getPriceSuffix, getListingBadgeStyle, resolveMediaUrl } from "../../../../helper/propertyOptions";
 
 const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteClick, onEditClick, onDetailClick}) => {
-  const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL
 
   let targetCoverImage = propertyImages?.find(
     (image) => image.propertyId === property?._id && image.isCover
@@ -12,9 +11,7 @@ const AdminPropertyRow = ({property, propertyImages, onStatusToggle, onDeleteCli
     targetCoverImage = propertyImages.find((image) => image.propertyId === property?._id);
   }
   const hasValidImage = !!targetCoverImage
-  const resolvedImageSrc = hasValidImage 
-    ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}` 
-    : null;
+  const resolvedImageSrc = resolveMediaUrl(targetCoverImage?.imageUrl);
   
   return (
     <div

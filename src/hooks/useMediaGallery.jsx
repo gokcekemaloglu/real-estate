@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import { resolveMediaUrl } from "../helper/propertyOptions";
  
 export const FALLBACK_KEY = "RENDER_PREMIUM_BLUEPRINT_PLACEHOLDER";
  
 export default function useMediaGallery(images) {
-  const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
- 
   const [activeImage, setActiveImage] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -13,7 +12,7 @@ export default function useMediaGallery(images) {
     if (images && images.length > 0) {
       const coverImage = images.find((image) => image?.isCover);
       const chosenImage = coverImage || images[0];
-      setActiveImage(`${IMAGE_BASE_URL}${chosenImage.imageUrl}`);
+      setActiveImage(resolveMediaUrl(chosenImage?.imageUrl));
     } else {
       setActiveImage(FALLBACK_KEY);
     }
@@ -26,7 +25,7 @@ export default function useMediaGallery(images) {
       setLightboxIndex(targetUrlOrIndex);
     } else {
       const targetIdx = images.findIndex(
-        (image) => `${IMAGE_BASE_URL}${image.imageUrl}` === targetUrlOrIndex,
+        (image) => resolveMediaUrl(image?.imageUrl) === targetUrlOrIndex,
       );
       setLightboxIndex(targetIdx !== -1 ? targetIdx : 0);
     }
@@ -34,7 +33,6 @@ export default function useMediaGallery(images) {
   };
  
   return {
-    IMAGE_BASE_URL,
     activeImage,
     isLightboxOpen,
     setIsLightboxOpen,
