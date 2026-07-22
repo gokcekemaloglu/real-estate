@@ -28,6 +28,8 @@ const AdminCustomerForm = lazy(() => import("../pages/admin/AdminCustomerForm"))
 const AdminCustomerDetail = lazy(() => import("../pages/admin/AdminCustomerDetail"));
 const AdminUsers = lazy(() => import("../pages/admin/AdminUsers"));
 const AdminUserDetail = lazy(() => import("../pages/admin/AdminUserDetail"));
+const NotFound = lazy(() => import("../pages/NotFound"));
+const AdminNotFound = lazy(() => import("../pages/admin/AdminNotFound"));
 
 // Loading Fallback Component
 const LoadingFallback = () => (
@@ -75,8 +77,10 @@ const AppRouter = () => {
 
                 <Route path="users" element={<AdminUsers />} />
                 <Route path="users/detail/:id" element={<AdminUserDetail />} />
+                <Route path="*" element={<AdminNotFound />} />
               </Route>
             </Route>
+              <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>
       </Suspense>
