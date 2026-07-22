@@ -87,17 +87,20 @@ const usePropertyCall = () => {
   //   }
   // }
 
-  const postPropertyImageData = async (propertyId, imageFile) => {
+  const postPropertyImageData = async (propertyId, imageFile, onSuccessCallback) => {
     dispatch(fetchStart())
     try {
       // Formulate multipart formData container payload
       const formData = new FormData();
       formData.append("propertyId", propertyId);
       formData.append("image", imageFile); // 'image' key matches backend upload.single("image")
-      await axiosWithToken.post("property-images", formData, {
+      const { data } = await axiosWithToken.post("property-images", formData, {
         headers: {"Content-Type": "multipart/form-data"}
       })
       SweetNotify("Fotoğraf başarıyla portföye yüklendi.", SweetAlertIcons.SUCCESS)
+      if (onSuccessCallback) {
+        onSuccessCallback();
+      }
     } catch (error) {
       handleError(error, "Fotoğraf yüklenirken beklenmedik bir hata oluştu!")
     }

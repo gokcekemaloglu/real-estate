@@ -19,7 +19,7 @@ const ImageGalleryGrid = ({propertyImages, triggerLightboxView, handleSetCover, 
               >
                 {/* Real binary asset file visualization */}
                 <img
-                  src={`${IMAGE_BASE_URL}${image.imageUrl}`}
+                  src={image?.imageUrl?.startsWith("http") ? image.imageUrl : `${IMAGE_BASE_URL}${image.imageUrl}`}
                   alt="Property Preview"
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                 />

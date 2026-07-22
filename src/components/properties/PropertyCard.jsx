@@ -3,12 +3,11 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SweetAlertIcons, SweetNotify } from "../../helper/SweetNotify";
 import ImagePlaceholder from "../ImagePlaceholder";
-import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/propertyOptions";
+import { formatPrice, getListingBadge, getPriceSuffix, resolveMediaUrl } from "../../helper/propertyOptions";
 import FavoriteButton from "./FavoriteButton";
 
 const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
-  const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // 1. Search for the designated cover image belonging to this card first
   let targetCoverImage = propertyImages?.find(
@@ -20,17 +19,14 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
     targetCoverImage = propertyImages.find((image) => image.propertyId === property?._id);
   }
   // 3. Resolve clean binary address path string
-  const hasValidImage = !!targetCoverImage
-  const resolvedImageSrc = hasValidImage 
-    ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}` 
-    : null;
+  const resolvedImageSrc = resolveMediaUrl(targetCoverImage?.imageUrl);
 
   return (
     <div className={`group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex transition-all duration-300 animate-fade-in ${ viewMode === "row" ? "flex-col md:flex-row h-auto md:h-64 w-full" : "flex-col h-full w-full" }`}>
       
       {/* Card Image Block Component Layout Frame */}
       <div className={`relative cursor-pointer bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 ${ viewMode === "row" ? "h-64 md:h-full w-full md:w-80" : "h-64 w-full" }`} onClick={() => navigate(`/properties/${property?._id}`)}>
-        {hasValidImage ? (
+        {resolvedImageSrc ? (
           <img
             src={resolvedImageSrc}
             alt={property?.title || "Real Estate Portfolio"}

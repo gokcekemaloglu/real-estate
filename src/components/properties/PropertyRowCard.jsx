@@ -1,14 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ImagePlaceholder from "../ImagePlaceholder";
-import { formatPrice, getListingBadge, getPriceSuffix } from "../../helper/propertyOptions";
+import { formatPrice, getListingBadge, getPriceSuffix, resolveMediaUrl } from "../../helper/propertyOptions";
 import FavoriteButton from "./FavoriteButton";
 
 const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavoriteToggle }) => {
   const navigate = useNavigate();
-  const IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-   // 1. Resolve core cover asset identifiers dynamically
+  // 1. Resolve core cover asset identifiers dynamically
   let targetCoverImage = propertyImages?.find(
     (img) => img.propertyId === property?._id && img.isCover,
   );
@@ -18,16 +17,14 @@ const PropertyRowCard = ({ property, propertyImages, isFavorite = false, onFavor
     );
   }
 
-  const hasValidImage = !!targetCoverImage
-  const resolvedImageSrc = hasValidImage
-    ? `${IMAGE_BASE_URL}${targetCoverImage.imageUrl}`
-    : null;
+  // const hasValidImage = !!targetCoverImage
+  const resolvedImageSrc = resolveMediaUrl(targetCoverImage?.imageUrl);
 
   return (
     <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden flex flex-col md:flex-row items-stretch gap-4 transition-all duration-300 hover:shadow-xl animate-fade-in w-full">
       {/* Left Segment: Premium Image Framework Panel */}
       <div className="relative h-48 w-full md:w-64 bg-slate-200 dark:bg-slate-950 overflow-hidden shrink-0 cursor-pointer" onClick={() => navigate(`/properties/${property?._id}`)}>
-        {hasValidImage ? (
+        {resolvedImageSrc ? (
           <img
             src={resolvedImageSrc}
             alt={property?.title || "Real Estate Portfolio"}
