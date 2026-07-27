@@ -6,8 +6,7 @@ function App() {
     <>
       <AppRouter/>
       <CookieBanner/>
-    </>
-    
+    </>    
   )
 }
 
