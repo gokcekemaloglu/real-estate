@@ -51,11 +51,12 @@ const Navbar = () => {
           {token ? (
             <div className="hidden sm:flex items-center relative" ref={dropdownRef}>
               <button 
-                title="Giriş"
+                title="Profil/Hesap"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="text-xs font-light tracking-wide text-slate-500 dark:text-slate-400 hover:text-brand-gold cursor-pointer py-2 flex items-center gap-1 transition-colors duration-200 font-sans"
               >
-                Giriş: <span className="font-medium text-brand-gold border-b border-dashed border-brand-gold/40 hover:border-brand-gold pb-0.5">{currentUser}</span>
+                {/* Giriş:  */}
+                <span className="font-medium text-brand-gold border-b border-dashed border-brand-gold/40 hover:border-brand-gold pb-0.5">{currentUser}</span>
                 <span className={`text-[10px] text-brand-gold transition-transform duration-300 font-sans ${isDropdownOpen ? "rotate-180" : ""}`}>▼</span>
               </button>
 
