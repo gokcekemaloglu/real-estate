@@ -22,6 +22,7 @@ const HeroSection = () => {
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <button 
             type="button"
+            title='İlanları İncele'
             onClick={() => navigate("/properties")}
             className="btn-premium px-8 py-3 text-xs font-semibold cursor-pointer shadow-md"
           >
@@ -29,6 +30,7 @@ const HeroSection = () => {
           </button>
           <button 
             type="button"
+            title='Bize Ulaşın'
             onClick={() => navigate("/contact")} 
             className="px-8 py-3 text-xs uppercase tracking-widest text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-800 hover:border-brand-gold dark:hover:border-brand-gold transition-all duration-300 cursor-pointer bg-white/20 dark:bg-transparent"
           >

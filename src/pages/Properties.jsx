@@ -11,6 +11,7 @@ import PaginationComponent from "../components/properties/PaginationComponent";
 import { useState } from "react";
 import PropertyDisplayBar from "../components/PropertyDisplayBar";
 import PropertyRowCard from "../components/properties/PropertyRowCard";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 
 const Properties = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,6 +21,11 @@ const Properties = () => {
   const { favoriteIds } = useSelector((state) => state.favorites);
   // console.log("Properties-->", properties);
   const activePage = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
+
+  useDocumentMeta(
+    "İlanlarımız | Görkem Emlak",
+    "Adana'daki tüm satılık, kiralık ve devren gayrimenkul portföyümüzü filtreleyerek inceleyin."
+  );
 
   const [viewMode, setViewMode] = useState(() => localStorage.getItem("gorkem_view_mode") || "grid");
 
