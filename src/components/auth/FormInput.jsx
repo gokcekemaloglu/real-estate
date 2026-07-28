@@ -36,6 +36,7 @@ const FormInput = ({
         {isPasswordType && (
           <button
             type="button"
+            title="Şifre"
             onClick={() => setShowPassword(prev => !prev)}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-gold transition-colors duration-200 cursor-pointer p-1"
             aria-label={showPassword ? "Hide password" : "Show password"}

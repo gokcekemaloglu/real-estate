@@ -45,6 +45,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen, onClose, images, currentIndex
         </span>
         <button
           type="button"
+          title="Kapat"
           onClick={onClose}
           className="text-xs tracking-widest text-slate-400 hover:text-white uppercase transition-colors duration-200 cursor-pointer"
         >
@@ -58,6 +59,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen, onClose, images, currentIndex
         {images?.length > 1 ? (
           <button
             type="button"
+            title="‹"
             onClick={handlePrev}
             className="w-10 h-10 border border-slate-800 text-slate-400 hover:text-white hover:border-brand-gold transition-all duration-200 flex items-center justify-center text-lg cursor-pointer shrink-0"
           >
@@ -78,6 +80,7 @@ const AdminPropertyDetailMediaLightbox = ({isOpen, onClose, images, currentIndex
         {images?.length > 1 ? (
           <button
             type="button"
+            title="›"
             onClick={handleNext}
             className="w-10 h-10 border border-slate-800 text-slate-400 hover:text-white hover:border-brand-gold transition-all duration-200 flex items-center justify-center text-lg cursor-pointer shrink-0"
           >

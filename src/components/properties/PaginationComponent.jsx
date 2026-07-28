@@ -2,10 +2,8 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 
 const PaginationComponent = ({ details, label }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  
+  const [searchParams, setSearchParams] = useSearchParams();  
   // console.log("Details-->", details);  
-
   const totalRecords = details?.totalRecords || 0;
   const totalPages = details?.pages?.total !== undefined && details?.pages !== false ? details?.pages?.total : 1;
   const currentPage = searchParams.get("page") ? Number(searchParams.get("page")) : details?.pages?.current || 1;
@@ -41,6 +39,7 @@ const PaginationComponent = ({ details, label }) => {
       {/* Luxury Minimalist Controls Grid bar instead of heavy MUI library injections */}
       <div className="flex items-center gap-2">
         <button
+          title="Önceki"
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
           className="px-3 py-2 border border-slate-200 dark:border-slate-800 hover:border-brand-gold dark:hover:border-brand-gold disabled:opacity-30 disabled:hover:border-slate-200 transition-colors cursor-pointer disabled:cursor-not-allowed uppercase tracking-widest text-[10px] font-medium text-slate-700 dark:text-slate-300"
@@ -55,6 +54,7 @@ const PaginationComponent = ({ details, label }) => {
         </div>
 
         <button
+          title="Sonraki"
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
           className="px-3 py-2 border border-slate-200 dark:border-slate-800 hover:border-brand-gold dark:hover:border-brand-gold disabled:opacity-30 disabled:hover:border-slate-200 transition-colors cursor-pointer disabled:cursor-not-allowed uppercase tracking-widest text-[10px] font-medium text-slate-700 dark:text-slate-300"

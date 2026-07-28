@@ -55,6 +55,7 @@ const PropertyDetail = () => {
       <div className="max-w-6xl mx-auto px-6 relative">
         {/* Back Navigation Action Link */}
         <button 
+          title='Tüm İlanları Gör'
           onClick={() => navigate("/properties")}
           className="text-xs uppercase tracking-widest text-slate-400 hover:text-brand-gold mb-8 flex items-center gap-2 transition-colors cursor-pointer"
         >

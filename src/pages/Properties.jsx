@@ -94,6 +94,7 @@ const Properties = () => {
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 text-center text-slate-400 uppercase tracking-widest text-xs font-light shadow-sm">
               <p className="text-sm font-light text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">Kriterlere uygun veya sistemde kayıtlı herhangi bir mülk portföyü bulunamadı.</p>
               <button 
+                title="Filtreleri Temizle"
                 onClick={handleClearFilters}
                 className="btn-premium px-6 py-3 text-xs tracking-widest font-semibold"
               >

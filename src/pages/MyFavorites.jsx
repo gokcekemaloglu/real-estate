@@ -115,6 +115,7 @@ const MyFavorites = () => {
               </p>
               <button
                 type="button"
+                title='Aradığın İlanları Keşfet'
                 onClick={() => navigate("/properties")}
                 className="btn-premium px-8 py-3.5 text-xs font-semibold uppercase tracking-widest cursor-pointer mt-2 shadow-md"
               >

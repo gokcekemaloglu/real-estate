@@ -33,6 +33,7 @@ const NotFound = () => {
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
           <button
             type="button"
+            title='Ana Sayfaya Dön'
             onClick={() => navigate("/")}
             className="btn-premium px-8 py-3.5 text-xs font-semibold uppercase tracking-widest cursor-pointer shadow-md"
           >

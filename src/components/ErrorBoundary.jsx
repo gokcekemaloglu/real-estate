@@ -26,6 +26,7 @@ class ErrorBoundary extends React.Component {
             Portföy ekranlarımızı yüklerken beklenmedik bir hata oluştu. Sayfayı yenilemeyi deneyebilir veya ana sayfaya dönebilirsiniz.
           </p>
           <button 
+            title='Ana Sayfaya Dön'
             onClick={() => window.location.href = "/"}
             className="px-6 py-2 bg-slate-900 text-amber-400 text-xs tracking-widest uppercase hover:bg-slate-800 transition-all cursor-pointer"
           >

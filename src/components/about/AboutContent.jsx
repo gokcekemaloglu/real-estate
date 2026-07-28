@@ -49,9 +49,3 @@ const AboutContent = () => {
 };
 
 export default AboutContent;
-// Gayrimenkulde Güvenin ve Prestijin Adresi
-// Görkem Emlak, kurulduğu günden bu yana lüks konut, elite projeler ve sıra dışı yaşam alanlarını seçkin yatırımcılarla buluşturmayı misyon edinmiştir. Sadece bir gayrimenkul ofisi değil, yaşam tarzı mimarı olarak hizmet veriyoruz.
-
-// "Her portföy bir sanat eseri, her müşteri ise benzersiz bir hikayedir. Biz, o hikayelere en kusursuz mekanları inşa etmek için buradayız." — Cemal Ciğer
-
-// Küresel standartlarda sunduğumuz analizler, şeffaf süreç yönetimi ve kişiselleştirilmiş danışmanlık hizmetlerimizle, yatırım kararlarınızı sanata ve kalıcı bir mirasa dönüştürüyoruz.

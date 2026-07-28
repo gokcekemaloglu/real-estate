@@ -28,6 +28,7 @@ const CookieBanner = () => {
         </a>
         <button
           type="button"
+          title='Kabul Et'
           onClick={handleAccept}
           className="bg-brand-gold hover:bg-amber-700 text-white font-semibold uppercase tracking-widest text-[10px] px-6 py-2.5 transition-colors duration-200 cursor-pointer"
         >
