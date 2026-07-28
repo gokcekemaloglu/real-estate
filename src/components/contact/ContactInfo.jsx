@@ -8,7 +8,7 @@ const ContactInfo = () => {
     <div className="lg:col-span-5 flex flex-col gap-10">
       <div className="flex flex-col gap-2">
         <h3 className="text-xl font-serif text-slate-800 dark:text-white tracking-wide">
-          Merkez Ofis Adresi
+          Ofis Adresi
         </h3>
         <p className="text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed">
           YeşilYurt Mh. MaviBulvar Girişi <br />
@@ -19,7 +19,7 @@ const ContactInfo = () => {
  
       <div className="flex flex-col gap-2">
         <h3 className="text-xl font-serif text-slate-800 dark:text-white tracking-wide">
-          Doğrudan Telefon Hatlarımız
+          Telefon
         </h3>
         <p className="text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed">
           Cep Telefonu:{" "}
@@ -27,14 +27,14 @@ const ContactInfo = () => {
             +90 (506) 793 1320
           </span>{" "}
           <br />
-          Merkez Ofis:{" "}
+          Ofis Telefonu:{" "}
           <span className="font-normal text-brand-gold">
             +90 (322) 226 4704
           </span>
         </p>
       </div>
  
-      <div className="flex flex-col gap-2">
+      {/* <div className="flex flex-col gap-2">
         <h3 className="text-xl font-serif text-slate-800 dark:text-white tracking-wide">
           E-Posta Adresi
         </h3>
@@ -44,11 +44,12 @@ const ContactInfo = () => {
             info@gorkememlak.com
           </span>
         </p>
-      </div>
+      </div> */}
  
       {/* WhatsApp CTA */}
       <a
         href={whatsappUrl}
+        title="WhatsApp"
         target="_blank"
         rel="noopener noreferrer"
         className="group relative flex items-center gap-4 border border-brand-gold/30 bg-white dark:bg-slate-900 px-6 py-5 shadow-md hover:shadow-xl hover:border-brand-gold transition-all duration-300"

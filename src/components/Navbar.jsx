@@ -51,6 +51,7 @@ const Navbar = () => {
           {token ? (
             <div className="hidden sm:flex items-center relative" ref={dropdownRef}>
               <button 
+                title="Giriş"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="text-xs font-light tracking-wide text-slate-500 dark:text-slate-400 hover:text-brand-gold cursor-pointer py-2 flex items-center gap-1 transition-colors duration-200 font-sans"
               >
@@ -79,6 +80,7 @@ const Navbar = () => {
 
           {/* Mobile Hamburger Menu Button */}
           <button
+            title="Menü"
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-slate-800 dark:text-white focus:outline-none cursor-pointer p-2 ml-1 transition-colors duration-300"
           >

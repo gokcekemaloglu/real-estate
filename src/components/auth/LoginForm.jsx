@@ -32,6 +32,7 @@ const LoginForm = (props) => {
 
       <button
         type="submit"
+        title={isSubmitting ? "Yükleniyor" + "..." : "Giriş Yap"}
         disabled={isSubmitting}
         className="btn-premium w-full py-3.5 mt-2 font-semibold text-center tracking-widest transition-all duration-300 shadow-md dark:shadow-lg dark:hover:shadow-brand-gold/10"
       >

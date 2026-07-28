@@ -61,6 +61,7 @@ const RegisterForm = (props) => {
       />
       <button
         type="submit"
+        title={isSubmitting ? "Yükleniyor" + "..." : "Kayıt Ol"}
         disabled={!isKvkkAccepted || isSubmitting}
         className={`w-full py-3.5 mt-2 font-semibold text-center tracking-widest transition-all duration-300 rounded-sm shadow-md ${
           isKvkkAccepted

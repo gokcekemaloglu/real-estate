@@ -63,6 +63,7 @@ const ProfileChangePasswordForm = ({ currentUserId }) => {
         <div className="flex justify-end mt-2">
           <button
             type="button"
+            title={passwordFormik.isSubmitting ? "Güncelleniyor..." : "Şifreyi Güncelle"}
             onClick={passwordFormik.handleSubmit}
             disabled={passwordFormik.isSubmitting}
             className="btn-premium w-full sm:w-auto px-8 py-3.5 text-xs font-semibold uppercase tracking-widest cursor-pointer disabled:opacity-50"

@@ -71,7 +71,8 @@ const Profile = () => {
           {/* Core Submit Operations Action Row */}
           <div className="flex justify-end pt-2 border-t border-slate-100 dark:border-slate-800">
             <button 
-              type="submit" 
+              type="submit"
+              title={formik?.isSubmitting ? "Güncelleniyor..." : "Değişiklikleri Kaydet"}
               disabled={formik?.isSubmitting}
               className="btn-premium px-10 py-3.5 text-xs font-semibold uppercase tracking-widest cursor-pointer shadow-md"
             >

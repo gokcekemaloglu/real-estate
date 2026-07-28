@@ -1,7 +1,7 @@
 import React from 'react'
 
 const HomeServices = () => {
-    const services = [
+  const services = [
     {
       id: 1,
       title: "Güvenilir & Samimi Bölge Danışmanlığı",

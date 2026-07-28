@@ -39,6 +39,7 @@ const ContactMap = () => {
       {/* Direction Button */}
       <a
         href={directionsUrl}
+        title='Yol Tarifi Al'
         target="_blank"
         rel="noopener noreferrer"
         className="group inline-flex items-center gap-2 self-start text-sm uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300 border-b border-brand-gold/50 hover:border-brand-gold pb-1 transition-colors"

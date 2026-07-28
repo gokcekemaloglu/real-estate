@@ -39,6 +39,7 @@ const KvkkText = () => {
       <div className="border-t border-slate-200 dark:border-slate-800 pt-6 mt-4 flex justify-center sm:justify-end">
         <button
           type="button"
+          title='Metni Okudum'
           onClick={() => navigate(-1)} // Pops context cleanly straight back into forms channels
           className="btn-premium px-12 py-3.5 text-xs font-semibold uppercase tracking-widest cursor-pointer shadow-md select-none w-full sm:w-auto text-center"
         >

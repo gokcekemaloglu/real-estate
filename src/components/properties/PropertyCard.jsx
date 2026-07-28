@@ -86,6 +86,7 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
             </span>
           </div>
           <button 
+            title="Detayları Gör"
             onClick={() => navigate(`/properties/${property?._id}`)}
             className="text-[11px] uppercase tracking-wider text-slate-700 dark:text-slate-300 font-medium border-b border-slate-300 dark:border-slate-700 hover:border-brand-gold dark:hover:border-brand-gold pb-0.5 transition-colors duration-300 cursor-pointer"
           >

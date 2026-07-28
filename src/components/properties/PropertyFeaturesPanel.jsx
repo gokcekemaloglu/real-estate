@@ -148,6 +148,7 @@ const PropertyFeaturesPanel = ({ property }) => {
       ) : null}
       {/* Primary Interactive CTA Call-to-action operations button wrapper */}
       <button
+        title="İletişime Geç"
         onClick={() => navigate("/contact")}
         className="btn-premium w-full py-4 text-center font-semibold tracking-widest shadow-md mt-2"
       >

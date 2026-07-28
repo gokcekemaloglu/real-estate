@@ -2,8 +2,13 @@ import React from 'react'
 import AboutHeader from '../components/about/AboutHeader'
 import AboutContent from '../components/about/AboutContent'
 import AboutShowcase from '../components/about/AboutShowcase'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const About = () => {
+  useDocumentMeta(
+    "Hakkımızda | Görkem Emlak",
+    "Görkem Emlak'ın hikayesi, vizyonu ve Adana gayrimenkul piyasasındaki deneyimi hakkında bilgi alın."
+  )
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-brand-dark pt-32 pb-24 font-display transition-colors duration-300 relative overflow-hidden">
       {/* Background Luxury Line Grid using Tailwind v4 syntax */}

@@ -31,6 +31,7 @@ const ProfileDeleteForm = ({ currentUserId }) => {
       <div className="shrink-0 w-full sm:w-auto">
         <button
           type="button"
+          title="Hesabımı Dondur"
           onClick={handleDeactivate}
           className="w-full sm:w-auto px-6 py-3 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white font-semibold uppercase tracking-widest text-[10px] transition-all duration-200 cursor-pointer text-center bg-red-50/30 dark:bg-red-950/5"
         >

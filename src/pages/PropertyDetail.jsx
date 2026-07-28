@@ -7,6 +7,7 @@ import PropertyGallery from '../components/properties/PropertyGallery'
 import PropertyDescription from '../components/properties/PropertyDescription'
 import PropertyFeaturesPanel from '../components/properties/PropertyFeaturesPanel'
 import { setData } from '../features/propertySlice';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 const PropertyDetail = () => {
   const {id} = useParams()
@@ -30,6 +31,14 @@ const PropertyDetail = () => {
       });
     }
   }, [id])
+  // Every listing gets its own <title> and meta description once loaded,
+  // instead of every property detail page sharing the same generic
+  // site-wide title. Falls back to the site defaults automatically
+  // (via useDocumentMeta) while property is still null/loading.
+  useDocumentMeta(
+    property?.title ? `${property?.title} | Görkem Emlak` : undefined,
+    property?.description ? property?.description.slice(0, 155) : undefined
+  )
   // console.log("property-->", property);
   if (loading && !property?.title) {
     return (
@@ -46,6 +55,7 @@ const PropertyDetail = () => {
       <div className="max-w-6xl mx-auto px-6 relative">
         {/* Back Navigation Action Link */}
         <button 
+          title='Tüm İlanları Gör'
           onClick={() => navigate("/properties")}
           className="text-xs uppercase tracking-widest text-slate-400 hover:text-brand-gold mb-8 flex items-center gap-2 transition-colors cursor-pointer"
         >

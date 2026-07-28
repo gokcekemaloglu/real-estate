@@ -50,6 +50,7 @@ const UserDropdown = ({ currentUser, isAdmin, logout, setIsDropdownOpen, current
       {/* 3. Action Trigger Controller Block Row */}
       <button
         type="button"
+        title='Oturumu Kapat'
         onClick={() => {
           setIsDropdownOpen(false);
           logout();

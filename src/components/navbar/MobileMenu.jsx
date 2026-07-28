@@ -28,6 +28,7 @@ const MobileMenu = ({ setIsOpen, logout, currentUser, token, isAdmin, currentUse
       {token ? (
         <button
           type="button"
+          title="Çıkış Yap"
           onClick={() => {
             setIsOpen(false);
             logout();
