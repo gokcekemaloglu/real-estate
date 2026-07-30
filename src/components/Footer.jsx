@@ -18,10 +18,10 @@ const Footer = () => {
           {/* Right Column: Quick Navigation */}
           <div className="flex flex-col md:items-end gap-2">
             <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-medium">Kurumsal</span>
-            <div className="flex flex-col items-start md:items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-light">
-              <Link to="/about" className="hover:text-brand-gold transition-colors duration-200">Hakkımızda</Link>
-              <Link to="/properties" className="hover:text-brand-gold transition-colors duration-200">İlanlarımız</Link>
-              <Link to="/contact" className="hover:text-brand-gold transition-colors duration-200">İletişim</Link>
+            <div className="flex flex-col items-start md:items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-light px-1">
+              <Link to="/about" className="hover:text-brand-gold transition-colors duration-200 py-0.5">Hakkımızda</Link>
+              <Link to="/properties" className="hover:text-brand-gold transition-colors duration-200 py-0.5">İlanlarımız</Link>
+              <Link to="/contact" className="hover:text-brand-gold transition-colors duration-200 py-0.5">İletişim</Link>
             </div>
           </div>
           {/* Right Column: Contact info */}
