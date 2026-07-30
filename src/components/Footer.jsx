@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-slate-50 dark:bg-brand-dark border-t border-slate-200 dark:border-slate-800 py-2 font-display transition-colors duration-300">
+    <footer className="w-full bg-slate-50 dark:bg-brand-dark border-t border-slate-300 dark:border-slate-800 py-2 font-display transition-colors duration-300">
       <div className=" mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pb-4 border-b border-slate-300 dark:border-slate-800">
           {/* Left Column: Brand Statement */}
           <div className="flex flex-col gap-3">
             <span className="text-sm uppercase tracking-[0.25em] text-slate-900 dark:text-white font-serif font-light">
               Görkem <span className="text-brand-gold font-sans font-semibold">Emlak</span>
             </span>
-            <p className="text-xs text-slate-400 font-light leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-light leading-relaxed max-w-sm">
               Cemal Ciğer güvencesiyle, sıra dışı yaşam alanlarını ve en prestijli gayrimenkul portföylerini küresel standartlarda sunuyoruz.
             </p>
           </div>
           {/* Right Column: Quick Navigation */}
           <div className="flex flex-col md:items-end gap-2">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-medium">Kurumsal</span>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 dark:text-slate-300 font-medium">Kurumsal</span>
             <div className="flex flex-col items-start md:items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-light px-1">
               <Link to="/about" className="hover:text-brand-gold transition-colors duration-200 py-0.5">Hakkımızda</Link>
               <Link to="/properties" className="hover:text-brand-gold transition-colors duration-200 py-0.5">İlanlarımız</Link>
@@ -43,7 +43,7 @@ const Footer = () => {
             <Link to="/kvkk" className="hover:text-brand-gold transition-colors duration-200">
               KVKK &amp; Çerez Politikası
             </Link>
-            <span className="tracking-wide text-slate-400/60">Premium Showcase Architecture</span>
+            <span className="tracking-wide text-slate-500/60">Premium Showcase Architecture</span>
           </div>
         </div>
       </div>
