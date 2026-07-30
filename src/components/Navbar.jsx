@@ -29,21 +29,21 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/85 dark:bg-brand-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 font-display transition-colors duration-300">
-      <div className="w-full mx-auto px-12 md:px-24 h-20 flex items-center justify-between">
+      <div className="w-full mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
         {/* Brand Luxury Logo */}
         <Link
           to="/"
-          className="text-lg md:text-xl lg:text-3xl uppercase tracking-[0.25em] text-slate-900 dark:text-white font-serif font-light transition-colors duration-300"
+          className="text-lg md:text-xl lg:text-3xl uppercase tracking-[0.25em] text-slate-900 dark:text-white font-serif font-light transition-colors duration-300 shrink-0 select-none"
         >
           Görkem{" "}
           <span className="text-brand-gold font-sans font-semibold">Emlak</span>
         </Link>
 
         {/* Desktop Navigation Links - Integrated with 'after-line' utility */}
-        <NavLinks isAdmin={isAdmin} />
+        <NavLinks isAdmin={isAdmin}  token={token} currentUserId={currentUserId}/>
 
         {/* Right Side Actions Container (Always visible on mobile & desktop) */}
-        <div className="flex items-center gap-2 md:gap-4 order-2 md:order-0">
+        <div className="flex items-center gap-2 md:gap-4 order-2 md:order-0 shrink-0">
           {/* Dark/Light Mode Toggle Switch */}
           <ThemeToggle />
 
@@ -72,7 +72,7 @@ const Navbar = () => {
               )}
             </div>
           ) : (
-            <div className="hidden md:flex">
+            <div className="hidden lg:flex">
               <Link to="/login" className="btn-premium px-6 py-2.5 font-medium">
                 Giriş Yap
               </Link>
@@ -83,7 +83,7 @@ const Navbar = () => {
           <button
             title="Menü"
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-slate-800 dark:text-white focus:outline-none cursor-pointer p-2 ml-1 transition-colors duration-300"
+            className="lg:hidden text-slate-800 dark:text-white focus:outline-none cursor-pointer p-2 ml-1 transition-colors duration-300"
           >
             <svg
               className="w-6 h-6"

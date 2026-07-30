@@ -3,15 +3,15 @@ export const getNavigationRoutes = (isAdmin, token, currentUserId) => {
     { path: "/", label: "Anasayfa" },
     { path: "/properties", label: "İlanlar" },
     { path: "/about", label: "Hakkımızda" },
-    { path: "/contact", label: "İletİşİm" },
+    { path: "/contact", label: "İletişim" },
   ];
 
-  if (token) {
-    routes.push({ path: `/profile/${currentUserId}`, label: "Hesabım / Profil Güncelle" });
+  if (token  && currentUserId) {
+    routes.push({ path: `/profile/${currentUserId}`, label: "Profilim / Güncelle" });
   }
 
   if (isAdmin) {
-    routes.push({ path: "/admin", label: "Admİn Panel" });
+    routes.push({ path: "/admin", label: "Admin Panel" });
   }
 
   return routes;
