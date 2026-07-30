@@ -19,7 +19,10 @@ const KvkkText = () => {
       <section className="flex flex-col gap-2">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-brand-gold">2. Kişisel Verilerin İşlenme Amacı</h2>
         <p>
-          Sitemiz üzerinde toplanan kişisel verileriniz (İsim, soyisim, telefon, e-posta, favori ilan listeleriniz ve tarayıcı arayüz mod seçimleriniz); emlak danışmanlığı süreçlerimizin yürütülmesi, taleplerinizin WhatsApp veya telefon kanalıyla Cemal Bey'e iletilerek takibinin yapılması ve güvenli üye oturumu açılması amaçlarıyla KVKK’nın 5. ve 6. maddelerine uygun olarak işlenmektedir.
+          Sitemiz üzerinde toplanan kişisel verileriniz (İsim, soyisim, telefon, e-posta ve favori ilan listeleriniz); emlak danışmanlığı süreçlerimizin yürütülmesi, taleplerinizin WhatsApp veya telefon kanalıyla Cemal Bey'e iletilerek takibinin yapılması ve güvenli üye oturumu açılması amaçlarıyla KVKK’nın 5. ve 6. maddelerine uygun olarak işlenmektedir.
+        </p>
+        <p>
+          Ayrıca, tarayıcınızda görünüm tercihiniz (Grid/Liste modu) gibi bazı ayarlar yalnızca cihazınızın yerel deposunda (localStorage) tutulur; bu bilgiler tarafımıza hiçbir şekilde iletilmez, sunucularımızda saklanmaz ve bu doğrultuda tarafımızca işlenmez.
         </p>
       </section>
 

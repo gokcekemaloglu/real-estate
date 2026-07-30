@@ -20,7 +20,7 @@ const CookieBanner = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 dark:bg-slate-950/95 backdrop-blur-md text-white p-4 border-t border-brand-gold/30 z-50 animate-fade-in flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-12 text-xs font-light tracking-wide">
       <div className="flex-1 text-slate-300 leading-relaxed">
-        Görkem Emlak olarak, web sitemizdeki deneyiminizi iyileştirmek, arayüz tercihlerini (Grid/Row modu) hafızada tutmak ve güvenli oturum açmanızı sağlamak amacıyla zorunlu çerezler kullanıyoruz. Sitemizi kullanmaya devam ederek çerez politikamızı kabul etmiş sayılırsınız.
+        Görkem Emlak'ın temel işlevleri (ilan arama, görüntüleme, WhatsApp ile iletişim) herhangi bir çerez kullanmadan çalışır; arayüz tercihinizi (Grid/Row modu) hatırlamak için yalnızca tarayıcınızın yerel deposunu kullanırız. <strong className="text-slate-200 font-normal">Google ile Giriş</strong> özelliğini tercih ederseniz, Google'ın kendi güvenli oturum çerezleri (üçüncü taraf) devreye girer. Sitemizi kullanmaya devam ederek bu bilgilendirmeyi kabul etmiş sayılırsınız.
       </div>
       <div className="flex items-center gap-4 shrink-0">
         <a href="/kvkk" className="text-brand-gold hover:underline uppercase tracking-widest text-[10px] font-medium">
