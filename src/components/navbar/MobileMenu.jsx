@@ -5,7 +5,7 @@ import { getNavigationRoutes } from "../../helper/navigationRoutes";
 const MobileMenu = ({ setIsOpen, logout, currentUser, token, isAdmin, currentUserId }) => {
   const activeRoutes = getNavigationRoutes(isAdmin, token, currentUserId);
   return (
-    <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-slate-800 px-6 py-6 flex flex-col gap-6 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 animate-fade-in transition-colors duration-300">
+    <div className="lg:hidden absolute top-20 left-0 w-full bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-slate-800 px-6 py-6 flex flex-col gap-6 text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 animate-fade-in transition-colors duration-300">
       {activeRoutes?.map((route) => (
         <NavLink
           key={route.path}
