@@ -60,15 +60,15 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
         {/* Tactical Architectural Specs Bar utilizing synced Mongoose parameters */}
         <div className="grid grid-cols-3 border-y border-slate-100 dark:border-slate-800/60 py-3 text-center text-xs text-slate-500 dark:text-slate-400 font-light">
           <div className="border-r border-slate-100 dark:border-slate-800/60 flex flex-col gap-0.5">
-            <span className="text-[10px] uppercase tracking-tight text-slate-400 font-medium">Alan</span>
+            <span className="text-[10px] uppercase tracking-tight text-slate-500 dark:text-slate-400 font-medium">Alan</span>
             <span className="font-medium text-slate-700 dark:text-slate-300">{property?.grossArea ? `${property.grossArea} m²` : "—"}</span>
           </div>
           <div className="border-r border-slate-100 dark:border-slate-800/60 flex flex-col gap-0.5">
-            <span className="text-[10px] uppercase tracking-tight text-slate-400 font-medium">Oda</span>
+            <span className="text-[10px] uppercase tracking-tight text-slate-500 dark:text-slate-400 font-medium">Oda</span>
             <span className="font-medium text-slate-700 dark:text-slate-300">{property?.roomCount || "—"}</span>
           </div>
           <div className="flex flex-col gap-0.5">
-            <span className="text-[10px] uppercase tracking-tight text-slate-400 font-medium">Banyo</span>
+            <span className="text-[10px] uppercase tracking-tight text-slate-500 dark:text-slate-400 font-medium">Banyo</span>
             <span className="font-medium text-slate-700 dark:text-slate-300">
               {property?.bathroomCount === null || property?.bathroomCount === undefined || property?.bathroomCount === "" ? "—" : property.bathroomCount}
             </span>
@@ -81,7 +81,7 @@ const PropertyCard = ({ property, propertyImages, viewMode, isFavorite = false, 
             <span className="text-base font-medium text-brand-gold dark:text-amber-400">
               {formatPrice(property?.price)}{getPriceSuffix(property?.listingType, property?.rentPeriod)}
             </span>
-            <span className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-light font-sans mt-0.5">
+            <span className="text-[9px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-light font-sans mt-0.5">
               👥 {property?.viewsCount ?? 0} Ziyaretçi
             </span>
           </div>

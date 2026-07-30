@@ -18,7 +18,9 @@ const UserLayout = () => {
   return (
     <>
       <Navbar/>
-      <Outlet/>
+      <main>
+        <Outlet/>
+      </main>      
       <Footer/>
     </>
   )
